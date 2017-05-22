@@ -17,7 +17,7 @@ if ( apply_filters( 'air_helper_sendgrid', true ) ) {
  *
  * @since 0.1.0
  */
-if( apply_filters( 'air_helper_change_uploads_path', true ) ) {
+if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 	update_option( 'upload_path', untrailingslashit( str_replace( 'wp', 'media', ABSPATH ) ) );
 	update_option( 'upload_url_path', untrailingslashit( str_replace( 'wp', 'media', get_site_url() ) ) );
 	define( 'uploads', '' . 'media' );

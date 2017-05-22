@@ -25,6 +25,15 @@ if ( ! defined( 'ABSPATH' )  ) {
 require 'plugin-update-checker/plugin-update-checker.php';
 $update_checker = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/digitoimistodude/air-helper', __FILE__, 'air-helper' );
 
+/**
+ *  Wrapper function to get real base path for this plugin.
+ *
+ *  @since  0.1.0
+ *  @return string  Path to this plugin
+ */
+function air_helper_base_path() {
+	return untrailingslashit( plugin_dir_path( __FILE__ ) );
+}
 
 /**
  *  Check if active theme is based on Air.
@@ -50,5 +59,21 @@ function air_helper_we_are_airless() {
 	printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 }
 
-require_once plugin_dir_path( __FILE__ ) . '/inc/hooks.php';
-require_once plugin_dir_path( __FILE__ ) . '/inc/misc.php';
+/**
+ *  Test if current theme support WooCommerce and require WC spesific
+ *  things if so.
+ *
+ *  @since  0.1.0
+ */
+function air_helper_maybe_woocommerce() {
+	if ( current_theme_supports( 'woocommerce' ) ) {
+		require_once air_helper_base_path() . '/inc/woocommerce.php';
+	}
+}
+add_action( 'init', 'air_helper_maybe_woocommerce' );
+
+/**
+ *  Require files containing our preferences.
+ */
+require_once air_helper_base_path() . '/inc/hooks.php';
+require_once air_helper_base_path() . '/inc/misc.php';
