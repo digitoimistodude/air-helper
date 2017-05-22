@@ -170,6 +170,84 @@ function air_helper_disable_rest_endpoints( $endpoints ) {
 add_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' );
 
 /**
+ * Remove WordPress Admin Bar when not on development env.
+ * Turn off by using `remove_action( 'get_header', 'air_helper_remove_admin_login_header' )`
+ *
+ * @since  1.0.1
+ * @link 	 http://davidwalsh.name/remove-wordpress-admin-bar-css
+ */
+function air_helper_remove_admin_login_header() {
+	remove_action( 'wp_head', '_admin_bar_bump_cb' );
+}
+add_action( 'get_header', 'air_helper_remove_admin_login_header' );
+
+if ( getenv( 'WP_ENV' ) === 'development' ) {
+	/**
+	 *  Better styles for admin bar when in development env.
+	 *  Turn off by using `remove_action( 'wp_head', 'air_helper_dev_adminbar' )`
+	 *
+	 *  @since  1.0.1
+	 */
+  function air_helper_dev_adminbar() {
+
+  	if ( ! is_user_logged_in() ) {
+  		return;
+  	} ?>
+    <style type="text/css">
+      html {
+        height: auto;
+        top: 32px;
+        position: relative;
+      }
+
+      @media screen and (max-width: 600px) {
+        html {
+          top: 46px;
+        }
+      }
+
+     /* Hide WordPress logo */
+     #wp-admin-bar-wp-logo {
+       display: none;
+     }
+
+     /* Invert admin bar */
+     #wpadminbar {
+       background: #fff;
+     }
+
+     @media screen and (max-width: 600px) {
+       #wpadminbar {
+         position: fixed;
+       }
+     }
+
+     #wpadminbar .ab-empty-item,
+     #wpadminbar a.ab-item,
+     #wpadminbar > #wp-toolbar span.ab-label,
+     #wpadminbar > #wp-toolbar span.noticon {
+       color: #23282d;
+     }
+
+     #wpadminbar #adminbarsearch:before,
+     #wpadminbar .ab-icon:before,
+     #wpadminbar .ab-item:before {
+       color: #23282d;
+       background: transparent;
+     }
+
+     #wpadminbar.nojs li:hover > .ab-sub-wrapper,
+     #wpadminbar li.hover > .ab-sub-wrapper {
+       top: 32px;
+     }
+   </style>
+	<?php }
+	add_action( 'wp_head', 'air_helper_dev_adminbar' );
+} else {
+	show_admin_bar( false );
+}
+
+/**
  * Allow Gravity Forms to hide labels to add placeholders.
  * Turn off by using `add_filter( 'gform_enable_field_label_visibility_settings', '__return_false' )`
  *
