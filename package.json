@@ -1,0 +1,22 @@
+{
+  "name": "air-helper",
+  "version": "1.0.2",
+  "description": "Air helper brings personal preferences to Air based themes and extends it with basic WooCommerce layout modifications.",
+  "main": "air-helper.php",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitoimistodude/air-helper.git"
+  },
+  "author": "Digitoimisto Dude Oy",
+  "license": "GPL2+",
+  "bugs": {
+    "url": "https://github.com/digitoimistodude/air-helper/issues"
+  },
+  "homepage": "https://github.com/digitoimistodude/air-helper"
+}
