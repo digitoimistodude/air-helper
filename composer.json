@@ -1,0 +1,17 @@
+{
+  "name": "digitoimistodude/air-helper",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "Air helper brings personal preferences to Air based themes and extends it with basic WooCommerce layout modifications.",
+  "homepage": "https://github.com/digitoimistodude/air-helper",
+  "keywords": ["wordpress", "plugin"],
+  "license": "MIT",
+  "version": "1.0.1",
+  "authors": [
+    {
+      "name": "Timi Wahalahti",
+      "email": "timi@dude.fi",
+      "homepage": "https://github.com/timiwahalahti"
+    }
+  ]
+}
