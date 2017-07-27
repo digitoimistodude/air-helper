@@ -42,6 +42,7 @@
     <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd" />
     <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterOpen" />
     <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd" />
+    <exclude name="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing" />
 
 		<exclude name="WordPress.XSS.EscapeOutput.UnsafePrintingFunction" />
 		<exclude name="WordPress.XSS.EscapeOutput.OutputNotEscaped" />

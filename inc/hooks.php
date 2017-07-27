@@ -35,7 +35,7 @@ function air_helper_helper_force_mail_to( $args ) {
  *
  * @since  0.1.0
  * @param  string $title Default title.
- * @return string 					Title without prefix
+ * @return string Title without prefix
  */
 function air_helper_helper_remove_archive_title_prefix( $title ) {
 	return preg_replace( '/^\w+: /', '', $title );
