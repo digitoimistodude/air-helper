@@ -18,7 +18,7 @@ Air helper brings personal preferences of Digitoimisto Dude to Air based themes 
 
 ### Please note before using
 
-Air helper an Air is used for **development**, so it updates very often. By using these code bases, you agree that the anything can change to a different direction without a warning.
+Air helper an Air is used for **development**, so those update very often. By using these code bases, you agree that the anything can change to a different direction without a warning.
 
 ### License
 
