@@ -1,11 +1,12 @@
 <?php
-
 /**
  *  Force essential SendGrid settings.
  *  Turn off by using `add_filter( 'air_helper_sendgrid', '__return_false' )`
  *
  *  @since 0.1.0
+ *  @package air-helper
  */
+
 if ( apply_filters( 'air_helper_sendgrid', true ) ) {
 	define( 'SENDGRID_API_KEY', getenv( 'SENDGRID_API_KEY' ) );
 	define( 'SENDGRID_CATEGORIES', get_option( 'blogname' ) );

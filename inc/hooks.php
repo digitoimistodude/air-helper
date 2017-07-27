@@ -1,11 +1,12 @@
 <?php
-
 /**
  *  Force to address in wp_mail function so that test emails wont go to client.
  *  Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
  *
  *  @since  0.1.0
+ *  @package air-helper
  */
+
 if ( getenv( 'WP_ENV' ) === 'development' ) {
 	add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
 }
@@ -20,7 +21,7 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
  *  Change address from admin_email by using `add_filter( 'air_helper_helper_mail_to', 'myprefix_override_air_helper_helper_mail_to' )`
  *
  *  @since  0.1.0
- *  @param 	array 	$args Default wp_mail agruments
+ *  @param 	array $args Default wp_mail agruments.
  *  @return array         New wp_mail agruments with forced to address
  */
 function air_helper_helper_force_mail_to( $args ) {
@@ -33,7 +34,7 @@ function air_helper_helper_force_mail_to( $args ) {
  * Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
  *
  * @since  0.1.0
- * @param  string 	$title 	Default title
+ * @param  string $title Default title.
  * @return string 					Title without prefix
  */
 function air_helper_helper_remove_archive_title_prefix( $title ) {
@@ -69,7 +70,7 @@ add_action( 'init', 'air_helper_helper_disable_wp_emojicons' );
  * Disable emojicons introduced with WP 4.2.
  *
  * @since 0.1.0
- * @param array $plugins
+ * @param array $plugins Plugins.
  */
 function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
 	if ( is_array( $plugins ) ) {

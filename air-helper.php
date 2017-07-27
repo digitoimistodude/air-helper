@@ -11,9 +11,11 @@
  *
  * Text Domain: air-helper
  * Domain Path: /languages
+ *
+ * @package air-helper
  */
 
-if ( ! defined( 'ABSPATH' )  ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
