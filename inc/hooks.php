@@ -18,14 +18,28 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
 
 /**
  *  Force to address in wp_mail.
+ *  Change allowed staging roles by using `add_filter( 'air_helper_helper_mail_to_allowed_roles', 'myprefix_override_air_helper_helper_mail_to_allowed_roles' )`
  *  Change address from admin_email by using `add_filter( 'air_helper_helper_mail_to', 'myprefix_override_air_helper_helper_mail_to' )`
  *
  *  @since  0.1.0
- *  @param 	array $args Default wp_mail agruments.
+ *  @param 	array 	$args Default wp_mail agruments
  *  @return array         New wp_mail agruments with forced to address
  */
 function air_helper_helper_force_mail_to( $args ) {
-	$args['to'] = apply_filters( 'air_helper_helper_mail_to', get_option( 'admin_email' ) );
+	$to = get_option( 'admin_email' );
+
+	if ( getenv( 'WP_ENV' ) === 'staging' ) {
+		$allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', array( 'administrator', 'editor', 'author' ) );
+		$user = get_user_by( 'email', $args['to'] );
+
+		if ( is_a( $user, 'WP_User' ) ) {
+			if ( array_intersect( $allowed_roles, $user->roles ) ) {
+				$to = $args['to'];
+			}
+		}
+	}
+
+	$args['to'] = apply_filters( 'air_helper_helper_mail_to', $to );
 	return $args;
 }
 
