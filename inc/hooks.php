@@ -22,7 +22,7 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
  *  Change address from admin_email by using `add_filter( 'air_helper_helper_mail_to', 'myprefix_override_air_helper_helper_mail_to' )`
  *
  *  @since  0.1.0
- *  @param 	array 	$args Default wp_mail agruments
+ *  @param 	array $args Default wp_mail agruments.
  *  @return array         New wp_mail agruments with forced to address
  */
 function air_helper_helper_force_mail_to( $args ) {
