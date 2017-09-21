@@ -75,7 +75,21 @@ function air_helper_maybe_woocommerce() {
 add_action( 'init', 'air_helper_maybe_woocommerce' );
 
 /**
+ *  Test if Carbon Fields is used and initialize our preview support
+ *  if so.
+ *
+ *  @since  1.1.0
+ */
+function air_helper_maybe_carbon_fields() {
+	if ( false !== has_action( 'after_setup_theme', 'carbon_fields_boot_plugin' ) ) {
+		require_once air_helper_base_path() . '/inc/carbonfields.php';
+	}
+}
+add_action( 'init', 'air_helper_maybe_carbon_fields' );
+
+/**
  *  Require files containing our preferences.
  */
 require_once air_helper_base_path() . '/inc/hooks.php';
 require_once air_helper_base_path() . '/inc/misc.php';
+require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
