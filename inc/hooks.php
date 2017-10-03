@@ -281,7 +281,7 @@ if ( getenv( 'WP_ENV' ) === 'development' ) {
  * Add envarioment marker to adminbar.
  * Turn off by using `remove_action( 'admin_bar_menu', 'air_helper_adminbar_show_env' )`
  *
- * @since  0.1.0
+ * @since  1.1.0
  */
 function air_helper_adminbar_show_env( $wp_admin_bar ) {
 	$env = esc_attr__( 'tuotanto', 'air-helper' );
@@ -308,7 +308,7 @@ add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );
  * Add envarioment marker styles.
  * Turn off by using `remove_action( 'admin_head', 'air_helper_adminbar_show_env_styles' )`
  *
- * @since  0.1.0
+ * @since  1.1.0
  */
 function air_helper_adminbar_show_env_styles() { ?>
   <style>
