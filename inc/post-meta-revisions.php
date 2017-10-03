@@ -95,7 +95,7 @@ if ( ! class_exists( 'WP_Post_Meta_Revisioning' ) ) :
 		 *
 		 * @return array An array of meta keys to be revisioned.
 		 */
-		public function _wp_post_revision_meta_keys( $only_keys = true ) {
+		public static function _wp_post_revision_meta_keys( $only_keys = true ) {
 			/**
 			 * Filter the list of post meta keys to be revisioned.
 			 *

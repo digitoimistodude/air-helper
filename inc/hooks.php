@@ -255,12 +255,80 @@ if ( getenv( 'WP_ENV' ) === 'development' ) {
      #wpadminbar li.hover > .ab-sub-wrapper {
        top: 32px;
      }
+
+     #wp-admin-bar-airhelperenv.air-helper-env-prod a {
+  		background: #00bb00 !important;
+  		color: black !important;
+  	}
+
+  	#wp-admin-bar-airhelperenv.air-helper-env-stage a {
+  		background: orange !important;
+  		color: black !important;
+  	}
+
+  	#wp-admin-bar-airhelperenv.air-helper-env-dev a {
+  		background: red !important;
+  		color: black !important;
+  	}
    </style>
 	<?php }
 	add_action( 'wp_head', 'air_helper_dev_adminbar' );
 } else {
 	show_admin_bar( false );
 }
+
+/**
+ * Add envarioment marker to adminbar.
+ * Turn off by using `remove_action( 'admin_bar_menu', 'air_helper_adminbar_show_env' )`
+ *
+ * @since  0.1.0
+ */
+function air_helper_adminbar_show_env( $wp_admin_bar ) {
+	$env = esc_attr__( 'tuotanto', 'air-helper' );
+	$class = 'air-helper-env-prod';
+
+	if ( getenv( 'WP_ENV' ) === 'staging' ) {
+		$env = esc_attr__( 'näyttöversio', 'air-helper' );
+		$class = 'air-helper-env-stage';
+	} else if ( getenv( 'WP_ENV' ) === 'development' ) {
+		$env = esc_attr__( 'kehitys', 'air-helper' );
+		$class = 'air-helper-env-dev';
+	}
+
+	$wp_admin_bar->add_node( array(
+		'id'    => 'airhelperenv',
+		'title' => wp_sprintf( __( 'Ympäristö: %s', 'air-helper' ), $env ),
+		'href'  => '#',
+		'meta'  => array( 'class' => $class )
+	) );
+}
+add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );
+
+/**
+ * Add envarioment marker styles.
+ * Turn off by using `remove_action( 'admin_head', 'air_helper_adminbar_show_env_styles' )`
+ *
+ * @since  0.1.0
+ */
+function air_helper_adminbar_show_env_styles() { ?>
+  <style>
+  	#wp-admin-bar-airhelperenv.air-helper-env-prod a {
+  		background: #00bb00 !important;
+  		color: black !important;
+  	}
+
+  	#wp-admin-bar-airhelperenv.air-helper-env-stage a {
+  		background: orange !important;
+  		color: black !important;
+  	}
+
+  	#wp-admin-bar-airhelperenv.air-helper-env-dev a {
+  		background: red !important;
+  		color: black !important;
+  	}
+  </style>
+<?php }
+add_action( 'admin_head', 'air_helper_adminbar_show_env_styles' );
 
 /**
  * Allow Gravity Forms to hide labels to add placeholders.
