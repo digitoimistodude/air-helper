@@ -1,10 +1,15 @@
 <?php
-
 /**
+ * Carbon Fields
+ *
+ * CF related functions and settings.
+ *
  * @Author: Timi Wahalahti
  * @Date:   2017-09-21 10:31:31
  * @Last Modified by:   Timi Wahalahti
  * @Last Modified time: 2017-09-21 12:46:52
+ *
+ * @package airhelper
  */
 
 /**
