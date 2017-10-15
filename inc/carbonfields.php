@@ -28,11 +28,15 @@ if ( ! function_exists( 'dude_get_post_meta' ) ) {
 }
 
 /**
- *  Short-circuit (override) default get_post_metadata functionality with
- *  our own to implement post meta revisions support when get_post_metadata
- *  function is used.
+ * Short-circuit (override) default get_post_metadata functionality with
+ * our own to implement post meta revisions support when get_post_metadata
+ * function is used.
  *
- *  @since  1.1.0
+ * @param check    $check Check param.
+ * @param post_id  $post_id Post ID param.
+ * @param meta_key $meta_key Meta key param.
+ * @param single   $single Single param.
+ * @since  1.1.0
  */
 function air_helper_short_circuit_get_post_metadata( $check, $post_id, $meta_key, $single ) {
 	/**
@@ -52,15 +56,11 @@ function air_helper_short_circuit_get_post_metadata( $check, $post_id, $meta_key
 		return $check;
 	}
 
-	// if ( ! in_array( $meta_key, $meta_keys ) ) {
-	// 	return $check;
-	// }
-
 	// Get post id for revision if we are viewing one.
 	if ( isset( $_GET['preview_id'] ) ) {
 		$autosave = wp_get_post_autosave( $_GET['preview_id'] );
 
-		if ( $autosave && $autosave->post_parent == $post_id ) {
+		if ( $autosave && $autosave->post_parent === $post_id ) {
 			$post_id = (int) $autosave->ID;
 		}
 	}
@@ -90,9 +90,10 @@ function air_helper_short_circuit_get_post_metadata( $check, $post_id, $meta_key
 add_filter( 'get_post_metadata', 'air_helper_short_circuit_get_post_metadata', 10, 4 );
 
 /**
- *  Structure the complex field as CF would.
+ * Structure the complex field as CF would.
  *
- *  @since  1.1.0
+ * @param array $array Array.
+ * @since  1.1.0
  */
 function air_helper_cf_hande_field_complex( $array ) {
 	$return = array();
@@ -106,17 +107,19 @@ function air_helper_cf_hande_field_complex( $array ) {
 }
 
 /**
- *  Clean array keys and remove that nasy and un-neccesary value
- *  field. Use only as a part of structuring CF complex field.
+ * Clean array keys and remove that nasy and un-neccesary value
+ * field. Use only as a part of structuring CF complex field.
  *
- *  @since  1.1.0
+ * @param key 	$key Key param.
+ * @param value $value Value param.
+ * @since  1.1.0
  */
 function air_helper_cf_hande_field_complex_clean_keys( $key, $value ) {
 	if ( is_array( $value ) ) {
 		$c = array();
 
 		foreach ( $value as $nested_key => $nested_value ) {
-			if ( $nested_key === 'value' ) {
+			if ( 'value' === $nested_key ) {
 				continue;
 			}
 
@@ -131,8 +134,9 @@ function air_helper_cf_hande_field_complex_clean_keys( $key, $value ) {
 }
 
 /**
- *  Show small message below preview button in admin.
- *  @since  1.1.0
+ * Show small message below preview button in admin.
+ *
+ * @since  1.1.0
  */
 function air_helper_post_preview_message() {
 	printf( '<br /><p style="color:#ddd;">%s</p>', __( 'Two preview times might be needed to see all content correctly.', 'air-helper' ) );
@@ -140,12 +144,13 @@ function air_helper_post_preview_message() {
 add_action( 'post_submitbox_minor_actions', 'air_helper_post_preview_message' );
 
 /**
- *  Nast hack to make meta data preview work correctly,
- *  don't tell mama.
+ * Nasty hack to make meta data preview work correctly,
+ * don't tell mama.
  *
- *  @since 1.1.0
+ * @param fields $fields Fields param.
+ * @since 1.1.0
  */
-function air_helper_add_field_debug_preview( $fields ){
+function air_helper_add_field_debug_preview( $fields ) {
 	$fields['debug_preview'] = 'debug_preview';
 	return $fields;
 }
