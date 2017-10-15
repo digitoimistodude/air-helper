@@ -39,7 +39,7 @@ if ( ! class_exists( 'WP_Post_Meta_Revisioning' ) ) :
 		 * @since 4.5.0
 		 */
 		public function _add_metadata_preview_filter() {
-			add_filter( 'get_post_metadata', array( $this, '_wp_preview_meta_filter'), 10, 4 );
+			add_filter( 'get_post_metadata', array( $this, '_wp_preview_meta_filter' ), 10, 4 );
 		}
 
 		/**

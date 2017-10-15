@@ -299,7 +299,9 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
 		'id'    => 'airhelperenv',
 		'title' => wp_sprintf( __( 'Ympäristö: %s', 'air-helper' ), $env ),
 		'href'  => '#',
-		'meta'  => array( 'class' => $class )
+		'meta'  => array(
+      'class' => $class
+    ),
 	) );
 }
 add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );

@@ -66,6 +66,9 @@
     <exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
     <exclude name="WordPress.VIP.ValidatedSanitizedInput.MissingUnslash" />
     <exclude name="WordPress.VIP.ValidatedSanitizedInput.InputNotSanitized" />
+    <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification" />
+    <exclude name="Generic.PHP.ForbiddenFunctions.FoundWithAlternative" />
+    <exclude name="WordPress.Classes.ClassInstantiation.MissingParenthesis" />
 
   </rule>
 </ruleset>
