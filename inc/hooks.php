@@ -44,6 +44,21 @@ function air_helper_helper_force_mail_to( $args ) {
 }
 
 /**
+ *  Do not force to address when sending notification to new user created.
+ *  Turn off by using `remove_action( 'edit_user_created_user', 'air_helper_dont_force_created_user_mail' )`
+ *
+ *  @since  1.2.0
+ *  @param  string  $user_id ID of new user
+ *  @param  string  $notify  Who to notify about user registration
+ */
+function air_helper_dont_force_created_user_mail( $user_id, $notify ) {
+	remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+	wp_send_new_user_notifications( $user_id, $notify );
+	add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+}
+add_action( 'edit_user_created_user', 'air_helper_dont_force_created_user_mail', 10, 2 );
+
+/**
  * Remove archive title prefix.
  * Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
  *
