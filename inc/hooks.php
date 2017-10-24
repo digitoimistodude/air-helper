@@ -48,8 +48,8 @@ function air_helper_helper_force_mail_to( $args ) {
  *  Turn off by using `remove_action( 'edit_user_created_user', 'air_helper_dont_force_created_user_mail' )`
  *
  *  @since  1.2.0
- *  @param  string  $user_id ID of new user
- *  @param  string  $notify  Who to notify about user registration
+ *  @param  string $user_id ID of new user.
+ *  @param  string $notify  Who to notify about user registration.
  */
 function air_helper_dont_force_created_user_mail( $user_id, $notify ) {
 	remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
