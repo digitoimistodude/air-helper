@@ -411,3 +411,10 @@ function air_helper_lowpriority_yoastseo() {
   return 'low';
 }
 add_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' );
+
+/**
+ *  Remove Update WP text from admin footer.
+ *
+ *  @since  1.3.0
+ */
+add_filter( 'update_footer', '__return_empty_string', 11 );
