@@ -157,6 +157,28 @@ function air_helper_helper_remove_admin_menu_links() {
 add_action( 'admin_menu', 'air_helper_helper_remove_admin_menu_links', 999 );
 
 /**
+ *  Remove plugins page from admin menu, execpt for users with spesific domain.
+ *
+ *  Turn off by using `remove_filter( 'air_helper_helper_remove_admin_menu_links', 'air_helper_maybe_remove_plugins_from_admin_menu' )`
+ *  Modify list by using `add_filter( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', 'myprefix_dont_remove_plugins_admin_menu_link_from_domain' )`
+ *
+ *  @since  1.3.0
+ *  @param  array  $menu_links pages to remove from admin menu.
+ */
+function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
+	$current_user = get_current_user_id();
+	$user = new WP_User( $current_user );
+	$domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', 'dude.fi' );
+
+	if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
+		$menu_links[] = 'plugins.php';
+	}
+
+	return $menu_links;
+}
+add_filter( 'air_helper_helper_remove_admin_menu_links', 'air_helper_maybe_remove_plugins_from_admin_menu' );
+
+/**
  * Hide WP updates nag.
  * Turn off by using `remove_action( 'admin_menu', 'air_helper_wphidenag' )`
  *
