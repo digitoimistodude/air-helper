@@ -153,6 +153,18 @@ function air_helper_helper_remove_admin_menu_links() {
 	foreach ( $remove_items as $item ) {
 		remove_menu_page( $item );
 	}
+
+	$remove_items = apply_filters( 'air_helper_helper_remove_admin_submenu_links', array(
+		'index.php' => array(
+			'update-core.php',
+		),
+	) );
+
+	foreach ( $remove_items as $parent => $items ) {
+		foreach ( $items as $item  ) {
+			remove_submenu_page( $parent, $item );
+		}
+	}
 }
 add_action( 'admin_menu', 'air_helper_helper_remove_admin_menu_links', 999 );
 
