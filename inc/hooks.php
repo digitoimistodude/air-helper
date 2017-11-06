@@ -394,6 +394,19 @@ function air_helper_customizer_remove_css_section( $wp_customize ) {
 add_action( 'customize_register', 'air_helper_customizer_remove_css_section', 15 );
 
 /**
+ *  Show TinyMCE second editor tools row by default.
+ *  Turn off by using `remove_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' )`
+ *
+ *  @since  1.3.0
+ *  @param  array 	$tinymce tinymce options.
+ */
+function air_helper_show_second_editor_row( $tinymce ) {
+	$tinymce['wordpress_adv_hidden'] = false;
+	return $tinymce;
+}
+add_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' );
+
+/**
  * Allow Gravity Forms to hide labels to add placeholders.
  * Turn off by using `add_filter( 'gform_enable_field_label_visibility_settings', '__return_false' )`
  *
