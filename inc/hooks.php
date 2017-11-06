@@ -161,7 +161,7 @@ function air_helper_helper_remove_admin_menu_links() {
 	) );
 
 	foreach ( $remove_items as $parent => $items ) {
-		foreach ( $items as $item  ) {
+		foreach ( $items as $item ) {
 			remove_submenu_page( $parent, $item );
 		}
 	}
@@ -175,7 +175,7 @@ add_action( 'admin_menu', 'air_helper_helper_remove_admin_menu_links', 999 );
  *  Modify list by using `add_filter( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', 'myprefix_dont_remove_plugins_admin_menu_link_from_domain' )`
  *
  *  @since  1.3.0
- *  @param  array  $menu_links pages to remove from admin menu.
+ *  @param  array $menu_links pages to remove from admin menu.
  */
 function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
 	$current_user = get_current_user_id();
@@ -197,7 +197,7 @@ add_filter( 'air_helper_helper_remove_admin_menu_links', 'air_helper_maybe_remov
  * @since  0.1.0
  */
 function air_helper_wphidenag() {
-  remove_action( 'admin_notices', 'update_nag', 3 );
+	remove_action( 'admin_notices', 'update_nag', 3 );
 }
 add_action( 'admin_menu', 'air_helper_wphidenag' );
 
@@ -385,7 +385,7 @@ add_action( 'admin_head', 'air_helper_adminbar_show_env_styles' );
  * Remove the additional CSS section, introduced in 4.7, from the Customizer.
  * Add back by using `remove_action( 'customize_register', 'air_helper_customizer_remove_css_section' )`
  *
- * @param object 	$wp_customize WP_Customize_Manager.
+ * @param object $wp_customize WP_Customize_Manager.
  * @since  1.3.0
  */
 function air_helper_customizer_remove_css_section( $wp_customize ) {
@@ -398,7 +398,7 @@ add_action( 'customize_register', 'air_helper_customizer_remove_css_section', 15
  *  Turn off by using `remove_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' )`
  *
  *  @since  1.3.0
- *  @param  array 	$tinymce tinymce options.
+ *  @param  array $tinymce tinymce options.
  */
 function air_helper_show_second_editor_row( $tinymce ) {
 	$tinymce['wordpress_adv_hidden'] = false;
