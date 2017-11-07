@@ -17,3 +17,24 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 		return is_string( get_post_status( $id ) );
 	}
 }
+
+if ( ! function_exists( 'get_icons_for_user' ) ) {
+	/**
+	 *  Get list of icons which are available for user.
+	 *
+	 *  @since  2.2.0
+	 *  @return array  array of icons
+	 */
+	function get_icons_for_user() {
+		$icons = array();
+		$files = glob( get_template_directory() . '/svg/foruser/*.svg' );
+
+		foreach ( $files as $file ) {
+			$filename = explode( '/', $file );
+			$filename = end( $filename );
+			$icons[ $filename ] = ucfirst( strstr( $filename, '.', true ) );
+		}
+
+		return $icons;
+	}
+}
