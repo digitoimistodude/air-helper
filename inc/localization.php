@@ -2,6 +2,10 @@
 /**
  *  Localization related functions.
  *
+ *  Big thanks to Aucor Oy and escpecially Teemy Suoranta for the
+ *  original code, which this file is based on.
+ *  https://github.com/aucor/aucor-starter/blob/master/inc/localization.php
+ *
  *  @package air-helper
  */
 
