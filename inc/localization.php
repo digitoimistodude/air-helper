@@ -32,10 +32,10 @@ function ask__( $key, $lang = null ) {
 	$strings = apply_filters( 'air_helper_pll_register_strings', array() );
 
 	if ( isset( $strings[ $key ] ) ) {
-		if ( $lang === null ) {
+		if ( null === $lang ) {
 			return pll__( $strings[ $key ] );
 		} else {
-			return pll_translate_string( $strings[$key], $lang );
+			return pll_translate_string( $strings[ $key ], $lang );
 		}
 	}
 
@@ -109,7 +109,7 @@ function asv__( $value, $lang = null ) {
 		}
 	}
 
-	if ( $lang === null ) {
+	if ( null === $lang ) {
 		return pll__( $value );
 	} else {
 		return pll_translate_string( $value, $lang );
