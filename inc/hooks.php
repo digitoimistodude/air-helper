@@ -1,12 +1,16 @@
 <?php
 /**
+ *  Hooks to alter the way in which core works.
+ *
+ *  @package air-helper
+ */
+
+/**
  *  Force to address in wp_mail function so that test emails wont go to client.
  *  Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
  *
  *  @since  0.1.0
- *  @package air-helper
  */
-
 if ( getenv( 'WP_ENV' ) === 'development' ) {
 	add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
 }
