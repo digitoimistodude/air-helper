@@ -88,8 +88,20 @@ function air_helper_maybe_carbon_fields() {
 add_action( 'init', 'air_helper_maybe_carbon_fields' );
 
 /**
+ *  Load localization helpers and Polylang fallbacks.
+ *  Turn off by using `remove_action( 'init', 'air_helper_localization_helpers' )`
+ *
+ *  @since  2.2.0
+ */
+function air_helper_localization_helpers() {
+	require_once air_helper_base_path() . '/inc/localization.php';
+}
+add_action( 'init', 'air_helper_localization_helpers' );
+
+/**
  *  Require files containing our preferences.
  */
 require_once air_helper_base_path() . '/inc/hooks.php';
+require_once air_helper_base_path() . '/inc/functions.php';
 require_once air_helper_base_path() . '/inc/misc.php';
 require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
