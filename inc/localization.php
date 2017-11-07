@@ -3,7 +3,7 @@
  *  Localization related functions.
  *
  *  Big thanks to Aucor Oy and escpecially Teemy Suoranta for the
- *  original code, which this file is based on.
+ *  original (GPL-2.o licensed) code, which this file is based on.
  *  https://github.com/aucor/aucor-starter/blob/master/inc/localization.php
  *
  *  @package air-helper
@@ -12,7 +12,7 @@
 /**
  *  Register polylang translatable.
  *
- *  @since 2.2.0
+ *  @since 1.4.0
  */
 if ( function_exists( 'pll_register_string' ) ) {
 	$strings = apply_filters( 'air_helper_pll_register_strings', array() );
@@ -27,7 +27,7 @@ if ( function_exists( 'pll_register_string' ) ) {
 /**
  * Get localized string by key.
  *
- * @since 2.2.0
+ * @since 1.4.0
  * @param string $key unique identifier of string.
  * @param string $lang 2 character language code (defaults to current language).
  * @return string translated value or key if not registered string.
@@ -70,7 +70,7 @@ function ask__( $key, $lang = null ) {
 /**
  * Echo localized string by key.
  *
- * @since 2.2.0
+ * @since 1.4.0
  * @param string $key unique identifier of string.
  * @param string $lang 2 character language code (defaults to current language).
  */
@@ -81,7 +81,7 @@ function ask_e( $key, $lang = null ) {
 /**
  * Get localized string by value.
  *
- * @since 2.2.0
+ * @since 1.4.0
  * @param string $value string.
  * @param string $lang 2 character language code (defaults to current language).
  * @return string translated value or key if not registered string.
@@ -123,7 +123,7 @@ function asv__( $value, $lang = null ) {
 /**
  * Echo localized string by value.
  *
- * @since 2.2.0
+ * @since 1.4.0
  * @param string $value string.
  * @param string $lang 2 character language code (defaults to current language).
  */
@@ -134,7 +134,7 @@ function asv_e( $value, $lang = null ) {
 /**
  *  Fallbacks for Polylang.
  *
- *  @since 2.2.0
+ *  @since 1.4.0
  *  @codingStandardsIgnoreStart
  */
 if ( ! function_exists( 'pll__' ) ) :

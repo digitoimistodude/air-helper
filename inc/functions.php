@@ -9,7 +9,7 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 	/**
 	 *  Check if post exists by ID.
 	 *
-	 *  @since  2.2.0
+	 *  @since  1.4.0
 	 *  @param  integer $id post ID.
 	 *  @return boolean     true / false weather the post exists.
 	 */
@@ -22,7 +22,7 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
 	/**
 	 *  Get list of icons which are available for user.
 	 *
-	 *  @since  2.2.0
+	 *  @since  1.4.0
 	 *  @return array  array of icons
 	 */
 	function get_icons_for_user() {

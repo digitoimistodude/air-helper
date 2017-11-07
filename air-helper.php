@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: This plugin extends themes based on Air by adding useful hooks, functions and basic things for WooCommerce.
- * Version: 1.3.0
+ * Version: 1.4.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
  * Requires at least: 4.7
@@ -91,7 +91,7 @@ add_action( 'init', 'air_helper_maybe_carbon_fields' );
  *  Load localization helpers and Polylang fallbacks.
  *  Turn off by using `remove_action( 'init', 'air_helper_localization_helpers' )`
  *
- *  @since  2.2.0
+ *  @since  1.4.0
  */
 function air_helper_localization_helpers() {
 	require_once air_helper_base_path() . '/inc/localization.php';
