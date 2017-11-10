@@ -417,9 +417,9 @@ add_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' );
  *
  *  @since  1.4.1
  *  @param  string $title title to strip.
- *  @param  mixed $arg_2 whatever filter can pass.
- *  @param  mixed $arg_3 whatever filter can pass.
- *  @param  mixed $arg_4 whatever filter can pass.
+ *  @param  mixed  $arg_2 whatever filter can pass.
+ *  @param  mixed  $arg_3 whatever filter can pass.
+ *  @param  mixed  $arg_4 whatever filter can pass.
  */
 function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
 	return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
