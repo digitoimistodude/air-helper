@@ -411,6 +411,23 @@ function air_helper_show_second_editor_row( $tinymce ) {
 add_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' );
 
 /**
+ *  Strip unwanted html tags from titles
+ *  Turn off by using `remove_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item' )`
+ *  Turn off by using `remove_filter( 'the_title', 'air_helper_strip_tags_menu_item' )`
+ *
+ *  @since  1.4.1
+ *  @param  string $title title to strip.
+ *  @param  mixed $arg_2 whatever filter can pass.
+ *  @param  mixed $arg_3 whatever filter can pass.
+ *  @param  mixed $arg_4 whatever filter can pass.
+ */
+function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
+	return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
+}
+add_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item', 10, 4 );
+add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
+
+/**
  * Allow Gravity Forms to hide labels to add placeholders.
  * Turn off by using `add_filter( 'gform_enable_field_label_visibility_settings', '__return_false' )`
  *
