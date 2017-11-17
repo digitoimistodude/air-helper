@@ -11,7 +11,7 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 	 *
 	 *  @since  1.4.0
 	 *  @param  integer $post_id post ID.
-	 *  @return boolean          true / false weather the post exists.
+	 *  @return boolean          true / false whether the post exists.
 	 */
 	function post_exists_id( $post_id ) {
 		return is_string( get_post_status( $post_id ) );
@@ -24,7 +24,7 @@ if ( ! function_exists( 'has_content' ) ) {
 	 *
 	 *  @since  1.4.2
 	 *  @param  integer $post_id post ID.
-	 *  @return boolean          true / false weather the post content exists.
+	 *  @return boolean          true / false whether the post content exists.
 	 */
 	function has_content( $post_id = null ) {
 		if ( isset( $post_id ) ) {
