@@ -10,11 +10,30 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 	 *  Check if post exists by ID.
 	 *
 	 *  @since  1.4.0
-	 *  @param  integer $id post ID.
-	 *  @return boolean     true / false weather the post exists.
+	 *  @param  integer $post_id post ID.
+	 *  @return boolean          true / false weather the post exists.
 	 */
-	function post_exists_id( $id ) {
-		return is_string( get_post_status( $id ) );
+	function post_exists_id( $post_id ) {
+		return is_string( get_post_status( $post_id ) );
+	}
+}
+
+if ( ! function_exists( 'has_content' ) ) {
+	/**
+	 *  Check if post has main content.
+	 *
+	 *  @since  1.4.2
+	 *  @param  integer $post_id post ID.
+	 *  @return boolean          true / false weather the post content exists.
+	 */
+	function has_content( $post_id = null ) {
+		if ( isset( $post_id ) ) {
+			$content = apply_filters( 'the_content', get_post_field( 'post_content', $post_id ) );
+		} else {
+			$content = get_the_content();
+		}
+
+		return empty( $content );
 	}
 }
 

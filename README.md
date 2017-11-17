@@ -36,6 +36,7 @@ Air helper is licensed with [The MIT License (MIT)](http://choosealicense.com/li
 Air helper introduces few helper functions to make your life easier.
 
 * Check if post exists, `post_exists_id( $post_id )`
+* Check if post has content, `has_content( $post_id )`
 * Get array of svg icons available for user in `svg/foruser` directory with `get_icons_for_user()`
 
 #### Modified WordPress functionality
