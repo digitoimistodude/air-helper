@@ -33,7 +33,7 @@ if ( ! function_exists( 'has_content' ) ) {
 			$content = get_the_content();
 		}
 
-		return empty( $content );
+		return ! empty( $content );
 	}
 }
 
