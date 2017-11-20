@@ -57,3 +57,28 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
 		return $icons;
 	}
 }
+
+if ( ! function_exists( 'has_children' ) ) {
+	/**
+	 *  Check if post has child pages.
+	 *
+	 *  @since  1.4.2
+	 *  @param  integer  $post_id  post ID, defaults to current post.
+	 *  @param  string  $post_type post type, defaults to page or current post type.
+	 *  @return boolean            true / false whether post has childs.
+	 */
+	function has_children( $post_id = null, $post_type = 'page' ) {
+		if ( null === $post_id ) {
+			global $post;
+			$post_id = $post->ID;
+			$post_type = $post->post_type;
+		}
+
+		$query = new WP_Query( array(
+			'post_parent'	=> $post_id,
+			'post_type'		=> $post_type,
+		) );
+
+		return $query->have_posts();
+	}
+}
