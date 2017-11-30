@@ -63,7 +63,7 @@ if ( ! function_exists( 'has_children' ) ) {
 	 *  Check if post has child pages.
 	 *
 	 *  @since  1.4.2
-	 *  @param  integer  $post_id  post ID, defaults to current post.
+	 *  @param  integer $post_id  post ID, defaults to current post.
 	 *  @param  string  $post_type post type, defaults to page or current post type.
 	 *  @return boolean            true / false whether post has childs.
 	 */
