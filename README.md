@@ -39,6 +39,7 @@ Air helper introduces few helper functions to make your life easier.
 * Check if post has content, `has_content( $post_id )`
 * Check if post has childs, `has_children( $post_id, $post_type )`
 * Get array of svg icons available for user in `svg/foruser` directory with `get_icons_for_user()`
+* Get key=>value list of pages, `get_posts_array( $args_for_get_posts, $field_to_use_as_key )`
 
 #### Modified WordPress functionality
 
