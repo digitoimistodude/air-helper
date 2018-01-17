@@ -7,7 +7,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2017-09-21 10:31:31
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-01-17 13:42:01
+ * @Last Modified time: 2018-01-17 13:45:23
  *
  * @package airhelper
  */
@@ -29,6 +29,7 @@ if ( ! function_exists( 'dude_get_post_meta' ) ) {
 
 /**
  *  Register and enqueue custom styles for CRB.
+ *
  *  @since  1.5.0
  */
 function air_helper_cf_styles() {
