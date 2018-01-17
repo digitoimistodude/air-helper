@@ -98,6 +98,7 @@ function air_helper_localization_helpers() {
 }
 add_action( 'init', 'air_helper_localization_helpers' );
 
+// @codingStandardsIgnoreStart
 /**
  *  Remove deactivate from air helper plugin actions.
  *  Modify actions with `air_helper_plugin_action_links` filter.
@@ -126,6 +127,7 @@ function air_helper_modify_plugins_bulk_actions( $actions ) {
 	return apply_filters( 'air_helper_plugins_bulk_actions', $actions );
 }
 add_filter( 'bulk_actions-plugins','air_helper_modify_plugins_bulk_actions' );
+// @codingStandardsIgnoreEnd
 
 /**
  *  Require files containing our preferences.
