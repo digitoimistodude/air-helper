@@ -37,6 +37,10 @@ function air_helper_base_path() {
 	return untrailingslashit( plugin_dir_path( __FILE__ ) );
 }
 
+function air_helper_base_url() {
+	return untrailingslashit( plugin_dir_url( __FILE__ ) );
+}
+
 /**
  *  Check if active theme is based on Air.
  *

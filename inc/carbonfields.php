@@ -7,7 +7,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2017-09-21 10:31:31
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2017-09-21 12:46:52
+ * @Last Modified time: 2018-01-17 13:42:01
  *
  * @package airhelper
  */
@@ -26,6 +26,16 @@ if ( ! function_exists( 'dude_get_post_meta' ) ) {
 		}
 	}
 }
+
+/**
+ *  Register and enqueue custom styles for CRB.
+ *  @since  1.5.0
+ */
+function air_helper_cf_styles() {
+	wp_register_style( 'air-helper-cf', air_helper_base_url() . '/assets/css/cf.css', false, filemtime( air_helper_base_path() . '/assets/css/cf.css' ) );
+	wp_enqueue_style( 'air-helper-cf' );
+}
+add_action( 'admin_enqueue_scripts', 'air_helper_cf_styles' );
 
 /**
  * Short-circuit (override) default get_post_metadata functionality with
