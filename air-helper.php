@@ -99,6 +99,35 @@ function air_helper_localization_helpers() {
 add_action( 'init', 'air_helper_localization_helpers' );
 
 /**
+ *  Remove deactivate from air helper plugin actions.
+ *  Modify actions with `air_helper_plugin_action_links` filter.
+ *
+ *  @since  1.5.0
+ */
+function air_helper_remove_deactivation_link( $actions, $plugin_file, $plugin_data, $context ) {
+	if ( plugin_basename( __FILE__ ) === $plugin_file && array_key_exists( 'deactivate', $actions ) ) {
+		unset( $actions['deactivate'] );
+	}
+
+	return apply_filters( 'air_helper_plugin_action_links', $actions, $plugin_file );
+}
+add_filter( 'plugin_action_links', 'air_helper_remove_deactivation_link', 10, 4 );
+
+/**
+ *  Remove delete and deactivate from plugin bulk actions.
+ *  Modify actions with `air_helper_plugins_bulk_actions` filter.
+ *
+ *  @since  1.5.0
+ */
+function air_helper_modify_plugins_bulk_actions( $actions ) {
+	unset( $actions['delete-selected'] );
+	unset( $actions['deactivate-selected'] );
+
+	return apply_filters( 'air_helper_plugins_bulk_actions', $actions );
+}
+add_filter( 'bulk_actions-plugins','air_helper_modify_plugins_bulk_actions' );
+
+/**
  *  Require files containing our preferences.
  */
 require_once air_helper_base_path() . '/inc/hooks.php';
