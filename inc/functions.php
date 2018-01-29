@@ -88,9 +88,9 @@ if ( ! function_exists( 'get_posts_array' ) ) {
 	 *  Get posts in key=>value array.
 	 *
 	 *  @since  1.4.2
-	 *  @param  array  $args 				Arguments passed to get_posts function.
-	 *  @param  string $return_key 	Which field to use as a key in return.
-	 *  @return array               {$return_key}=>post_title array of posts.
+	 *  @param  array   $args       Arguments passed to get_posts function
+	 *  @param  string  $return_key Which field to use as a key in return
+	 *  @return array               {$return_key}=>post_title array of posts
 	 */
 	function get_posts_array( $args = array(), $return_key = 'ID' ) {
 		$return = array();
