@@ -7,13 +7,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2017-09-21 10:31:31
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-01-29 12:11:44
+ * @Last Modified time: 2018-01-29 12:16:36
  *
  * @package airhelper
  */
 
 /**
  *  Register and enqueue custom styles for CRB.
+ *
  *  @since 1.5.0
  */
 function air_helper_cf_styles() {
