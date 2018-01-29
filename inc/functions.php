@@ -103,3 +103,61 @@ if ( ! function_exists( 'get_posts_array' ) ) {
 		return $return;
 	}
 }
+
+if ( ! function_exists( 'dude_get_post_meta' ) ) {
+	/**
+	 *  Our own function mainly for getting CF complex fields.
+	 *
+	 *  @since  1.1.0
+	 *  @param int    $post_id Post ID.
+	 *  @param string $key     Optional. The meta key to retrieve. By default, returns
+	 *                         data for all keys. Default empty.
+	 *  @param bool   $single  Optional. Whether to return a single value. Default false.
+	 *  @return mixed 					Will be an array if $single is false. Will be value of meta data
+	 *                          field if $single is true.
+	 */
+	function dude_get_post_meta( $post_id, $key, $single ) {
+		if ( isset( $_GET['preview_id'] ) ) {
+			return get_post_meta( $post_id, '_' . $key, $single );
+		} elseif ( function_exists( 'carbon_get_post_meta' ) ) {
+			return carbon_get_post_meta( $post_id, $key );
+		} else {
+			return false;
+		}
+	}
+}
+
+if ( ! function_exists( 'dude_get_crb_pll_id' ) ) {
+	/**
+	 *  Make CF conditional display condition with post_id to work with Polylang.
+	 *
+	 *  @since  1.4.3
+	 *  @param  mixed   $condition Condition type name as a string from CF.
+	 *  @param  integer $post_id   Post ID to check against.
+	 *  @param  string  $operator  Which operator to use in conditional check.
+	 *  @return mixed 						 CF condition result.
+	 */
+	function dude_get_crb_pll_id( $condition, $post_id = 0, $operator = '=' ) {
+		if ( function_exists( 'pll_e' ) ) {
+			// If Polylang is active, get translations for post.
+			global $polylang;
+			$translations = $polylang->model->post->get_translations( $post_id );
+
+			// Modify operator to work with array.
+			if ( '=' === $operator ) {
+				$operator = 'IN';
+			} else {
+				$operator = 'NOT IN';
+			}
+
+			// CF condition check.
+			$condition->where( 'post_id', $operator, $translations );
+		} else {
+			// Polylang is not active, use default condition check.
+			$condition->where( 'post_id', $operator, $post_id );
+		}
+
+		// Return condition result.
+		return $condition;
+	}
+}
