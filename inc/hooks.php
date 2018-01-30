@@ -258,7 +258,7 @@ if ( getenv( 'WP_ENV' ) === 'development' ) {
 	 */
   function air_helper_dev_adminbar() {
 
-  	if ( ! is_user_logged_in() ) {
+  	if ( ! is_user_logged_in() || get_user_option( 'show_admin_bar_front' ) ) {
   		return;
   	} ?>
     <style type="text/css">
