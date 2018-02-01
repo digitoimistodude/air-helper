@@ -94,6 +94,13 @@ if ( ! function_exists( 'get_posts_array' ) ) {
 	 */
 	function get_posts_array( $args = array(), $return_key = 'ID' ) {
 		$return = array();
+		$defaults = array(
+			'posts_per_page'	=> 500,
+			'orderby'					=> 'title',
+			'order'						=> 'DESC',
+		);
+
+		$args = wp_parse_args( $args, $defaults );
 		$posts = get_posts( $args );
 
 		foreach ( $posts as $post ) {
