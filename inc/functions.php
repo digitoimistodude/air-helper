@@ -95,7 +95,7 @@ if ( ! function_exists( 'get_posts_array' ) ) {
 	function get_posts_array( $args = array(), $return_key = 'ID' ) {
 		$return = array();
 		$defaults = array(
-			'posts_per_page'	=> 500,
+			'posts_per_page'	=> 100,
 			'orderby'					=> 'title',
 			'order'						=> 'DESC',
 		);
