@@ -219,7 +219,7 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 	 *  @param  integer $id page which previous to get.
 	 *  @return mixed       false if no previous page, id if there is.
 	 */
-	function get_prev_page_id( $id = 0) {
+	function get_prev_page_id( $id = 0 ) {
 		$prev_page_id = false;
 
 		// Get all pages under this section

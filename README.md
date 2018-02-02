@@ -42,6 +42,8 @@ Air helper introduces few helper functions to make your life easier.
 * Get key=>value list of pages, `get_posts_array( $args_for_get_posts, $field_to_use_as_key )`
 * Use [Carbon Fields](https://carbonfields.net) conditional check with [Polylang](https://polylang.pro/) with `dude_get_crb_pll_id( $condition_from_cfb, $post_id = 0, $condition_operator = '=' )`
 * Use post meta preview with [Carbon Fields](https://carbonfields.net) field types not saving to one row with `dude_get_post_meta( $post_id, $key, $single )` 
+* Get previous page ID `get_prev_page_id( $id = 0)`
+* Get next page ID `get_next_page_id( $id = 0)`
 
 #### Modified WordPress functionality
 
