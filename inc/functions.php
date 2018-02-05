@@ -183,6 +183,7 @@ if ( ! function_exists( 'get_next_page_id' ) ) {
 		// Get all pages under this section
 		$post = get_post( $id );
 		$get_pages = get_pages( array(
+			'post_type'		=> $post->post_type,
 			'child_of'		=> $post->post_parent,
 			'parent'			=> $post->post_parent,
 			'sort_column'	=> 'menu_order',
@@ -194,7 +195,7 @@ if ( ! function_exists( 'get_next_page_id' ) ) {
 
 		for ( $p = 0; $p < $page_count; $p++ ) {
 			// Get the array key for our entry.
-			if ( $id === $get_pages[ $p ]->ID ) {
+			if ( isset( $get_pages[ $p ] ) && $id === $get_pages[ $p ]->ID ) {
 				break;
 			}
 		}
@@ -225,6 +226,7 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 		// Get all pages under this section
 		$post = get_post( $id );
 		$get_pages = get_pages( array(
+			'post_type'		=> $post->post_type,
 			'child_of'		=> $post->post_parent,
 			'parent'			=> $post->post_parent,
 			'sort_column'	=> 'menu_order',
@@ -236,7 +238,7 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 
 		for ( $p = 0; $p < $page_count; $p++ ) {
 			// Get the array key for our entry.
-			if ( $id === $get_pages[ $p ]->ID ) {
+			if ( isset( $get_pages[ $p ] ) && $id === $get_pages[ $p ]->ID ) {
 				break;
 			}
 		}
@@ -253,4 +255,3 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 		return $prev_page_id;
 	}
 } // End if().
-
