@@ -136,7 +136,10 @@ add_filter( 'bulk_actions-plugins','air_helper_modify_plugins_bulk_actions' );
 /**
  *  Require files containing our preferences.
  */
-require_once air_helper_base_path() . '/inc/hooks.php';
-require_once air_helper_base_path() . '/inc/functions.php';
-require_once air_helper_base_path() . '/inc/misc.php';
-require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
+function air_helper_fly() {
+	require_once air_helper_base_path() . '/inc/hooks.php';
+	require_once air_helper_base_path() . '/inc/functions.php';
+	require_once air_helper_base_path() . '/inc/misc.php';
+	require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
+}
+add_action( 'init', 'air_helper_fly', 999 );
