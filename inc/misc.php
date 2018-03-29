@@ -22,6 +22,7 @@ if ( apply_filters( 'air_helper_sendgrid', true ) ) {
 	// Define SendGrid settings.
 	define( 'SENDGRID_API_KEY', getenv( 'SENDGRID_API_KEY' ) );
 	define( 'SENDGRID_CATEGORIES', get_option( 'blogname' ) );
+	define( 'SENDGRID_STATS_CATEGORIES', get_option( 'blogname' ) );
 }
 
 /**
