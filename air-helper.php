@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: This plugin extends themes based on Air by adding useful hooks, functions and basic things for WooCommerce.
- * Version: 1.5.5
+ * Version: 1.5.6
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
  * Requires at least: 4.7
@@ -47,7 +47,7 @@ function air_helper_base_url() {
  *  @since  0.1.0
  */
 function air_helper_are_we_airless() {
-	if ( ! defined( 'AIR_VERSION' ) ) {
+	if ( ! defined( 'AIR_VERSION' ) && ! defined( 'AIR_LIGHT_VERSION' ) ) {
 		add_action( 'admin_notices', 'air_helper_we_are_airless' );
 	}
 }
