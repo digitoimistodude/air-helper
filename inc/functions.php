@@ -14,6 +14,10 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 	 *  @return boolean          true / false whether the post exists.
 	 */
 	function post_exists_id( $post_id ) {
+		if ( empty( $post_id ) ) {
+			return false;
+		}
+		
 		return is_string( get_post_status( $post_id ) );
 	}
 }
