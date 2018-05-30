@@ -20,6 +20,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ *  Get current version of plugin. Version is semver without extra marks, so it can be used as a int.
+ *
+ *  @since  1.5.7
+ *  @return integer  current version of plugin
+ */
+function air_helper_version() {
+	return 156;
+}
+
+/**
+ *  Get the version at where plugin was activated.
+ *
+ *  @since  1.5.7
+ *  @return integer  version where plugin was activated
+ */
+function air_helper_activated_at_version() {
+	return (int) get_option( 'air_helper_activated_at_version' );
+}
+
+/**
  *  Custom GitHub updater for this plugin.
  *
  *  @since  0.1.0
@@ -143,3 +163,34 @@ function air_helper_fly() {
 	require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
 }
 add_action( 'init', 'air_helper_fly', 999 );
+
+/**
+ *  Plugin activation hook to save current version for reference in what version activation happened.
+ *  Check if deactivation without version option is apparent, then do not save current version for
+ *  maintaining backwards compatibility.
+ *
+ *  @since  1.5.7
+ */
+function air_helper_activate() {
+	$deactivated_without = get_option( 'air_helper_deactivated_without_version' );
+
+	if ( 'true' !== $deactivated_without ) {
+		update_option( 'air_helper_activated_at_version', air_helper_version() );
+	}
+}
+register_activation_hook( __FILE__, 'air_helper_activate' );
+
+/**
+ *  Maybe add option if deactivation happened without plugin activation version in options.
+ *  Helps to maintain backwards compatibility.
+ *
+ *  @since  1.5.7
+ */
+function air_helper_deactivate() {
+	$activated_version = get_option( 'air_helper_activated_at_version' );
+
+	if ( ! $activated_version ) {
+		update_option( 'air_helper_deactivated_without_version', 'true', false );
+	}
+}
+register_deactivation_hook( __FILE__, 'air_helper_deactivate' );

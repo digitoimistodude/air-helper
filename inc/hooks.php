@@ -442,7 +442,7 @@ add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
 
 /**
  *  Set Yoast SEO plugin metabox priority to low.
- *  Turn off by using `add_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' )`
+ *  Turn off by using `remove_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' )`
  *
  *  @since  0.1.0
  */
@@ -510,3 +510,69 @@ function air_helper_orderby_fix() {
 	}, 10, 3);
 }
 add_filter( 'init', 'air_helper_orderby_fix' );
+
+/**
+ *  Disable some views by default.
+ *  archives: tag, category, date, author
+ *  other: search
+ *
+ *  Turn off by using `remove_action( 'template_redirect', 'air_helper_disable_views' )`
+ *  or spesific views, for example tag archive, with `add_filter( 'air_helper_disable_views_tag', '__return_false' )`
+ *
+ *  @since  1.5.7
+ */
+function air_helper_disable_views() {
+	if ( ! function_exists( 'air_helper_activated_at_version' ) ) {
+		return;
+	}
+
+	if ( air_helper_activated_at_version() < 156 ) {
+		return;
+	}
+
+	// Enable tag archives by using `add_filter( 'air_helper_disable_views_tag', '__return_false' )`
+	if ( apply_filters( 'air_helper_disable_views_tag', true ) ) {
+		if( is_tag() ) {
+	    global $wp_query;
+	    $wp_query->set_404();
+	    status_header( 404 );
+	  }
+	}
+
+	// Enable category archives by using `add_filter( 'air_helper_disable_views_category', '__return_false' )`
+	if ( apply_filters( 'air_helper_disable_views_category', true ) ) {
+		if( is_category() ) {
+	    global $wp_query;
+	    $wp_query->set_404();
+	    status_header( 404 );
+	  }
+	}
+
+	// Enable date archives by using `add_filter( 'air_helper_disable_views_date', '__return_false' )`
+	if ( apply_filters( 'air_helper_disable_views_date', true ) ) {
+		if( is_date() ) {
+	    global $wp_query;
+	    $wp_query->set_404();
+	    status_header( 404 );
+	  }
+	}
+
+	// Enable author archives by using `add_filter( 'air_helper_disable_views_author', '__return_false' )`
+	if ( apply_filters( 'air_helper_disable_views_author', true ) ) {
+		if( is_author() ) {
+	    global $wp_query;
+	    $wp_query->set_404();
+	    status_header( 404 );
+	  }
+	}
+
+	// Enable search view by using `add_filter( 'air_helper_disable_views_search', '__return_false' )`
+	if ( apply_filters( 'air_helper_disable_views_search', true ) ) {
+		if( is_search() ) {
+	    global $wp_query;
+	    $wp_query->set_404();
+	    status_header( 404 );
+	  }
+	}
+}
+add_action( 'template_redirect', 'air_helper_disable_views' );
