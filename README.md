@@ -44,6 +44,8 @@ Air helper introduces few helper functions to make your life easier.
 * Use post meta preview with [Carbon Fields](https://carbonfields.net) field types not saving to one row with `dude_get_post_meta( $post_id, $key, $single )` 
 * Get previous page ID `get_prev_page_id( $id = 0)`
 * Get next page ID `get_next_page_id( $id = 0)`
+* Get years where are posts `get_post_years( $post_type = 'post' )`
+* Get months by year where are posts `get_post_months_by_year( $year = date( 'Y' ), $post_type = 'post' )`
 
 #### Modified WordPress functionality
 
@@ -55,7 +57,7 @@ All of these modifications can be altered and/or disabled with hooks. Please see
 * Remove archive title prefix
 * Disable emojicons
 * Clean up admin bar and menu from unused and/or non client friendly things
-* Remove plugins page from admin menu, execpt for users with spesific domain
+* Remove plugins page from admin menu, execpt for users with spesific domain or user meta row
 * Hide WordPress core, plugins and themes updates nag
 * Add a pingback url auto-discovery header for singularly identifiable articles
 * Disable REST API users endpoint
@@ -70,6 +72,9 @@ All of these modifications can be altered and/or disabled with hooks. Please see
 * Change default uploads folder to `media`
 * Force disablation of month- and year-based folders
 * Get SendGrid credentials from `.env`
+* Disable some views by default.
+    - archives: tag, category, date, author
+    - other: search
 
 #### Localization and Polylang support
 
