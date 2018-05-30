@@ -4,7 +4,7 @@
   "description": "Air helper brings personal preferences to Air based themes and extends it with basic WooCommerce layout modifications.",
   "homepage": "https://github.com/digitoimistodude/air-helper",
   "keywords": ["wordpress", "plugin"],
-  "license": "MIT",
+  "license": "GPLv3",
   "version": "1.5.7",
   "authors": [
     {

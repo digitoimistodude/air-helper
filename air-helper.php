@@ -8,6 +8,8 @@
  * Author URI: https://www.dude.fi
  * Requires at least: 4.7
  * Tested up to: 4.9.4
+ * License: GPLv3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
  * Text Domain: air-helper
  * Domain Path: /languages
