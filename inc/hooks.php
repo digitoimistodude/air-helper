@@ -526,7 +526,7 @@ function air_helper_disable_views() {
 		return;
 	}
 
-	if ( air_helper_activated_at_version() < 156 ) {
+	if ( air_helper_activated_at_version() < 157 ) {
 		return;
 	}
 
