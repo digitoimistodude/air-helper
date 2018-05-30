@@ -17,7 +17,7 @@ if ( ! function_exists( 'post_exists_id' ) ) {
 		if ( empty( $post_id ) ) {
 			return false;
 		}
-		
+
 		return is_string( get_post_status( $post_id ) );
 	}
 }
@@ -259,3 +259,80 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 		return $prev_page_id;
 	}
 } // End if().
+
+if ( ! function_exists( 'get_post_years' ) ) {
+	/**
+	 *  Get years where there are posts.
+	 *
+	 *  @since  1.5.7
+	 *  @param  string  $post_type post type to get post years, defaults to post.
+	 *  @return array 	           array containing years where there are posts.
+	 */
+	function get_post_years( $post_type = 'post' ) {
+
+		// Check if result is cached and if, return cached version.
+		$result = get_transient( "get_{$post_type}_years_result" );
+		if ( ! empty( $result ) ) {
+			return $result;
+		}
+
+		global $wpdb;
+		$result = array();
+
+		// Do databse query to get years.
+		$years = $wpdb->get_results( "SELECT YEAR(post_date) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type = '{$post_type}' GROUP BY YEAR(post_date) DESC", ARRAY_N );
+
+		// Loop result.
+		if ( is_array( $years ) && count( $years ) > 0 ) {
+			foreach ( $years as $year ) {
+				$result[] = $year[0];
+			}
+		}
+
+		// Save result to cache for 30 minutes.
+		set_transient( "get_{$post_type}_years_result", $result, MINUTE_IN_SECONDS * 30 );
+
+		return $result;
+	}
+} // end if
+
+if ( ! function_exists( 'get_post_months_by_year' ) ) {
+	/**
+	 *  Get months where there are posts in spesific year.
+	 *
+	 *  @since  1.5.7
+	 *  @param  string  $year      year to get posts, defaults to current year.
+	 *  @param  string  $post_type post type to get post years, defaults to post.
+	 *  @return array 	           array containing months where there are posts.
+	 */
+	function get_post_months_by_year( $year = '', $post_type = 'post' ) {
+		// Use current year if not defined.
+		if ( empty( $year ) ) {
+			$year = date( 'Y' );
+		}
+
+		// Check if result is cached and if, return cached version.
+		$result = get_transient( "get_{$post_type}_months_by_year_{$year}_result" );
+		if ( ! empty( $result ) ) {
+			return $result;
+		}
+
+		global $wpdb;
+		$result = array();
+
+		// Do databse query to get years.
+		$months = $wpdb->get_results( "SELECT DISTINCT MONTH(post_date) FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = '{$post_type}' AND YEAR(post_date) = '".$year."' ORDER BY post_date DESC", ARRAY_N );
+
+		// Loop result.
+		if ( is_array( $months ) && count( $months ) > 0 ) {
+			foreach ( $months as $month ) {
+				$result[] = $month[0];
+			}
+		}
+
+		// Save result to cache for 30 minutes.
+		set_transient( "get_{$post_type}_months_by_year_{$year}_result", $result, MINUTE_IN_SECONDS * 30 );
+
+		return $result;
+	}
+} // end if
