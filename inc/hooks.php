@@ -576,3 +576,6 @@ function air_helper_disable_views() {
 	}
 }
 add_action( 'template_redirect', 'air_helper_disable_views' );
+
+// Disable Try Gutenberg notification in dashboard added on 4.8.9.
+remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
