@@ -193,6 +193,7 @@ function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
 
 	if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
 		$menu_links[] = 'plugins.php';
+		$menu_links[] = 'edit.php?post_type=acf-field-group';
 	}
 
 	return $menu_links;

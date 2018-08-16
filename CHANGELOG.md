@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Introduced function `get_post_years` to get years where there are posts
 * Intriduced function ` get_post_months_by_year` to get months where there are posts in spesific year
 * Disable "Try Gutenberg" notification
+* Hide ACF admin menu item if also plugins item is hidden
 
 ### Changed
 
