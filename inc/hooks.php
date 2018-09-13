@@ -520,13 +520,15 @@ add_filter( 'init', 'air_helper_orderby_fix' );
  *  Turn off by using `remove_action( 'template_redirect', 'air_helper_disable_views' )`
  *  or spesific views, for example tag archive, with `add_filter( 'air_helper_disable_views_tag', '__return_false' )`
  *
- *  @since  1.5.7
+ *  @since  1.6.0
  */
 function air_helper_disable_views() {
+	// Do not try to disable views if we don't have function to check version where plugin was activated.
 	if ( ! function_exists( 'air_helper_activated_at_version' ) ) {
 		return;
 	}
 
+	// If plugin vas activated before version 1.5.7, do NOT disable views.
 	if ( air_helper_activated_at_version() < 157 ) {
 		return;
 	}

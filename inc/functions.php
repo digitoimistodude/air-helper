@@ -264,7 +264,7 @@ if ( ! function_exists( 'get_post_years' ) ) {
 	/**
 	 *  Get years where there are posts.
 	 *
-	 *  @since  1.5.7
+	 *  @since  1.6.0
 	 *  @param  string  $post_type post type to get post years, defaults to post.
 	 *  @return array 	           array containing years where there are posts.
 	 */
@@ -300,7 +300,7 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
 	/**
 	 *  Get months where there are posts in spesific year.
 	 *
-	 *  @since  1.5.7
+	 *  @since  1.6.0
 	 *  @param  string  $year      year to get posts, defaults to current year.
 	 *  @param  string  $post_type post type to get post years, defaults to post.
 	 *  @return array 	           array containing months where there are posts.

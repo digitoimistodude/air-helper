@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: This plugin extends themes based on Air by adding useful hooks, functions and basic things for WooCommerce.
- * Version: 1.5.7
+ * Version: 1.6.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
  * Requires at least: 4.7
@@ -24,17 +24,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  *  Get current version of plugin. Version is semver without extra marks, so it can be used as a int.
  *
- *  @since  1.5.7
+ *  @since  1.6.0
  *  @return integer  current version of plugin
  */
 function air_helper_version() {
-	return 157;
+	return 160;
 }
 
 /**
  *  Get the version at where plugin was activated.
  *
- *  @since  1.5.7
+ *  @since  1.6.0
  *  @return integer  version where plugin was activated
  */
 function air_helper_activated_at_version() {
@@ -171,7 +171,7 @@ add_action( 'init', 'air_helper_fly', 999 );
  *  Check if deactivation without version option is apparent, then do not save current version for
  *  maintaining backwards compatibility.
  *
- *  @since  1.5.7
+ *  @since  1.6.0
  */
 function air_helper_activate() {
 	$deactivated_without = get_option( 'air_helper_deactivated_without_version' );
@@ -186,7 +186,7 @@ register_activation_hook( __FILE__, 'air_helper_activate' );
  *  Maybe add option if deactivation happened without plugin activation version in options.
  *  Helps to maintain backwards compatibility.
  *
- *  @since  1.5.7
+ *  @since  1.6.0
  */
 function air_helper_deactivate() {
 	$activated_version = get_option( 'air_helper_activated_at_version' );
