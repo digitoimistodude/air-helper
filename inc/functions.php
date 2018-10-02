@@ -53,9 +53,11 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
 		$files = glob( get_template_directory() . '/svg/foruser/*.svg' );
 
 		foreach ( $files as $file ) {
-			$filename = explode( '/', $file );
-			$filename = end( $filename );
-			$icons[ $filename ] = ucfirst( strstr( $filename, '.', true ) );
+			$raw_filename = explode( '/', $file );
+			$raw_filename = end( $raw_filename );
+			$filename = strstr( $raw_filename, '.', true );
+			$filename = str_replace( '-', ' ', $filename );
+			$icons[ $raw_filename ] = ucfirst( $filename );
 		}
 
 		return $icons;
