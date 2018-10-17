@@ -11,7 +11,7 @@ Air helper brings useful functions and modifications to WordPress projects, from
 1. [Please note before using](#please-note-before-using)
 2. [License](#license)
 3. [Features](#features)
-    1. [functions](#functions)
+    1. [Functions](#functions)
     2. [Modified WordPress functionality](#modified-wordpress-functionality)
     3. [Localization and Polylang support](#localization-and-polylang-support)
     4. [Post meta revisions](#post-meta-revisions)
