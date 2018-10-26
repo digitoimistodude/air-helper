@@ -580,5 +580,18 @@ function air_helper_disable_views() {
 }
 add_action( 'template_redirect', 'air_helper_disable_views' );
 
+/**
+ *  Remove some Tiny MCE formats from editor.
+ *
+ *  Turn off by using `remove_action( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' )`
+ *
+ *  @since  1.6.0
+ */
+function air_helper_tinymce_remove_formats( $init ) {
+  $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;';
+  return $init;
+}
+add_filter( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' );
+
 // Disable Try Gutenberg notification in dashboard added on 4.8.9.
 remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
