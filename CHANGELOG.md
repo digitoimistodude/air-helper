@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Improved `get_icons_for_user` function icon name parsing
+- Remove some Tiny MCE formats from editor
 
 ## [1.6.0] - 2018-09-13
 ### Added

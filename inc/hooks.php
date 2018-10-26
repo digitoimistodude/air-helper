@@ -585,7 +585,7 @@ add_action( 'template_redirect', 'air_helper_disable_views' );
  *
  *  Turn off by using `remove_action( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' )`
  *
- *  @since  1.6.0
+ *  @since  1.6.1
  */
 function air_helper_tinymce_remove_formats( $init ) {
   $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;';
