@@ -57,6 +57,7 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
 			$raw_filename = end( $raw_filename );
 			$filename = strstr( $raw_filename, '.', true );
 			$filename = str_replace( '-', ' ', $filename );
+			$filename = str_replace( '_', ' ', $filename );
 			$icons[ $raw_filename ] = ucfirst( $filename );
 		}
 
