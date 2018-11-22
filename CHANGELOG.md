@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Improved `get_icons_for_user` function icon name parsing
 - Remove some Tiny MCE formats from editor
+- Force mail to address from hook with koodarit@dude.fi default, not from admin email option
 
 ## [1.6.0] - 2018-09-13
 ### Added
