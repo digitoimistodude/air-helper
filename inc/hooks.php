@@ -30,7 +30,7 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
  *  @return array         New wp_mail agruments with forced to address
  */
 function air_helper_helper_force_mail_to( $args ) {
-	$to = get_option( 'admin_email' );
+	$to = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
 
 	if ( getenv( 'WP_ENV' ) === 'staging' ) {
 		$allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', array( 'administrator', 'editor', 'author' ) );
