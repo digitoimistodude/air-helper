@@ -362,6 +362,16 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
       'class' => $class
     ),
 	) );
+
+	if ( getenv( 'WP_ENV' ) === 'staging' ) {
+		$updated_time = date_i18n( 'j.n.Y H:i:s', get_date_from_gmt( filemtime( get_template_directory() ), 'U' ) );
+		$wp_admin_bar->add_node( array(
+	    'parent'  => 'airhelperenv',
+	    'id'    	=> 'airhelperenv-deployed',
+	    'title' 	=> wp_sprintf( __( 'Päivitetty: %s', 'air-helper' ), $updated_time ),
+	    'href'  	=> '#',
+	  ) );
+	}
 }
 add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );
 
@@ -373,17 +383,17 @@ add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );
  */
 function air_helper_adminbar_show_env_styles() { ?>
   <style>
-  	#wp-admin-bar-airhelperenv.air-helper-env-prod a {
+  	#wp-admin-bar-airhelperenv.air-helper-env-prod > a {
   		background: #00bb00 !important;
   		color: black !important;
   	}
 
-  	#wp-admin-bar-airhelperenv.air-helper-env-stage a {
+  	#wp-admin-bar-airhelperenv.air-helper-env-stage > a {
   		background: orange !important;
   		color: black !important;
   	}
 
-  	#wp-admin-bar-airhelperenv.air-helper-env-dev a {
+  	#wp-admin-bar-airhelperenv.air-helper-env-dev > a {
   		background: red !important;
   		color: black !important;
   	}
