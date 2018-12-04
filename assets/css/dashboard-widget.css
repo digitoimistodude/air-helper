@@ -1,0 +1,104 @@
+#dashboard-widgets #air-helper-help .inside {
+	margin-top: 0;
+	padding: 0;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .maintenance {
+	padding: 12px;
+	background-color: #fff8e5;
+	border-left: 4px solid #ffb900;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .maintenance p {
+	color: #333;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .maintenance .time {
+	font-weight: 600;
+	margin-top: 5px;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .news {
+	padding: 12px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .news .time {
+	color: #72777c;
+	margin: 0;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .news h3 {
+	margin-top: 5px;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .maintenance .read-more,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .news .read-more {
+	margin-bottom: 0;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .maintenance h3,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .news-wrapper .news h3 {
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper {
+	padding: 12px;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper h2 {
+	font-size: 16px;
+	font-weight: 600;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper p {
+	margin-top: 5px;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper label {
+	font-weight: 600;
+	margin-top: 12px;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper input,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper textarea,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper button {
+	display: block;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper input,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper textarea {
+	width: 100%;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper input.error,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper textarea.error {
+	border-color: red;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper textarea {
+	margin-bottom: 12px;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper p.message {
+	margin-top: 12px;
+	margin-bottom: 0;
+	display: none;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper p.message.message-field-error,
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper p.message.message-error {
+	color: red;
+	font-weight: 600;
+}
+
+#dashboard-widgets #air-helper-help .inside .air-helper-help-wrapper .support-wrapper p.message.message-success {
+	color: green;
+	font-weight: 600;
+}
