@@ -339,3 +339,29 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
 		return $result;
 	}
 } // end if
+
+if ( ! function_exists( 'wp_parse_args_dimensional' ) ) {
+	/**
+	 *  Similar to wp_parse_args() just extended to work with multidimensional arrays.
+	 *
+	 *  @since  1.7.0
+	 *  @param  array  $a  Value to merge with $defaults.
+	 *  @param  array  $b  Optional. Array that serves as the defaults. Default empty.
+	 *  @return array      Merged user defined values with defaults.
+	 */
+	function wp_parse_args_dimensional( &$a, $b = '' ) {
+	  $a = (array) $a;
+	  $b = (array) $b;
+	  $result = $b;
+
+	  foreach ( $a as $k => &$v ) {
+	    if ( is_array( $v ) && isset( $result[ $k ] ) ) {
+	      $result[ $k ] = ilokivi_wp_parse_args( $v, $result[ $k ] );
+	    } else {
+	      $result[ $k ] = $v;
+	    }
+	  }
+
+	  return $result;
+	}
+} // end if
