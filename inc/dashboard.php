@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-04 15:39:12
+ * @Last Modified time: 2018-12-04 16:03:52
  *
  * @package development
  */
@@ -80,7 +80,7 @@ function air_helper_admin_dashboard_widgets_setup() {
 	) );
 
 	// Check that widget is allowed to be visible on this site, bail if not
-	if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'u' ), $hostnames_where_visible ) ) {
+	if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames_where_visible ) ) {
 		return;
 	}
 
@@ -244,7 +244,7 @@ function _air_helper_admin_dashboard_widget_get_data() {
 	// Make api reauest if data isn't in cache
 	$api_base = _air_helper_admin_dashboard_widget_get_api_url();
 	$api_access_token = _air_helper_admin_dashboard_widget_get_api_key();
-	$request = wp_remote_request( "{api_base}/v1/newsfeed?access_token={$api_access_token}" );
+	$request = wp_remote_request( "{$api_base}/v1/newsfeed?access_token={$api_access_token}" );
 
 	if ( is_wp_error( $request ) ) {
 		return false;
@@ -315,7 +315,7 @@ function _air_helper_admin_dashboard_widget_send_ticket() {
 
 	// make post call
 	$api_base = _air_helper_admin_dashboard_widget_get_api_url();
-	$response = wp_remote_post( "{api_base}/v1/tickets/new", array(
+	$response = wp_remote_post( "{$api_base}/v1/tickets/new", array(
 		'method'	=> 'POST',
 		'body'		=> array(
 			'access_token'	=> _air_helper_admin_dashboard_widget_get_api_key(),
