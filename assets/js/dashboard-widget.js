@@ -2,7 +2,7 @@
 * @Author: Timi Wahalahti
 * @Date:   2018-12-04 13:35:35
 * @Last Modified by:   Timi Wahalahti
-* @Last Modified time: 2018-12-04 15:22:41
+* @Last Modified time: 2018-12-04 15:29:22
 */
 
 jQuery(document).ready( function($) {
@@ -54,6 +54,8 @@ jQuery(document).ready( function($) {
 			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 			jQuery.post(ajaxurl, data, function(response) {
 				if ( response.success ) {
+					$( '#dashboard-widgets #air-helper-help .support-form form input[name="subject"]' ).val( '' );
+					$( '#dashboard-widgets #air-helper-help .support-form form textarea' ).val( '' );
 					$('#dashboard-widgets #air-helper-help .support-form form' ).hide();
 					$('#dashboard-widgets #air-helper-help .support-form p.message-error').hide();
 					$('#dashboard-widgets #air-helper-help .support-form p.message-success').show();
