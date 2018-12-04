@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-04 16:03:52
+ * @Last Modified time: 2018-12-04 16:06:48
  *
  * @package development
  */
@@ -237,7 +237,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
  */
 function _air_helper_admin_dashboard_widget_get_data() {
 	// Get data from transient
-	if ( $data = get_site_transient( 'air_helpwidget_data' ) && 'development' !== getenv( 'WP_ENV' ) ) {
+	if ( $data = get_site_transient( 'air_helpwidget_data' ) ) {
 		return $data;
 	}
 
