@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-04 16:06:48
+ * @Last Modified time: 2018-12-04 16:13:15
  *
  * @package development
  */
@@ -222,7 +222,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 
 				<p class="message message-field-error"><?php _e( 'Täytä lomakkeen kentät.', 'air-helper' ) ?></p>
 				<p class="message message-error"><?php _e( 'Lomakkeen lähettämisessä tapahtui virhe. Yritä uudelleen tai lähetä sähköpostia suoraan apuva@dude.fi.', 'air-helper' ) ?></p>
-				<p class="message message-success"><?php _e( 'Tukipyyntö vastaanotettu! Vastaamme sinulle mahdollisimman pian.', 'air-helper' ) ?></p>
+				<p class="message message-success"><?php _e( 'Tukipyyntö vastaanotettu!', 'air-helper' ) ?></p>
 			</div>
 		</div>
 

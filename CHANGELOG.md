@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Force mail to address from hook with koodarit@dude.fi default, not from admin email option
 - Introcude `wp_parse_args_dimensional` function which is similar to wp_parse_args() just extended to work with multidimensional arrays
 - Show when latest deploy was made on staging env
+- Introduce new dashboard widget for maintenance info, news and support ticket creation
 
 ## [1.6.0] - 2018-09-13
 ### Added
