@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-04 16:13:15
+ * @Last Modified time: 2018-12-05 17:39:20
  *
  * @package development
  */
@@ -87,7 +87,7 @@ function air_helper_admin_dashboard_widgets_setup() {
 	// Add the dashboard widget
  	wp_add_dashboard_widget(
  		'air-helper-help', // id
- 		__( 'Duden päivityksiä & tukipyynnön lähetys', 'air-helper' ), // name
+ 		__( 'Updates from Dude & send support requests', 'air-helper' ), // name
  		'air_helper_admin_dashboard_widget_callback' // callbac
  	);
 
@@ -127,7 +127,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 
 	// if no data, show error message and bail
 	if ( empty( $data ) ) {
-		echo wpautop( __( 'Datan haussa tapahtui virhe.', 'air-helper' ) );
+		echo wpautop( __( 'Error while fetching data.', 'air-helper' ) );
 		return;
 	} ?>
 
@@ -149,16 +149,16 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 					// make maintenance start and end times to human readbale string
 					$day_str = _air_helper_admin_dashboard_widget_get_time_str( $maintenance->start, $maintenance->end ); ?>
 					<div class="maintenance">
-						<h3><?php echo $maintenance->title ?></h3>
+						<h3><?php echo sanitize_text_field( $maintenance->title ) ?></h3>
 
 						<p class="time">
 							<?php echo $day_str ?>
 						</p>
 
-						<?php echo wpautop( $maintenance->desc ) ?>
+						<?php echo wpautop( wp_kses_post( $maintenance->desc ) ) ?>
 
 						<p class="read-more">
-							<a href="<?php echo $statuspage_url ?>" target="_blank"><?php _e( 'Palvelinten tila reaaliajassa', 'air-helper' ) ?> &rarr;</a>
+							<a href="<?php echo $statuspage_url ?>" target="_blank"><?php _e( 'Server status on real time', 'air-helper' ) ?> &rarr;</a>
 						</p>
 					</div>
 				<?php endif; // maintennace content isset
@@ -186,14 +186,14 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 							<?php echo date_i18n( 'j.n.Y H:i', strtotime( $news->time ) ) ?>
 						</p>
 
-						<h3><?php echo $news->title ?></h3>
+						<h3><?php echo sanitize_text_field( $news->title ) ?></h3>
 
-						<?php echo wpautop( $content );
+						<?php echo wpautop( wp_kses_post( $content ) );
 
 						if ( isset( $news->link ) ) :
 							if ( ! empty( $news->link->href ) && ! empty( $news->link->title ) ) : ?>
 								<p class="read-more">
-									<a href="<?php echo $news->link->href ?>" target="_blank"><?php echo $news->link->title ?> &rarr;</a>
+									<a href="<?php echo esc_url( $news->link->href ) ?>" target="_blank"><?php echo sanitize_text_field( $news->link->title ) ?> &rarr;</a>
 								</p>
 							<?php endif;
 						endif; ?>
@@ -205,24 +205,24 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 
 		<div class="support-wrapper">
 			<div class="support-form">
-				<h2><?php _e( 'Lähetä tukipyyntö', 'air-helper' ) ?></h2>
+				<h2><?php _e( 'Send support ticket', 'air-helper' ) ?></h2>
 
-				<p><?php _e( 'Voit lähettää tällä lomakkeella viestin Duden käyttötukeen, joka palvelee arkipäivisin 9-17. Saat vastauksen viimeistään seuraavana arkipäivänä.', 'air-helper' ) ?></p>
+				<p><?php _e( 'You can send a new message to Dudes support with this form, which serves on weekdays 9-17. We will respond to you on next working day at latest.', 'air-helper' ) ?></p>
 
 				<form>
-					<label><?php _e( 'Aihe', 'air-helper' ) ?></label>
-					<input type="text" name="subject">
+					<label><?php _e( 'Subject', 'air-helper' ) ?></label>
+					<input type="text" name="subject" autocomplete="off">
 
-					<label><?php _e( 'Viestisi', 'air-helper' ) ?></label>
+					<label><?php _e( 'Message', 'air-helper' ) ?></label>
 					<textarea rows="8" name="content"></textarea>
-					<button class="button"><?php _e( 'Lähetä tukipyyntö', 'air-helper' ) ?></button>
+					<button class="button"><?php _e( 'Send support request', 'air-helper' ) ?></button>
 
 					<input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'air_helper_dashboard_widget_ticket_nonce' ) ?>">
 				</form>
 
-				<p class="message message-field-error"><?php _e( 'Täytä lomakkeen kentät.', 'air-helper' ) ?></p>
-				<p class="message message-error"><?php _e( 'Lomakkeen lähettämisessä tapahtui virhe. Yritä uudelleen tai lähetä sähköpostia suoraan apuva@dude.fi.', 'air-helper' ) ?></p>
-				<p class="message message-success"><?php _e( 'Tukipyyntö vastaanotettu!', 'air-helper' ) ?></p>
+				<p class="message message-field-error"><?php _e( 'Fill all fields.', 'air-helper' ) ?></p>
+				<p class="message message-error"><?php sprintf( __( 'There was an error while sending the form, please contact support by email %s', 'air-helper' ), apply_filters( 'air_helper_dashboard_widget_support_email', 'apuva@dude.fi' ) ) ?></p>
+				<p class="message message-success"><?php _e( 'Support request received!', 'air-helper' ) ?></p>
 			</div>
 		</div>
 
