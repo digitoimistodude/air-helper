@@ -343,20 +343,20 @@ if ( getenv( 'WP_ENV' ) === 'development' ) {
  * @since  1.1.0
  */
 function air_helper_adminbar_show_env( $wp_admin_bar ) {
-	$env = esc_attr__( 'tuotanto', 'air-helper' );
+	$env = esc_attr__( 'production', 'air-helper' );
 	$class = 'air-helper-env-prod';
 
 	if ( getenv( 'WP_ENV' ) === 'staging' ) {
-		$env = esc_attr__( 'näyttöversio', 'air-helper' );
+		$env = esc_attr__( 'staging', 'air-helper' );
 		$class = 'air-helper-env-stage';
 	} else if ( getenv( 'WP_ENV' ) === 'development' ) {
-		$env = esc_attr__( 'kehitys', 'air-helper' );
+		$env = esc_attr__( 'development', 'air-helper' );
 		$class = 'air-helper-env-dev';
 	}
 
 	$wp_admin_bar->add_node( array(
 		'id'    => 'airhelperenv',
-		'title' => wp_sprintf( __( 'Ympäristö: %s', 'air-helper' ), $env ),
+		'title' => wp_sprintf( __( 'Environment: %s', 'air-helper' ), $env ),
 		'href'  => '#',
 		'meta'  => array(
       'class' => $class
@@ -368,7 +368,7 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
 		$wp_admin_bar->add_node( array(
 	    'parent'  => 'airhelperenv',
 	    'id'    	=> 'airhelperenv-deployed',
-	    'title' 	=> wp_sprintf( __( 'Päivitetty: %s', 'air-helper' ), $updated_time ),
+	    'title' 	=> wp_sprintf( __( 'Updated: %s', 'air-helper' ), $updated_time ),
 	    'href'  	=> '#',
 	  ) );
 	}

@@ -159,6 +159,8 @@ add_filter( 'bulk_actions-plugins','air_helper_modify_plugins_bulk_actions' );
  *  Require files containing our preferences.
  */
 function air_helper_fly() {
+	load_plugin_textdomain( 'air-helper', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
 	require_once air_helper_base_path() . '/inc/hooks.php';
 	require_once air_helper_base_path() . '/inc/functions.php';
 	require_once air_helper_base_path() . '/inc/misc.php';

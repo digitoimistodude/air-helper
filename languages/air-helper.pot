@@ -1,0 +1,155 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Air helper\n"
+"POT-Creation-Date: 2018-12-05 17:42+0200\n"
+"PO-Revision-Date: 2018-12-05 17:40+0200\n"
+"Last-Translator: Timi Wahalahti <timi@dude.fi>\n"
+"Language-Team: Timi Wahalahti <timi@dude.fi>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: air-helper.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: air-helper.php:85
+msgid ""
+"Active theme seems not to be Air based. Some functionality of Air helper "
+"plugin may not work, since it's intended to use with Air based themes."
+msgstr ""
+
+#: inc/carbonfields.php:138
+msgid "Two preview times might be needed to see all content correctly."
+msgstr ""
+
+#: inc/dashboard.php:90
+msgid "Updates from Dude & send support requests"
+msgstr ""
+
+#: inc/dashboard.php:130
+msgid "Error while fetching data."
+msgstr ""
+
+#: inc/dashboard.php:161
+msgid "Server status on real time"
+msgstr ""
+
+#: inc/dashboard.php:208
+msgid "Send support ticket"
+msgstr ""
+
+#: inc/dashboard.php:210
+msgid ""
+"You can send a new message to Dudes support with this form, which serves on "
+"weekdays 9-17. We will respond to you on next working day at latest."
+msgstr ""
+
+#: inc/dashboard.php:213
+msgid "Subject"
+msgstr ""
+
+#: inc/dashboard.php:216
+msgid "Message"
+msgstr ""
+
+#: inc/dashboard.php:218
+msgid "Send support request"
+msgstr ""
+
+#: inc/dashboard.php:223
+msgid "Fill all fields."
+msgstr ""
+
+#: inc/dashboard.php:224
+#, php-format
+msgid ""
+"There was an error while sending the form, please contact support by email %s"
+msgstr ""
+
+#: inc/dashboard.php:225
+msgid "Support request received!"
+msgstr ""
+
+#: inc/hooks.php:346
+msgid "production"
+msgstr ""
+
+#: inc/hooks.php:350
+msgid "staging"
+msgstr ""
+
+#: inc/hooks.php:353
+msgid "development"
+msgstr ""
+
+#: inc/hooks.php:359
+#, php-format
+msgid "Environment: %s"
+msgstr ""
+
+#: inc/hooks.php:371
+#, php-format
+msgid "Updated: %s"
+msgstr ""
+
+#: inc/misc.php:46
+msgid ""
+"SendGrid email delivery plugin is not active or configured. Please contact "
+"your agency to fix this issue."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:358
+msgid "Check for updates"
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:405
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:407
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:409
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: plugin-update-checker/Puc/v4p1/Vcs/PluginUpdateChecker.php:83
+msgid "There is no changelog available."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Air helper"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/digitoimistodude/air-helper"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin extends themes based on Air by adding useful hooks, functions "
+"and basic things for WooCommerce."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Digitoimisto Dude Oy, Timi Wahalahti"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.dude.fi"
+msgstr ""
