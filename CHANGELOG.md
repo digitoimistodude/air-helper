@@ -1,17 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### Changed
-- Improved `get_icons_for_user` function icon name parsing
-- Remove some Tiny MCE formats from editor
-- Force mail to address from hook with koodarit@dude.fi default, not from admin email option
+
+## [1.7.0] - 2018-12-05
+### Added
+- Introduce new dashboard widget to show sheculed maintenances, news/updates from vendor and for sending new support requests. Only visible if site is hosted on Dude's servers
+- Remove some dashboard widgets for having more simpler dashboard
+- Do not show welcome message after core update
 - Introcude `wp_parse_args_dimensional` function which is similar to wp_parse_args() just extended to work with multidimensional arrays
-- Show when latest deploy was made on staging env
-- Introduce new dashboard widget for maintenance info, news and support ticket creation
+- At admin menu env, show when latest deploy was made to staging
+- Remove some unused Tiny MCE formats from editor
+
+### Fixed
+- Improved `get_icons_for_user` function icon name parsing
+
+### Changed
+- Force mail to address from hook with koodarit@dude.fi default, not from admin email option
 
 ## [1.6.0] - 2018-09-13
 ### Added

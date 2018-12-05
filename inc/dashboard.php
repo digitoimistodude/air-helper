@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-05 17:39:20
+ * @Last Modified time: 2018-12-05 18:06:08
  *
  * @package development
  */
@@ -11,7 +11,7 @@
 /**
  * Remove welcome panel
  *
- * @since  1.6.1
+ * @since  1.7.0
  */
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
@@ -20,7 +20,7 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
  *
  *  Turn off by using `remove_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard' )`
  *
- *  @since 1.6.1
+ *  @since 1.7.0
  */
 function air_helper_clear_admin_dashboard() {
 	$remove_boxes = array(
@@ -70,7 +70,7 @@ add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
  *
  *  Turn off by using `remove_action( 'wp_dashboard_setup', 'air_helper_admin_dashboard_widgets_setup' )`
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  */
 function air_helper_admin_dashboard_widgets_setup() {
 	// In which servers widget should be visible
@@ -102,7 +102,7 @@ add_action( 'wp_dashboard_setup', 'air_helper_admin_dashboard_widgets_setup' );
 /**
  *  Enqueue styles and scripts for dashboard widget.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  */
 function air_helper_dashboard_widget_styles() {
 	wp_register_style( 'air-helper-dashboard-widget', air_helper_base_url() . '/assets/css/dashboard-widget.css', false, air_helper_version() );
@@ -116,7 +116,7 @@ add_action( 'admin_enqueue_scripts', 'air_helper_dashboard_widget_styles' );
 /**
  *  Output dashboard widget content.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  *  @param  mixed   $post          where widget is shown
  *  @param  array   $callback_args arguments passed into callback function
  *  @return [type]                 [description]
@@ -232,7 +232,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 /**
  *  Get data for the widget from helpwidget api.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  *  @return mixed  false if no data, otherwise data object
  */
 function _air_helper_admin_dashboard_widget_get_data() {
@@ -303,7 +303,7 @@ function _air_helper_admin_dashboard_widget_get_time_str( $start = null, $end = 
 /**
  *  Handle new ticket creation ajax call from dashboard widget.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  */
 function _air_helper_admin_dashboard_widget_send_ticket() {
 	// check nonce
@@ -344,7 +344,7 @@ add_action( 'wp_ajax_air_helper_send_ticket', '_air_helper_admin_dashboard_widge
 /**
  *  Get API base url for dashboard widget API calls.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  *  @return string  api base url
  */
 function _air_helper_admin_dashboard_widget_get_api_url() {
@@ -354,7 +354,7 @@ function _air_helper_admin_dashboard_widget_get_api_url() {
 /**
  *  Get key for dashbard widget API calls.
  *
- *  @since  1.6.1
+ *  @since  1.7.0
  *  @return string  api key
  */
 function _air_helper_admin_dashboard_widget_get_api_key() {
