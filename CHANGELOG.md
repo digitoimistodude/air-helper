@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Changed
+- Remove SendGrid, GADWP and Email Address Encored notifications from dashboard
 
 ## [1.7.0] - 2018-12-05
 ### Added

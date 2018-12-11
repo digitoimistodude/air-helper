@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-05 18:06:08
+ * @Last Modified time: 2018-12-11 12:31:14
  *
  * @package development
  */
@@ -63,6 +63,36 @@ function air_helper_clear_admin_dashboard() {
 	}
 }
 add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
+
+/**
+ *  Remoev some notices from dashboard.
+ *
+ *  Turn off by using `remove_action( 'admin_init', 'air_helper_clean_admin_notices' )`
+ *
+ *  @since  1.7.1
+ */
+function air_helper_clean_admin_notices() {
+  $remove_notices = array(
+    'sg_subscription_widget_admin_notice',
+    'eae_page_scanner_notice',
+  );
+
+  // Allow filtering which notices to remove
+  $remove_notices = apply_filters( 'air_helper_clear_admin_notices', $remove_notices );
+
+  // remove notices
+  if ( ! empty( $remove_notices ) ) {
+    foreach ( $remove_notices as $notice ) {
+      remove_action( 'admin_notices', $notice );
+    }
+  }
+
+  // GADWP notice is better to remove by updating a option
+  if ( ! get_option( 'exactmetrics_tracking_notice' ) ) {
+    update_option( 'exactmetrics_tracking_notice', true );
+  }
+}
+add_action( 'admin_init', 'air_helper_clean_admin_notices', 999 );
 
 /**
  *  Add our news and support widget to dashboard. Also make sure that it is always first in
