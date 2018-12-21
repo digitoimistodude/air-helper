@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Changed
 - Remove SendGrid, GADWP and Email Address Encored notifications from dashboard
+- Do not trust deactivation hook on air_helper_deactivated_without_version nag save, maybe do it in admin_init
 
 ## [1.7.0] - 2018-12-05
 ### Added

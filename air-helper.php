@@ -186,7 +186,7 @@ function air_helper_activate() {
 register_activation_hook( __FILE__, 'air_helper_activate' );
 
 /**
- *  Maybe add option if deactivation happened without plugin activation version in options.
+ *  Maybe add option if activated version is not yet saved.
  *  Helps to maintain backwards compatibility.
  *
  *  @since  1.6.0
@@ -199,3 +199,4 @@ function air_helper_deactivate() {
 	}
 }
 register_deactivation_hook( __FILE__, 'air_helper_deactivate' );
+add_action( 'admin_init', 'air_helper_deactivate' );
