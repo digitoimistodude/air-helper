@@ -600,12 +600,12 @@ add_action( 'template_redirect', 'air_helper_disable_views' );
 function air_helper_tinymce_remove_formats( $init ) {
 	// Do not try to do this if we don't have function to check version where plugin was activated.
 	if ( ! function_exists( 'air_helper_activated_at_version' ) ) {
-		return;
+		return $init;
 	}
 
 	// If plugin vas activated before version 1.7.0, do NOT do this.
 	if ( air_helper_activated_at_version() < 170 ) {
-		return;
+		return $init;
 	}
 
   $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;';

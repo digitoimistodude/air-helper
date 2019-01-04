@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Changed
 
+## [1.7.2] - 2019-01-94
+### Fixed
+- Tiny MCE (classic editor) `tiny_mce_before_init` hook which caused white broken classic editor with WP 5.0 in some situations
+
 ## [1.7.1] - 2018-12-21
 ### Added
 - Remove SendGrid, GADWP and Email Address Encored notifications from dashboard
