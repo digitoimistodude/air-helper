@@ -130,7 +130,7 @@ if ( ! function_exists( 'dude_get_post_meta' ) ) {
 	 *  @return mixed 					Will be an array if $single is false. Will be value of meta data
 	 *                          field if $single is true.
 	 */
-	function dude_get_post_meta( $post_id, $key, $single ) {
+	function dude_get_post_meta( $post_id, $key, $single = false ) {
 		if ( isset( $_GET['preview_id'] ) ) {
 			return get_post_meta( $post_id, '_' . $key, $single );
 		} elseif ( function_exists( 'carbon_get_post_meta' ) ) {
