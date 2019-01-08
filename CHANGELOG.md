@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Changed
 
-## [1.7.2] - 2019-01-94
+## [1.7.3] - 2019-01-08
+### Fixed
+- Function dude_get_post_meta set $single default as false
+
+## [1.7.2] - 2019-01-04
 ### Fixed
 - Tiny MCE (classic editor) `tiny_mce_before_init` hook which caused white broken classic editor with WP 5.0 in some situations
 
