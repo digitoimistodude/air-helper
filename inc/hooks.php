@@ -617,6 +617,8 @@ add_filter( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' );
  *  Unify and modify the login error message to be more general,
  *  so those do not exist any hint what did go wrong.
  *
+ *  Turn off by using `remove_action( 'login_errors', 'air_helper_login_errors' )`
+ *
  *  @since  1.8.0
  *  @return string  messag to display when login fails
  */
