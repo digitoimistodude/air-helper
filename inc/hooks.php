@@ -613,5 +613,17 @@ function air_helper_tinymce_remove_formats( $init ) {
 }
 add_filter( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' );
 
+/**
+ *  Unify and modify the login error message to be more general,
+ *  so those do not exist any hint what did go wrong.
+ *
+ *  @since  1.8.0
+ *  @return string  messag to display when login fails
+ */
+function air_helper_login_errors() {
+	return __( '<b>Login failed.</b> Please contact your site admin or agency if you continue having problems.', 'air-helper' );
+}
+add_filter( 'login_errors', 'air_helper_login_errors' );
+
 // Disable Try Gutenberg notification in dashboard added on 4.8.9.
 remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );

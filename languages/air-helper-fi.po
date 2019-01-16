@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-12-05 17:42+0200\n"
-"PO-Revision-Date: 2018-12-05 17:52+0200\n"
+"POT-Creation-Date: 2019-01-16 16:38+0200\n"
+"PO-Revision-Date: 2019-01-16 16:39+0200\n"
 "Last-Translator: Timi Wahalahti <timi@dude.fi>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -26,23 +26,23 @@ msgstr ""
 msgid "Two preview times might be needed to see all content correctly."
 msgstr ""
 
-#: inc/dashboard.php:90
+#: inc/dashboard.php:120
 msgid "Updates from Dude & send support requests"
 msgstr "Duden päivityksiä & tukipyynnön lähetys"
 
-#: inc/dashboard.php:130
+#: inc/dashboard.php:160
 msgid "Error while fetching data."
 msgstr "Datan haussa tapahtui virhe."
 
-#: inc/dashboard.php:161
+#: inc/dashboard.php:191
 msgid "Server status on real time"
 msgstr "Palvelinten tila reaaliajassa"
 
-#: inc/dashboard.php:208
+#: inc/dashboard.php:238
 msgid "Send support ticket"
 msgstr "Lähetä tukipyyntö"
 
-#: inc/dashboard.php:210
+#: inc/dashboard.php:240
 msgid ""
 "You can send a new message to Dudes support with this form, which serves on "
 "weekdays 9-17. We will respond to you on next working day at latest."
@@ -50,29 +50,29 @@ msgstr ""
 "Voit lähettää tällä lomakkeella viestin Duden käyttötukeen, joka palvelee "
 "arkipäivisin 9-17. Saat vastauksen viimeistään seuraavana arkipäivänä."
 
-#: inc/dashboard.php:213
+#: inc/dashboard.php:243
 msgid "Subject"
 msgstr "Aihe"
 
-#: inc/dashboard.php:216
+#: inc/dashboard.php:246
 msgid "Message"
 msgstr "Viesti"
 
-#: inc/dashboard.php:218
+#: inc/dashboard.php:248
 msgid "Send support request"
 msgstr "Lähetä tukipyyntö"
 
-#: inc/dashboard.php:223
+#: inc/dashboard.php:253
 msgid "Fill all fields."
 msgstr "Täytä kaikki kentät."
 
-#: inc/dashboard.php:224
+#: inc/dashboard.php:254
 #, php-format
 msgid ""
 "There was an error while sending the form, please contact support by email %s"
 msgstr "Virhe lähetettäessä lomaketta, ota yhteyttä tukeen sähköpostitse %s"
 
-#: inc/dashboard.php:225
+#: inc/dashboard.php:255
 msgid "Support request received!"
 msgstr "Tukipyyntö vastaanotettu!"
 
@@ -97,6 +97,14 @@ msgstr "Ympäristö: %s"
 #, php-format
 msgid "Updated: %s"
 msgstr "Päivitetty: %s"
+
+#: inc/hooks.php:624
+msgid ""
+"<b>Login failed.</b> Please contact your site admin or agency if you "
+"continue having problems."
+msgstr ""
+"<b>Kirjautuminen epäonnistui.</b> Ota yhteyttä sivuston ylläpitäjään tai "
+"palveluntarjoajaasi jos kirjautumisongelmat jatkuvat."
 
 #: inc/misc.php:46
 msgid ""
