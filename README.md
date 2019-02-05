@@ -1,6 +1,6 @@
 # Air helper
 
-[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) [![Build Status](https://img.shields.io/travis/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.org/digitoimistodude/air-helper)
+[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![Tested_up_to WordPress_5.0.3](https://img.shields.io/badge/Tested_up_to-WordPress_5.0.3-blue.svg?style=flat-square) ![Compatible_with PHP_7.2](https://img.shields.io/badge/Compatible_with-PHP_7.2-green.svg?style=flat-square) [![Build Status](https://img.shields.io/travis/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.org/digitoimistodude/air-helper)
 
 Air helper brings useful functions and modifications to WordPress projects, from where many of those are preferences of Digitoimisto Dude. Plugin is meant to be used with our [Air](https://github.com/digitoimistodude/air) theme.
 
