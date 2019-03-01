@@ -4,9 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.8.0] - 2019-03-01
 ### Added
 - Priority hooks file loaded in `init` hook with priority `5`
 - User enumeration stop
+- Change login failed message to more generic one
+
+### Removed
+- PHP 5.6 Travis check
 
 ## [1.7.3] - 2019-01-08
 ### Fixed
