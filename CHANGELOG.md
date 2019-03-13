@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.8.1] - 2019-03-13
+### Added
+- Force from address in staging
+
 ## [1.8.0] - 2019-03-01
 ### Added
 - Priority hooks file loaded in `init` hook with priority `5`
