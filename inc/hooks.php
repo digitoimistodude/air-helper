@@ -18,6 +18,7 @@ if ( getenv( 'WP_ENV' ) === 'development' ) {
 // Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
 if ( getenv( 'WP_ENV' ) === 'staging' ) {
 	add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+	add_filter( 'wp_mail_from', 'air_helper_staging_wp_mail_from' );
 }
 
 /**
@@ -45,6 +46,16 @@ function air_helper_helper_force_mail_to( $args ) {
 
 	$args['to'] = apply_filters( 'air_helper_helper_mail_to', $to );
 	return $args;
+}
+
+/**
+ *  Force from address in staging.
+ *
+ *  @since  1.8.1
+ *  @return string  Email address
+ */
+function air_helper_staging_wp_mail_from() {
+	return 'wordpress@' . str_replace( array( 'http://', 'https://', '/wp' ), '', get_site_url() );
 }
 
 /**
