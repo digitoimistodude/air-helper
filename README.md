@@ -77,6 +77,7 @@ All of these modifications can be altered and/or disabled with hooks. Please see
     - other: search
 * Disable user enumeration via done with user GET-parameter
 * Change login failed message
+* Add simple honeypot to login form _*NB!* This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
 
 #### Localization and Polylang support
 

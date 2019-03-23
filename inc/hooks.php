@@ -469,7 +469,7 @@ add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
  *  @since  0.1.0
  */
 function air_helper_lowpriority_yoastseo() {
-  return 'low';
+	return 'low';
 }
 add_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' );
 
@@ -486,7 +486,6 @@ add_filter( 'update_footer', '__return_empty_string', 11 );
  * Props Teemu Suoranta https://gist.github.com/TeemuSuoranta/2174f78f37248aeef483526d1c5d176f
  *
  *  @since  1.5.0
- *  @param string $orderby ordering clause for query
  *  @return string ordering clause for query
  */
 function air_helper_orderby_fix() {
@@ -556,7 +555,7 @@ function air_helper_disable_views() {
 
 	// Enable tag archives by using `add_filter( 'air_helper_disable_views_tag', '__return_false' )`
 	if ( apply_filters( 'air_helper_disable_views_tag', true ) ) {
-		if( is_tag() ) {
+		if ( is_tag() ) {
 	    global $wp_query;
 	    $wp_query->set_404();
 	    status_header( 404 );
@@ -565,7 +564,7 @@ function air_helper_disable_views() {
 
 	// Enable category archives by using `add_filter( 'air_helper_disable_views_category', '__return_false' )`
 	if ( apply_filters( 'air_helper_disable_views_category', true ) ) {
-		if( is_category() ) {
+		if ( is_category() ) {
 	    global $wp_query;
 	    $wp_query->set_404();
 	    status_header( 404 );
@@ -574,7 +573,7 @@ function air_helper_disable_views() {
 
 	// Enable date archives by using `add_filter( 'air_helper_disable_views_date', '__return_false' )`
 	if ( apply_filters( 'air_helper_disable_views_date', true ) ) {
-		if( is_date() ) {
+		if ( is_date() ) {
 	    global $wp_query;
 	    $wp_query->set_404();
 	    status_header( 404 );
@@ -583,7 +582,7 @@ function air_helper_disable_views() {
 
 	// Enable author archives by using `add_filter( 'air_helper_disable_views_author', '__return_false' )`
 	if ( apply_filters( 'air_helper_disable_views_author', true ) ) {
-		if( is_author() ) {
+		if ( is_author() ) {
 	    global $wp_query;
 	    $wp_query->set_404();
 	    status_header( 404 );
@@ -592,7 +591,7 @@ function air_helper_disable_views() {
 
 	// Enable search view by using `add_filter( 'air_helper_disable_views_search', '__return_false' )`
 	if ( apply_filters( 'air_helper_disable_views_search', true ) ) {
-		if( is_search() ) {
+		if ( is_search() ) {
 	    global $wp_query;
 	    $wp_query->set_404();
 	    status_header( 404 );
