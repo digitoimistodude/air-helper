@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-03-23 04:03:30
+ * @Last Modified time: 2019-03-23 10:17:50
  *
  * @package air-helper
  */
@@ -47,13 +47,8 @@ add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_login_honeypot_form() {
 	// Generate new prefix to honeypot if it's older than 30 minutes
 	$prefix = get_option( 'air_helper_login_honeypot' );
-	if ( ! $prefix || $prefix['generated'] < strtotime( '-30 minutes' ) ) {
-		$prefix = array(
-			'generated'	=> time(),
-			'prefix'		=> wp_generate_password( 3, false ),
-		);
-
-		update_option( 'air_helper_login_honeypot', $prefix, false );
+	if ( ! $prefix || $prefix['generated'] < strtotime( '-3 seconds' ) ) {
+		$prefix = air_helper_login_honeypot_reset_prefix();
 	} ?>
 
 	<p id="air_lh_name_field" class="air_lh_name_field">
@@ -110,3 +105,21 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
 	return $user;
 }
 add_action( 'authenticate', 'air_helper_login_honeypot_check', 1000, 3 );
+
+/**
+ *  Reset login form honeypot prefix on call and after succesfull login.
+ *
+ *  @since  1.9.0
+ *  @return array  prexif generation time an prefix itself
+ */
+function air_helper_login_honeypot_reset_prefix() {
+	$prefix = array(
+		'generated'	=> time(),
+		'prefix'		=> wp_generate_password( 3, false ),
+	);
+
+	update_option( 'air_helper_login_honeypot', $prefix, false );
+
+	return $prefix;
+}
+add_action( 'wp_login', 'air_helper_login_honeypot_reset_prefix' );
