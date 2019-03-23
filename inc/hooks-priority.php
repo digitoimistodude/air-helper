@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-03-23 03:51:48
+ * @Last Modified time: 2019-03-23 04:03:30
  *
  * @package air-helper
  */
@@ -29,17 +29,18 @@ function air_helper_stop_user_enumeration() {
 add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 
 /**
- *  Add honeypot to login form.
+ *  Add honeypot to the login form.
  *
  *  For login to succeed, we require that the field value is exactly
  *  six characters long and has is prefixed with correct three letters.
- *  Orefix can not be older than 30 minutes. Store the prefix and
- *  generation time to the options table for later use. After the prefix,
- *  following three charters can be anything.
+ *  Prefix cannot be older than 30 minutes. After the prefix, following
+ *  three charters can be anything. Store the prefix and generation time
+ *  to the options table for later use.
  *
  *  Append the three charters with javascript and hide the field. In case
- *  user has javascript disabled, label describes what the input is and what
- *  to do with that. This is unlikely to happen, but better safe than sorry.
+ *  user has javascript disabled, the label describes what the input is and
+ *  what to do with that. This is unlikely to happen, but better safe than
+ *  sorry.
  *
  *  @since  1.9.0
  */
@@ -72,9 +73,9 @@ add_action( 'login_form', 'air_helper_login_honeypot_form', 99 );
  *  Check if login form honeypot seems legit.
  *
  *  @since  1.9.0
- *  @param  mixed  $user     if the user is authenticated. WP_Error or null otherwise.
- *  @param  string $username username or email address.
- *  @param  string $password user password.
+ *  @param  mixed  $user      if the user is authenticated. WP_Error or null otherwise.
+ *  @param  string $username  username or email address.
+ *  @param  string $password  user password.
  *  @return mixed             WP_User object if honeypot passed, null otherwise.
  */
 function air_helper_login_honeypot_check( $user, $username, $password ) {
