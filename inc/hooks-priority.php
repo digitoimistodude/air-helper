@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-03-23 10:17:50
+ * @Last Modified time: 2019-03-23 10:19:59
  *
  * @package air-helper
  */
@@ -47,7 +47,7 @@ add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_login_honeypot_form() {
 	// Generate new prefix to honeypot if it's older than 30 minutes
 	$prefix = get_option( 'air_helper_login_honeypot' );
-	if ( ! $prefix || $prefix['generated'] < strtotime( '-3 seconds' ) ) {
+	if ( ! $prefix || $prefix['generated'] < strtotime( '-30 minutes' ) ) {
 		$prefix = air_helper_login_honeypot_reset_prefix();
 	} ?>
 
@@ -75,31 +75,33 @@ add_action( 'login_form', 'air_helper_login_honeypot_form', 99 );
  */
 function air_helper_login_honeypot_check( $user, $username, $password ) {
 	// field is required
-	if ( ! isset( $_POST['air_lh_name'] ) ) {
-		return null;
-	}
+	if ( ! empty( $_POST ) ) {
+		if ( ! isset( $_POST['air_lh_name'] ) ) {
+			return null;
+		}
 
-	// field cant be empty
-	if ( empty( $_POST['air_lh_name'] ) ) {
-		return null;
-	}
+		// field cant be empty
+		if ( empty( $_POST['air_lh_name'] ) ) {
+			return null;
+		}
 
-	// value needs to be exactly six charters long
-	if ( 6 !== mb_strlen( $_POST['air_lh_name'] ) ) {
-		return null;
-	}
+		// value needs to be exactly six charters long
+		if ( 6 !== mb_strlen( $_POST['air_lh_name'] ) ) {
+			return null;
+		}
 
-	// bother database at this point
-	$prefix = get_option( 'air_helper_login_honeypot' );
+		// bother database at this point
+		$prefix = get_option( 'air_helper_login_honeypot' );
 
-	// prefix is too old
-	if ( $prefix['generated'] < strtotime( '-30 minutes' ) ) {
-		return null;
-	}
+		// prefix is too old
+		if ( $prefix['generated'] < strtotime( '-30 minutes' ) ) {
+			return null;
+		}
 
-	// prefix is not correct
-	if ( substr( $_POST['air_lh_name'], 0, 3 ) !== $prefix['prefix'] ) {
-		return null;
+		// prefix is not correct
+		if ( substr( $_POST['air_lh_name'], 0, 3 ) !== $prefix['prefix'] ) {
+			return null;
+		}
 	}
 
 	return $user;
