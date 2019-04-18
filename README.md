@@ -18,7 +18,7 @@ Air helper brings useful functions and modifications to WordPress projects, from
     5. [WooCommerce support](#woocommerce-support)
 4. [Installing](#installing)
     1. [Updates](#updates)
-6. [Changelog](#hangelog)
+6. [Changelog](#changelog)
 7. [Contributing](#contributing)
 
 ### Please note before using
