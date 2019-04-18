@@ -129,9 +129,9 @@ With these filters you can turn disabled views back on:
 
 ```` php
 /**
- *  Switch disabled views back on
+ * Switch disabled views back on
  */
-//remove_action( 'template_redirect', 'air_helper_disable_views' );
+// remove_action( 'template_redirect', 'air_helper_disable_views' );
 add_filter( 'air_helper_disable_views_category', '__return_false' );
 add_filter( 'air_helper_disable_views_tag', '__return_false' );
 add_filter( 'air_helper_disable_views_date', '__return_false' );
