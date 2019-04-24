@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-03-23 10:19:59
+ * @Last Modified time: 2019-04-24 17:20:03
  *
  * @package air-helper
  */
@@ -76,6 +76,10 @@ add_action( 'login_form', 'air_helper_login_honeypot_form', 99 );
 function air_helper_login_honeypot_check( $user, $username, $password ) {
 	// field is required
 	if ( ! empty( $_POST ) ) {
+		if ( isset( $_POST['woocommerce-login-nonce'] ) ) {
+			return $user;
+		}
+
 		if ( ! isset( $_POST['air_lh_name'] ) ) {
 			return null;
 		}
