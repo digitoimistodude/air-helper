@@ -18,8 +18,10 @@ Air helper brings useful functions and modifications to WordPress projects, from
     5. [WooCommerce support](#woocommerce-support)
 4. [Installing](#installing)
     1. [Updates](#updates)
-6. [Changelog](#hangelog)
-7. [Contributing](#contributing)
+5. [Hooks](#hooks)
+    1. [Switch disabled views back on](#switch-disabled-views-back-on)
+6. [Changelog](#changelog)
+8. [Contributing](#contributing)
 
 ### Please note before using
 
@@ -116,6 +118,24 @@ Or install with composer, running command `composer require digitoimistodude/air
 #### Updates
 
 Updates will be automatically distributed when new version is released.
+
+### Hooks
+
+Documentation work in progress.
+
+#### Switch disabled views back on
+
+With these filters you can turn disabled views back on:
+
+```` php
+/**
+ * Switch disabled views back on
+ */
+// remove_action( 'template_redirect', 'air_helper_disable_views' );
+add_filter( 'air_helper_disable_views_category', '__return_false' );
+add_filter( 'air_helper_disable_views_tag', '__return_false' );
+add_filter( 'air_helper_disable_views_date', '__return_false' );
+````
 
 ### Changelog
 
