@@ -365,3 +365,24 @@ if ( ! function_exists( 'wp_parse_args_dimensional' ) ) {
 	  return $result;
 	}
 } // end if
+
+if ( ! function_exists( 'get_the_sentence_excerpt' ) ) {
+	/**
+	 *  Get excerpt with custom length of three sentences.
+	 *
+	 *  @since  1.10.0
+	 *  @param  integer $length  how many sentences to return. Default three.
+	 *  @param  string  $excerpt The excerpt. Default excerpt of global $post.
+	 *  @return string           Excerpt.
+	 */
+	function get_the_sentence_excerpt( $length = 3, $excerpt = null ) {
+		if ( ! $excerpt ) {
+			$excerpt = get_the_excerpt();
+		}
+
+	  $split = preg_split( '/(\. |\!|\?)/', $excerpt, $length, PREG_SPLIT_DELIM_CAPTURE );
+	  $new_excerpt = implode( '', array_slice( $split, 0, $length+1 ) );
+
+	  return $new_excerpt;
+	}
+} // end if
