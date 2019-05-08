@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-04-24 17:20:03
+ * @Last Modified time: 2019-05-08 17:19:13
  *
  * @package air-helper
  */
@@ -129,3 +129,42 @@ function air_helper_login_honeypot_reset_prefix() {
 	return $prefix;
 }
 add_action( 'wp_login', 'air_helper_login_honeypot_reset_prefix' );
+
+/**
+ *  We take care of multiple things, user does not need to know all the details.
+ *
+ *  @since  1.10.0
+ */
+function air_helper_remove_status_tests( $tests ) {
+	// We take care of server requirements.
+	unset( $tests['direct']['php_version'] );
+	unset( $tests['direct']['sql_server'] );
+	unset( $tests['direct']['php_extensions'] );
+	unset( $tests['direct']['utf8mb4_support'] );
+
+	// We provide the updates.
+	unset( $tests['direct']['wordpress_version'] );
+	unset( $tests['direct']['plugin_version'] );
+	unset( $tests['direct']['theme_version'] );
+	unset( $tests['async']['background_updates'] );
+
+	return $tests;
+}
+add_filter( 'site_status_tests', 'air_helper_remove_status_tests' );
+
+/**
+ *  We take care of multiple things, user does not need to know all the details.
+ *
+ *  @since  1.10.0
+ */
+function air_helper_remove_debug_information( $debug_info ) {
+	unset( $debug_info['wp-server'] );
+	unset( $debug_info['wp-paths-sizes'] );
+	unset( $debug_info['wp-database'] );
+	unset( $debug_info['wp-constants'] );
+	unset( $debug_info['wp-filesystem'] );
+	unset( $debug_info['wp-media'] );
+
+	return $debug_info;
+}
+add_filter( 'debug_information', 'air_helper_remove_debug_information' );
