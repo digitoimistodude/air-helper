@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.10.1]
+### Fixed
+- Load order for Carbon Field related things, `air_helper_fly` prio changed to 998
+
 ## [1.10.0]
 ### Added
 - `get_the_sentence_excerpt` function
