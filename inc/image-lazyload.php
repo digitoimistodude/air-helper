@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-08-07 16:19:54
+ * @Last Modified time: 2019-08-07 17:08:43
  *
  * @package air-helper
  */
@@ -68,8 +68,48 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 	}
 } // end if
 
+// function to output lazyload divs
+if ( ! function_exists( 'image_lazyload_tag' ) ) {
+	function image_lazyload_tag( $image_id = 0, $sizes = array() ) {
+		echo get_image_lazyload_tag( $image_id, $sizes );
+	}
+} // end if
+
+// function to get lazyload img tag
+if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
+	function get_image_lazyload_tag( $image_id = 0, $sizes = array() ) {
+		// Get image
+		$image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
+
+		// Check if we have image
+		if ( ! $image_urls || ! is_array( $image_urls ) ) {
+			return;
+		}
+
+		// Get dimensions
+		$dimensions = air_helper_get_image_lazyload_dimensions( $image_id, $sizes );
+
+		if ( ! $dimensions ) {
+			return;
+		}
+
+		// get the img tag
+		ob_start(); ?>
+		<img class="lazyload"
+			src="<?php echo $image_urls['tiny']; ?>"
+			data-src="<?php echo $image_urls['big']; ?>"
+			width="<?php echo $dimensions['width']; ?>" height="<?php echo $dimensions['height']; ?>" />
+
+    <?php
+
+    return ob_get_clean();
+	}
+} // end if
+
 // function to get proper image sizes
 function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) {
+	$image_id = intval( $image_id );
+
 	if ( ! $image_id ) {
 		return false;
 	}
@@ -86,7 +126,7 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
 		'big'			=> 'full',
 	);
 
-	$args = wp_parse_args( $sizes, $default_sizes );
+	$sizes = wp_parse_args( $sizes, $default_sizes );
 
 	// Loop use cases to get image url for it
 	foreach ( $sizes as $size_for => $size ) {
@@ -104,7 +144,7 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
 		}
 
 		// Replace the image size name with url to image
-		$sizes[ $size_for ] = $url;
+		$sizes[ $size_for ] = esc_url( $url );
 	}
 
 	// Check that all required default images exists
@@ -122,3 +162,36 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
 
 	return $sizes;
 } // end function air_helper_get_image_lazyload_sizes
+
+function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array() ) {
+	$image_id = intval( $image_id );
+
+	if ( ! $image_id ) {
+		return false;
+	}
+
+	// Bail if ID is not attachment
+	if ( 'attachment' !== get_post_type( $image_id ) ) {
+		return false;
+	}
+
+	// Default image sizes for use cases
+	$default_sizes = array(
+		'tiny'		=> 'tiny-lazyload-thumbnail',
+		'mobile'	=> 'large',
+		'big'			=> 'full',
+	);
+
+	$sizes = wp_parse_args( $sizes, $default_sizes );
+
+	$dimensions = wp_get_attachment_image_src( $image_id, $sizes['big'] );
+
+	if ( ! $dimensions ) {
+		return false;
+	}
+
+	return array(
+		'width'		=> $dimensions[1],
+		'height'	=> $dimensions[2],
+	);
+}

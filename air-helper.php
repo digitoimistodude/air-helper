@@ -173,6 +173,7 @@ function air_helper_fly() {
 	require_once air_helper_base_path() . '/inc/functions.php';
 	require_once air_helper_base_path() . '/inc/misc.php';
 	require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
+	require_once air_helper_base_path() . '/inc/image-lazyload.php';
 	require_once air_helper_base_path() . '/inc/dashboard.php';
 }
 add_action( 'init', 'air_helper_fly', 998 );
