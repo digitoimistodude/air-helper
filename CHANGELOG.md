@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - Lazyload
+- If dev env, show database host
 
 ## [1.10.1]
 ### Fixed
