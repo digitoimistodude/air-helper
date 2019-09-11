@@ -361,6 +361,7 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
 		$class = 'air-helper-env-stage';
 	} else if ( getenv( 'WP_ENV' ) === 'development' ) {
 		$env = esc_attr__( 'development', 'air-helper' );
+		$env .= ' (DB ' . getenv( 'DB_HOST' ) . ')';
 		$class = 'air-helper-env-dev';
 	}
 
