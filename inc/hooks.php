@@ -211,6 +211,32 @@ function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
 add_filter( 'air_helper_helper_remove_admin_menu_links', 'air_helper_maybe_remove_plugins_from_admin_menu' );
 
 /**
+ *  Hide ACF for all users, execpt for users with spesific domain or override in user meta.
+ *
+ *  Turn off by using `remove_filter( 'acf/settings/show_admin', 'air_helper_maybe_hide_acf' )`
+ *  Modify list by using `add_filter( 'air_helper_dont_hide_acf_from_domain', 'myprefix_air_helper_dont_hide_acf_from_domain' )`
+ *
+ *  @since  1.12.0
+ */
+function air_helper_maybe_hide_acf() {
+	$current_user = get_current_user_id();
+	$user = new WP_User( $current_user );
+	$domain = apply_filters( 'air_helper_dont_hide_acf_from_domain', 'dude.fi' );
+	$meta_override = get_user_meta( $user->ID, '_airhelper_admin_show_acf', true );
+
+	if ( 'true' === $meta_override ) {
+		return $menu_links;
+	}
+
+	if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
+		return false;
+	}
+
+	return true;
+}
+add_filter('acf/settings/show_admin','air_helper_maybe_hide_acf' );
+
+/**
  * Hide WP updates nag.
  * Turn off by using `remove_action( 'admin_menu', 'air_helper_wphidenag' )`
  *
