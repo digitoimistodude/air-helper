@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Lazyload
 - If dev env, show database host
+- Hide ACF for all users, execpt for users with spesific domain or override in user meta
 
 ## [1.10.1]
 ### Fixed
