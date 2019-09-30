@@ -16,6 +16,7 @@ Air helper brings useful functions and modifications to WordPress projects, from
     3. [Localization and Polylang support](#localization-and-polylang-support)
     4. [Post meta revisions](#post-meta-revisions)
     5. [WooCommerce support](#woocommerce-support)
+    6. [Image lazyloading](#image-lazyloading)
 4. [Installing](#installing)
     1. [Updates](#updates)
 5. [Hooks](#hooks)
@@ -48,6 +49,7 @@ Air helper introduces few helper functions to make your life easier.
 * Get next page ID `get_next_page_id( $id = 0)`
 * Get years where are posts `get_post_years( $post_type = 'post' )`
 * Get months by year where are posts `get_post_months_by_year( $year = date( 'Y' ), $post_type = 'post' )`
+* Get sentence excerpt `get_the_sentence_excerpt( $sentences = 2 )`
 
 #### Modified WordPress functionality
 
@@ -80,6 +82,7 @@ All of these modifications can be altered and/or disabled with hooks. Please see
 * Disable user enumeration via done with user GET-parameter
 * Change login failed message
 * Add simple honeypot to login form _*NB!* This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
+* Remove hosting provider spesific information from Site Health check
 
 #### Localization and Polylang support
 
@@ -108,6 +111,16 @@ Meta revisions are served only when using `get_post_meta` for simple key=>value 
 #### WooCommerce support
 
 Plugin will detect if current theme support WooCommerce and if so, loads the most basic overrides and makes Air based theme compatible with WooCommerce. This feature is built for starting point only.
+
+#### Image lazyloading
+
+Air helper adds few additional helpers to work with image lazyloading, but requires also support from the theme in use. In there, there needs to be [jaavascript](https://github.com/digitoimistodude/air-light/blob/master/js/src/lazyload.js) and [style](https://github.com/digitoimistodude/air-light/blob/master/sass/features/_lazyload.scss) files.
+
+Plugin has two functions to use for getting lazyload images. Easier one is `image_lazyload_tag( $image_id )` which returns an simple `img` tag. Other function `image_lazyload_div( $image_id )` returns a div structure to use as a background image in sections.
+
+Both functions accept second argument, which should be array. With that array, developers can spesificy image sizes to use for different purposes. Array should contain image sizes for keys `tiny` (used as preview), `mobile` and `big`. If passed image sizes does not exist, there will be defaults used.
+
+If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI `ep media regenerate` or [Regenerate Thumbnails](https://wordpress.org/plugins/regenerate-thumbnails/) plugin.
 
 ### Installing
 
