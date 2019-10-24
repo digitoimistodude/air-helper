@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-08-07 17:08:43
+ * @Last Modified time: 2019-10-24 17:13:29
  *
  * @package air-helper
  */
@@ -98,7 +98,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 		<img class="lazyload"
 			src="<?php echo $image_urls['tiny']; ?>"
 			data-src="<?php echo $image_urls['big']; ?>"
-		     	data-src-mobile="<?php echo $image_urls['mobile']; ?>"
+      data-src-mobile="<?php echo $image_urls['mobile']; ?>"
 			width="<?php echo $dimensions['width']; ?>" height="<?php echo $dimensions['height']; ?>" />
 
     <?php
