@@ -98,6 +98,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 		<img class="lazyload"
 			src="<?php echo $image_urls['tiny']; ?>"
 			data-src="<?php echo $image_urls['big']; ?>"
+		     	data-src-mobile="<?php echo $image_urls['mobile']; ?>"
 			width="<?php echo $dimensions['width']; ?>" height="<?php echo $dimensions['height']; ?>" />
 
     <?php
