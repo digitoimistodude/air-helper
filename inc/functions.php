@@ -292,6 +292,8 @@ if ( ! function_exists( 'get_post_years' ) ) {
 			}
 		}
 
+    $result = apply_filters( "get_{$post_type}_years_result", $results );
+
 		// Save result to cache for 30 minutes.
 		set_transient( "get_{$post_type}_years_result", $result, MINUTE_IN_SECONDS * 30 );
 
