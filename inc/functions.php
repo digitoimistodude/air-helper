@@ -272,33 +272,34 @@ if ( ! function_exists( 'get_post_years' ) ) {
 	 *  @return array 	           array containing years where there are posts.
 	 */
 	function get_post_years( $post_type = 'post' ) {
+    $cache_key = apply_filters( "get_{$post_type}_years_result_key", "get_{$post_type}_years_result" );
 
-		// Check if result is cached and if, return cached version.
-		$result = get_transient( "get_{$post_type}_years_result" );
-		if ( ! empty( $result ) ) {
-			return $result;
-		}
+    // Check if result is cached and if, return cached version.
+    $result = get_transient( $cache_key );
+    if ( ! empty( $result ) ) {
+      return $result;
+    }
 
-		global $wpdb;
-		$result = array();
+    global $wpdb;
+    $result = array();
 
-		// Do databse query to get years.
-		$years = $wpdb->get_results( "SELECT YEAR(post_date) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type = '{$post_type}' GROUP BY YEAR(post_date) DESC", ARRAY_N );
+    // Do databse query to get years.
+    $years = $wpdb->get_results( "SELECT YEAR(post_date) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type = '{$post_type}' GROUP BY YEAR(post_date) DESC", ARRAY_N );
 
-		// Loop result.
-		if ( is_array( $years ) && count( $years ) > 0 ) {
-			foreach ( $years as $year ) {
-				$result[] = $year[0];
-			}
-		}
+    // Loop result.
+    if ( is_array( $years ) && count( $years ) > 0 ) {
+      foreach ( $years as $year ) {
+        $result[] = $year[0];
+      }
+    }
 
-    $result = apply_filters( "get_{$post_type}_years_result", $results );
+    $result = apply_filters( "get_{$post_type}_years_result", $result, $post_type );
 
-		// Save result to cache for 30 minutes.
-		set_transient( "get_{$post_type}_years_result", $result, MINUTE_IN_SECONDS * 30 );
+    // Save result to cache for 30 minutes.
+    set_transient( $cache_key, $result, MINUTE_IN_SECONDS * 30 );
 
-		return $result;
-	}
+    return $result;
+  }
 } // end if
 
 if ( ! function_exists( 'get_post_months_by_year' ) ) {
