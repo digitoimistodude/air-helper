@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.12.1]
+### Fixed
+- Registration of our lazyload preload image size
+- Lazyload imagesize get
+
 ## [1.12.0]
 ### Added
 - Hook `get_{$post_type}_years_result` for function get_post_years

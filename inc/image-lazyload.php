@@ -5,16 +5,10 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-10-24 17:13:29
+ * @Last Modified time: 2019-11-29 16:46:42
  *
  * @package air-helper
  */
-
-// ad our image size for lazyload
-add_action( 'after_setup_theme', 'air_helper_add_lazyload_image_sizes' );
-function air_helper_add_lazyload_image_sizes() {
-	add_image_size( 'tiny-lazyload-thumbnail', 20, 20 );
-}
 
 // function to output lazyload divs
 if ( ! function_exists( 'image_lazyload_div' ) ) {
@@ -111,57 +105,75 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) {
 	$image_id = intval( $image_id );
 
-	if ( ! $image_id ) {
-		return false;
-	}
+  if ( ! $image_id ) {
+    return false;
+  }
 
-	// Bail if ID is not attachment
-	if ( 'attachment' !== get_post_type( $image_id ) ) {
-		return false;
-	}
+  // Bail if ID is not attachment
+  if ( 'attachment' !== get_post_type( $image_id ) ) {
+    return false;
+  }
 
-	// Default image sizes for use cases
-	$default_sizes = array(
-		'tiny'		=> 'tiny-lazyload-thumbnail',
-		'mobile'	=> 'large',
-		'big'			=> 'full',
-	);
+  // Default image sizes for use cases
+  $default_sizes = array(
+    'tiny'    => 'tiny-lazyload-thumbnail',
+    'mobile'  => 'large',
+    'big'     => 'full',
+  );
 
-	$sizes = wp_parse_args( $sizes, $default_sizes );
+  $sizes = wp_parse_args( $sizes, $default_sizes );
+  $intermediate_sizes = get_intermediate_image_sizes();
 
-	// Loop use cases to get image url for it
-	foreach ( $sizes as $size_for => $size ) {
-		// Check that asked image size exists and fallback to full size
-		if ( ! has_image_size( $size ) ) {
-			$size = 'full';
-		}
+  // Loop use cases to get image url for it
+  foreach ( $sizes as $size_for => $size ) {
+    // Check that asked image size exists and fallback to full size
+    if ( ! in_array( $size, $intermediate_sizes ) ) {
+      $size = 'full';
+    }
 
-		// Get image url
-		$url = wp_get_attachment_image_url( $image_id, $size );
+    // Get image url
+    $url = wp_get_attachment_image_url( $image_id, $size );
 
-		// For some reason, we don't have image so unset the size
-		if ( ! $url ) {
-			unset( $sizes[ $size_for ] );
-		}
+    // Try to get thumbnail
+    if ( ! $url && 'tiny-lazyload-thumbnail' === $size ) {
+      $url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
+    }
 
-		// Replace the image size name with url to image
-		$sizes[ $size_for ] = esc_url( $url );
-	}
+    // Get image url
+    $url = wp_get_attachment_image_url( $image_id, $size );
 
-	// Check that all required default images exists
-	if ( ! array_key_exists( 'tiny', $sizes ) ) {
-		return false;
-	}
+    // For some reason, we don't have image so unset the size
+    if ( ! $url ) {
+      unset( $sizes[ $size_for ] );
+    }
 
-	if ( ! array_key_exists( 'mobile', $sizes ) ) {
-		return false;
-	}
+    // Replace the image size name with url to image
+    $sizes[ $size_for ] = esc_url( $url );
+  }
 
-	if ( ! array_key_exists( 'big', $sizes ) ) {
-		return false;
-	}
+  // Check that all required default images exists
+  if ( ! array_key_exists( 'tiny', $sizes ) ) {
+    return false;
+  }
 
-	return $sizes;
+  if ( ! array_key_exists( 'mobile', $sizes ) ) {
+    return false;
+  }
+
+  if ( ! array_key_exists( 'big', $sizes ) ) {
+    return false;
+  }
+
+  // Fallback to thumbnail if tiny is same as big
+  if ( $sizes['tiny'] === $sizes['big'] ) {
+    $url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
+
+    if ( $url ) {
+      $sizes['tiny'] = esc_url( $url );
+    }
+  }
+
+  return $sizes;
 } // end function air_helper_get_image_lazyload_sizes
 
 function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array() ) {

@@ -5,10 +5,16 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-02-04 12:07:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-05-08 17:19:13
+ * @Last Modified time: 2019-11-29 16:46:12
  *
  * @package air-helper
  */
+
+// Add our image size for lazyload
+add_action( 'init', 'air_helper_add_lazyload_image_sizes' );
+function air_helper_add_lazyload_image_sizes() {
+  add_image_size( 'tiny-lazyload-thumbnail', 20, 20 );
+}
 
 /**
  *  Stop user enumeraton by ?author=(init) urls
