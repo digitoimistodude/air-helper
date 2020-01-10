@@ -43,19 +43,6 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
 }
 
 /**
- * Add a pingback url auto-discovery header for singularly identifiable articles.
- * Turn off by using `remove_action( 'wp_head', 'air_helper_pingback_header' )`
- *
- * @since  0.1.0
- */
-function air_helper_pingback_header() {
-	if ( is_singular() && pings_open() ) :
-		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
-	endif;
-}
-add_action( 'wp_head', 'air_helper_pingback_header' );
-
-/**
  *  Disable REST-API users endpoint.
  *  Turn off by using `remove_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' )`
  *
