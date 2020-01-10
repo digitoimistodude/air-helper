@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:43:49
+ * @Last Modified time: 2020-01-10 16:44:25
  *
  * @package air-helper
  */
@@ -82,7 +82,7 @@ function air_helper_orderby_fix() {
    */
   add_filter( 'posts_orderby', function( $orderby ) use ( $wpdb ) {
     if ( strstr( $orderby, 'post_title' ) ) {
-      $order        = ( strstr($orderby, 'post_title ASC' ) ? 'ASC' : 'DESC' );
+      $order        = ( strstr( $orderby, 'post_title ASC' ) ? 'ASC' : 'DESC' );
       $old_orderby  = $wpdb->posts . '.post_title ' . $order;
       $utf8_orderby = 'CONVERT ( LCASE(' . $wpdb->posts . '.post_title) USING utf8) COLLATE utf8_bin ' . $order;
 
