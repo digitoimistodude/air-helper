@@ -72,8 +72,14 @@ function air_helper_priority_fly() {
  */
 add_action( 'init', 'air_helper_fly', 998 );
 function air_helper_fly() {
+  // Function files
+  require_once air_helper_base_path() . '/functions/archives.php';
+  require_once air_helper_base_path() . '/functions/checks.php';
+  require_once air_helper_base_path() . '/functions/pagination.php';
+  require_once air_helper_base_path() . '/functions/misc.php';
+
+  // Hook & filter files
 	require_once air_helper_base_path() . '/inc/hooks.php';
-	require_once air_helper_base_path() . '/inc/functions.php';
 	require_once air_helper_base_path() . '/inc/misc.php';
 	require_once air_helper_base_path() . '/inc/image-lazyload.php';
 } // end air_helper_fly
