@@ -88,32 +88,6 @@ function air_helper_we_are_airless() {
 }
 
 /**
- *  Test if current theme support WooCommerce and require WC spesific
- *  things if so.
- *
- *  @since  0.1.0
- */
-function air_helper_maybe_woocommerce() {
-	if ( current_theme_supports( 'woocommerce' ) ) {
-		require_once air_helper_base_path() . '/inc/woocommerce.php';
-	}
-}
-add_action( 'init', 'air_helper_maybe_woocommerce' );
-
-/**
- *  Test if Carbon Fields is used and initialize our preview support
- *  if so.
- *
- *  @since  1.1.0
- */
-function air_helper_maybe_carbon_fields() {
-	if ( false !== has_action( 'after_setup_theme', 'carbon_fields_boot_plugin' ) ) {
-		require_once air_helper_base_path() . '/inc/carbonfields.php';
-	}
-}
-add_action( 'init', 'air_helper_maybe_carbon_fields', 999 );
-
-/**
  *  Load localization helpers and Polylang fallbacks.
  *  Turn off by using `remove_action( 'init', 'air_helper_localization_helpers' )`
  *
@@ -172,7 +146,6 @@ function air_helper_fly() {
 	require_once air_helper_base_path() . '/inc/hooks.php';
 	require_once air_helper_base_path() . '/inc/functions.php';
 	require_once air_helper_base_path() . '/inc/misc.php';
-	require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
 	require_once air_helper_base_path() . '/inc/image-lazyload.php';
 	require_once air_helper_base_path() . '/inc/dashboard.php';
 }
