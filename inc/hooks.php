@@ -1,8 +1,13 @@
 <?php
 /**
- *  Hooks to alter the way in which core works.
+ * Collection of miscellaneous actions.
  *
- *  @package air-helper
+ * @Author: Timi Wahalahti
+ * @Date:   2020-01-10 16:03:27
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2020-01-10 16:38:56
+ *
+ * @package air-helper
  */
 
 /**
@@ -12,21 +17,20 @@
  * @since  0.1.0
  * @link http://wordpress.stackexchange.com/questions/185577/disable-emojicons-introduced-with-wp-4-2
  */
+add_action( 'init', 'air_helper_helper_disable_wp_emojicons' );
 function air_helper_helper_disable_wp_emojicons() {
 	remove_action( 'admin_print_styles', 'print_emoji_styles' );
-  	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-  	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-  	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-  	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-  	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-  	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 
 	// Disable classic smilies.
 	add_filter( 'option_use_smilies', '__return_false' );
-
 	add_filter( 'tiny_mce_plugins', 'air_helper_helper_disable_emojicons_tinymce' );
-}
-add_action( 'init', 'air_helper_helper_disable_wp_emojicons' );
+} // end air_helper_helper_disable_wp_emojicons
 
 /**
  * Disable emojicons introduced with WP 4.2.
@@ -40,7 +44,7 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
 	} else {
 		return array();
 	}
-}
+} // end air_helper_helper_disable_emojicons_tinymce
 
 /**
  *  Strip unwanted html tags from titles
@@ -53,12 +57,11 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
  *  @param  mixed  $arg_3 whatever filter can pass.
  *  @param  mixed  $arg_4 whatever filter can pass.
  */
-function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
-	return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
-}
 add_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item', 10, 4 );
 add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
-
+function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
+	return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
+} // end air_helper_strip_tags_menu_item
 
 /**
  * Add support for correct UTF8 orderby for post_title and term name (äöå).
@@ -68,6 +71,7 @@ add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
  *  @since  1.5.0
  *  @return string ordering clause for query
  */
+add_filter( 'init', 'air_helper_orderby_fix' );
 function air_helper_orderby_fix() {
 	/**
 	 * Add support for correct UTF8 orderby for post_title and term name (äöå).
@@ -109,5 +113,4 @@ function air_helper_orderby_fix() {
 
 		return $orderby;
 	}, 10, 3);
-}
-add_filter( 'init', 'air_helper_orderby_fix' );
+} // end air_helper_orderby_fix

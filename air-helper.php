@@ -68,6 +68,7 @@ function air_helper_priority_fly() {
   // Hook & filter files
 	require_once air_helper_base_path() . '/inc/priority/security.php';
   require_once air_helper_base_path() . '/inc/priority/site-health-check.php';
+  require_once air_helper_base_path() . '/inc/priority/sendgrid.php';
   require_once air_helper_base_path() . '/inc/priority/misc.php';
 } // end air_helper_priority_fly
 
