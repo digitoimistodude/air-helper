@@ -5,10 +5,17 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:17:20
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:18:13
+ * @Last Modified time: 2020-01-10 16:31:52
  *
  * @package air-helper
  */
+
+/**
+ *  Remove Update WP text from admin footer.
+ *
+ *  @since  1.3.0
+ */
+add_filter( 'update_footer', '__return_empty_string', 11 );
 
 /**
  * Hide WP updates nag.

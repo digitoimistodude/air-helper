@@ -72,31 +72,6 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
 add_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item', 10, 4 );
 add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
 
-/**
- * Allow Gravity Forms to hide labels to add placeholders.
- * Turn off by using `add_filter( 'gform_enable_field_label_visibility_settings', '__return_false' )`
- *
- * @since  0.1.0
- */
-add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
-
-/**
- *  Set Yoast SEO plugin metabox priority to low.
- *  Turn off by using `remove_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' )`
- *
- *  @since  0.1.0
- */
-function air_helper_lowpriority_yoastseo() {
-	return 'low';
-}
-add_filter( 'wpseo_metabox_prio', 'air_helper_lowpriority_yoastseo' );
-
-/**
- *  Remove Update WP text from admin footer.
- *
- *  @since  1.3.0
- */
-add_filter( 'update_footer', '__return_empty_string', 11 );
 
 /**
  * Add support for correct UTF8 orderby for post_title and term name (äöå).
