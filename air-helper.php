@@ -86,6 +86,8 @@ function air_helper_fly() {
 	require_once air_helper_base_path() . '/inc/hooks.php';
 	require_once air_helper_base_path() . '/inc/misc.php';
 	require_once air_helper_base_path() . '/inc/image-lazyload.php';
+
+  require_once air_helper_base_path() . '/inc/mail.php';
 } // end air_helper_fly
 
 /**
