@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:01:58
+ * @Last Modified time: 2020-01-10 16:33:59
  *
  * @package air-helper
  */
@@ -129,3 +129,17 @@ function air_helper_login_honeypot_reset_prefix() {
 
   return $prefix;
 } // end air_helper_login_honeypot_reset_prefix
+
+/**
+ *  Unify and modify the login error message to be more general,
+ *  so those do not exist any hint what did go wrong.
+ *
+ *  Turn off by using `remove_action( 'login_errors', 'air_helper_login_errors' )`
+ *
+ *  @since  1.8.0
+ *  @return string  messag to display when login fails
+ */
+add_filter( 'login_errors', 'air_helper_login_errors' );
+function air_helper_login_errors() {
+  return __( '<b>Login failed.</b> Please contact your site admin or agency if you continue having problems.', 'air-helper' );
+} // end air_helper_login_errors
