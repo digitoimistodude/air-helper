@@ -5,10 +5,13 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:15:08
+ * @Last Modified time: 2020-01-10 16:34:42
  *
  * @package air-helper
  */
+
+// Disable Try Gutenberg notification in dashboard added on 4.8.9.
+remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
 
 /**
  *  Remove some notices from dashboard.
@@ -39,3 +42,4 @@ function air_helper_clean_admin_notices() {
     update_option( 'exactmetrics_tracking_notice', true );
   }
 } // end air_helper_clean_admin_notices
+
