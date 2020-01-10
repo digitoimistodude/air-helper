@@ -6,19 +6,6 @@
  */
 
 /**
- * Remove archive title prefix.
- * Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
- *
- * @since  0.1.0
- * @param  string $title Default title.
- * @return string Title without prefix
- */
-function air_helper_helper_remove_archive_title_prefix( $title ) {
-	return preg_replace( '/^\w+: /', '', $title );
-}
-add_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' );
-
-/**
  * Disable emojicons introduced with WP 4.2.
  * Turn off by using `remove_action( 'init', 'air_helper_helper_disable_wp_emojicons' )`
  *
