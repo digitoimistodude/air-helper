@@ -62,9 +62,13 @@ function air_helper_localization_helpers() {
  */
 add_action( 'init', 'air_helper_priority_fly', 5 );
 function air_helper_priority_fly() {
+  // Load textdomain for few translations in this plugin
 	load_plugin_textdomain( 'air-helper', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-	require_once air_helper_base_path() . '/inc/hooks-priority.php';
+  // Hook & filter files
+	require_once air_helper_base_path() . '/inc/priority/security.php';
+  require_once air_helper_base_path() . '/inc/priority/site-health-check.php';
+  require_once air_helper_base_path() . '/inc/priority/misc.php';
 } // end air_helper_priority_fly
 
 /**
