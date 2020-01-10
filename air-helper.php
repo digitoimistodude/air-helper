@@ -31,10 +31,15 @@ function air_helper_version() {
 	return 1121;
 }
 
+/**
+ * Require helpers for this plugin.
+ *
+ * @since  2.0.0
+ */
 require 'inc/plugin-helpers.php';
 
 /**
- *  Custom GitHub updater for this plugin.
+ *  Github updater for this plugin.
  *
  *  @since  0.1.0
  */
