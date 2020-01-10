@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 14:44:21
+ * @Last Modified time: 2020-01-10 14:48:29
  *
  * @package air-helper
  */
@@ -31,7 +31,7 @@ function air_helper_activated_at_version() {
  *  @return string  Path to this plugin
  */
 function air_helper_base_path() {
-  return untrailingslashit( plugin_dir_path( __FILE__ ) );
+  return untrailingslashit( plugin_dir_path( __DIR__ ) );
 } // end air_helper_base_path
 
 /**
@@ -41,7 +41,7 @@ function air_helper_base_path() {
  *  @return string  Url to this plugin
  */
 function air_helper_base_url() {
-  return untrailingslashit( plugin_dir_url( __FILE__ ) );
+  return untrailingslashit( plugin_dir_url( __DIR__ ) );
 } // end air_helper_base_url
 
 /**

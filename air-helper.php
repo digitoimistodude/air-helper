@@ -31,6 +31,8 @@ function air_helper_version() {
 	return 1121;
 }
 
+require 'inc/plugin-helpers.php';
+
 /**
  *  Custom GitHub updater for this plugin.
  *
