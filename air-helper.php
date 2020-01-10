@@ -96,8 +96,12 @@ function air_helper_fly() {
 add_action( 'admin_init', 'air_helper_admin_fly' );
 function air_helper_admin_fly() {
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
+  require_once air_helper_base_path() . '/inc/admin/access.php';
+  require_once air_helper_base_path() . '/inc/admin/acf.php';
+  require_once air_helper_base_path() . '/inc/admin/adminbar.php';
   require_once air_helper_base_path() . '/inc/admin/dashboard.php';
   require_once air_helper_base_path() . '/inc/admin/help-widget.php';
+  require_once air_helper_base_path() . '/inc/admin/updates.php';
 } // end air_helper_admin_fly
 
 /**
