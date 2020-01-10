@@ -43,25 +43,6 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
 }
 
 /**
- *  Disable REST-API users endpoint.
- *  Turn off by using `remove_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' )`
- *
- * 	@since  0.1.0
- */
-function air_helper_disable_rest_endpoints( $endpoints ) {
-	if ( isset( $endpoints['/wp/v2/users'] ) ) {
-  	unset( $endpoints['/wp/v2/users'] );
-  }
-
-  if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-  	unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-  }
-
-  return $endpoints;
-}
-add_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' );
-
-/**
  * Remove WordPress Admin Bar when not on development env.
  * Turn off by using `remove_action( 'get_header', 'air_helper_remove_admin_login_header' )`
  *

@@ -90,6 +90,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/mail.php';
   require_once air_helper_base_path() . '/inc/archives.php';
   require_once air_helper_base_path() . '/inc/comments.php';
+  require_once air_helper_base_path() . '/inc/rest-api.php';
 } // end air_helper_fly
 
 /**
