@@ -84,8 +84,6 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/functions/misc.php';
 
   // Hook & filter files
-	require_once air_helper_base_path() . '/inc/hooks.php';
-	require_once air_helper_base_path() . '/inc/misc.php';
 	require_once air_helper_base_path() . '/inc/image-lazyload.php';
 
   require_once air_helper_base_path() . '/inc/mail.php';
@@ -97,6 +95,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
+  require_once air_helper_base_path() . '/inc/misc.php';
 } // end air_helper_fly
 
 /**
