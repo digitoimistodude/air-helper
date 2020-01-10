@@ -94,6 +94,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/customizer.php';
   require_once air_helper_base_path() . '/inc/gravityforms.php';
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
+  require_once air_helper_base_path() . '/inc/tinymce.php';
 } // end air_helper_fly
 
 /**

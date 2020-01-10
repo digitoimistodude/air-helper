@@ -43,19 +43,6 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
 }
 
 /**
- *  Show TinyMCE second editor tools row by default.
- *  Turn off by using `remove_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' )`
- *
- *  @since  1.3.0
- *  @param  array $tinymce tinymce options.
- */
-function air_helper_show_second_editor_row( $tinymce ) {
-	$tinymce['wordpress_adv_hidden'] = false;
-	return $tinymce;
-}
-add_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' );
-
-/**
  *  Strip unwanted html tags from titles
  *  Turn off by using `remove_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item' )`
  *  Turn off by using `remove_filter( 'the_title', 'air_helper_strip_tags_menu_item' )`
@@ -124,26 +111,3 @@ function air_helper_orderby_fix() {
 	}, 10, 3);
 }
 add_filter( 'init', 'air_helper_orderby_fix' );
-
-/**
- *  Remove some Tiny MCE formats from editor.
- *
- *  Turn off by using `remove_action( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' )`
- *
- *  @since  1.7.0
- */
-function air_helper_tinymce_remove_formats( $init ) {
-	// Do not try to do this if we don't have function to check version where plugin was activated.
-	if ( ! function_exists( 'air_helper_activated_at_version' ) ) {
-		return $init;
-	}
-
-	// If plugin vas activated before version 1.7.0, do NOT do this.
-	if ( air_helper_activated_at_version() < 170 ) {
-		return $init;
-	}
-
-  $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;';
-  return $init;
-}
-add_filter( 'tiny_mce_before_init', 'air_helper_tinymce_remove_formats' );
