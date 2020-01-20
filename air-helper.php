@@ -72,10 +72,9 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/functions/pagination.php';
   require_once air_helper_base_path() . '/functions/misc.php';
   require_once air_helper_base_path() . '/functions/localization.php';
+  require_once air_helper_base_path() . '/functions/image-lazyload.php';
 
   // Hook & filter files
-	require_once air_helper_base_path() . '/inc/image-lazyload.php';
-
   require_once air_helper_base_path() . '/inc/mail.php';
   require_once air_helper_base_path() . '/inc/archives.php';
   require_once air_helper_base_path() . '/inc/comments.php';
