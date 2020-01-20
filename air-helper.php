@@ -47,17 +47,6 @@ require 'plugin-update-checker/plugin-update-checker.php';
 $update_checker = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/digitoimistodude/air-helper', __FILE__, 'air-helper' );
 
 /**
- *  Load localization helpers and Polylang fallbacks.
- *  Turn off by using `remove_action( 'init', 'air_helper_localization_helpers' )`
- *
- *  @since  1.4.0
- */
-add_action( 'init', 'air_helper_localization_helpers' );
-function air_helper_localization_helpers() {
-	require_once air_helper_base_path() . '/inc/localization.php';
-} // end air_helper_localization_helpers
-
-/**
  *  Require priority files.
  */
 add_action( 'init', 'air_helper_priority_fly', 5 );
@@ -82,6 +71,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/functions/checks.php';
   require_once air_helper_base_path() . '/functions/pagination.php';
   require_once air_helper_base_path() . '/functions/misc.php';
+  require_once air_helper_base_path() . '/functions/localization.php';
 
   // Hook & filter files
 	require_once air_helper_base_path() . '/inc/image-lazyload.php';
@@ -106,6 +96,7 @@ function air_helper_admin_fly() {
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
   require_once air_helper_base_path() . '/inc/admin/access.php';
   require_once air_helper_base_path() . '/inc/admin/acf.php';
+  require_once air_helper_base_path() . '/inc/admin/localization.php';
   require_once air_helper_base_path() . '/inc/admin/adminbar.php';
   require_once air_helper_base_path() . '/inc/admin/dashboard.php';
   require_once air_helper_base_path() . '/inc/admin/help-widget.php';
