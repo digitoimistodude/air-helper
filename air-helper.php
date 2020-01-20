@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: This plugin extends themes based on Air by adding useful hooks, functions and basic things for WooCommerce.
- * Version: 1.12.1
+ * Version: 2.0.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
  * Requires at least: 4.7
@@ -36,7 +36,7 @@ function air_helper_version() {
  *
  * @since  2.0.0
  */
-require 'inc/plugin-helpers.php';
+require 'plugin-helpers.php';
 
 /**
  *  Github updater for this plugin.
@@ -91,7 +91,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/comments.php';
   require_once air_helper_base_path() . '/inc/rest-api.php';
   require_once air_helper_base_path() . '/inc/customizer.php';
-  require_once air_helper_base_path() . '/inc/gravityforms.php';
+  require_once air_helper_base_path() . '/inc/gravity-forms.php';
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
