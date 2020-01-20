@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:33:59
+ * @Last Modified time: 2020-01-20 15:44:16
  *
  * @package air-helper
  */
@@ -21,7 +21,7 @@
 add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_stop_user_enumeration() {
   if ( ! is_admin() && isset( $_SERVER['REQUEST_URI'] ) ) {
-    if ( preg_match('/(wp-comments-post)/', $_SERVER['REQUEST_URI'] ) === 0 && ! empty( $_REQUEST['author'] ) ) {
+    if ( preg_match( '/(wp-comments-post)/', $_SERVER['REQUEST_URI'] ) === 0 && ! empty( $_REQUEST['author'] ) ) {
       wp_safe_redirect( home_url() );
       exit;
     }

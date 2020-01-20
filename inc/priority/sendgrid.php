@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:41:02
+ * @Last Modified time: 2020-01-20 15:47:10
  *
  * @package air-helper
  */
@@ -18,10 +18,7 @@
  *  @package air-helper
  */
 if ( apply_filters( 'air_helper_sendgrid', true ) ) {
-
-  /**
-   *  Check that SendGrid API key is set and show warning if not.
-   */
+  // Check that SendGrid API key is set and show warning if not
   add_action( 'admin_init', 'air_helper_sendgrid_check' );
 
   // Define SendGrid settings.
