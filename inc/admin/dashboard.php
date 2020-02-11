@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:15:41
+ * @Last Modified time: 2020-02-11 12:42:42
  *
  * @package air-helper
  */
@@ -21,13 +21,14 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
  *  Remove some boxes from dashboard.
  *
  *  Turn off by using `remove_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard' )`
+ *  Modify with `add_filter( 'air_helper_clear_admin_dashboard_boxes', 'myprefix_air_helper_clear_admin_dashboard_boxes' )`
  *
  *  @since 1.7.0
  */
 add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
 function air_helper_clear_admin_dashboard() {
-	$remove_boxes = array(
-		'normal'	=> array(
+	$remove_boxes = [
+		'normal'	=> [
 			'dashboard_right_now',
 			'dashboard_recent_comments',
 			'dashboard_incoming_links',
@@ -36,14 +37,14 @@ function air_helper_clear_admin_dashboard() {
 			'sendgrid_statistics_widget',
 			'wpseo-dashboard-overview', // yoast
 			'rg_forms_dashboard', // gravity forms
-		),
-		'side'		=> array(
+		],
+		'side'		=> [
 			'dashboard_quick_press',
 			'dashboard_recent_drafts',
 			'dashboard_primary',
 			'dashboard_secondary',
-		),
-	);
+		],
+	];
 
 	// Allow filtering which boxes to hide
 	$remove_boxes = apply_filters( 'air_helper_clear_admin_dashboard_boxes', $remove_boxes );
