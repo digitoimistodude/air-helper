@@ -82,6 +82,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/customizer.php';
   require_once air_helper_base_path() . '/inc/gravity-forms.php';
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
+  require_once air_helper_base_path() . '/inc/imagify.php';
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
@@ -92,7 +93,7 @@ function air_helper_fly() {
  */
 add_action( 'init', 'air_helper_admin_fly' );
 function air_helper_admin_fly() {
-  if ( ! is_user_logged_in() ) {
+  if ( ! is_user_logged_in() || wp_doing_ajax() ) {
     return false;
   }
 
