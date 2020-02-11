@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-20 15:44:16
+ * @Last Modified time: 2020-02-11 14:41:40
  *
  * @package air-helper
  */
@@ -21,7 +21,7 @@
 add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_stop_user_enumeration() {
   if ( ! is_admin() && isset( $_SERVER['REQUEST_URI'] ) ) {
-    if ( preg_match( '/(wp-comments-post)/', $_SERVER['REQUEST_URI'] ) === 0 && ! empty( $_REQUEST['author'] ) ) {
+    if ( preg_match( '/(wp-comments-post)/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === 0 && ! empty( $_REQUEST['author'] ) ) {
       wp_safe_redirect( home_url() );
       exit;
     }
@@ -53,13 +53,13 @@ function air_helper_login_honeypot_form() {
   } ?>
 
   <p id="air_lh_name_field" class="air_lh_name_field">
-    <label for="air_lh_name"><?php _e( 'Append three letters to this input', 'air-helper' ); ?></label><br />
-    <input type="text" name="air_lh_name" id="air_lh_name" class="input" value="<?php echo $prefix['prefix']; ?>" size="20" autocomplete="off" />
+    <label for="air_lh_name"><?php echo esc_html( 'Append three letters to this input', 'air-helper' ); ?></label><br />
+    <input type="text" name="air_lh_name" id="air_lh_name" class="input" value="<?php echo esc_attr( $prefix['prefix'] ); ?>" size="20" autocomplete="off" />
   </p>
 
   <script type="text/javascript">
     var text = document.getElementById('air_lh_name');
-    text.value += '<?php echo wp_generate_password( 3, false ); ?>';
+    text.value += '<?php echo esc_attr( wp_generate_password( 3, false ) ); ?>';
     document.getElementById('air_lh_name_field').style.display = 'none';
   </script>
 <?php } // end air_helper_login_honeypot_form
@@ -72,6 +72,8 @@ function air_helper_login_honeypot_form() {
  *  @param  string $username  username or email address.
  *  @param  string $password  user password.
  *  @return mixed             WP_User object if honeypot passed, null otherwise.
+ *
+ *  phpcs:disable WordPress.Security.NonceVerification.Missing
  */
 add_action( 'authenticate', 'air_helper_login_honeypot_check', 1000, 3 );
 function air_helper_login_honeypot_check( $user, $username, $password ) {
@@ -91,7 +93,7 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
     }
 
     // value needs to be exactly six charters long
-    if ( 6 !== mb_strlen( $_POST['air_lh_name'] ) ) {
+    if ( 6 !== mb_strlen( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ) ) ) {
       return null;
     }
 
@@ -104,13 +106,14 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
     }
 
     // prefix is not correct
-    if ( substr( $_POST['air_lh_name'], 0, 3 ) !== $prefix['prefix'] ) {
+    if ( substr( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ), 0, 3 ) !== $prefix['prefix'] ) {
       return null;
     }
   }
 
   return $user;
 } // end air_helper_login_honeypot_check
+// phpcs: enable WordPress.Security.NonceVerification.Missing
 
 /**
  *  Reset login form honeypot prefix on call and after succesfull login.
@@ -120,10 +123,10 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
  */
 add_action( 'wp_login', 'air_helper_login_honeypot_reset_prefix' );
 function air_helper_login_honeypot_reset_prefix() {
-  $prefix = array(
+  $prefix = [
     'generated' => time(),
     'prefix'    => wp_generate_password( 3, false ),
-  );
+  ];
 
   update_option( 'air_helper_login_honeypot', $prefix, false );
 
