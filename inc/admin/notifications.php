@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 12:46:22
+ * @Last Modified time: 2020-02-11 16:39:51
  *
  * @package air-helper
  */
@@ -41,6 +41,9 @@ function air_helper_clean_admin_notices() {
   if ( ! get_option( 'exactmetrics_tracking_notice' ) ) {
     update_option( 'exactmetrics_tracking_notice', true );
   }
+
+  // Imagify upsell ads needs to be disabled by user
+  update_user_meta( get_current_user_id(), '_imagify_ignore_ads', [ 'wp-rocket' ] );
 
   // Hide always all redis object cache notifications
   define( 'WP_REDIS_DISABLE_BANNERS', true );
