@@ -83,6 +83,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/gravity-forms.php';
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
   require_once air_helper_base_path() . '/inc/imagify.php';
+  require_once air_helper_base_path() . '/inc/autodescription.php';
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
