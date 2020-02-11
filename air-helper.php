@@ -96,7 +96,7 @@ function air_helper_admin_fly() {
     return false;
   }
 
-  require_once air_helper_base_path() . '/inc/adminbar.php';
+  require_once air_helper_base_path() . '/inc/admin/adminbar.php';
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
   require_once air_helper_base_path() . '/inc/admin/access.php';
   require_once air_helper_base_path() . '/inc/admin/acf.php';

@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:15:47
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 11:59:12
+ * @Last Modified time: 2020-02-11 14:27:11
  *
  * @package air-helper
  */
@@ -18,7 +18,7 @@
  *
  * @since  0.1.0
  */
-add_action( 'admin_menu', 'air_helper_helper_remove_admin_menu_links', 999 );
+add_action( 'admin_init', 'air_helper_helper_remove_admin_menu_links' );
 function air_helper_helper_remove_admin_menu_links() {
   $remove_items = apply_filters( 'air_helper_helper_remove_admin_menu_links', [
     'edit-comments.php',
