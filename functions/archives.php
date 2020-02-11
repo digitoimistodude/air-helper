@@ -5,14 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:49:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:50:57
+ * @Last Modified time: 2020-02-11 11:33:49
  *
  * @package air-helper
  */
 
 if ( ! function_exists( 'get_posts_array' ) ) {
   /**
-   *  Get posts in key=>value array.
+   *  Get posts in key=>title array.
    *
    *  @since  1.4.2
    *  @param  array  $args       Arguments passed to get_posts function.
@@ -20,12 +20,19 @@ if ( ! function_exists( 'get_posts_array' ) ) {
    *  @return array              {$return_key}=>post_title array of posts.
    */
   function get_posts_array( $args = array(), $return_key = 'ID' ) {
-    $return = array();
-    $defaults = array(
+    $cache_key_hash = sprintf( '%u', crc32( serialize( $args ) . $return_key ) );
+    $cache_key = apply_filters( 'get_posts_array_cache_key', "get_posts_array_{$cache_key_hash}", $args, $return_key );
+
+    // Check if result is cached and if, return cached version
+    $return = get_transient( $cache_key );
+    if ( ! empty( $return ) ) {
+      return $return;
+    }
+
+    $return = [];
+    $defaults = [
       'posts_per_page'  => 100,
-      'orderby'         => 'title',
-      'order'           => 'DESC',
-    );
+    ];
 
     $args = wp_parse_args( $args, $defaults );
     $posts = get_posts( $args );
@@ -33,6 +40,11 @@ if ( ! function_exists( 'get_posts_array' ) ) {
     foreach ( $posts as $post ) {
       $return[ $post->{ $return_key } ] = $post->post_title;
     }
+
+    $return = apply_filters( 'get_posts_array', $return, $args, $return_key );
+
+    // Save result to cache
+    set_transient( $cache_key, $return, apply_filters( 'get_posts_array_cache_lifetime', MINUTE_IN_SECONDS * 30 ) );
 
     return $return;
   } // end get_posts_array
@@ -43,37 +55,37 @@ if ( ! function_exists( 'get_post_years' ) ) {
    *  Get years where there are posts.
    *
    *  @since  1.6.0
-   *  @param  string  $post_type post type to get post years, defaults to post.
+   *  @param  string $post_type  post type to get post years, defaults to post.
    *  @return array              array containing years where there are posts.
    */
   function get_post_years( $post_type = 'post' ) {
     $cache_key = apply_filters( "get_{$post_type}_years_result_key", "get_{$post_type}_years_result" );
 
-    // Check if result is cached and if, return cached version.
-    $result = get_transient( $cache_key );
-    if ( ! empty( $result ) ) {
-      return $result;
+    // Check if result is cached and if, return cached version
+    $return = get_transient( $cache_key );
+    if ( ! empty( $return ) ) {
+      return $return;
     }
 
     global $wpdb;
-    $result = array();
+    $return = [];
 
-    // Do databse query to get years.
-    $years = $wpdb->get_results( "SELECT YEAR(post_date) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type = '{$post_type}' GROUP BY YEAR(post_date) DESC", ARRAY_N );
+    // Do databse query to get years
+    $years = $wpdb->get_results( $wpdb->prepare( "SELECT YEAR(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s GROUP BY YEAR(post_date) DESC", $wpdb->posts, $post_type ), ARRAY_N );
 
-    // Loop result.
+    // Loop result
     if ( is_array( $years ) && count( $years ) > 0 ) {
       foreach ( $years as $year ) {
-        $result[] = $year[0];
+        $return[] = absint( $year[0] );
       }
     }
 
-    $result = apply_filters( "get_{$post_type}_years_result", $result, $post_type );
+    $return = apply_filters( "get_{$post_type}_years_result", $return, $post_type );
 
-    // Save result to cache for 30 minutes.
-    set_transient( $cache_key, $result, MINUTE_IN_SECONDS * 30 );
+    // Save result to cache for 30 minutes
+    set_transient( $cache_key, $return, apply_filters( 'get_post_years_cache_lifetime', MINUTE_IN_SECONDS * 30 ) );
 
-    return $result;
+    return $return;
   } // end get_post_years
 } // end if
 
@@ -82,38 +94,40 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
    *  Get months where there are posts in spesific year.
    *
    *  @since  1.6.0
-   *  @param  string  $year      year to get posts, defaults to current year.
-   *  @param  string  $post_type post type to get post years, defaults to post.
+   *  @param  string $year       year to get posts, defaults to current year.
+   *  @param  string $post_type  post type to get post years, defaults to post.
    *  @return array              array containing months where there are posts.
    */
   function get_post_months_by_year( $year = '', $post_type = 'post' ) {
-    // Use current year if not defined.
+    // Use current year if not defined
     if ( empty( $year ) ) {
       $year = date( 'Y' );
     }
 
-    // Check if result is cached and if, return cached version.
-    $result = get_transient( "get_{$post_type}_months_by_year_{$year}_result" );
-    if ( ! empty( $result ) ) {
-      return $result;
+    $cache_key = "get_{$post_type}_months_by_year_{$year}_result";
+
+    // Check if result is cached and if, return cached version
+    $return = get_transient( $cache_key );
+    if ( ! empty( $return ) ) {
+      return $return;
     }
 
     global $wpdb;
-    $result = array();
+    $return = [];
 
-    // Do databse query to get years.
-    $months = $wpdb->get_results( "SELECT DISTINCT MONTH(post_date) FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = '{$post_type}' AND YEAR(post_date) = '".$year."' ORDER BY post_date DESC", ARRAY_N );
+    // Do databse query to get years
+    $months = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT MONTH(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s AND YEAR(post_date) = %s ORDER BY post_date DESC", $wpdb->posts, $post_type, $year ), ARRAY_N );
 
-    // Loop result.
+    // Loop result
     if ( is_array( $months ) && count( $months ) > 0 ) {
       foreach ( $months as $month ) {
-        $result[] = $month[0];
+        $return[] = absint( $month[0] );
       }
     }
 
-    // Save result to cache for 30 minutes.
-    set_transient( "get_{$post_type}_months_by_year_{$year}_result", $result, MINUTE_IN_SECONDS * 30 );
+    // Save result to cache for 30 minutes
+    set_transient( $cache_key, $return, apply_filters( 'get_post_months_by_year_cache_lifetime', MINUTE_IN_SECONDS * 30 ) );
 
-    return $result;
+    return $return;
   } // end get_post_months_by_year
 } // end if
