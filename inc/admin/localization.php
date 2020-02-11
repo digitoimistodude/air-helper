@@ -10,7 +10,7 @@
  */
 
 /**
- *  Register polylang translatable.
+ *  Register Polylang translatable strings.
  *
  *  @since 1.4.0
  */
