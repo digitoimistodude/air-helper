@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:20:24
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:32:47
+ * @Last Modified time: 2020-02-11 14:57:39
  *
  * @package air-helper
  */
 
 /**
  * Remove archive title prefix.
+ *
  * Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
  *
  * @since  0.1.0

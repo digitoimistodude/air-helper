@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:42:40
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:43:05
+ * @Last Modified time: 2020-02-11 14:58:29
  *
  * @package air-helper
  */
 
 /**
  * Custom uploads folder media/ instead of default content/uploads/.
+ *
  * Turn off by using filter `add_filter( 'air_helper_change_uploads_path', '__return_false' )`
  *
  * @since 0.1.0

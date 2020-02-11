@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:26:35
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:27:20
+ * @Last Modified time: 2020-02-11 14:57:34
  *
  * @package air-helper
  */
 
 /**
- * Remove the additional CSS section, introduced in 4.7, from the Customizer.
+ * Remove the additional CSS section from the Customizer.
+ *
  * Add back by using `remove_action( 'customize_register', 'air_helper_customizer_remove_css_section' )`
  *
  * @param object $wp_customize WP_Customize_Manager.

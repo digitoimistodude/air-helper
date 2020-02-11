@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:35:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:36:56
+ * @Last Modified time: 2020-02-11 14:59:08
  *
  * @package air-helper
  */
 
 /**
  *  Show TinyMCE second editor tools row by default.
+ *
  *  Turn off by using `remove_filter( 'tiny_mce_before_init', 'air_helper_show_second_editor_row' )`
  *
  *  @since  1.3.0

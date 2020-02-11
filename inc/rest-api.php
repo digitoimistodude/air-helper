@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:24:01
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:24:40
+ * @Last Modified time: 2020-02-11 14:59:03
  *
  * @package air-helper
  */
 
 /**
  *  Disable REST API users endpoint.
+ *
  *  Turn off by using `remove_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' )`
  *
  *  @since  0.1.0

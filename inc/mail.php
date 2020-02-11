@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:40:31
+ * @Last Modified time: 2020-02-11 14:58:11
  *
  * @package air-helper
  */
 
 /**
  *  Force to address in wp_mail function so that test emails wont go to client.
+ *
  *  Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
  *
  *  @since  0.1.0
@@ -28,6 +29,7 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
 
 /**
  *  Force to address in wp_mail.
+ *
  *  Change allowed staging roles by using `add_filter( 'air_helper_helper_mail_to_allowed_roles', 'myprefix_override_air_helper_helper_mail_to_allowed_roles' )`
  *  Change address from admin_email by using `add_filter( 'air_helper_helper_mail_to', 'myprefix_override_air_helper_helper_mail_to' )`
  *
@@ -55,6 +57,7 @@ function air_helper_helper_force_mail_to( $args ) {
 
 /**
  *  Do not force to address when sending notification to new user created.
+ *
  *  Turn off by using `remove_action( 'edit_user_created_user', 'air_helper_dont_force_created_user_mail' )`
  *
  *  @since  1.2.0

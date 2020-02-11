@@ -5,13 +5,14 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:44:25
+ * @Last Modified time: 2020-02-11 14:59:34
  *
  * @package air-helper
  */
 
 /**
- * Disable emojicons introduced with WP 4.2.
+ * Disable emojicons.
+ *
  * Turn off by using `remove_action( 'init', 'air_helper_helper_disable_wp_emojicons' )`
  *
  * @since  0.1.0
@@ -27,13 +28,13 @@ function air_helper_helper_disable_wp_emojicons() {
   remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
   remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 
-  // Disable classic smilies.
+  // Disable classic smilies
   add_filter( 'option_use_smilies', '__return_false' );
   add_filter( 'tiny_mce_plugins', 'air_helper_helper_disable_emojicons_tinymce' );
 } // end air_helper_helper_disable_wp_emojicons
 
 /**
- * Disable emojicons introduced with WP 4.2.
+ * Disable emojicons.
  *
  * @since 0.1.0
  * @param array $plugins Plugins.
@@ -42,12 +43,13 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
   if ( is_array( $plugins ) ) {
     return array_diff( $plugins, array( 'wpemoji' ) );
   } else {
-    return array();
+    return [];
   }
 } // end air_helper_helper_disable_emojicons_tinymce
 
 /**
  *  Strip unwanted html tags from titles
+ *
  *  Turn off by using `remove_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item' )`
  *  Turn off by using `remove_filter( 'the_title', 'air_helper_strip_tags_menu_item' )`
  *
@@ -65,6 +67,7 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
 
 /**
  * Add support for correct UTF8 orderby for post_title and term name (äöå).
+ *
  * Turn off by using `remove_filter( 'init', 'air_helper_orderby_fix' )`
  * Props Teemu Suoranta https://gist.github.com/TeemuSuoranta/2174f78f37248aeef483526d1c5d176f
  *
