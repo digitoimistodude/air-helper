@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:47:21
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 11:48:12
+ * @Last Modified time: 2020-02-11 11:54:08
  *
  * @package air-helper
  */
@@ -28,7 +28,7 @@ if ( ! function_exists( 'get_next_page_id' ) ) {
     // Check if result is cached and if, return cached version
     $next_page_id = get_transient( $cache_key );
     if ( ! empty( $next_page_id ) ) {
-      return $next_page_id;
+      return absint( $next_page_id );
     }
 
     $next_page_id = false;
@@ -39,8 +39,8 @@ if ( ! function_exists( 'get_next_page_id' ) ) {
       'post_type'   => $post->post_type,
       'child_of'    => $post->post_parent,
       'parent'      => $post->post_parent,
-      'sort_column' => 'menu_order',
-      'sort_order'  => 'asc',
+      'sort_column' => 'menu_order post_title',
+      'sort_order'  => 'ASC',
     ] );
 
     // Count pages.
@@ -86,7 +86,7 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
     // Check if result is cached and if, return cached version
     $prev_page_id = get_transient( $cache_key );
     if ( ! empty( $prev_page_id ) ) {
-      return $prev_page_id;
+      return absint( $prev_page_id );
     }
 
     $prev_page_id = false;
@@ -97,8 +97,8 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
       'post_type'   => $post->post_type,
       'child_of'    => $post->post_parent,
       'parent'      => $post->post_parent,
-      'sort_column' => 'menu_order',
-      'sort_order'  => 'asc',
+      'sort_column' => 'menu_order post_title',
+      'sort_order'  => 'ASC',
     ] );
 
     // Count pages.
@@ -121,7 +121,7 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
     }
 
     // Save to cache
-    set_transient( $cache_key, $next_page_id, apply_filters( 'get_prev_page_id_cache_lifetime', MINUTE_IN_SECONDS * 30 ) );
+    set_transient( $cache_key, $prev_page_id, apply_filters( 'get_prev_page_id_cache_lifetime', MINUTE_IN_SECONDS * 30 ) );
 
     return $prev_page_id;
   } // end get_prev_page_id
