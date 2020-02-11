@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:53:45
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:54:46
+ * @Last Modified time: 2020-02-11 11:41:49
  *
  * @package air-helper
  */
@@ -15,7 +15,7 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
    *  Get list of icons which are available for user.
    *
    *  @since  1.4.0
-   *  @return array  array of icons
+   *  @return array  Array of icons available.
    */
   function get_icons_for_user() {
     $icons = array();
@@ -39,9 +39,9 @@ if ( ! function_exists( 'wp_parse_args_dimensional' ) ) {
    *  Similar to wp_parse_args() just extended to work with multidimensional arrays.
    *
    *  @since  1.7.0
-   *  @param  array  $a  Value to merge with $defaults.
-   *  @param  array  $b  Optional. Array that serves as the defaults. Default empty.
-   *  @return array      Merged user defined values with defaults.
+   *  @param  array $a  Value to merge with $defaults.
+   *  @param  array $b  Optional, array that serves as the defaults. Defaults to empty.
+   *  @return array     Merged user defined values with defaults.
    */
   function wp_parse_args_dimensional( &$a, $b = '' ) {
     $a = (array) $a;
@@ -75,7 +75,7 @@ if ( ! function_exists( 'get_the_sentence_excerpt' ) ) {
     }
 
     $split = preg_split( '/(\. |\!|\?)/', $excerpt, $length, PREG_SPLIT_DELIM_CAPTURE );
-    $new_excerpt = implode( '', array_slice( $split, 0, $length+1 ) );
+    $new_excerpt = implode( '', array_slice( $split, 0, $length + 1 ) );
 
     return $new_excerpt;
   } // end get_the_sentence_excerpt
