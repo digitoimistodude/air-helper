@@ -5,16 +5,16 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:41:40
+ * @Last Modified time: 2020-02-11 14:42:34
  *
  * @package air-helper
  */
 
 /**
- *  Stop user enumeraton by ?author=(init) urls
- *  Turn off by using `remove_action( 'init', 'air_helper_stop_user_enumeration' )`
- *
+ *  Stop user enumeraton by ?author=(init) urls.
  *  Idea by Davide Giunchi, from plugin "Stop User Enumeration"
+ *
+ *  Turn off by using `remove_action( 'init', 'air_helper_stop_user_enumeration' )`
  *
  *  @since  1.7.4
  */
