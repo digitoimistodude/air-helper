@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:51:13
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:53:08
+ * @Last Modified time: 2020-02-11 11:35:31
  *
  * @package air-helper
  */
@@ -62,10 +62,10 @@ if ( ! function_exists( 'has_children' ) ) {
       $post_type = $post->post_type;
     }
 
-    $query = new WP_Query( array(
+    $query = new WP_Query( [
       'post_parent' => $post_id,
       'post_type'   => $post_type,
-    ) );
+    ] );
 
     return $query->have_posts();
   } // end has_children
