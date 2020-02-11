@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:12:18
+ * @Last Modified time: 2020-02-11 11:59:25
  *
  * @package air-helper
  */
@@ -14,7 +14,6 @@
  *  Hide ACF for all users, execpt for users with spesific domain or override in user meta.
  *
  *  Turn off by using `remove_filter( 'acf/settings/show_admin', 'air_helper_maybe_hide_acf' )`
- *  Modify list by using `add_filter( 'air_helper_dont_hide_acf_from_domain', 'myprefix_air_helper_dont_hide_acf_from_domain' )`
  *
  *  @since  1.12.0
  */
