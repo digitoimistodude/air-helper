@@ -12,10 +12,10 @@
 /**
  * Get localized string by key.
  *
- * @since 1.4.0
- * @param string $key unique identifier of string.
- * @param string $lang 2 character language code (defaults to current language).
- * @return string translated value or key if not registered string.
+ * @since  1.4.0
+ * @param  string $key  Unique identifier of string.
+ * @param  string $lang 2 character language code (defaults to current language).
+ * @return string       Translated value or key if not registered string.
  */
 function ask__( $key, $lang = null ) {
   $strings = apply_filters( 'air_helper_pll_register_strings', array() );
@@ -46,7 +46,7 @@ function ask__( $key, $lang = null ) {
     $error_msg = $e->getMessage() . $trace_line;
 
     // trigger errors.
-    trigger_error( $error_msg, E_USER_WARNING );
+    trigger_error( esc_html( $error_msg ), E_USER_WARNING );
     error_log( $error_msg );
   }
 
@@ -56,20 +56,20 @@ function ask__( $key, $lang = null ) {
  * Echo localized string by key.
  *
  * @since 1.4.0
- * @param string $key unique identifier of string.
- * @param string $lang 2 character language code (defaults to current language).
+ * @param string $key   Unique identifier of string.
+ * @param string $lang  2 character language code (defaults to current language).
  */
 function ask_e( $key, $lang = null ) {
-  echo ask__( $key, $lang );
+  echo ask__( $key, $lang ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
  * Get localized string by value.
  *
  * @since 1.4.0
- * @param string $value string.
- * @param string $lang 2 character language code (defaults to current language).
- * @return string translated value or key if not registered string.
+ * @param string $value   String.
+ * @param string $lang    2 character language code (defaults to current language).
+ * @return string         Translated value or key if not registered string.
  */
 function asv__( $value, $lang = null ) {
   // debug missing strings.
@@ -93,7 +93,7 @@ function asv__( $value, $lang = null ) {
       $error_msg = $e->getMessage() . $trace_line;
 
       // trigger errors.
-      trigger_error( $error_msg, E_USER_WARNING );
+      trigger_error( esc_html( $error_msg ), E_USER_WARNING );
       error_log( $error_msg );
     }
   }
@@ -109,11 +109,11 @@ function asv__( $value, $lang = null ) {
  * Echo localized string by value.
  *
  * @since 1.4.0
- * @param string $value string.
- * @param string $lang 2 character language code (defaults to current language).
+ * @param string $value   String.
+ * @param string $lang    2 character language code (defaults to current language).
  */
 function asv_e( $value, $lang = null ) {
-  echo asv__( $value, $lang );
+  echo asv__( $value, $lang ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -121,13 +121,13 @@ function asv_e( $value, $lang = null ) {
  *
  *  @since 1.4.0
  */
-if ( ! function_exists( 'pll__' ) ) :
+if ( ! function_exists( 'pll__' ) ) {
   function pll__( $string ) {
     return $string;
   }
 
   function pll_e( $string ) {
-    echo $string;
+    echo $string; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
 
   function pll_current_language() {
@@ -157,4 +157,4 @@ if ( ! function_exists( 'pll__' ) ) :
   function pll_home_url( $slug = '' ) {
     return get_home_url();
   }
-endif;
+} // end if
