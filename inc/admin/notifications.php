@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:34:42
+ * @Last Modified time: 2020-02-11 12:46:22
  *
  * @package air-helper
  */
@@ -41,5 +41,8 @@ function air_helper_clean_admin_notices() {
   if ( ! get_option( 'exactmetrics_tracking_notice' ) ) {
     update_option( 'exactmetrics_tracking_notice', true );
   }
+
+  // Hide always all redis object cache notifications
+  define( 'WP_REDIS_DISABLE_BANNERS', true );
 } // end air_helper_clean_admin_notices
 
