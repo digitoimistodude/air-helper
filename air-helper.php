@@ -85,18 +85,18 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
-
-  // Only for users who have logged in
-  if ( is_user_logged_in() ) {
-    require_once air_helper_base_path() . '/inc/adminbar.php';
-  }
 } // end air_helper_fly
 
 /**
  * Require files needed on admin side of the site.
  */
-add_action( 'admin_init', 'air_helper_admin_fly' );
+add_action( 'init', 'air_helper_admin_fly' );
 function air_helper_admin_fly() {
+  if ( ! is_user_logged_in() ) {
+    return false;
+  }
+
+  require_once air_helper_base_path() . '/inc/adminbar.php';
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
   require_once air_helper_base_path() . '/inc/admin/access.php';
   require_once air_helper_base_path() . '/inc/admin/acf.php';
