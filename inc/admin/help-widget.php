@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:16:02
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 15:34:09
+ * @Last Modified time: 2020-02-12 15:36:07
  *
  * @package air-helper
  */
@@ -34,7 +34,7 @@ function air_helper_admin_dashboard_widgets_setup() {
   // Add the dashboard widget
   wp_add_dashboard_widget(
     'air-helper-help', // id
-    __( 'Updates from Dude & send support requests', 'air-helper' ), // name
+    __( 'Updates from Dude', 'air-helper' ), // name
     'air_helper_admin_dashboard_widget_callback' // callbac
   );
 
@@ -54,9 +54,6 @@ add_action( 'admin_enqueue_scripts', 'air_helper_dashboard_widget_styles' );
 function air_helper_dashboard_widget_styles() {
   wp_register_style( 'air-helper-dashboard-widget', air_helper_base_url() . '/assets/css/dashboard-widget.css', false, air_helper_version() );
   wp_enqueue_style( 'air-helper-dashboard-widget' );
-
-  wp_register_script( 'air-helper-dashboard-widget', air_helper_base_url() . '/assets/js/dashboard-widget.js', false, air_helper_version() );
-  wp_enqueue_script( 'air-helper-dashboard-widget' );
 } // end air_helper_dashboard_widget_styles
 
 /**
@@ -148,29 +145,6 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
       endif; // ! empty( $data->news ) ?>
     </div>
 
-    <div class="support-wrapper">
-      <div class="support-form">
-        <h2><?php _e( 'Send support ticket', 'air-helper' ) ?></h2>
-
-        <p><?php _e( 'You can send a new message to Dudes support with this form, which serves on weekdays 9-17. We will respond to you on next working day at latest.', 'air-helper' ) ?></p>
-
-        <form>
-          <label><?php _e( 'Subject', 'air-helper' ) ?></label>
-          <input type="text" name="subject" autocomplete="off">
-
-          <label><?php _e( 'Message', 'air-helper' ) ?></label>
-          <textarea rows="8" name="content"></textarea>
-          <button class="button"><?php _e( 'Send support request', 'air-helper' ) ?></button>
-
-          <input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'air_helper_dashboard_widget_ticket_nonce' ) ?>">
-        </form>
-
-        <p class="message message-field-error"><?php _e( 'Fill all fields.', 'air-helper' ) ?></p>
-        <p class="message message-error"><?php sprintf( __( 'There was an error while sending the form, please contact support by email %s', 'air-helper' ), apply_filters( 'air_helper_dashboard_widget_support_email', 'apuva@dude.fi' ) ) ?></p>
-        <p class="message message-success"><?php _e( 'Support request received!', 'air-helper' ) ?></p>
-      </div>
-    </div>
-
   </div>
 <?php } // end function air_helper_admin_dashboard_widget_help_callback
 
@@ -244,47 +218,6 @@ function _air_helper_admin_dashboard_widget_get_time_str( $start = null, $end = 
   // return str
   return $day_str;
 } // end function _air_helper_admin_dashboard_widget_get_time_str
-
-/**
- *  Handle new ticket creation ajax call from dashboard widget.
- *
- *  @since  1.7.0
- */
-add_action( 'wp_ajax_air_helper_send_ticket', '_air_helper_admin_dashboard_widget_send_ticket' );
-function _air_helper_admin_dashboard_widget_send_ticket() {
-  // check nonce
-  check_ajax_referer( 'air_helper_dashboard_widget_ticket_nonce', 'ticket_nonce' );
-
-  // get content
-  $subject = sanitize_text_field( $_POST['subject'] );
-  $content = sanitize_text_field( $_POST['content'] );
-
-  // make post call
-  $api_base = _air_helper_admin_dashboard_widget_get_api_url();
-  $response = wp_remote_post( "{$api_base}/v1/tickets/new", array(
-    'method'  => 'POST',
-    'body'    => array(
-      'access_token'  => _air_helper_admin_dashboard_widget_get_api_key(),
-      'site'          => get_bloginfo( 'name' ) . ' / ' . get_site_url(),
-      'user'          => wp_get_current_user()->user_email,
-      'subject'       => $subject,
-      'content'       => $content,
-    ),
-  ) );
-
-  // send error if post call failed
-  if ( is_wp_error( $response ) ) {
-    wp_send_json_error();
-  }
-
-  // if api didn't return OK message, send error
-  if ( 200 !== (int) $response['response']['code'] ) {
-    wp_send_json_error();
-  }
-
-  // send success message
-  wp_send_json_success( array( $response ) );
-} // end _air_helper_admin_dashboard_widget_send_ticket
 
 /**
  *  Get API base url for dashboard widget API calls.

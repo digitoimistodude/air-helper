@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Air helper\n"
-"POT-Creation-Date: 2019-01-16 16:38+0200\n"
-"PO-Revision-Date: 2018-12-05 17:40+0200\n"
-"Last-Translator: Timi Wahalahti <timi@dude.fi>\n"
-"Language-Team: Timi Wahalahti <timi@dude.fi>\n"
+"POT-Creation-Date: 2020-02-12 15:41+0200\n"
+"PO-Revision-Date: 2020-02-12 15:40+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: air-helper.php\n"
@@ -19,98 +19,159 @@ msgstr ""
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: air-helper.php:85
-msgid ""
-"Active theme seems not to be Air based. Some functionality of Air helper "
-"plugin may not work, since it's intended to use with Air based themes."
-msgstr ""
-
-#: inc/carbonfields.php:138
-msgid "Two preview times might be needed to see all content correctly."
-msgstr ""
-
-#: inc/dashboard.php:120
-msgid "Updates from Dude & send support requests"
-msgstr ""
-
-#: inc/dashboard.php:160
-msgid "Error while fetching data."
-msgstr ""
-
-#: inc/dashboard.php:191
-msgid "Server status on real time"
-msgstr ""
-
-#: inc/dashboard.php:238
-msgid "Send support ticket"
-msgstr ""
-
-#: inc/dashboard.php:240
-msgid ""
-"You can send a new message to Dudes support with this form, which serves on "
-"weekdays 9-17. We will respond to you on next working day at latest."
-msgstr ""
-
-#: inc/dashboard.php:243
-msgid "Subject"
-msgstr ""
-
-#: inc/dashboard.php:246
-msgid "Message"
-msgstr ""
-
-#: inc/dashboard.php:248
-msgid "Send support request"
-msgstr ""
-
-#: inc/dashboard.php:253
-msgid "Fill all fields."
-msgstr ""
-
-#: inc/dashboard.php:254
-#, php-format
-msgid ""
-"There was an error while sending the form, please contact support by email %s"
-msgstr ""
-
-#: inc/dashboard.php:255
-msgid "Support request received!"
-msgstr ""
-
-#: inc/hooks.php:346
+#: inc/admin/adminbar.php:53
 msgid "production"
 msgstr ""
 
-#: inc/hooks.php:350
+#: inc/admin/adminbar.php:57
 msgid "staging"
 msgstr ""
 
-#: inc/hooks.php:353
+#: inc/admin/adminbar.php:60
 msgid "development"
 msgstr ""
 
-#: inc/hooks.php:359
+#: inc/admin/adminbar.php:67
 #, php-format
 msgid "Environment: %s"
 msgstr ""
 
-#: inc/hooks.php:371
-#, php-format
-msgid "Updated: %s"
+#: inc/admin/help-scout.php:29
+msgid "Help request"
 msgstr ""
 
-#: inc/hooks.php:624
+#: inc/admin/help-scout.php:30
+msgid "Do you need help?"
+msgstr ""
+
+#: inc/admin/help-scout.php:31 inc/admin/help-scout.php:45
+msgid "Dude user support"
+msgstr ""
+
+#: inc/admin/help-scout.php:32 inc/admin/help-scout.php:40
+msgid "How can we help?"
+msgstr ""
+
+#: inc/admin/help-scout.php:33 inc/admin/help-scout.php:47
+msgid "Our support team will respond to you on next working day at latest"
+msgstr ""
+
+#: inc/admin/help-scout.php:34
+msgid "Continue writing…"
+msgstr ""
+
+#: inc/admin/help-scout.php:35
+msgid "Last updated"
+msgstr ""
+
+#: inc/admin/help-scout.php:36
+msgid "You"
+msgstr ""
+
+#: inc/admin/help-scout.php:37
+msgid "Name"
+msgstr ""
+
+#: inc/admin/help-scout.php:38
+msgid "Subject"
+msgstr ""
+
+#: inc/admin/help-scout.php:39
+msgid "Email address"
+msgstr ""
+
+#: inc/admin/help-scout.php:41
+msgid "Send support request"
+msgstr ""
+
+#: inc/admin/help-scout.php:42
+msgid "Next"
+msgstr ""
+
+#: inc/admin/help-scout.php:43
+msgid "We’re on it!"
+msgstr ""
+
+#: inc/admin/help-scout.php:44
+msgid "You’ll receive an reply shortly."
+msgstr ""
+
+#: inc/admin/help-scout.php:46
+msgid "You can view and update your message in"
+msgstr ""
+
+#: inc/admin/help-scout.php:48
+msgid "Previous Conversations"
+msgstr ""
+
+#: inc/admin/help-scout.php:49
+msgid "Email"
+msgstr ""
+
+#: inc/admin/help-scout.php:50
+msgid "Send message to our support team"
+msgstr ""
+
+#: inc/admin/help-scout.php:51
+msgid "Add a reply"
+msgstr ""
+
+#: inc/admin/help-scout.php:52
+msgid "Add your message here..."
+msgstr ""
+
+#: inc/admin/help-scout.php:53
+msgid "Send message"
+msgstr ""
+
+#: inc/admin/help-scout.php:54
+msgid "Received"
+msgstr ""
+
+#: inc/admin/help-scout.php:55
+msgid "Waiting for an answer"
+msgstr ""
+
+#: inc/admin/help-scout.php:56
+msgid ""
+"There was a problem retrieving this message. Please double-check your "
+"Internet connection and try again."
+msgstr ""
+
+#: inc/admin/help-scout.php:57
+msgid "Just Now"
+msgstr ""
+
+#: inc/admin/help-widget.php:37
+msgid "Updates from Dude"
+msgstr ""
+
+#: inc/admin/help-widget.php:72
+msgid "Error while fetching data."
+msgstr ""
+
+#: inc/admin/help-widget.php:103
+msgid "Server status on real time"
+msgstr ""
+
+#: inc/priority/security.php:147
 msgid ""
 "<b>Login failed.</b> Please contact your site admin or agency if you "
 "continue having problems."
 msgstr ""
 
-#: inc/misc.php:46
+#: inc/priority/sendgrid.php:48
 msgid ""
 "SendGrid email delivery plugin is not active or configured. Please contact "
 "your agency to fix this issue."
+msgstr ""
+
+#: plugin-helpers.php:95
+msgid ""
+"Active theme seems not to be Air based. Some functionality of Air helper "
+"plugin may not work, since it's intended to use with Air based themes."
 msgstr ""
 
 #: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:358
