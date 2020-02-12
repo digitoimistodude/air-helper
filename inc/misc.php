@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:59:34
+ * @Last Modified time: 2020-02-12 11:48:05
  *
  * @package air-helper
  */
@@ -117,3 +117,17 @@ function air_helper_orderby_fix() {
     return $orderby;
   }, 10, 3);
 } // end air_helper_orderby_fix
+
+/**
+ * Add instant.page just-in-time preloading script to footer.
+ *
+ * Disble using `remove_action( 'wp_footer', 'air_helper_enqueue_instantpage_script', 50 )`
+ *
+ * @since 5.0.0
+ * phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript
+ */
+add_action( 'wp_footer', 'air_helper_enqueue_instantpage_script', 50 );
+function air_helper_enqueue_instantpage_script() { ?>
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+<?php } // end air_helper_enqueue_instantpage_script
+// phpcs:enable
