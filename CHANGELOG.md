@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.12.2]
+### Added
+- Hide ExactMetrics version 6.0.0 onboarding
+
 ## [1.12.1]
 ### Fixed
 - Registration of our lazyload preload image size

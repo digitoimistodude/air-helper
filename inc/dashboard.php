@@ -3,7 +3,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2018-12-11 12:31:14
+ * @Last Modified time: 2020-02-13 10:56:56
  *
  * @package development
  */
@@ -14,6 +14,9 @@
  * @since  1.7.0
  */
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
+
+// GADWP version 6.0.0 update notices
+add_action( 'exactmetrics_enable_onboarding_wizard', '__return_false' );
 
 /**
  *  Remove some boxes from dashboard.
@@ -90,6 +93,15 @@ function air_helper_clean_admin_notices() {
   // GADWP notice is better to remove by updating a option
   if ( ! get_option( 'exactmetrics_tracking_notice' ) ) {
     update_option( 'exactmetrics_tracking_notice', true );
+  }
+
+  // GADWP version 6.0.0 update notices
+  if ( ! get_option( 'exactmetrics_frontend_tracking_notice_viewed' ) ) {
+    update_option( 'exactmetrics_frontend_tracking_notice_viewed', true );
+  }
+
+  if ( ! get_option( 'exactmetrics_notices' ) ) {
+    update_option( 'exactmetrics_notices', [ 'exactmetrics_auth_not_manual' => true ] );
   }
 }
 add_action( 'admin_init', 'air_helper_clean_admin_notices', 999 );
