@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:58:11
+ * @Last Modified time: 2020-02-13 15:26:03
  *
  * @package air-helper
  */
@@ -41,7 +41,7 @@ function air_helper_helper_force_mail_to( $args ) {
   $to = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
 
   if ( getenv( 'WP_ENV' ) === 'staging' ) {
-    $allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', array( 'administrator', 'editor', 'author' ) );
+    $allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', [ 'administrator', 'editor', 'author' ] );
     $user = get_user_by( 'email', $args['to'] );
 
     if ( is_a( $user, 'WP_User' ) ) {
@@ -78,5 +78,5 @@ function air_helper_dont_force_created_user_mail( $user_id, $notify ) {
  *  @return string  Email address
  */
 function air_helper_staging_wp_mail_from() {
-  return 'wordpress@' . str_replace( array( 'http://', 'https://', '/wp' ), '', get_site_url() );
+  return 'wordpress@' . str_replace( [ 'http://', 'https://', '/wp' ], '', get_site_url() );
 } // end air_helper_staging_wp_mail_from

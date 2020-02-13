@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:53:45
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 11:41:49
+ * @Last Modified time: 2020-02-13 15:22:50
  *
  * @package air-helper
  */
@@ -18,7 +18,7 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
    *  @return array  Array of icons available.
    */
   function get_icons_for_user() {
-    $icons = array();
+    $icons = [];
     $files = glob( get_template_directory() . '/svg/foruser/*.svg' );
 
     foreach ( $files as $file ) {

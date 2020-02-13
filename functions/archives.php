@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:49:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 11:33:49
+ * @Last Modified time: 2020-02-13 15:22:06
  *
  * @package air-helper
  */
@@ -19,7 +19,7 @@ if ( ! function_exists( 'get_posts_array' ) ) {
    *  @param  string $return_key Which field to use as a key in return.
    *  @return array              {$return_key}=>post_title array of posts.
    */
-  function get_posts_array( $args = array(), $return_key = 'ID' ) {
+  function get_posts_array( $args = [], $return_key = 'ID' ) {
     $cache_key_hash = sprintf( '%u', crc32( serialize( $args ) . $return_key ) );
     $cache_key = apply_filters( 'get_posts_array_cache_key', "get_posts_array_{$cache_key_hash}", $args, $return_key );
 

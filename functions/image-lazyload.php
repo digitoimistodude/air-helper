@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:20:31
+ * @Last Modified time: 2020-02-13 15:23:57
  *
  * @package air-helper
  */
@@ -18,7 +18,7 @@
  * @since  1.11.0
  */
 if ( ! function_exists( 'image_lazyload_div' ) ) {
-	function image_lazyload_div( $image_id = 0, $sizes = array() ) {
+	function image_lazyload_div( $image_id = 0, $sizes = [] ) {
 		echo get_image_lazyload_div( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	} // end image_lazyload_div
 } // end if
@@ -32,7 +32,7 @@ if ( ! function_exists( 'image_lazyload_div' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'get_image_lazyload_div' ) ) {
-	function get_image_lazyload_div( $image_id = 0, $sizes = array() ) {
+	function get_image_lazyload_div( $image_id = 0, $sizes = [] ) {
 		// Get image
 		$image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
 
@@ -80,7 +80,7 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'image_lazyload_tag' ) ) {
-	function image_lazyload_tag( $image_id = 0, $sizes = array() ) {
+	function image_lazyload_tag( $image_id = 0, $sizes = [] ) {
 		echo get_image_lazyload_tag( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	} // end image_lazyload_tag
 } // end if
@@ -94,7 +94,7 @@ if ( ! function_exists( 'image_lazyload_tag' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
-	function get_image_lazyload_tag( $image_id = 0, $sizes = array() ) {
+	function get_image_lazyload_tag( $image_id = 0, $sizes = [] ) {
 		// Get image
 		$image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
 
@@ -131,7 +131,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
  * @return mixed             Boolean false if image or sizes do not exist, otherwise array size=>image url
  * @since  1.11.0
  */
-function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) {
+function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
 	$image_id = intval( $image_id );
 
   if ( ! $image_id ) {
@@ -210,7 +210,7 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
  * @return mixed             Boolean false if image do not exist, otherwise array with width and height.
  * @since  1.11.0
  */
-function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array() ) {
+function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = [] ) {
 	$image_id = intval( $image_id );
 
 	if ( ! $image_id ) {
@@ -238,8 +238,8 @@ function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array
 		return false;
 	}
 
-	return array(
+	return [
 		'width'		=> $dimensions[1],
 		'height'	=> $dimensions[2],
-	);
+	];
 } // end air_helper_get_image_lazyload_dimensions

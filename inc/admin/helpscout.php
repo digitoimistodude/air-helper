@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-02-12 14:29:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-12 15:55:59
+ * @Last Modified time: 2020-02-13 15:25:08
  *
  * @package air-helper
  */
@@ -11,10 +11,10 @@
 add_action( 'admin_enqueue_scripts', 'air_helper_enqueue_helpscout_beacon' );
 function air_helper_enqueue_helpscout_beacon() {
   // In which servers widget should be visible
-  $hostnames_where_visible = apply_filters( 'air_helper_dashboard_widget_show_hostnames', array(
+  $hostnames_where_visible = apply_filters( 'air_helper_dashboard_widget_show_hostnames', [
     'craft' => true,
     'ghost' => true,
-  ) );
+  ] );
 
   // Check that widget is allowed to be visible on this site, bail if not
   if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames_where_visible ) ) {

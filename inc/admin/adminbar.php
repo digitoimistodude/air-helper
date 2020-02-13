@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:14:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 12:39:03
+ * @Last Modified time: 2020-02-13 15:24:24
  *
  * @package air-helper
  */
@@ -62,14 +62,14 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
     $class = 'air-helper-env-dev';
   }
 
-  $wp_admin_bar->add_node( array(
+  $wp_admin_bar->add_node( [
     'id'    => 'airhelperenv',
     'title' => wp_sprintf( __( 'Environment: %s', 'air-helper' ), $env ),
     'href'  => '#',
-    'meta'  => array(
+    'meta'  => [
       'class' => $class,
-    ),
-  ) );
+    ],
+  ] );
 } // end air_helper_adminbar_show_env
 
 /**

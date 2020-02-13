@@ -18,7 +18,7 @@
  * @return string       Translated value or key if not registered string.
  */
 function ask__( $key, $lang = null ) {
-  $strings = apply_filters( 'air_helper_pll_register_strings', array() );
+  $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
   if ( isset( $strings[ $key ] ) ) {
     if ( null === $lang ) {
@@ -37,7 +37,7 @@ function ask__( $key, $lang = null ) {
     $trace_line = '';
 
     foreach ( $e->getTrace() as $trace ) {
-      if ( in_array( $trace['function'], array( 'ask__', 'ask_e' ), true ) ) {
+      if ( in_array( $trace['function'], [ 'ask__', 'ask_e' ], true ) ) {
         $trace_line = ' in ' . $trace['file'] . ':' . $trace['line'];
       }
     }
@@ -74,7 +74,7 @@ function ask_e( $key, $lang = null ) {
 function asv__( $value, $lang = null ) {
   // debug missing strings.
   if ( WP_DEBUG === true ) {
-    $strings = apply_filters( 'air_helper_pll_register_strings', array() );
+    $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
     if ( array_search( $value, $strings ) === false ) {
       // init warning to get source.
@@ -84,7 +84,7 @@ function asv__( $value, $lang = null ) {
       $trace_line = '';
 
       foreach ( $e->getTrace() as $trace ) {
-        if ( in_array( $trace['function'], array( 'asv__', 'asv_e' ), true ) ) {
+        if ( in_array( $trace['function'], [ 'asv__', 'asv_e' ], true ) ) {
           $trace_line = ' in ' . $trace['file'] . ':' . $trace['line'];
         }
       }

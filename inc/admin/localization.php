@@ -15,7 +15,7 @@
  *  @since 1.4.0
  */
 if ( function_exists( 'pll_register_string' ) ) {
-	$strings = apply_filters( 'air_helper_pll_register_strings', array() );
+	$strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
 	if ( is_array( $strings ) ) {
 		foreach ( $strings as $key => $value ) {

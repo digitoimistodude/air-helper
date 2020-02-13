@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-12 14:28:57
+ * @Last Modified time: 2020-02-13 15:26:19
  *
  * @package air-helper
  */
@@ -41,7 +41,7 @@ function air_helper_helper_disable_wp_emojicons() {
  */
 function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
   if ( is_array( $plugins ) ) {
-    return array_diff( $plugins, array( 'wpemoji' ) );
+    return array_diff( $plugins, [ 'wpemoji' ] );
   } else {
     return [];
   }

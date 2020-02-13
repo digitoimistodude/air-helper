@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 14:28:25
+ * @Last Modified time: 2020-02-13 15:25:22
  *
  * @package air-helper
  */
@@ -22,10 +22,10 @@ remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
  */
 add_action( 'admin_init', 'air_helper_clean_admin_notices', 999 );
 function air_helper_clean_admin_notices() {
-  $remove_notices = array(
+  $remove_notices = [
     'sg_subscription_widget_admin_notice', // sendgrid
     'eae_page_scanner_notice', // email encoder
-  );
+  ];
 
   // Allow filtering which notices to remove
   $remove_notices = apply_filters( 'air_helper_clear_admin_notices', $remove_notices );
