@@ -5,19 +5,32 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2019-11-29 16:46:42
+ * @Last Modified time: 2020-02-13 15:20:31
  *
  * @package air-helper
  */
 
-// function to output lazyload divs
+/**
+ * Echo image in lazyloading divs.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @since  1.11.0
+ */
 if ( ! function_exists( 'image_lazyload_div' ) ) {
 	function image_lazyload_div( $image_id = 0, $sizes = array() ) {
-		echo get_image_lazyload_div( $image_id, $sizes );
-	}
+		echo get_image_lazyload_div( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	} // end image_lazyload_div
 } // end if
 
-// function to get lazyload divs
+/**
+ * Get image lazyloading divs.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return string            String containing lazyloading divs.
+ * @since  1.11.0
+ */
 if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 	function get_image_lazyload_div( $image_id = 0, $sizes = array() ) {
 		// Get image
@@ -28,48 +41,58 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 			return;
 		}
 
-		// do preg match for our browser hack
+		// Do preg match and check if we need to do browser hack
 		$browser_hack = false;
 		if ( ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
-			if ( preg_match( '/Windows Phone|Lumia|iPad|Safari/i', $_SERVER['HTTP_USER_AGENT'] ) ) {
+			if ( preg_match( '/Windows Phone|Lumia|iPad|Safari/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) ) {
 				$browser_hack = true;
 			}
 		}
 
 		ob_start();
 
-		// div for preview image and data for js to use
-		?>
-		<div
-			class="background-image preview lazyload"
-			style="background-image: url('<?php echo $image_urls['tiny']; ?>');"
-			data-src="<?php echo $image_urls['big']; ?>"
-			data-src-mobile="<?php echo $image_urls['mobile']; ?>"></div>
+		// Div for preview image and data for js to use ?>
+		<div class="background-image preview lazyload"
+			style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');"
+			data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+			data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
 
-		<?php // div for full image, hack for browsers that don't support our js well ?>
-		<div
-			class="background-image full-image"
+		<?php // Div for full image, hack for browsers that don't support our js well ?>
+		<div class="background-image full-image"
 			<?php if ( $browser_hack ) : ?>
-				style="background-image: url('<?php echo $image_urls['big']; ?>');"
+				style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"
 			<?php endif; ?>></div>
 
-		<?php // div with full image for browsers without js ?>
-		<noscript><div class="background-image full-image" style="background-image: url('<?php echo $image_urls['big']; ?>');"></div></noscript>
+		<?php // Div with full image for browsers without js ?>
+		<noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div></noscript>
 
 		<?php
 
 		return ob_get_clean();
-	}
+	} // end get_image_lazyload_div
 } // end if
 
-// function to output lazyload divs
+/**
+ * Echo image in lazyloading tag.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @since  1.11.0
+ */
 if ( ! function_exists( 'image_lazyload_tag' ) ) {
 	function image_lazyload_tag( $image_id = 0, $sizes = array() ) {
-		echo get_image_lazyload_tag( $image_id, $sizes );
-	}
+		echo get_image_lazyload_tag( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	} // end image_lazyload_tag
 } // end if
 
-// function to get lazyload img tag
+/**
+ * Get image lazyloading tag.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return string            String containing lazyloading divs.
+ * @since  1.11.0
+ */
 if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 	function get_image_lazyload_tag( $image_id = 0, $sizes = array() ) {
 		// Get image
@@ -87,21 +110,27 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 			return;
 		}
 
-		// get the img tag
+		// Get the img tag
 		ob_start(); ?>
 		<img class="lazyload"
-			src="<?php echo $image_urls['tiny']; ?>"
-			data-src="<?php echo $image_urls['big']; ?>"
-      data-src-mobile="<?php echo $image_urls['mobile']; ?>"
-			width="<?php echo $dimensions['width']; ?>" height="<?php echo $dimensions['height']; ?>" />
-
+			src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
+			data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+      data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"
+			width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" />
     <?php
 
     return ob_get_clean();
-	}
+	} // end get_image_lazyload_tag
 } // end if
 
-// function to get proper image sizes
+/**
+ * Get image urls for each size needed on lazyloading.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return mixed             Boolean false if image or sizes do not exist, otherwise array size=>image url
+ * @since  1.11.0
+ */
 function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) {
 	$image_id = intval( $image_id );
 
@@ -115,16 +144,16 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
   }
 
   // Default image sizes for use cases
-  $default_sizes = array(
+  $default_sizes = [
     'tiny'    => 'tiny-lazyload-thumbnail',
     'mobile'  => 'large',
     'big'     => 'full',
-  );
+  ];
 
   $sizes = wp_parse_args( $sizes, $default_sizes );
   $intermediate_sizes = get_intermediate_image_sizes();
 
-  // Loop use cases to get image url for it
+  // Loop sizes to get corresponding image url
   foreach ( $sizes as $size_for => $size ) {
     // Check that asked image size exists and fallback to full size
     if ( ! in_array( $size, $intermediate_sizes ) ) {
@@ -134,13 +163,10 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
     // Get image url
     $url = wp_get_attachment_image_url( $image_id, $size );
 
-    // Try to get thumbnail
+    // Thumbnail fallback
     if ( ! $url && 'tiny-lazyload-thumbnail' === $size ) {
       $url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
     }
-
-    // Get image url
-    $url = wp_get_attachment_image_url( $image_id, $size );
 
     // For some reason, we don't have image so unset the size
     if ( ! $url ) {
@@ -176,6 +202,14 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = array() ) 
   return $sizes;
 } // end function air_helper_get_image_lazyload_sizes
 
+/**
+ * Get dimensions of attachment image.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return mixed             Boolean false if image do not exist, otherwise array with width and height.
+ * @since  1.11.0
+ */
 function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array() ) {
 	$image_id = intval( $image_id );
 
@@ -189,14 +223,15 @@ function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array
 	}
 
 	// Default image sizes for use cases
-	$default_sizes = array(
+	$default_sizes = [
 		'tiny'		=> 'tiny-lazyload-thumbnail',
 		'mobile'	=> 'large',
 		'big'			=> 'full',
-	);
+	];
 
 	$sizes = wp_parse_args( $sizes, $default_sizes );
 
+  // Get image data
 	$dimensions = wp_get_attachment_image_src( $image_id, $sizes['big'] );
 
 	if ( ! $dimensions ) {
@@ -207,4 +242,4 @@ function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = array
 		'width'		=> $dimensions[1],
 		'height'	=> $dimensions[2],
 	);
-}
+} // end air_helper_get_image_lazyload_dimensions
