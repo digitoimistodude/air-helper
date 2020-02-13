@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 16:39:51
+ * @Last Modified time: 2020-02-13 14:28:25
  *
  * @package air-helper
  */
@@ -47,5 +47,18 @@ function air_helper_clean_admin_notices() {
 
   // Hide always all redis object cache notifications
   define( 'WP_REDIS_DISABLE_BANNERS', true );
+
+  // GADWP version 6.0.0 update onboarding
+  add_action( 'exactmetrics_enable_onboarding_wizard', '__return_false' );
+
+  // GADWP version 6.0.0 update notices
+  if ( ! get_option( 'exactmetrics_frontend_tracking_notice_viewed' ) ) {
+    update_option( 'exactmetrics_frontend_tracking_notice_viewed', true );
+  }
+
+  // GADWP version 6.0.0 new auth method notice
+  if ( ! get_option( 'exactmetrics_notices' ) ) {
+    update_option( 'exactmetrics_notices', [ 'exactmetrics_auth_not_manual' => true ] );
+  }
 } // end air_helper_clean_admin_notices
 
