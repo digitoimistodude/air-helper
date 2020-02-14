@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:16:02
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-14 10:52:57
+ * @Last Modified time: 2020-02-14 10:59:40
  *
  * @package air-helper
  */
@@ -54,8 +54,8 @@ function air_helper_dashboard_widget_styles() {
  *  Output dashboard widget content.
  *
  *  @since  1.7.0
- *  @param  mixed   $post          where widget is shown
- *  @param  array   $callback_args arguments passed into callback function
+ *  @param  mixed $post          Where widget is shown.
+ *  @param  array $callback_args Arguments passed into callback function.
  */
 function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
   // get data for widget
@@ -63,7 +63,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
 
   // if no data, show error message and bail
   if ( empty( $data ) ) {
-    echo wpautop( __( 'Error while fetching data.', 'air-helper' ) );
+    echo wp_kses_post( wpautop( __( 'Error while fetching data.', 'air-helper' ) ) );
     return;
   } ?>
 
@@ -85,16 +85,16 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
           // make maintenance start and end times to human readbale string
           $day_str = _air_helper_admin_dashboard_widget_get_time_str( $maintenance->start, $maintenance->end ); ?>
           <div class="maintenance">
-            <h3><?php echo sanitize_text_field( $maintenance->title ) ?></h3>
+            <h3><?php echo esc_html( $maintenance->title ) ?></h3>
 
             <p class="time">
-              <?php echo $day_str ?>
+              <?php echo esc_html( $day_str ) ?>
             </p>
 
-            <?php echo wpautop( wp_kses_post( $maintenance->desc ) ) ?>
+            <?php echo wp_kses_post( wpautop( $maintenance->desc ) ) ?>
 
             <p class="read-more">
-              <a href="<?php echo $statuspage_url ?>" target="_blank"><?php _e( 'Server status on real time', 'air-helper' ) ?> &rarr;</a>
+              <a href="<?php echo esc_url( $statuspage_url ) ?>" target="_blank"><?php echo esc_html( 'Server status on real time', 'air-helper' ) ?> &rarr;</a>
             </p>
           </div>
         <?php endif; // maintennace content isset
@@ -104,7 +104,7 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
       if ( ! empty( $data->news ) ) :
 
         // loop news
-        foreach( $data->news as $news ) :
+        foreach ( $data->news as $news ) :
 
           // if no essential content, skip this and continue to next
           if ( ! isset( $news->content ) ||
@@ -119,17 +119,17 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
           $content = strip_tags( $news->content, '<a><i><b><br><strong><italic>' ); ?>
           <div class="news">
             <p class="time">
-              <?php echo date_i18n( 'j.n.Y H:i', strtotime( $news->time ) ) ?>
+              <?php echo esc_html( date_i18n( 'j.n.Y H:i', strtotime( $news->time ) ) ) ?>
             </p>
 
-            <h3><?php echo sanitize_text_field( $news->title ) ?></h3>
+            <h3><?php echo esc_html( $news->title ) ?></h3>
 
-            <?php echo wpautop( wp_kses_post( $content ) );
+            <?php echo wp_kses_post( wpautop( $content ) );
 
             if ( isset( $news->link ) ) :
               if ( ! empty( $news->link->href ) && ! empty( $news->link->title ) ) : ?>
                 <p class="read-more">
-                  <a href="<?php echo esc_url( $news->link->href ) ?>" target="_blank"><?php echo sanitize_text_field( $news->link->title ) ?> &rarr;</a>
+                  <a href="<?php echo esc_url( $news->link->href ) ?>" target="_blank"><?php echo esc_html( $news->link->title ) ?> &rarr;</a>
                 </p>
               <?php endif;
             endif; ?>
@@ -150,7 +150,8 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
  */
 function _air_helper_admin_dashboard_widget_get_data() {
   // Get data from transient
-  if ( $data = get_site_transient( 'air_helpwidget_data' ) ) {
+  $data = get_site_transient( 'air_helpwidget_data' );
+  if ( $data ) {
     return $data;
   }
 
