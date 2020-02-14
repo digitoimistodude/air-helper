@@ -6,8 +6,6 @@ Air helper provides helpful functions and modifications for WordPress projects. 
 
 ## Table of contents
 
-+ [Table of contents](#table-of-contents)
-+ [Please note before using](#please-note-before-using)
 + [Features](#features)
   - [Localization and Polylang support](#localization-and-polylang-support)
     * [Registering your strings](#registering-your-strings)
@@ -187,7 +185,7 @@ To find out how the modification exactly works and how to disable it, search for
 
 #### Misc
 * Disable emojicons.
-* Strip unwanted html tags from titles
+* Strip unwanted html tags from titles.
 * Add support for correct UTF8 orderby for post_title and term name (äöå).
 * Add instant.page just-in-time preloading script to footer.
 
