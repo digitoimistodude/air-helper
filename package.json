@@ -1,7 +1,7 @@
 {
   "name": "air-helper",
   "version": "1.12.1",
-  "description": "Air helper brings personal preferences to Air based themes and extends it with basic WooCommerce layout modifications.",
+  "description": "Plugin provides helpful functions and modifications for WordPress projects.",
   "main": "air-helper.php",
   "dependencies": {
   },

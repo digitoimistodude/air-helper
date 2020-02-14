@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-20 15:04:28
+ * @Last Modified time: 2020-02-14 10:54:38
  *
  * @package air-helper
  */
@@ -43,6 +43,34 @@ function air_helper_base_path() {
 function air_helper_base_url() {
   return untrailingslashit( plugin_dir_url( __FILE__ ) );
 } // end air_helper_base_url
+
+/**
+ * Get server hostnames that indicate that the site is in care plan.
+ *
+ * @since  5.0.0
+ */
+function air_helper_get_care_plan_hostnames() {
+  return apply_filters( 'air_helper_care_plan_hostnames', [
+    'craft' => true,
+    'ghost' => true,
+  ] );
+} // end air_helper_get_care_plan_hostnames
+
+/**
+ * Check if site belongs to care plan.
+ *
+ * @return boolean True if site has care plan, otherwise false.
+ * @since  5.0.0
+ */
+function air_helper_site_has_care_plan() {
+  $hostnames = air_helper_get_care_plan_hostnames();
+
+  if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames ) ) {
+    return false;
+  }
+
+  return true;
+} // end air_helper_site_has_care_plan
 
 /**
  *  Remove deactivate from air helper plugin actions.

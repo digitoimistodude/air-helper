@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:16:02
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:24:40
+ * @Last Modified time: 2020-02-14 10:52:57
  *
  * @package air-helper
  */
@@ -20,14 +20,8 @@
  */
 add_action( 'wp_dashboard_setup', 'air_helper_admin_dashboard_widgets_setup' );
 function air_helper_admin_dashboard_widgets_setup() {
-  // In which servers widget should be visible
-  $hostnames_where_visible = apply_filters( 'air_helper_dashboard_widget_show_hostnames', [
-    'craft' => true,
-    'ghost' => true,
-  ] );
-
-  // Check that widget is allowed to be visible on this site, bail if not
-  if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames_where_visible ) ) {
+  // Show only if in care plan
+  if ( ! air_helper_site_has_care_plan() ) {
     return;
   }
 

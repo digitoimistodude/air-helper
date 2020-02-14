@@ -3,26 +3,29 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-02-12 14:29:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:25:08
+ * @Last Modified time: 2020-02-14 10:52:47
  *
  * @package air-helper
  */
 
+/**
+ * Enqueue Helpscout beacon in dashboard for providing user support
+ * for sites that are in our care plan.
+ *
+ * Disable using `remove_action( 'admin_enqueue_scripts', 'air_helper_enqueue_helpscout_beacon' )`
+ *
+ * @since  5.0.0
+ */
 add_action( 'admin_enqueue_scripts', 'air_helper_enqueue_helpscout_beacon' );
 function air_helper_enqueue_helpscout_beacon() {
-  // In which servers widget should be visible
-  $hostnames_where_visible = apply_filters( 'air_helper_dashboard_widget_show_hostnames', [
-    'craft' => true,
-    'ghost' => true,
-  ] );
-
-  // Check that widget is allowed to be visible on this site, bail if not
-  if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames_where_visible ) ) {
+  // Show only if in care plan
+  if ( ! air_helper_site_has_care_plan() ) {
     return;
   }
 
   wp_enqueue_script( 'helpscout-beacon', air_helper_base_url() . '/assets/js/helpscout-beacon.js', [], '2.0.0', true );
 
+  // Settings for beacon and string translations based on the language user has in dashboard rather than using the browser language
   $user_info = get_userdata( get_current_user_id() );
   wp_localize_script( 'helpscout-beacon', 'airhelperHelpscout', [
     'color'         => '#4d4aff',
