@@ -2,13 +2,43 @@
 
 [![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![Tested_up_to WordPress_5.3](https://img.shields.io/badge/Tested_up_to-WordPress_5.3-blue.svg?style=flat-square) ![Compatible_with PHP_7.2](https://img.shields.io/badge/Compatible_with-PHP_7.2-green.svg?style=flat-square) [![Build Status](https://img.shields.io/travis/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.org/digitoimistodude/air-helper)
 
-Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi).
-
-Plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
+Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi). Plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
 
 ## Table of contents
 
-1. [Please note before using](#please-note-before-using)
++ [Table of contents](#table-of-contents)
++ [Please note before using](#please-note-before-using)
++ [Features](#features)
+  - [Localization and Polylang support](#localization-and-polylang-support)
+    * [Registering your strings](#registering-your-strings)
+  - [Image lazyloading](#image-lazyloading)
+  - [Disabled views](#disabled-views)
+  - [Functions](#functions)
+    * [Archive related](#archive-related)
+    * [Checks](#checks)
+    * [Image lazyloading](#image-lazyloading-1)
+    * [Localization](#localization)
+    * [Pagination](#pagination)
+    * [Misc](#misc)
+  - [Modified WordPress functionality](#modified-wordpress-functionality)
+    * [Admin](#admin)
+    * [Security](#security)
+    * [Archives](#archives)
+    * [The SEO Framework](#the-seo-framework)
+  - [Yoast](#yoast)
+    * [Commenting](#commenting)
+    * [Customizer](#customizer)
+    * [Gravity Forms](#gravity-forms)
+    * [Imagify](#imagify)
+    * [Mail](#mail)
+    * [Media](#media)
+    * [Rest API](#rest-api)
+    * [TinyMCE](#tinymce)
+    * [Misc](#misc-1)
++ [Installing](#installing)
+  - [Updates](#updates)
++ [Changelog](#changelog)
++ [Contributing](#contributing)
 
 ## Please note before using
 
@@ -43,13 +73,13 @@ add_filter( 'air_helper_pll_register_strings', function() {
 
 Air helper adds few additional helpers to work with image lazyloading, but requires also support from the theme in use. In there, there needs to be [js](https://github.com/digitoimistodude/air-light/blob/master/js/src/lazyload.js) and [style](https://github.com/digitoimistodude/air-light/blob/master/sass/features/_lazyload.scss) files.
 
-If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI ep media regenerate or Regenerate Thumbnails plugin.
+If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
 
 Refer to [functions](#image-lazyloading) to find out how to use image lazyloading.
 
 ### Disabled views
 
-In most of the client projects there's no need for some views that WordPress created automatically. Insted of caring about those, show 404 page instead.
+In most of the client projects there's no need for some views that WordPress creates automatically. Insted of caring about those, show 404 page.
 
 Currently disabled views are:
 - archives: tag, category, date, author
