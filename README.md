@@ -25,7 +25,7 @@ Air helper provides helpful functions and modifications for WordPress projects. 
     * [Security](#security)
     * [Archives](#archives)
     * [The SEO Framework](#the-seo-framework)
-  - [Yoast](#yoast)
+    * [Yoast](#yoast)
     * [Commenting](#commenting)
     * [Customizer](#customizer)
     * [Gravity Forms](#gravity-forms)
@@ -151,7 +151,7 @@ To find out how the modification exactly works and how to disable it, search for
 #### The SEO Framework
 * Set default setting values.
 
-### Yoast
+#### Yoast
 * Set Yoast SEO plugin metabox priority to low.
 
 #### Commenting
