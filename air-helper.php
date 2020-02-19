@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  @return integer  current version of plugin
  */
 function air_helper_version() {
-	return 1121;
+	return 2000;
 }
 
 /**
