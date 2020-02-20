@@ -107,6 +107,7 @@ function air_helper_admin_fly() {
   require_once air_helper_base_path() . '/inc/admin/help-widget.php';
   require_once air_helper_base_path() . '/inc/admin/updates.php';
   require_once air_helper_base_path() . '/inc/admin/helpscout.php';
+  require_once air_helper_base_path() . '/inc/admin/polylang.php';
 } // end air_helper_admin_fly
 
 /**
