@@ -5,10 +5,13 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:14:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:24:24
+ * @Last Modified time: 2020-02-20 10:51:38
  *
  * @package air-helper
  */
+
+// Hide always all email address encoder notifications
+define( 'EAE_DISABLE_NOTICES', apply_filters( 'air_helper_remove_eae_admin_bar', true ) );
 
 /**
  * Clean up admin bar.

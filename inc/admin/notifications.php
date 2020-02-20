@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:25:22
+ * @Last Modified time: 2020-02-20 10:50:37
  *
  * @package air-helper
  */
@@ -47,6 +47,9 @@ function air_helper_clean_admin_notices() {
 
   // Hide always all redis object cache notifications
   define( 'WP_REDIS_DISABLE_BANNERS', true );
+
+  // Hide always all email address encoder notifications
+  define( 'EAE_DISABLE_NOTICES', true );
 
   // GADWP version 6.0.0 update onboarding
   add_action( 'exactmetrics_enable_onboarding_wizard', '__return_false' );
