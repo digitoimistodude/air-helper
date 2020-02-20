@@ -28,6 +28,7 @@ Air helper provides helpful functions and modifications for WordPress projects. 
     * [Customizer](#customizer)
     * [Gravity Forms](#gravity-forms)
     * [Imagify](#imagify)
+    * [Email Address Encoder](#email-address-encoder)
     * [Mail](#mail)
     * [Media](#media)
     * [Rest API](#rest-api)
@@ -167,6 +168,9 @@ To find out how the modification exactly works and how to disable it, search for
 * Get Imagify API key from .env
 * Resize large images and set maximum width.
 * Set optimization level to normal.
+
+#### Email Address Encoder
+* Hide always all email address encoder notifications.
 
 #### Mail
 * Force essential SendGrid settings.
