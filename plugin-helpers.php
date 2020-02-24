@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  @return integer  version where plugin was activated
  */
 function air_helper_activated_at_version() {
-  return absint( get_option( 'air_helper_activated_at_version' ) );
+  return absint( apply_filters( 'air_helper_activated_at_version', get_option( 'air_helper_activated_at_version' ) ) );
 } // end air_helper_activated_at_version
 
 /**
