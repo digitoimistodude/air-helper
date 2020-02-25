@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-14 10:54:38
+ * @Last Modified time: 2020-02-25 10:47:23
  *
  * @package air-helper
  */
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  @return integer  version where plugin was activated
  */
 function air_helper_activated_at_version() {
-  return absint( get_option( 'air_helper_activated_at_version' ) );
+  return absint( apply_filters( 'air_helper_activated_at_version', get_option( 'air_helper_activated_at_version' ) ) );
 } // end air_helper_activated_at_version
 
 /**
