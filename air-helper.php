@@ -2,13 +2,13 @@
 /**
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
- * Description: This plugin extends themes based on Air by adding useful hooks, functions and basic things for WooCommerce.
- * Version: 1.12.2
+ * Description: Plugin provides helpful functions and modifications for WordPress projects.
+ * Version: 2.0.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
- * Requires at least: 4.7
- * Tested up to: 5.2
- * License: GPLv3
+ * Requires at least: 5.0
+ * Tested up to: 5.3
+ * License: GPL-3.0+
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
  * Text Domain: air-helper
@@ -28,21 +28,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  @return integer  current version of plugin
  */
 function air_helper_version() {
-	return 1122;
+	return 2000;
 }
 
 /**
- *  Get the version at where plugin was activated.
+ * Require helpers for this plugin.
  *
- *  @since  1.6.0
- *  @return integer  version where plugin was activated
+ * @since  2.0.0
  */
-function air_helper_activated_at_version() {
-	return (int) get_option( 'air_helper_activated_at_version' );
-}
+require 'plugin-helpers.php';
 
 /**
- *  Custom GitHub updater for this plugin.
+ *  Github updater for this plugin.
  *
  *  @since  0.1.0
  */
@@ -50,133 +47,68 @@ require 'plugin-update-checker/plugin-update-checker.php';
 $update_checker = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/digitoimistodude/air-helper', __FILE__, 'air-helper' );
 
 /**
- *  Wrapper function to get real base path for this plugin.
- *
- *  @since  0.1.0
- *  @return string  Path to this plugin
- */
-function air_helper_base_path() {
-	return untrailingslashit( plugin_dir_path( __FILE__ ) );
-}
-
-function air_helper_base_url() {
-	return untrailingslashit( plugin_dir_url( __FILE__ ) );
-}
-
-/**
- *  Check if active theme is based on Air.
- *
- *  @since  0.1.0
- */
-function air_helper_are_we_airless() {
-	if ( ! defined( 'AIR_VERSION' ) && ! defined( 'AIR_LIGHT_VERSION' ) ) {
-		add_action( 'admin_notices', 'air_helper_we_are_airless' );
-	}
-}
-add_action( 'after_setup_theme', 'air_helper_are_we_airless' );
-
-/**
- *  Show warning notice when current theme is not based on Air.
- *
- *  @since  0.1.0
- */
-function air_helper_we_are_airless() {
-	$class = 'notice notice-warning is-dismissible';
-	$message = __( 'Active theme seems not to be Air based. Some functionality of Air helper plugin may not work, since it\'s intended to use with Air based themes.', 'air-helper' );
-
-	printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
-}
-
-/**
- *  Test if current theme support WooCommerce and require WC spesific
- *  things if so.
- *
- *  @since  0.1.0
- */
-function air_helper_maybe_woocommerce() {
-	if ( current_theme_supports( 'woocommerce' ) ) {
-		require_once air_helper_base_path() . '/inc/woocommerce.php';
-	}
-}
-add_action( 'init', 'air_helper_maybe_woocommerce' );
-
-/**
- *  Test if Carbon Fields is used and initialize our preview support
- *  if so.
- *
- *  @since  1.1.0
- */
-function air_helper_maybe_carbon_fields() {
-	if ( false !== has_action( 'after_setup_theme', 'carbon_fields_boot_plugin' ) ) {
-		require_once air_helper_base_path() . '/inc/carbonfields.php';
-	}
-}
-add_action( 'init', 'air_helper_maybe_carbon_fields', 999 );
-
-/**
- *  Load localization helpers and Polylang fallbacks.
- *  Turn off by using `remove_action( 'init', 'air_helper_localization_helpers' )`
- *
- *  @since  1.4.0
- */
-function air_helper_localization_helpers() {
-	require_once air_helper_base_path() . '/inc/localization.php';
-}
-add_action( 'init', 'air_helper_localization_helpers' );
-
-// @codingStandardsIgnoreStart
-/**
- *  Remove deactivate from air helper plugin actions.
- *  Modify actions with `air_helper_plugin_action_links` filter.
- *
- *  @since  1.5.0
- */
-function air_helper_remove_deactivation_link( $actions, $plugin_file, $plugin_data, $context ) {
-	if ( plugin_basename( __FILE__ ) === $plugin_file && array_key_exists( 'deactivate', $actions ) ) {
-		unset( $actions['deactivate'] );
-	}
-
-	return apply_filters( 'air_helper_plugin_action_links', $actions, $plugin_file );
-}
-add_filter( 'plugin_action_links', 'air_helper_remove_deactivation_link', 10, 4 );
-
-/**
- *  Remove delete and deactivate from plugin bulk actions.
- *  Modify actions with `air_helper_plugins_bulk_actions` filter.
- *
- *  @since  1.5.0
- */
-function air_helper_modify_plugins_bulk_actions( $actions ) {
-	unset( $actions['delete-selected'] );
-	unset( $actions['deactivate-selected'] );
-
-	return apply_filters( 'air_helper_plugins_bulk_actions', $actions );
-}
-add_filter( 'bulk_actions-plugins','air_helper_modify_plugins_bulk_actions' );
-// @codingStandardsIgnoreEnd
-
-/**
  *  Require priority files.
  */
+add_action( 'init', 'air_helper_priority_fly', 5 );
 function air_helper_priority_fly() {
+  // Load textdomain for few translations in this plugin
 	load_plugin_textdomain( 'air-helper', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-	require_once air_helper_base_path() . '/inc/hooks-priority.php';
-}
-add_action( 'init', 'air_helper_priority_fly', 5 );
+  // Hook & filter files
+	require_once air_helper_base_path() . '/inc/priority/security.php';
+  require_once air_helper_base_path() . '/inc/priority/site-health-check.php';
+  require_once air_helper_base_path() . '/inc/priority/sendgrid.php';
+  require_once air_helper_base_path() . '/inc/priority/misc.php';
+} // end air_helper_priority_fly
 
 /**
  *  Require files containing our preferences.
  */
-function air_helper_fly() {
-	require_once air_helper_base_path() . '/inc/hooks.php';
-	require_once air_helper_base_path() . '/inc/functions.php';
-	require_once air_helper_base_path() . '/inc/misc.php';
-	require_once air_helper_base_path() . '/inc/post-meta-revisions.php';
-	require_once air_helper_base_path() . '/inc/image-lazyload.php';
-	require_once air_helper_base_path() . '/inc/dashboard.php';
-}
 add_action( 'init', 'air_helper_fly', 998 );
+function air_helper_fly() {
+  // Function files
+  require_once air_helper_base_path() . '/functions/archives.php';
+  require_once air_helper_base_path() . '/functions/checks.php';
+  require_once air_helper_base_path() . '/functions/pagination.php';
+  require_once air_helper_base_path() . '/functions/misc.php';
+  require_once air_helper_base_path() . '/functions/localization.php';
+  require_once air_helper_base_path() . '/functions/image-lazyload.php';
+
+  // Hook & filter files
+  require_once air_helper_base_path() . '/inc/mail.php';
+  require_once air_helper_base_path() . '/inc/archives.php';
+  require_once air_helper_base_path() . '/inc/comments.php';
+  require_once air_helper_base_path() . '/inc/rest-api.php';
+  require_once air_helper_base_path() . '/inc/customizer.php';
+  require_once air_helper_base_path() . '/inc/gravity-forms.php';
+  require_once air_helper_base_path() . '/inc/yoast-seo.php';
+  require_once air_helper_base_path() . '/inc/imagify.php';
+  require_once air_helper_base_path() . '/inc/autodescription.php';
+  require_once air_helper_base_path() . '/inc/tinymce.php';
+  require_once air_helper_base_path() . '/inc/media.php';
+  require_once air_helper_base_path() . '/inc/misc.php';
+} // end air_helper_fly
+
+/**
+ * Require files needed on admin side of the site.
+ */
+add_action( 'init', 'air_helper_admin_fly' );
+function air_helper_admin_fly() {
+  if ( ! is_user_logged_in() || wp_doing_ajax() ) {
+    return false;
+  }
+
+  require_once air_helper_base_path() . '/inc/admin/adminbar.php';
+  require_once air_helper_base_path() . '/inc/admin/notifications.php';
+  require_once air_helper_base_path() . '/inc/admin/access.php';
+  require_once air_helper_base_path() . '/inc/admin/acf.php';
+  require_once air_helper_base_path() . '/inc/admin/localization.php';
+  require_once air_helper_base_path() . '/inc/admin/dashboard.php';
+  require_once air_helper_base_path() . '/inc/admin/help-widget.php';
+  require_once air_helper_base_path() . '/inc/admin/updates.php';
+  require_once air_helper_base_path() . '/inc/admin/helpscout.php';
+  require_once air_helper_base_path() . '/inc/admin/polylang.php';
+} // end air_helper_admin_fly
 
 /**
  *  Plugin activation hook to save current version for reference in what version activation happened.
@@ -185,14 +117,14 @@ add_action( 'init', 'air_helper_fly', 998 );
  *
  *  @since  1.6.0
  */
-function air_helper_activate() {
-	$deactivated_without = get_option( 'air_helper_deactivated_without_version' );
-
-	if ( 'true' !== $deactivated_without ) {
-		update_option( 'air_helper_activated_at_version', air_helper_version() );
-	}
-}
 register_activation_hook( __FILE__, 'air_helper_activate' );
+function air_helper_activate() {
+  $deactivated_without = get_option( 'air_helper_deactivated_without_version' );
+
+  if ( 'true' !== $deactivated_without ) {
+    update_option( 'air_helper_activated_at_version', air_helper_version() );
+  }
+} // end air_helper_activate
 
 /**
  *  Maybe add option if activated version is not yet saved.
@@ -200,12 +132,12 @@ register_activation_hook( __FILE__, 'air_helper_activate' );
  *
  *  @since  1.6.0
  */
-function air_helper_deactivate() {
-	$activated_version = get_option( 'air_helper_activated_at_version' );
-
-	if ( ! $activated_version ) {
-		update_option( 'air_helper_deactivated_without_version', 'true', false );
-	}
-}
 register_deactivation_hook( __FILE__, 'air_helper_deactivate' );
 add_action( 'admin_init', 'air_helper_deactivate' );
+function air_helper_deactivate() {
+  $activated_version = get_option( 'air_helper_activated_at_version' );
+
+  if ( ! $activated_version ) {
+    update_option( 'air_helper_deactivated_without_version', 'true', false );
+  }
+} // end air_helper_deactivate

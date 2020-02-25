@@ -1,159 +1,212 @@
 # Air helper
 
-[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![Tested_up_to WordPress_5.2.0](https://img.shields.io/badge/Tested_up_to-WordPress_5.2.0-blue.svg?style=flat-square) ![Compatible_with PHP_7.2](https://img.shields.io/badge/Compatible_with-PHP_7.2-green.svg?style=flat-square) [![Build Status](https://img.shields.io/travis/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.org/digitoimistodude/air-helper)
+[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![Tested_up_to WordPress_5.3](https://img.shields.io/badge/Tested_up_to-WordPress_5.3-blue.svg?style=flat-square) ![Compatible_with PHP_7.2](https://img.shields.io/badge/Compatible_with-PHP_7.2-green.svg?style=flat-square) [![Build Status](https://img.shields.io/travis/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.org/digitoimistodude/air-helper)
 
-Air helper brings useful functions and modifications to WordPress projects, from where many of those are preferences of Digitoimisto Dude. Plugin is meant to be used with our [Air](https://github.com/digitoimistodude/air) theme.
-
-[Digitoimisto Dude Oy](https://www.dude.fi) is a Finnish boutique digital agency in the center of Jyväskylä.
+Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi). Plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
 
 ## Table of contents
 
-1. [Please note before using](#please-note-before-using)
-2. [License](#license)
-3. [Features](#features)
-    1. [Functions](#functions)
-    2. [Modified WordPress functionality](#modified-wordpress-functionality)
-    3. [Localization and Polylang support](#localization-and-polylang-support)
-    4. [Post meta revisions](#post-meta-revisions)
-    5. [WooCommerce support](#woocommerce-support)
-    6. [Image lazyloading](#image-lazyloading)
-4. [Installing](#installing)
-    1. [Updates](#updates)
-5. [Hooks](#hooks)
-    1. [Switch disabled views back on](#switch-disabled-views-back-on)
-6. [Changelog](#changelog)
-8. [Contributing](#contributing)
++ [Features](#features)
+  - [Localization and Polylang support](#localization-and-polylang-support)
+    * [Registering your strings](#registering-your-strings)
+  - [Image lazyloading](#image-lazyloading)
+  - [Disabled views](#disabled-views)
+  - [Functions](#functions)
+    * [Archive related](#archive-related)
+    * [Checks](#checks)
+    * [Image lazyloading](#image-lazyloading-1)
+    * [Localization](#localization)
+    * [Pagination](#pagination)
+    * [Misc](#misc)
+  - [Modified WordPress functionality](#modified-wordpress-functionality)
+    * [Admin](#admin)
+    * [Security](#security)
+    * [Archives](#archives)
+    * [The SEO Framework](#the-seo-framework)
+    * [Yoast](#yoast)
+    * [Commenting](#commenting)
+    * [Customizer](#customizer)
+    * [Gravity Forms](#gravity-forms)
+    * [Imagify](#imagify)
+    * [Email Address Encoder](#email-address-encoder)
+    * [Mail](#mail)
+    * [Media](#media)
+    * [Rest API](#rest-api)
+    * [TinyMCE](#tinymce)
+    * [Misc](#misc-1)
++ [Installing](#installing)
+  - [Updates](#updates)
++ [Changelog](#changelog)
++ [Contributing](#contributing)
 
-### Please note before using
+## Please note before using
 
-Air helper and Air is used for **development**, so those update very often. By using these code bases, you agree that the anything can change to a different direction without a warning.
+Air helper and Air light are used for **development**, so those update very often. By using these code bases, you agree that the anything can change to a different direction without a prior warning.
 
-### License
+## Features
 
-Air helper is licensed with [The MIT License (MIT)](http://choosealicense.com/licenses/mit/) which means you can freely use this plugin commercially or privately, modify it, or distribute it, but you are forbidden to hold Dude liable for anything, or claim that what you do with this is made by us.
-
-### Features
-
-#### Functions
-
-Air helper introduces few helper functions to make your life easier.
-
-* Check if post exists, `post_exists_id( $post_id )`
-* Check if post has content, `has_content( $post_id )`
-* Check if post has childs, `has_children( $post_id, $post_type )`
-* Get array of svg icons available for user in `svg/foruser` directory with `get_icons_for_user()`
-* Get key=>value list of pages, `get_posts_array( $args_for_get_posts, $field_to_use_as_key )`
-* Use [Carbon Fields](https://carbonfields.net) conditional check with [Polylang](https://polylang.pro/) with `dude_get_crb_pll_id( $condition_from_cfb, $post_id = 0, $condition_operator = '=' )`
-* Use post meta preview with [Carbon Fields](https://carbonfields.net) field types not saving to one row with `dude_get_post_meta( $post_id, $key, $single )` 
-* Get previous page ID `get_prev_page_id( $id = 0)`
-* Get next page ID `get_next_page_id( $id = 0)`
-* Get years where are posts `get_post_years( $post_type = 'post' )`
-* Get months by year where are posts `get_post_months_by_year( $year = date( 'Y' ), $post_type = 'post' )`
-* Get sentence excerpt `get_the_sentence_excerpt( $sentences = 2 )`
-
-#### Modified WordPress functionality
-
-Air helper also modifies default WordPress behavior to make it more suitable for customer projects, forcing our personal preferences and making sure that all the un-neccesary information is hidden or unreachable.
-
-All of these modifications can be altered and/or disabled with hooks. Please see [`inc/hooks.php`](https://github.com/digitoimistodude/air-helper/blob/master/inc/hooks.php) for references.
-
-* In development and staging envarioments allow outgoing emails only if there's administrator, editor or author with recipients address
-* Remove archive title prefix
-* Disable emojicons
-* Clean up admin bar and menu from unused and/or non client friendly things
-* Remove plugins page from admin menu, execpt for users with spesific domain or user meta row
-* Hide WordPress core, plugins and themes updates nag
-* Add a pingback url auto-discovery header for singularly identifiable articles
-* Disable REST API users endpoint
-* Remove admin bar in front-end when not on development envarioment
-* Add envarioment marker to admin bar
-* Remove the additional CSS section from customizer
-* Show TinyMCE second editor tools row by default
-* Strip unwanted html tags from titles and menu items
-* Allow Gravity Forms to hide labels to add placeholders
-* Set Yoast SEO plugin metabox priority to low
-* Remove update WordPress text from admin footer
-* Change default uploads folder to `media`
-* Force disablation of month- and year-based folders
-* Get SendGrid credentials from `.env`
-* Disable some views by default.
-    - archives: tag, category, date, author
-    - other: search
-* Disable user enumeration via done with user GET-parameter
-* Change login failed message
-* Add simple honeypot to login form _*NB!* This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
-* Remove hosting provider spesific information from Site Health check
-
-#### Localization and Polylang support
+### Localization and Polylang support
 
 Air helper adds fallbacks for widely used Polylang functions, so you can use those event if there's no Polylang or multilanguage support needed in project at the time. This saves heck lot of a time when client want's multilanguage support later on.
 
-These functionalities are quite direct copies from [Aucor starter](https://github.com/aucor/aucor-starter) because why invent the wheel again ;) Please see their [documentation](https://github.com/aucor/aucor-starter#71-localization-polylang) about localization helpers.
+Refer to section below and [functions](#localization) to find out how to use translated strings.
 
-#### Post meta revisions
+#### Registering your strings
 
-WordPress does not revision post meta by default and Air helper makes this possible if needed. It also adds possibility to preview meta changes before publishing or updating posts.
+All strings needs to be registered in one `localization.php` file and passed to `air_helper_pll_register_strings` an an array.
 
-At the moment post meta isn't revisioned automatically, you need to register your choice of meta fields for revisioning manually.
+Like this.
+```php
+add_filter( 'air_helper_pll_register_strings', function() {
+  return [
+    // General
+    'General: Read more' => 'Read more',
 
+    // Footer
+    'Footer: Back to top' => 'Back to top',
+  ]
+} );
 ```
-function air_helper_example_meta_revisions( $keys ) {
-    $keys['_subtitle'] = true; // key is the name of your meta field
-    $keys['_location'] = 'map'; // if you use CRB and field is map, tell it
-    $keys['_persons'] = 'complex'; // and same goes if fiels type is complex
-    return $keys;
-}
-add_filter( 'wp_post_revision_meta_keys', 'air_helper_example_meta_revisions' );
-```
 
-Meta revisions are served only when using `get_post_meta` for simple key=>value fields or `dude_get_post_meta` for Carbon Fields complexed fields.
+### Image lazyloading
 
-#### WooCommerce support
+Air helper adds few additional helpers to work with image lazyloading, but requires also support from the theme in use. In there, there needs to be [js](https://github.com/digitoimistodude/air-light/blob/master/js/src/lazyload.js) and [style](https://github.com/digitoimistodude/air-light/blob/master/sass/features/_lazyload.scss) files.
 
-Plugin will detect if current theme support WooCommerce and if so, loads the most basic overrides and makes Air based theme compatible with WooCommerce. This feature is built for starting point only.
+If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
+
+Refer to [functions](#image-lazyloading) to find out how to use image lazyloading.
+
+### Disabled views
+
+In most of the client projects there's no need for some views that WordPress creates automatically. Insted of caring about those, show 404 page.
+
+Currently disabled views are:
+- archives: tag, category, date, author
+- other: search
+
+Enable spesific view back with filter `add_filter( 'air_helper_disable_views_{VIEW}', '__return_false' );` or all views with `remove_action( 'template_redirect', 'air_helper_disable_views' )`.
+
+### Functions
+
+#### Archive related
+* `get_posts_array( $args, $return_key )` Get posts in key=>title array.
+* `get_post_years()` Get years where there are posts published.
+* `get_post_months_by_year( $year, $post_type )` Get months where there are posts in spesific year. Defaults to current year.
+
+#### Checks
+* `post_exists_id( $post_id )` Check if post exists by ID.
+* `has_content( $post_id )` Check if post has main content. Defaults to current post id.
+* `has_children( $post_id, $post_type )` Check if post has child pages. Defaults to current post id.
 
 #### Image lazyloading
+* `image_lazyload_div( $attachment_id )` Echo image in lazyloading divs.
+* `image_lazyload_tag( $attachment_id )` Echo image in lazyloading tag.
 
-Air helper adds few additional helpers to work with image lazyloading, but requires also support from the theme in use. In there, there needs to be [jaavascript](https://github.com/digitoimistodude/air-light/blob/master/js/src/lazyload.js) and [style](https://github.com/digitoimistodude/air-light/blob/master/sass/features/_lazyload.scss) files.
+#### Localization
+* `ask__( $key, $lang )` Return string by key. Defaults to current language.
+* `ask_e( $key, $lang )` Echo string by key. Defaults to current language.
+* `asv__( $key, $lang )` Return string by value. Defaults to current language.
+* `asv_e( $key, $lang )` Echo string by value. Defaults to current language.
 
-Plugin has two functions to use for getting lazyload images. Easier one is `image_lazyload_tag( $image_id )` which returns an simple `img` tag. Other function `image_lazyload_div( $image_id )` returns a div structure to use as a background image in sections.
+#### Pagination
+* `get_next_page_id( $post_id )` Get ID of next page. Defaults to current page.
+* `get_prev_page_id( $post_id )` Get ID of previous page. Defaults to current page.
 
-Both functions accept second argument, which should be array. With that array, developers can spesificy image sizes to use for different purposes. Array should contain image sizes for keys `tiny` (used as preview), `mobile` and `big`. If passed image sizes does not exist, there will be defaults used.
+#### Misc
+* `get_icons_for_user()` Get list of icons which are available for user. Returns array of icons inside theme's `svg/foruser` directory.
+* `wp_parse_args_dimensional( $a, $b )` Similar to wp_parse_args() just extended to work with multidimensional arrays.
+* `get_the_sentence_excerpt( $length, $excerpt )` Get excerpt with custom length of sentences. Defaults to three sentences and current post.
 
-If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI `ep media regenerate` or [Regenerate Thumbnails](https://wordpress.org/plugins/regenerate-thumbnails/) plugin.
+### Modified WordPress functionality
 
-### Installing
+Air helper modifies default behaviour of WordPress and various plugins to make it more suitable for customer projects, forcing our preferences and making sure that all the un-neccesary information is hidden or unreachable.
 
-Download [latest](https://github.com/digitoimistodude/air-helper/releases/latest) version as a zip package and unzip it to your plugins directiry. 
+All these modifications can be disabled or altered with hooks. All modifications live under `inc` directory.
+
+To find out how the modification exactly works and how to disable it, search for a comment section from files in `inc` directory with following list item.
+
+#### Admin
+* Clean up admin menu from stuff we usually don't need.
+* Remove plugins page from admin menu, execpt for users with spesific domain or override in user meta.
+* Hide ACF for all users, execpt for users with spesific domain or override in user meta.
+* Clean up admin bar.
+* Add envarioment marker to adminbar.
+* Remove welcome panel.
+* Remove some boxes from dashboard.
+* Add our news and support widget to dashboard. Also make sure that it is always first in order.
+* Remove some notices from dashboard.
+* Remove Update WP text from admin footer.
+* Hide all WP update nags.
+
+#### Security
+* Stop user enumeraton by ?author=(init) urls.
+* Add honeypot to the login form. _NB! This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
+* Change login failed message.
+* Remove hosting provider spesific information from Site Health check.
+
+#### Archives
+* Remove archive title prefix. Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
+
+#### The SEO Framework
+* Set default setting values.
+
+#### Yoast
+* Set Yoast SEO plugin metabox priority to low.
+
+#### Commenting
+* Add a pingback url auto-discovery header for singularly identifiable articles.
+
+#### Customizer
+* Remove custom CSS.
+
+#### Gravity Forms
+* Allow Gravity Forms to hide labels to add placeholders.
+
+#### Imagify
+* Disable adminbar menu.
+* Disable .webp conversion.
+* Get Imagify API key from .env
+* Resize large images and set maximum width.
+* Set optimization level to normal.
+
+#### Email Address Encoder
+* Hide always all email address encoder notifications.
+
+#### Mail
+* Force essential SendGrid settings.
+* Force to address in wp_mail function so that test emails wont go to client.
+* Show notice if SendGrid is not active or configured.
+
+#### Media
+* Custom uploads folder media/ instead of default content/uploads/.
+
+#### Rest API
+* Disable REST API users endpoint.
+
+#### TinyMCE
+* Show TinyMCE second editor tools row by default.
+* Remove some Tiny MCE formats from editor.
+
+#### Misc
+* Disable emojicons.
+* Strip unwanted html tags from titles.
+* Add support for correct UTF8 orderby for post_title and term name (äöå).
+* Add instant.page just-in-time preloading script to footer.
+
+## Installing
+
+Download [latest](https://github.com/digitoimistodude/air-helper/releases/latest) version as a zip package and unzip it to your plugins directiry.
 
 Or install with composer, running command `composer require digitoimistodude/air-helper` in your project directory or add `"digitoimistodude/air-helper":"dev-master"` to your composer.json require.
 
-#### Updates
+### Updates
 
 Updates will be automatically distributed when new version is released.
 
-### Hooks
-
-Documentation work in progress.
-
-#### Switch disabled views back on
-
-With these filters you can turn disabled views back on:
-
-```` php
-/**
- * Switch disabled views back on
- */
-// remove_action( 'template_redirect', 'air_helper_disable_views' );
-add_filter( 'air_helper_disable_views_category', '__return_false' );
-add_filter( 'air_helper_disable_views_tag', '__return_false' );
-add_filter( 'air_helper_disable_views_date', '__return_false' );
-````
-
-### Changelog
+## Changelog
 
 Changelog can be found from [releases page](https://github.com/digitoimistodude/air-helper/releases).
 
-### Contributing
+## Contributing
 
 If you have ideas about the plugin or spot an issue, please let us know. Before contributing ideas or reporting an issue about "missing" features or things regarding to the nature of that matter, please read [Please note](#please-note-before-using) section. Thank you very much.
