@@ -5,6 +5,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.1]
+### Added
+- Allow filtering air_helper_activated_at_version for MU support
+
+### Fixed
+- Remove double declaration of EAE_DISABLE_NOTICES
+- Update upload options always unless in production and already updated
+
+## [2.0.0]
+2.0.0 release is a rewrite of the plugin.
+
+Functions and hooks are now all separated into smaller files containing things related to the same specific functionalities. Internal hooks are added to provide more ways to customize how Air helper works. Also caching to especially expensive functions are added.
+
+Version 2.0.0 breaks backward compatibility as it drops support for WooCommerce, Carbon Fields and Post Meta Revisions. Other changes do not break backward compatibility. Sites using WooCommerce or Carbon Fields should install legacy support plugins that do contain the same functionalities than previous versions of Air helper.
+
+For upkeep customers, Helpscout beacon is added and it requires HS_BEACON_ID in .env file.
+
 ## [1.12.2]
 ### Added
 - Hide ExactMetrics version 6.0.0 onboarding
