@@ -2,10 +2,10 @@
 /**
  * Image lazyload helpers.
  *
- * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
- * @Date:   						2019-08-07 14:38:34
+ * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
+ * @Date:               2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:23:57
+ * @Last Modified time: 2020-04-27 11:47:21
  *
  * @package air-helper
  */
@@ -18,9 +18,9 @@
  * @since  1.11.0
  */
 if ( ! function_exists( 'image_lazyload_div' ) ) {
-	function image_lazyload_div( $image_id = 0, $sizes = [] ) {
-		echo get_image_lazyload_div( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	} // end image_lazyload_div
+  function image_lazyload_div( $image_id = 0, $sizes = [], $fallback = false ) {
+    echo get_image_lazyload_div( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  } // end image_lazyload_div
 } // end if
 
 /**
@@ -32,45 +32,88 @@ if ( ! function_exists( 'image_lazyload_div' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'get_image_lazyload_div' ) ) {
-	function get_image_lazyload_div( $image_id = 0, $sizes = [] ) {
-		// Get image
-		$image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
+  function get_image_lazyload_div( $image_id = 0, $sizes = [], $fallback = false ) {
+    // Get image
+    $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
 
-		// Check if we have image
-		if ( ! $image_urls || ! is_array( $image_urls ) ) {
-			return;
-		}
+    // Check if we have image
+    if ( ! $image_urls || ! is_array( $image_urls ) ) {
+      if ( $fallback ) {
+        return get_image_lazyload_div_fallback( $fallback );
+      }
 
-		// Do preg match and check if we need to do browser hack
-		$browser_hack = false;
-		if ( ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
-			if ( preg_match( '/Windows Phone|Lumia|iPad|Safari/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) ) {
-				$browser_hack = true;
-			}
-		}
+      return;
+    }
 
-		ob_start();
+    // Do preg match and check if we need to do browser hack
+    $browser_hack = false;
+    if ( ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
+      if ( preg_match( '/Windows Phone|Lumia|iPad|Safari/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) ) {
+        $browser_hack = true;
+      }
+    }
 
-		// Div for preview image and data for js to use ?>
-		<div class="background-image preview lazyload"
-			style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');"
-			data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
-			data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
+    ob_start();
 
-		<?php // Div for full image, hack for browsers that don't support our js well ?>
-		<div class="background-image full-image"
-			<?php if ( $browser_hack ) : ?>
-				style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"
-			<?php endif; ?>></div>
+    // Div for preview image and data for js to use ?>
+    <div class="background-image preview lazyload"
+      style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');"
+      data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+      data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
 
-		<?php // Div with full image for browsers without js ?>
-		<noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div></noscript>
+    <?php // Div for full image, hack for browsers that don't support our js well ?>
+    <div class="background-image full-image"
+      <?php if ( $browser_hack ) : ?>
+        style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"
+      <?php endif; ?>></div>
 
-		<?php
+    <?php // Div with full image for browsers without js ?>
+    <noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div></noscript>
 
-		return ob_get_clean();
-	} // end get_image_lazyload_div
+    <?php
+
+    return ob_get_clean();
+  } // end get_image_lazyload_div
 } // end if
+
+if ( ! function_exists( 'get_image_lazyload_div_fallback' ) ) {
+  function get_image_lazyload_div_fallback( $fallback = false ) {
+    if ( empty( $fallback ) ) {
+      return;
+    }
+
+    // Do preg match and check if we need to do browser hack
+    $browser_hack = false;
+    if ( ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
+      if ( preg_match( '/Windows Phone|Lumia|iPad|Safari/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) ) {
+        $browser_hack = true;
+      }
+    }
+
+    ob_start();
+
+    // Div for preview image and data for js to use ?>
+    <div class="background-image preview lazyload"
+      style="background-image: url('<?php echo esc_url( $fallback ); ?>');"
+      data-src="<?php echo esc_url( $fallback ); ?>"
+      data-src-mobile="<?php echo esc_url( $fallback ); ?>"></div>
+
+    <?php // Div for full image, hack for browsers that don't support our js well ?>
+    <div class="background-image full-image"
+      <?php if ( $browser_hack ) : ?>
+        style="background-image: url('<?php echo esc_url( $fallback ); ?>');"
+      <?php endif; ?>></div>
+
+    <?php // Div with full image for browsers without js ?>
+    <noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $fallback ); ?>');"></div></noscript>
+
+    <?php
+
+    return ob_get_clean();
+  } // end get_image_lazyload_div_fallback
+} // end if
+
+
 
 /**
  * Echo image in lazyloading tag.
@@ -80,9 +123,9 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'image_lazyload_tag' ) ) {
-	function image_lazyload_tag( $image_id = 0, $sizes = [] ) {
-		echo get_image_lazyload_tag( $image_id, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	} // end image_lazyload_tag
+  function image_lazyload_tag( $image_id = 0, $sizes = [], $fallback = false ) {
+    echo get_image_lazyload_tag( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  } // end image_lazyload_tag
 } // end if
 
 /**
@@ -94,33 +137,55 @@ if ( ! function_exists( 'image_lazyload_tag' ) ) {
  * @since  1.11.0
  */
 if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
-	function get_image_lazyload_tag( $image_id = 0, $sizes = [] ) {
-		// Get image
-		$image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
+  function get_image_lazyload_tag( $image_id = 0, $sizes = [], $fallback = false ) {
+    // Get image
+    $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
 
-		// Check if we have image
-		if ( ! $image_urls || ! is_array( $image_urls ) ) {
-			return;
-		}
+    // Check if we have image
+    if ( ! $image_urls || ! is_array( $image_urls ) ) {
+      if ( $fallback ) {
+        return get_image_lazyload_tag_fallback( $fallback );
+      }
 
-		// Get dimensions
-		$dimensions = air_helper_get_image_lazyload_dimensions( $image_id, $sizes );
+      return;
+    }
 
-		if ( ! $dimensions ) {
-			return;
-		}
+    // Get dimensions
+    $dimensions = air_helper_get_image_lazyload_dimensions( $image_id, $sizes );
 
-		// Get the img tag
-		ob_start(); ?>
-		<img class="lazyload"
-			src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
-			data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+    if ( ! $dimensions ) {
+      return;
+    }
+
+    // Get the img tag
+    ob_start(); ?>
+    <img class="lazyload"
+      src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
+      data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
       data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"
-			width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" />
+      width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" />
     <?php
 
     return ob_get_clean();
-	} // end get_image_lazyload_tag
+  } // end get_image_lazyload_tag
+} // end if
+
+if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
+  function get_image_lazyload_tag_fallback( $fallback = false ) {
+    if ( empty( $fallback ) ) {
+      return;
+    }
+
+    // Get the img tag
+    ob_start(); ?>
+    <img class="lazyload"
+      src="<?php echo esc_url( $fallback ); ?>"
+      data-src="<?php echo esc_url( $fallback ); ?>"
+      data-src-mobile="<?php echo esc_url( $fallback ); ?>" />
+    <?php
+
+    return ob_get_clean();
+  } // end get_image_lazyload_tag_fallback
 } // end if
 
 /**
@@ -132,7 +197,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
  * @since  1.11.0
  */
 function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
-	$image_id = intval( $image_id );
+  $image_id = intval( $image_id );
 
   if ( ! $image_id ) {
     return false;
@@ -211,35 +276,35 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
  * @since  1.11.0
  */
 function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = [] ) {
-	$image_id = intval( $image_id );
+  $image_id = intval( $image_id );
 
-	if ( ! $image_id ) {
-		return false;
-	}
+  if ( ! $image_id ) {
+    return false;
+  }
 
-	// Bail if ID is not attachment
-	if ( 'attachment' !== get_post_type( $image_id ) ) {
-		return false;
-	}
+  // Bail if ID is not attachment
+  if ( 'attachment' !== get_post_type( $image_id ) ) {
+    return false;
+  }
 
-	// Default image sizes for use cases
-	$default_sizes = [
-		'tiny'		=> 'tiny-lazyload-thumbnail',
-		'mobile'	=> 'large',
-		'big'			=> 'full',
-	];
+  // Default image sizes for use cases
+  $default_sizes = [
+    'tiny'    => 'tiny-lazyload-thumbnail',
+    'mobile'  => 'large',
+    'big'     => 'full',
+  ];
 
-	$sizes = wp_parse_args( $sizes, $default_sizes );
+  $sizes = wp_parse_args( $sizes, $default_sizes );
 
   // Get image data
-	$dimensions = wp_get_attachment_image_src( $image_id, $sizes['big'] );
+  $dimensions = wp_get_attachment_image_src( $image_id, $sizes['big'] );
 
-	if ( ! $dimensions ) {
-		return false;
-	}
+  if ( ! $dimensions ) {
+    return false;
+  }
 
-	return [
-		'width'		=> $dimensions[1],
-		'height'	=> $dimensions[2],
-	];
+  return [
+    'width'   => $dimensions[1],
+    'height'  => $dimensions[2],
+  ];
 } // end air_helper_get_image_lazyload_dimensions
