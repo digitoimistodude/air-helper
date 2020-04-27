@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.0]
+### Added
+- Add fallback support for lazyloaded images
+
 ## [2.0.1]
 ### Added
 - Allow filtering air_helper_activated_at_version for MU support
