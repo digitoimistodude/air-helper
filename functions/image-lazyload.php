@@ -163,7 +163,8 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
       src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
       data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
       data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"
-      width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" />
+      width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>"
+      alt="" />
     <?php
 
     return ob_get_clean();
@@ -181,7 +182,8 @@ if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
     <img class="lazyload"
       src="<?php echo esc_url( $fallback ); ?>"
       data-src="<?php echo esc_url( $fallback ); ?>"
-      data-src-mobile="<?php echo esc_url( $fallback ); ?>" />
+      data-src-mobile="<?php echo esc_url( $fallback ); ?>"
+      alt="" />
     <?php
 
     return ob_get_clean();
