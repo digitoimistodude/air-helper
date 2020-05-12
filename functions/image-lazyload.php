@@ -4,8 +4,8 @@
  *
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-04-27 11:47:21
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2020-05-12 16:17:30
  *
  * @package air-helper
  */
@@ -160,6 +160,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
     // Get the img tag
     ob_start(); ?>
     <img class="lazyload"
+      aria-hidden="true"
       src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
       data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
       data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"
@@ -180,6 +181,7 @@ if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
     // Get the img tag
     ob_start(); ?>
     <img class="lazyload"
+      aria-hidden="true"
       src="<?php echo esc_url( $fallback ); ?>"
       data-src="<?php echo esc_url( $fallback ); ?>"
       data-src-mobile="<?php echo esc_url( $fallback ); ?>"
