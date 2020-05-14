@@ -52,25 +52,23 @@
     <exclude name="WordPress.Arrays.ArrayIndentation.ItemNotAligned" />
     <exclude name="WordPress.Arrays.ArrayIndentation.CloseBraceNotAligned" />
 
-    <exclude name="WordPress.Variables.GlobalVariables" />
     <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis" />
     <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis)" />
     <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict" />
     <exclude name="WordPress.Functions.DontExtract.extract" />
     <exclude name="WordPress.Functions.DontExtract.extract_extract" />
 
-    <exclude name="WordPress.VIP.RestrictedFunctions" />
-    <exclude name="WordPress.VIP.AdminBarRemoval.RemovalDetected" />
-    <exclude name="WordPress.VIP.OrderByRand" />
-    <exclude name="WordPress.VIP.OrderByRand.orderby" />
     <exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
-    <exclude name="WordPress.VIP.ValidatedSanitizedInput.MissingUnslash" />
-    <exclude name="WordPress.VIP.ValidatedSanitizedInput.InputNotSanitized" />
     <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification" />
     <exclude name="Generic.PHP.ForbiddenFunctions.FoundWithAlternative" />
     <exclude name="WordPress.Classes.ClassInstantiation.MissingParenthesis" />
     <exclude name="WordPress.Arrays.ArrayIndentation.MultiLineArrayItemNotAligned" />
     <exclude name="WordPress.Arrays.CommaAfterArrayItem.NoComma" />
+    <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+    <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace" />
+    <exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
+    <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
+    <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
 
   </rule>
 </ruleset>

@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.3]
+### Added
+- Fix aria-hidden in pre-loaded divs, update PHP Code Sniffer excludes
+
 ## [2.1.2]
 ### Added
 - Fix accessibility issues, add missing alt tags and aria-hidden for loading image

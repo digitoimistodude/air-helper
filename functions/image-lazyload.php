@@ -55,22 +55,18 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 
     ob_start();
 
-    // Div for preview image and data for js to use ?>
-    <div class="background-image preview lazyload"
-      style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');"
-      data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
-      data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
+// Div for preview image and data for js to use ?>
+<div aria-hidden="true" class="background-image preview lazyload" style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
 
-    <?php // Div for full image, hack for browsers that don't support our js well ?>
-    <div class="background-image full-image"
-      <?php if ( $browser_hack ) : ?>
-        style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"
-      <?php endif; ?>></div>
+<?php // Div for full image, hack for browsers that don't support our js well ?>
+<div aria-hidden="true" class="background-image full-image" <?php if ( $browser_hack ) : ?> style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');" <?php endif; ?>></div>
 
-    <?php // Div with full image for browsers without js ?>
-    <noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div></noscript>
+<?php // Div with full image for browsers without js ?>
+<noscript>
+  <div aria-hidden="true" class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div>
+</noscript>
 
-    <?php
+<?php
 
     return ob_get_clean();
   } // end get_image_lazyload_div
@@ -92,22 +88,18 @@ if ( ! function_exists( 'get_image_lazyload_div_fallback' ) ) {
 
     ob_start();
 
-    // Div for preview image and data for js to use ?>
-    <div class="background-image preview lazyload"
-      style="background-image: url('<?php echo esc_url( $fallback ); ?>');"
-      data-src="<?php echo esc_url( $fallback ); ?>"
-      data-src-mobile="<?php echo esc_url( $fallback ); ?>"></div>
+// Div for preview image and data for js to use ?>
+<div aria-hidden="true" class="background-image preview lazyload" style="background-image: url('<?php echo esc_url( $fallback ); ?>');" data-src="<?php echo esc_url( $fallback ); ?>" data-src-mobile="<?php echo esc_url( $fallback ); ?>"></div>
 
-    <?php // Div for full image, hack for browsers that don't support our js well ?>
-    <div class="background-image full-image"
-      <?php if ( $browser_hack ) : ?>
-        style="background-image: url('<?php echo esc_url( $fallback ); ?>');"
-      <?php endif; ?>></div>
+<?php // Div for full image, hack for browsers that don't support our js well ?>
+<div aria-hidden="true" class="background-image full-image" <?php if ( $browser_hack ) : ?> style="background-image: url('<?php echo esc_url( $fallback ); ?>');" <?php endif; ?>></div>
 
-    <?php // Div with full image for browsers without js ?>
-    <noscript><div class="background-image full-image" style="background-image: url('<?php echo esc_url( $fallback ); ?>');"></div></noscript>
+<?php // Div with full image for browsers without js ?>
+<noscript>
+  <div aria-hidden="true" class="background-image full-image" style="background-image: url('<?php echo esc_url( $fallback ); ?>');"></div>
+</noscript>
 
-    <?php
+<?php
 
     return ob_get_clean();
   } // end get_image_lazyload_div_fallback
@@ -159,14 +151,8 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 
     // Get the img tag
     ob_start(); ?>
-    <img class="lazyload"
-      aria-hidden="true"
-      src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
-      data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
-      data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"
-      width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>"
-      alt="" />
-    <?php
+<img aria-hidden="true" class="lazyload" src="<?php echo esc_url( $image_urls['tiny'] ); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>" width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" alt="" />
+<?php
 
     return ob_get_clean();
   } // end get_image_lazyload_tag
@@ -180,13 +166,8 @@ if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
 
     // Get the img tag
     ob_start(); ?>
-    <img class="lazyload"
-      aria-hidden="true"
-      src="<?php echo esc_url( $fallback ); ?>"
-      data-src="<?php echo esc_url( $fallback ); ?>"
-      data-src-mobile="<?php echo esc_url( $fallback ); ?>"
-      alt="" />
-    <?php
+<img aria-hidden="true" class="lazyload" src="<?php echo esc_url( $fallback ); ?>" data-src="<?php echo esc_url( $fallback ); ?>" data-src-mobile="<?php echo esc_url( $fallback ); ?>" alt="" />
+<?php
 
     return ob_get_clean();
   } // end get_image_lazyload_tag_fallback
