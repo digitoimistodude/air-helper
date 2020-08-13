@@ -75,6 +75,6 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
  */
 add_action( 'wp_footer', 'air_helper_enqueue_instantpage_script', 50 );
 function air_helper_enqueue_instantpage_script() { ?>
-  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
 <?php } // end air_helper_enqueue_instantpage_script
 // phpcs:enable
