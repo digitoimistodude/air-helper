@@ -45,6 +45,14 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
       return;
     }
 
+    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
+
+    $styles = '';
+
+    foreach ($styles_array as $key => $value ) {
+      $styles .= ' ' . $key . ': ' . $value . ';';
+    }
+
     // Do preg match and check if we need to do browser hack
     $browser_hack = false;
     if ( ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
@@ -56,14 +64,14 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
     ob_start();
 
 // Div for preview image and data for js to use ?>
-<div aria-hidden="true" class="background-image preview lazyload" style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>');" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
+<div aria-hidden="true" class="background-image preview lazyload" style="background-image: url('<?php echo esc_url( $image_urls['tiny'] ); ?>'); <?php echo esc_attr( $styles); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>"></div>
 
 <?php // Div for full image, hack for browsers that don't support our js well ?>
-<div aria-hidden="true" class="background-image full-image" <?php if ( $browser_hack ) : ?> style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');" <?php endif; ?>></div>
+<div aria-hidden="true" class="background-image full-image" <?php if ( $browser_hack ) : ?> style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>'); <?php echo esc_attr( $styles); ?>" <?php endif; ?>></div>
 
 <?php // Div with full image for browsers without js ?>
 <noscript>
-  <div aria-hidden="true" class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>');"></div>
+  <div aria-hidden="true" class="background-image full-image" style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>'); <?php echo esc_attr( $styles); ?>"></div>
 </noscript>
 
 <?php
@@ -149,9 +157,17 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
       return;
     }
 
+    $styles_array = apply_filters( 'air_image_lazyload_img_styles', [], $image_id );
+
+    $styles = '';
+
+    foreach ($styles_array as $key => $value ) {
+      $styles .= ' ' . $key . ': ' . $value . ';';
+    }
+
     // Get the img tag
     ob_start(); ?>
-<img aria-hidden="true" class="lazyload" src="<?php echo esc_url( $image_urls['tiny'] ); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>" width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" alt="" />
+<img aria-hidden="true" class="lazyload" src="<?php echo esc_url( $image_urls['tiny'] ); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>" width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" alt="" style="<?php echo esc_attr( $styles); ?>"/>
 <?php
 
     return ob_get_clean();
