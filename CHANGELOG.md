@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.1.5]
 ### Fixed
 - Support for correct UTF8 orderby for post_title and term name (äöå) hooks now always in, before in some rare occasion
+- Bump instant.page script to version 5.1.0 
 
 ## [2.1.3-2.1.4]
 ### Added
