@@ -4,8 +4,8 @@
  *
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2020-05-12 16:17:30
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2020-09-14 17:38:32
  *
  * @package air-helper
  */
@@ -45,11 +45,10 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
       return;
     }
 
-    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
-
+    // Possibility to add optional styles for the image
     $styles = '';
-
-    foreach ($styles_array as $key => $value ) {
+    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
+    foreach ( $styles_array as $key => $value ) {
       $styles .= ' ' . $key . ': ' . $value . ';';
     }
 
@@ -157,17 +156,19 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
       return;
     }
 
-    $styles_array = apply_filters( 'air_image_lazyload_img_styles', [], $image_id );
-
+    // Possibility to add optional styles for the image
     $styles = '';
-
-    foreach ($styles_array as $key => $value ) {
+    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
+    foreach ( $styles_array as $key => $value ) {
       $styles .= ' ' . $key . ': ' . $value . ';';
     }
 
+    // Get alt
+    $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+
     // Get the img tag
     ob_start(); ?>
-<img aria-hidden="true" class="lazyload" src="<?php echo esc_url( $image_urls['tiny'] ); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>" width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" alt="" style="<?php echo esc_attr( $styles); ?>"/>
+<img <?php if ( empty( $alt ) ) : ?>aria-hidden="true"<?php endif; ?> class="lazyload" src="<?php echo esc_url( $image_urls['tiny'] ); ?>" data-src="<?php echo esc_url( $image_urls['big'] ); ?>" data-src-mobile="<?php echo esc_url( $image_urls['mobile'] ); ?>" width="<?php echo esc_attr( $dimensions['width'] ); ?>" height="<?php echo esc_attr( $dimensions['height'] ); ?>" alt="<?php echo esc_attr( $alt ); ?>" style="<?php echo esc_attr( $styles ); ?>"/>
 <?php
 
     return ob_get_clean();
