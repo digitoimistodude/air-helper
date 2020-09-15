@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 - Option to inject styles to lazyloaded images
 - `get_primary_category` function
+- Alt tag for lazyloaded img tag if alternative text exists
 
 ## [2.1.5]
 ### Fixed
