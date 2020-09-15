@@ -81,7 +81,7 @@ if ( ! function_exists( 'get_the_sentence_excerpt' ) ) {
   } // end get_the_sentence_excerpt
 } // end if
 
-if ( function_exists( 'get_primary_category' ) ) {
+if ( ! function_exists( 'get_primary_category' ) ) {
   /**
    * Get primary category for post.
    *
