@@ -84,7 +84,7 @@ Currently disabled views are:
 - archives: tag, category, date, author
 - other: search
 
-Enable spesific view back with filter `add_filter( 'air_helper_disable_views_{VIEW}', '__return_false' );` or all views with `remove_action( 'template_redirect', 'air_helper_disable_views' )`.
+Enable specific view back with filter `add_filter( 'air_helper_disable_views_{VIEW}', '__return_false' );` or all views with `remove_action( 'template_redirect', 'air_helper_disable_views' )`.
 
 ### Functions
 
