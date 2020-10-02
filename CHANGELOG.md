@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.3.0] - 2020-10-02
+### Added
+- Image lazyload try to get fallback from theme settings if not defined
+- Remove unnecessary type attributes to suppress HTML validator messages
+
+### Changed
+- Do not show Helpscout notice if not configured
+- Move emoji disable to priority fly
+
+### Removed
+- noscript fallback from lazyloading images
+
 ## [2.2.1]
 ### Fixed
 - `get_primary_category` function declaration

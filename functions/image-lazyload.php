@@ -5,7 +5,7 @@
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-09-15 09:49:58
+ * @Last Modified time: 2020-10-02 15:33:05
  *
  * @package air-helper
  */
@@ -38,16 +38,13 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 
     // Check if we have image
     if ( ! $image_urls || ! is_array( $image_urls ) ) {
-      if ( $fallback ) {
-        return get_image_lazyload_div_fallback( $fallback );
-      }
-
-      return;
+      return get_image_lazyload_div_fallback( $fallback );
     }
 
     // Possibility to add optional styles for the image
     $styles = '';
-    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
+    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id ); // backwards comp
+    $styles_array = apply_filters( 'air_helper_image_lazyload_div_styles', $styles_array, $image_id );
     foreach ( $styles_array as $key => $value ) {
       $styles .= ' ' . $key . ': ' . $value . ';';
     }
@@ -78,14 +75,14 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
       <?php endif; ?>>
     </div>
 
-    <?php // Div with full image for browsers without js ?>
-    <noscript>
-      <div aria-hidden="true"
-        class="background-image full-image"
-        style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>'); <?php echo esc_attr( $styles ); ?>">
-      </div>
-    </noscript>
-    <?php
+    <?php if ( apply_filters( 'air_helper_image_lazyload_enable_noscript_fallback', false ) ) : ?>
+      <noscript>
+        <div aria-hidden="true"
+          class="background-image full-image"
+          style="background-image: url('<?php echo esc_url( $image_urls['big'] ); ?>'); <?php echo esc_attr( $styles ); ?>">
+        </div>
+      </noscript>
+    <?php endif;
 
     return ob_get_clean();
   } // end get_image_lazyload_div
@@ -94,7 +91,11 @@ if ( ! function_exists( 'get_image_lazyload_div' ) ) {
 if ( ! function_exists( 'get_image_lazyload_div_fallback' ) ) {
   function get_image_lazyload_div_fallback( $fallback = false ) {
     if ( empty( $fallback ) ) {
-      return;
+      if ( apply_filters( 'air_helper_image_lazyload_fallback_from_theme_settings', true ) && defined( 'THEME_SETTINGS' ) ) {
+        $fallback = THEME_SETTINGS['default_featured_image'];
+      } else {
+        return;
+      }
     }
 
     // Do preg match and check if we need to do browser hack
@@ -123,14 +124,14 @@ if ( ! function_exists( 'get_image_lazyload_div_fallback' ) ) {
       <?php endif; ?>>
     </div>
 
-    <?php // Div with full image for browsers without js ?>
-    <noscript>
-      <div aria-hidden="true"
-        class="background-image full-image"
-        style="background-image: url('<?php echo esc_url( $fallback ); ?>');">
-      </div>
-    </noscript>
-    <?php
+    <?php if ( apply_filters( 'air_helper_image_lazyload_enable_noscript_fallback', false ) ) : ?>
+      <noscript>
+        <div aria-hidden="true"
+          class="background-image full-image"
+          style="background-image: url('<?php echo esc_url( $fallback ); ?>');">
+        </div>
+      </noscript>
+    <?php endif;
 
     return ob_get_clean();
   } // end get_image_lazyload_div_fallback
@@ -166,11 +167,7 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 
     // Check if we have image
     if ( ! $image_urls || ! is_array( $image_urls ) ) {
-      if ( $fallback ) {
-        return get_image_lazyload_tag_fallback( $fallback );
-      }
-
-      return;
+      return get_image_lazyload_tag_fallback( $fallback );
     }
 
     // Get dimensions
@@ -182,7 +179,8 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 
     // Possibility to add optional styles for the image
     $styles = '';
-    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id );
+    $styles_array = apply_filters( 'air_image_lazyload_div_styles', [], $image_id ); // backwards comp
+    $styles_array = apply_filters( 'air_helper_image_lazyload_div_styles', $styles_array, $image_id );
     foreach ( $styles_array as $key => $value ) {
       $styles .= ' ' . $key . ': ' . $value . ';';
     }
@@ -213,7 +211,11 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
 if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
   function get_image_lazyload_tag_fallback( $fallback = false ) {
     if ( empty( $fallback ) ) {
-      return;
+      if ( apply_filters( 'air_helper_image_lazyload_fallback_from_theme_settings', true ) && defined( 'THEME_SETTINGS' ) ) {
+        $fallback = THEME_SETTINGS['default_featured_image'];
+      } else {
+        return;
+      }
     }
 
     // Get the img tag

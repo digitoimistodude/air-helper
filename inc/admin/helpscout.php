@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-02-12 14:29:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-20 10:21:43
+ * @Last Modified time: 2020-10-02 15:21:40
  *
  * @package air-helper
  */
@@ -16,25 +16,11 @@
 add_action( 'admin_init', 'air_helper_is_helpscout_beacon_configured' );
 function air_helper_is_helpscout_beacon_configured() {
   if ( ! getenv( 'HS_BEACON_ID' ) && air_helper_site_has_care_plan() ) {
-    add_action( 'admin_notices', 'air_helper_helpscout_beacon_not_configured_notice' );
     return false;
   }
 
   return true;
 } // end air_helper_is_helpscout_beacon_configured
-
-/**
- *  Show notice if Help Scout Beacon ID is not configured.
- *
- *  @since  2.0.0
- */
-function air_helper_helpscout_beacon_not_configured_notice() {
-  $class = 'notice notice-error';
-  $message = __( 'Help Scout Beacon is not configured. Please contact your agency to fix this issue.', 'air-helper' );
-
-  printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
-} // end air_helper_helpscout_beacon_not_configured_notice
-
 
 /**
  * Enqueue Helpscout beacon in dashboard for providing user support

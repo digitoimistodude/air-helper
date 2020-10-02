@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-06-11 11:05:14
+ * @Last Modified time: 2020-10-02 15:39:39
  *
  * @package air-helper
  */
@@ -19,6 +19,43 @@ add_action( 'init', 'air_helper_add_lazyload_image_sizes' );
 function air_helper_add_lazyload_image_sizes() {
   add_image_size( 'tiny-lazyload-thumbnail', 20, 20 );
 } // end air_helper_add_lazyload_image_sizes
+
+/**
+ * Disable emojicons.
+ *
+ * Turn off by using `remove_action( 'init', 'air_helper_helper_disable_wp_emojicons' )`
+ *
+ * @since  0.1.0
+ * @link http://wordpress.stackexchange.com/questions/185577/disable-emojicons-introduced-with-wp-4-2
+ */
+add_action( 'init', 'air_helper_helper_disable_wp_emojicons' );
+function air_helper_helper_disable_wp_emojicons() {
+  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+  remove_action( 'wp_print_styles', 'print_emoji_styles' );
+  remove_action( 'admin_print_styles', 'print_emoji_styles' );
+  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+
+  // Disable classic smilies
+  add_filter( 'option_use_smilies', '__return_false' );
+  add_filter( 'tiny_mce_plugins', 'air_helper_helper_disable_emojicons_tinymce' );
+} // end air_helper_helper_disable_wp_emojicons
+
+/**
+ * Disable emojicons.
+ *
+ * @since 0.1.0
+ * @param array $plugins Plugins.
+ */
+function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
+  if ( is_array( $plugins ) ) {
+    return array_diff( $plugins, [ 'wpemoji' ] );
+  } else {
+    return [];
+  }
+} // end air_helper_helper_disable_emojicons_tinymce
 
 /**
  * Add support for correct UTF8 orderby for post_title and term name (äöå).

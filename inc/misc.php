@@ -5,47 +5,26 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-06-11 10:19:37
+ * @Last Modified time: 2020-10-02 15:43:20
  *
  * @package air-helper
  */
 
 /**
- * Disable emojicons.
+ * Remove unnecessary type attributes to suppress HTML validator messages.
  *
- * Turn off by using `remove_action( 'init', 'air_helper_helper_disable_wp_emojicons' )`
+ * Turn off by using `add_filter( 'style_loader_tag', 'air_helper_remove_type_attr' )`
+ * Turn off by using `add_filter( 'script_loader_tag', 'air_helper_remove_type_attr' )`
+ * Turn off by using `add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr' )`
  *
- * @since  0.1.0
- * @link http://wordpress.stackexchange.com/questions/185577/disable-emojicons-introduced-with-wp-4-2
+ * @since  2.3.0
  */
-add_action( 'init', 'air_helper_helper_disable_wp_emojicons' );
-function air_helper_helper_disable_wp_emojicons() {
-  remove_action( 'admin_print_styles', 'print_emoji_styles' );
-  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-  remove_action( 'wp_print_styles', 'print_emoji_styles' );
-  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-
-  // Disable classic smilies
-  add_filter( 'option_use_smilies', '__return_false' );
-  add_filter( 'tiny_mce_plugins', 'air_helper_helper_disable_emojicons_tinymce' );
-} // end air_helper_helper_disable_wp_emojicons
-
-/**
- * Disable emojicons.
- *
- * @since 0.1.0
- * @param array $plugins Plugins.
- */
-function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
-  if ( is_array( $plugins ) ) {
-    return array_diff( $plugins, [ 'wpemoji' ] );
-  } else {
-    return [];
-  }
-} // end air_helper_helper_disable_emojicons_tinymce
+add_filter( 'style_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
+add_filter( 'script_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
+add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr', 10, 2 );
+function air_helper_remove_type_attr( $tag, $handle = '' ) {
+  return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag ); // phpcs:ignore
+} // end air_helper_remove_type_attr
 
 /**
  *  Strip unwanted html tags from titles
