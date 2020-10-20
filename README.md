@@ -70,11 +70,11 @@ add_filter( 'air_helper_pll_register_strings', function() {
 
 ### Image lazyloading
 
-Air helper adds few additional helpers to work with image lazyloading, but requires also support from the theme in use. In there, there needs to be [js](https://github.com/digitoimistodude/air-light/blob/master/js/src/lazyload.js) and [style](https://github.com/digitoimistodude/air-light/blob/master/sass/features/_lazyload.scss) files.
+Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy) and [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
 
 If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
 
-Refer to [functions](#image-lazyloading) to find out how to use image lazyloading.
+Refer to [functions](#image-lazyloading-1) to find out how to use image lazyloading.
 
 ### Disabled views
 
@@ -99,8 +99,10 @@ Enable specific view back with filter `add_filter( 'air_helper_disable_views_{VI
 * `has_children( $post_id, $post_type )` Check if post has child pages. Defaults to current post id.
 
 #### Image lazyloading
-* `image_lazyload_div( $attachment_id )` Echo image in lazyloading divs.
-* `image_lazyload_tag( $attachment_id )` Echo image in lazyloading tag.
+* `get_vanilla_lazyload_div( $attachment_id )` Get image in lazyloading divs.
+* `get_vanilla_lazyload_tag( $attachment_id )` Get image in lazyloading img tag.
+* `vanilla_lazyload_div( $attachment_id )` Echo image in lazyloading divs.
+* `vanilla_lazyload_tag( $attachment_id )` Echo image in lazyloading img tag.
 
 #### Localization
 * `ask__( $key, $lang )` Return string by key. Defaults to current language.

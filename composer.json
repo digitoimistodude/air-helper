@@ -8,12 +8,10 @@
     "plugin"
   ],
   "license": "GPL-3.0+",
-  "version": "2.3.0",
-  "authors": [
-    {
-      "name": "Timi Wahalahti",
-      "email": "timi@dude.fi",
-      "homepage": "https://github.com/timiwahalahti"
-    }
-  ]
+  "version": "2.3.1",
+  "authors": [{
+    "name": "Timi Wahalahti",
+    "email": "timi@dude.fi",
+    "homepage": "https://github.com/timiwahalahti"
+  }]
 }

@@ -11,6 +11,61 @@
  */
 
 /**
+ * Echo image in lazyloading tag for vanilla-lazyload.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @since  1.11.0
+ */
+if ( ! function_exists( 'vanilla_lazyload_tag' ) ) {
+  function vanilla_lazyload_tag( $image_id = 0, $sizes = [], $fallback = false ) {
+    echo get_vanilla_lazyload_tag( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  } // end vanilla_lazyload_tag
+} // end if
+
+/**
+ * Get image lazyloading tag for vanilla-lazyload.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return string            String containing lazyloading divs.
+ * @since  1.11.0
+ */
+if ( ! function_exists( 'get_vanilla_lazyload_tag' ) ) {
+  function get_vanilla_lazyload_tag( $image_id = 0, $sizes = [], $fallback = false ) {
+    // Get image
+    $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
+
+    // Check if we have image
+    if ( ! $image_urls || ! is_array( $image_urls ) ) {
+      return get_image_lazyload_tag_fallback( $fallback );
+    }
+
+    // Get dimensions
+    $dimensions = air_helper_get_image_lazyload_dimensions( $image_id, $sizes );
+
+    if ( ! $dimensions ) {
+      return;
+    }
+
+    // Get alt
+    $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+
+    // Get the img tag
+    ob_start(); ?>
+    <img
+      alt="<?php echo esc_attr( $alt ); ?>"
+      class="lazy"
+      src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
+      data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+    />
+    <?php
+
+    return ob_get_clean();
+  } // end get_vanilla_lazyload_tag
+} // end if
+
+/**
  * Echo image in lazyloading divs.
  *
  * @param  integer $image_id Image attachment id to lazyload.
@@ -21,6 +76,49 @@ if ( ! function_exists( 'image_lazyload_div' ) ) {
   function image_lazyload_div( $image_id = 0, $sizes = [], $fallback = false ) {
     echo get_image_lazyload_div( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   } // end image_lazyload_div
+} // end if
+
+/**
+ * Get image lazyloading divs for vanilla-lazyload.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @return string            String containing lazyloading divs.
+ * @since  1.11.0
+ */
+if ( ! function_exists( 'get_vanilla_lazyload_div' ) ) {
+  function get_vanilla_lazyload_div( $image_id = 0, $sizes = [], $fallback = false ) {
+    // Get image
+    $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $sizes );
+
+    // Check if we have image
+    if ( ! $image_urls || ! is_array( $image_urls ) ) {
+      return get_image_lazyload_div_fallback( $fallback );
+    }
+
+    ob_start();
+
+    // Div for preview image and data for js to use ?>
+    <div 
+      class="lazy" 
+      data-bg="<?php echo esc_url( $image_urls['big'] ); ?>">
+    </div>
+
+    <?php return ob_get_clean();
+  } // end get_vanilla_lazyload_div
+} // end if
+
+/**
+ * Echo image in lazyloading divs for vanilla-lazyload.
+ *
+ * @param  integer $image_id Image attachment id to lazyload.
+ * @param  array   $sizes    Custom sizes for lazyloading. Optional.
+ * @since  1.11.0
+ */
+if ( ! function_exists( 'vanilla_lazyload_div' ) ) {
+  function vanilla_lazyload_div( $image_id = 0, $sizes = [], $fallback = false ) {
+    echo get_vanilla_lazyload_div( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  } // end vanilla_lazyload_div
 } // end if
 
 /**
@@ -136,8 +234,6 @@ if ( ! function_exists( 'get_image_lazyload_div_fallback' ) ) {
     return ob_get_clean();
   } // end get_image_lazyload_div_fallback
 } // end if
-
-
 
 /**
  * Echo image in lazyloading tag.
