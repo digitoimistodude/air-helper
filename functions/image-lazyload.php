@@ -198,9 +198,6 @@ if ( ! function_exists( 'get_image_lazyload_tag' ) ) {
       height="<?php echo esc_attr( $dimensions['height'] ); ?>"
       alt="<?php echo esc_attr( $alt ); ?>"
       style="<?php echo esc_attr( $styles ); ?>"
-      <?php if ( empty( $alt ) ) : ?>
-        aria-hidden="true"
-      <?php endif; ?>
     />
     <?php
 
