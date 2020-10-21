@@ -99,10 +99,12 @@ Enable specific view back with filter `add_filter( 'air_helper_disable_views_{VI
 * `has_children( $post_id, $post_type )` Check if post has child pages. Defaults to current post id.
 
 #### Image lazyloading
-* `get_vanilla_lazyload_div( $attachment_id )` Get image in lazyloading divs.
-* `get_vanilla_lazyload_tag( $attachment_id )` Get image in lazyloading img tag.
-* `vanilla_lazyload_div( $attachment_id )` Echo image in lazyloading divs.
-* `vanilla_lazyload_tag( $attachment_id )` Echo image in lazyloading img tag.
+* `vanilla_lazyload_div( $attachment_id, $fallback )` Echo image in lazyloading div.
+* `vanilla_lazyload_tag( $attachment_id, $fallback )` Echo image in lazyloading img tag.
+
+Fallback is optional. By default fallback is default featured image from theme settings.
+
+If you want to get lazyloading div or tag as a string, you may prefix functions with `get_`.
 
 #### Localization
 * `ask__( $key, $lang )` Return string by key. Defaults to current language.
