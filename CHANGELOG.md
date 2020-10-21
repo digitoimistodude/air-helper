@@ -5,12 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.4.0] - 2020-10-21
+### Added
+- Hook to add custom styles for vanilla lazyload
+
+### Fixed
+- Vanilla lazyload fallbacks
+- Semantic versioning for plugin version (new features)
+
 ## [2.3.1] - 2020-10-20
 ### Added
 - Introducing support for vanilla-lazyload
 
-### Changed
-- Fix img accessibility
+### Fixed
+- Lazyload img accessibility
 
 ## [2.3.0] - 2020-10-02
 ### Added
