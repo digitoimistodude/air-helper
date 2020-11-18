@@ -89,28 +89,34 @@ if ( ! function_exists( 'get_primary_category' ) ) {
    * @param  integer $post_id Which post to get the primary category for, if empty current post is used.
    * @return mixed            Boolean false of no category, otherwise WP_Term object.
    */
-  function get_primary_category( $post_id = 0 ) {
+  function get_primary_category( $post_id = 0, $taxonomy = 'category' ) {
     $post_id = ! empty( $post_id ) ? $post_id : get_the_id();
 
-    // Try to get the primary category from Yoast setting
-    $cat_id = get_post_meta( $post_id, '_yoast_wpseo_primary_category', true );
-    if ( empty( $cat_id ) ) {
+    $primary_meta_keys = [
+      '_yoast_wpseo_primary_' . $taxonomy, // Primary category from Yoast setting
+      '_primary_term_' . $taxonomy, // Autodescription primary category setting
+    ];
 
-      // Next try Autodescription primary categiry setting
-      $cat_id = get_post_meta( $post_id, '_primary_term_category', true );
-    }
+    $cat_id = null;
 
-    // If primary set, get and return WP_Term object for it
-    if ( ! empty( $cat_id ) ) {
-      $term = get_term( $cat_id, 'category' );
-
-      if ( ! empty( $term ) ) {
-        return get_term( $cat_id, 'category' );
+    // Try to get the primary term id from meta fields
+    foreach ( $primary_meta_keys as $primary_meta_key ) {
+      $maybe_cat_id = get_post_meta( $post_id, $primary_meta_key, true );
+      if ( ! empty( $maybe_cat_id ) ) {
+        $cat_id = $maybe_cat_id;
+        break;
       }
     }
 
+    // If primary set, try to get and return WP_Term object for it
+    $term = ! empty( $cat_id ) ? get_term( $cat_id, $taxonomy ) : false;
+
+    if ( ! empty( $term ) && ! is_wp_error( $term ) ) {
+      return $term;
+    }
+
     // No primary category, get all post categories and return first one
-    $cats = get_the_category( $post_id );
+    $cats = wp_get_post_terms( $post_id, $taxonomy );
     if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
       return $cats[0];
     }
