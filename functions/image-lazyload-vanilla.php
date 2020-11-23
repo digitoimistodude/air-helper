@@ -5,7 +5,7 @@
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-21 10:59:03
+ * @Last Modified time: 2020-11-23 16:41:03
  *
  * @package air-helper
  */
@@ -20,7 +20,7 @@
  */
 if ( ! function_exists( 'vanilla_lazyload_div' ) ) {
   function vanilla_lazyload_div( $image_id = 0, $fallback = false, $sizes = [] ) {
-    echo get_vanilla_lazyload_div( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo get_vanilla_lazyload_div( $image_id, $fallback, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   } // end vanilla_lazyload_div
 } // end if
 
@@ -104,7 +104,7 @@ if ( ! function_exists( 'get_vanilla_lazyload_div_fallback' ) ) {
  */
 if ( ! function_exists( 'vanilla_lazyload_tag' ) ) {
   function vanilla_lazyload_tag( $image_id = 0, $fallback = false, $sizes = [] ) {
-    echo get_vanilla_lazyload_tag( $image_id, $sizes, $fallback ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo get_vanilla_lazyload_tag( $image_id, $fallback, $sizes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   } // end vanilla_lazyload_tag
 } // end if
 
