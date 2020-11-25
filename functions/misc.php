@@ -15,9 +15,10 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
    *  Get list of icons which are available for user.
    *
    *  @since  1.4.0
+   *  @param bool $show_preview Shows icon preview, requires you have enabled Select2 in ACF Select field.
    *  @return array  Array of icons available.
    */
-  function get_icons_for_user() {
+  function get_icons_for_user( $show_preview = false ) {
     $icons = [];
     $files = glob( get_template_directory() . '/svg/foruser/*.svg' );
 
@@ -27,7 +28,16 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
       $filename = strstr( $raw_filename, '.', true );
       $filename = str_replace( '-', ' ', $filename );
       $filename = str_replace( '_', ' ', $filename );
-      $icons[ $raw_filename ] = ucfirst( $filename );
+
+      // If using the ACF select2 improved UI, show preview icons
+      if ( $show_preview ) {
+        ob_start();
+        echo esc_html( ucfirst( $filename ) ) . '&nbsp;&nbsp;<br/><br/>';
+        include get_theme_file_path( '/svg/foruser/' . $raw_filename );
+        $icons[ $raw_filename ] = ob_get_clean();
+      } else {
+        $icons[ $raw_filename ] = ucfirst( $filename );
+      }
     }
 
     return $icons;
