@@ -117,7 +117,7 @@ If you want to get lazyloading div or tag as a string, you may prefix functions 
 * `get_prev_page_id( $post_id )` Get ID of previous page. Defaults to current page.
 
 #### Misc
-* `get_icons_for_user( $show_preview = false )` Get list of icons which are available for user. Returns array of icons inside theme's `svg/foruser` directory.
+* `get_icons_for_user( $args)` Get list of icons which are available for user. Returns array of icons from defined theme directory (default `svg/foruser/`).
 * `wp_parse_args_dimensional( $a, $b )` Similar to wp_parse_args() just extended to work with multidimensional arrays.
 * `get_the_sentence_excerpt( $length, $excerpt )` Get excerpt with custom length of sentences. Defaults to three sentences and current post.
 * `get_primary_category( $post_id )` Get primary category for defined or current post.

@@ -15,12 +15,18 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
    *  Get list of icons which are available for user.
    *
    *  @since  1.4.0
-   *  @param bool $show_preview Shows icon preview, requires you have enabled Select2 in ACF Select field.
+   *  @param array $args Array of arguments.
    *  @return array  Array of icons available.
    */
-  function get_icons_for_user( $show_preview = false ) {
+  function get_icons_for_user( $args = [] ) {
+    $default_args = [
+      'show_preview' => false, // Shows icon preview, requires you have enabled Select2 in ACF Select field
+      'icon_path' => 'svg/foruser/', // Set icon path in theme directory
+    ];
+
+    $args = wp_parse_args( $args, $default_args );
     $icons = [];
-    $files = glob( get_template_directory() . '/svg/foruser/*.svg' );
+    $files = glob( get_template_directory() . '/' . $args['icon_path'] . '*.svg' );
 
     foreach ( $files as $file ) {
       $raw_filename = explode( '/', $file );
@@ -30,10 +36,10 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
       $filename = str_replace( '_', ' ', $filename );
 
       // If using the ACF select2 improved UI, show preview icons
-      if ( $show_preview ) {
+      if ( $args['show_preview'] ) {
         ob_start();
         echo esc_html( ucfirst( $filename ) ) . '&nbsp;&nbsp;<br/><br/>';
-        include get_theme_file_path( '/svg/foruser/' . $raw_filename );
+        include get_theme_file_path( $args['icon_path'] . $raw_filename );
         $icons[ $raw_filename ] = ob_get_clean();
       } else {
         $icons[ $raw_filename ] = ucfirst( $filename );
