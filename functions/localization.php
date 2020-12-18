@@ -60,7 +60,7 @@ function ask__( $key, $lang = null ) {
  * @param string $lang  2 character language code (defaults to current language).
  */
 function ask_e( $key, $lang = null ) {
-  echo ask__( $key, $lang ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  echo wp_kses_post( ask__( $key, $lang ) );
 }
 
 /**
@@ -113,7 +113,7 @@ function asv__( $value, $lang = null ) {
  * @param string $lang    2 character language code (defaults to current language).
  */
 function asv_e( $value, $lang = null ) {
-  echo asv__( $value, $lang ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  echo wp_kses_post( asv__( $value, $lang ) );
 }
 
 /**
@@ -127,7 +127,7 @@ if ( ! function_exists( 'pll__' ) ) {
   }
 
   function pll_e( $string ) {
-    echo $string; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo wp_kses_post( $string );
   }
 
   function pll_current_language() {
