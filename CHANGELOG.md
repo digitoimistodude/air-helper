@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 #### Fixed
 - Escape outputting localization functions ask_e, asv_e and pll_e return
+- On `widgets_init` remove recent comments style
 
 ## [2.5.0] - 2020-11-23
 ### Added
