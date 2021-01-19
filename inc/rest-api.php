@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:24:01
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:59:03
+ * @Last Modified time: 2021-01-19 09:52:42
  *
  * @package air-helper
  */
@@ -19,6 +19,10 @@
  */
 add_filter( 'rest_endpoints', 'air_helper_disable_rest_endpoints' );
 function air_helper_disable_rest_endpoints( $endpoints ) {
+  if ( current_user_can( 'edit_posts' ) ) {
+    return $endpoints;
+  }
+
   if ( isset( $endpoints['/wp/v2/users'] ) ) {
     unset( $endpoints['/wp/v2/users'] );
   }
