@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:15:47
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:27:11
+ * @Last Modified time: 2021-01-29 11:03:14
  *
  * @package air-helper
  */
@@ -23,7 +23,6 @@ function air_helper_helper_remove_admin_menu_links() {
   $remove_items = apply_filters( 'air_helper_helper_remove_admin_menu_links', [
     'edit-comments.php',
     'themes.php?page=editcss',
-    'widgets.php',
     'admin.php?page=jetpack',
   ] );
 
@@ -34,6 +33,9 @@ function air_helper_helper_remove_admin_menu_links() {
   $remove_items = apply_filters( 'air_helper_helper_remove_admin_submenu_links', [
     'index.php' => [
       'update-core.php',
+    ],
+    'themes.php' => [
+      'widgets.php',
     ],
   ] );
 
