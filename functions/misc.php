@@ -20,8 +20,8 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
    */
   function get_icons_for_user( $args = [] ) {
     $default_args = [
-      'show_preview' => false, // Shows icon preview, requires you have enabled Select2 in ACF Select field
-      'icon_path' => 'svg/foruser/', // Set icon path in theme directory
+      'show_preview' => false,
+      'icon_path' => '/svg/foruser/',
     ];
 
     $args = wp_parse_args( $args, $default_args );
@@ -38,7 +38,7 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
       // If using the ACF select2 improved UI, show preview icons
       if ( $args['show_preview'] ) {
         ob_start();
-        echo esc_html( ucfirst( $filename ) ) . '&nbsp;&nbsp;<br/><br/>';
+        echo esc_html( ucfirst( $filename ) );
         include get_theme_file_path( $args['icon_path'] . $raw_filename );
         $icons[ $raw_filename ] = ob_get_clean();
       } else {
