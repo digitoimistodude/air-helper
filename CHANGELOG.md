@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Changed
 - Allow REST API users endpoints if user is logged in and can edit_posts
+- Get icons with previews from any theme path
 
 ### Fixed
 - Escape outputting localization functions ask_e, asv_e and pll_e return
