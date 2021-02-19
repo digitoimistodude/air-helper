@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:42:40
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-03-12 13:31:48
+ * @Last Modified time: 2021-02-19 14:26:46
  *
  * @package air-helper
  */
@@ -20,7 +20,7 @@
 if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   $update_option = true;
 
-  if ( 'production' === getenv( 'WP_ENV' ) && get_option( 'air_helper_changed_uploads_path' ) ) {
+  if ( 'production' === wp_get_environment_type() && get_option( 'air_helper_changed_uploads_path' ) ) {
     $update_option = false;
   }
 

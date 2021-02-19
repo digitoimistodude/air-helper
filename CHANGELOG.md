@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Allow REST API users endpoints if user is logged in and can edit_posts
 - Get icons with previews from any theme path
+- Changed `WP_ENV` checks to new core function `wp_get_environment_type` introduced in 5.5
 
 ### Fixed
 - Escape outputting localization functions ask_e, asv_e and pll_e return

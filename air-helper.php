@@ -6,7 +6,7 @@
  * Version: 2.5.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
- * Requires at least: 5.0
+ * Requires at least: 5.5
  * Tested up to: 5.5
  * License: GPL-3.0+
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html

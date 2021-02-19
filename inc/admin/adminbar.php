@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:14:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-20 10:51:38
+ * @Last Modified time: 2021-02-19 14:28:58
  *
  * @package air-helper
  */
@@ -53,14 +53,12 @@ function air_helper_helper_remove_admin_bar_links() {
 add_action( 'admin_bar_menu', 'air_helper_adminbar_show_env', 999 );
 function air_helper_adminbar_show_env( $wp_admin_bar ) {
   // Default to production env
-  $env = esc_attr__( 'production', 'air-helper' );
+  $env = wp_get_environment_type();
   $class = 'air-helper-env-prod';
 
-  if ( getenv( 'WP_ENV' ) === 'staging' ) {
-    $env = esc_attr__( 'staging', 'air-helper' );
+  if ( wp_get_environment_type() === 'staging' ) {
     $class = 'air-helper-env-stage';
-  } else if ( getenv( 'WP_ENV' ) === 'development' ) {
-    $env = esc_attr__( 'development', 'air-helper' );
+  } else if ( wp_get_environment_type() === 'development' ) {
     $env .= ' (DB ' . getenv( 'DB_HOST' ) . ')'; // On dev, show database
     $class = 'air-helper-env-dev';
   }

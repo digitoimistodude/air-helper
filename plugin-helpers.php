@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-25 10:47:23
+ * @Last Modified time: 2021-02-19 14:26:47
  *
  * @package air-helper
  */
@@ -65,7 +65,7 @@ function air_helper_get_care_plan_hostnames() {
 function air_helper_site_has_care_plan() {
   $hostnames = air_helper_get_care_plan_hostnames();
 
-  if ( 'development' !== getenv( 'WP_ENV' ) && ! array_key_exists( php_uname( 'n' ), $hostnames ) ) {
+  if ( 'development' !== wp_get_environment_type() && ! array_key_exists( php_uname( 'n' ), $hostnames ) ) {
     return false;
   }
 
