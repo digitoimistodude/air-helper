@@ -83,7 +83,6 @@ require_once air_helper_base_path() . '/inc/customizer.php';
 require_once air_helper_base_path() . '/inc/gravity-forms.php';
 require_once air_helper_base_path() . '/inc/yoast-seo.php';
 require_once air_helper_base_path() . '/inc/imagify.php';
-require_once air_helper_base_path() . '/inc/autodescription.php';
 require_once air_helper_base_path() . '/inc/tinymce.php';
 require_once air_helper_base_path() . '/inc/media.php';
 require_once air_helper_base_path() . '/inc/misc.php';
@@ -108,6 +107,7 @@ require_once air_helper_base_path() . '/inc/admin/help-widget.php';
 require_once air_helper_base_path() . '/inc/admin/updates.php';
 require_once air_helper_base_path() . '/inc/admin/helpscout.php';
 require_once air_helper_base_path() . '/inc/admin/polylang.php';
+require_once air_helper_base_path() . '/inc/admin/autodescription.php';
 } // end air_helper_admin_fly
 
 /**
