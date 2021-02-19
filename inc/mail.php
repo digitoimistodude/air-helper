@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:26:03
+ * @Last Modified time: 2021-02-19 14:26:45
  *
  * @package air-helper
  */
@@ -17,12 +17,12 @@
  *
  *  @since  0.1.0
  */
-if ( getenv( 'WP_ENV' ) === 'development' ) {
+if ( wp_get_environment_type() === 'development' ) {
   add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
 }
 
 // Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
-if ( getenv( 'WP_ENV' ) === 'staging' ) {
+if ( wp_get_environment_type() === 'staging' ) {
   add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
   add_filter( 'wp_mail_from', 'air_helper_staging_wp_mail_from' );
 }
@@ -40,7 +40,7 @@ if ( getenv( 'WP_ENV' ) === 'staging' ) {
 function air_helper_helper_force_mail_to( $args ) {
   $to = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
 
-  if ( getenv( 'WP_ENV' ) === 'staging' ) {
+  if ( wp_get_environment_type() === 'staging' ) {
     $allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', [ 'administrator', 'editor', 'author' ] );
     $user = get_user_by( 'email', $args['to'] );
 
