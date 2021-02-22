@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.7.1] - 2021-02-22
+### Fixed
+- Prefixed `remove_recent_comments_style` function properly
+
 ## [2.7.0] - 2021-02-22
 ### Added
 - Notice if The SEO Framework options have not been reseted to our standards

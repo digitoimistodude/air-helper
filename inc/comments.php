@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:22:06
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-22 19:41:47
+ * @Last Modified time: 2021-02-22 19:44:42
  *
  * @package air-helper
  */
@@ -31,6 +31,14 @@ function air_helper_pingback_header() {
  */
 add_action( 'widgets_init', 'air_helper_remove_recent_comments_style' );
 function air_helper_remove_recent_comments_style() {
+  if ( ! function_exists( 'air_helper_activated_at_version' ) ) {
+    return;
+  }
+
+  if ( air_helper_activated_at_version() < 2600 ) {
+    return;
+  }
+
   global $wp_widget_factory;
   remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
 } // end air_helper_remove_recent_comments_style
