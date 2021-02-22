@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.7.1] - 2021-02-22
 ### Fixed
 - Prefixed `remove_recent_comments_style` function properly
+- Do not remove comment widget styles if air helped activated before version 2.6.0
 
 ## [2.7.0] - 2021-02-22
 ### Added
