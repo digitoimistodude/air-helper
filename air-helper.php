@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: Plugin provides helpful functions and modifications for WordPress projects.
- * Version: 2.6.0
+ * Version: 2.7.0
  * Author: Digitoimisto Dude Oy, Timi Wahalahti
  * Author URI: https://www.dude.fi
  * Requires at least: 5.5
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return integer current version of plugin
  */
 function air_helper_version() {
-  return 2600;
+  return 2700;
 }
 
 /**
@@ -83,7 +83,6 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/gravity-forms.php';
   require_once air_helper_base_path() . '/inc/yoast-seo.php';
   require_once air_helper_base_path() . '/inc/imagify.php';
-  require_once air_helper_base_path() . '/inc/autodescription.php';
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
@@ -99,6 +98,7 @@ add_action( 'init', 'air_helper_admin_fly' );
   }
 
   require_once air_helper_base_path() . '/inc/admin/adminbar.php';
+  require_once air_helper_base_path() . '/inc/admin/autodescription.php';
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
   require_once air_helper_base_path() . '/inc/admin/access.php';
   require_once air_helper_base_path() . '/inc/admin/acf.php';
