@@ -5,7 +5,7 @@
  * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:   						2018-11-13 18:06:44
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-04-05 16:33:45
+ * @Last Modified time: 2021-05-18 13:01:28
  *
  * @package air-helper
  */
@@ -39,6 +39,7 @@ function air_helper_clear_admin_dashboard() {
 			'wpseo-dashboard-overview', // yoast
 			'rg_forms_dashboard', // gravity forms
       'dashboard_rediscache',
+      'dashboard_php_nag',
 		],
 		'side'		=> [
 			'dashboard_quick_press',
