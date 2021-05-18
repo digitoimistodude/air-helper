@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-02-11 15:18:11
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 16:35:16
+ * @Last Modified time: 2021-05-18 13:10:49
  *
  * @package air-helper
  */
@@ -13,6 +13,7 @@
 // Disable some features
 add_filter( 'get_imagify_option_admin_bar_menu', '__return_false' );
 add_filter( 'get_imagify_option_convert_to_webp', '__return_false' );
+add_filter( 'get_imagify_option_backup', '__return_false' );
 
 /**
  * Get Imagify API key from .env
