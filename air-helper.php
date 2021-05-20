@@ -69,6 +69,7 @@ function air_helper_fly() {
   // Function files
   require_once air_helper_base_path() . '/functions/archives.php';
   require_once air_helper_base_path() . '/functions/checks.php';
+  require_once air_helper_base_path() . '/functions/custom-settings.php';
   require_once air_helper_base_path() . '/functions/pagination.php';
   require_once air_helper_base_path() . '/functions/misc.php';
   require_once air_helper_base_path() . '/functions/localization.php';
