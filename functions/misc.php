@@ -28,8 +28,10 @@ if ( ! function_exists( 'get_icons_for_user' ) ) {
     $args = wp_parse_args( $args, $default_args );
     $icons = [];
 
-    if ( $args['show_empty'] ) {
-      $icons[0] = __( 'No icon', 'air-helper' ) . '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#888" d="M0 10a10 10 0 1 1 20 0 10 10 0 0 1-20 0zm16.32-4.9L5.09 16.31A8 8 0 0 0 16.32 5.09zm-1.41-1.42A8 8 0 0 0 3.68 14.91L14.91 3.68z"/></svg>';
+    if ( $args['show_empty'] && $args['show_preview'] ) {
+      $icons[0] = esc_html__( 'No icon', 'air-helper' ) . '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#888" d="M0 10a10 10 0 1 1 20 0 10 10 0 0 1-20 0zm16.32-4.9L5.09 16.31A8 8 0 0 0 16.32 5.09zm-1.41-1.42A8 8 0 0 0 3.68 14.91L14.91 3.68z"/></svg>';
+    } elseif ( $args['show_empty'] ) {
+      $icons[0] = esc_html__( 'No icon', 'air-helper' );
     }
 
     $files = glob( get_template_directory() . '/' . $args['icon_path'] . '*.svg' );
