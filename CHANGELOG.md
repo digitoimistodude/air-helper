@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Allow user to select "No icon" when ACF icon select field is set to "Allow null"
+
 ## [2.8.0] - 2021-05-18
 ### Added
 - Disabled Imagify backup by default
