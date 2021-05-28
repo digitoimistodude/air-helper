@@ -148,3 +148,41 @@ if ( ! function_exists( 'get_primary_category' ) ) {
     return false;
   } // end get_primary_category
 } // end if
+
+if ( ! function_exists( 'the_block_content' ) ) {
+  /**
+   * Outputs block content from a post
+   *
+   * @since  2.9.0
+   * @param int     $post_id Post id to get block content from.
+   * @param boolean $echo If true, echoes the block content otherwise returns.
+   * @return mixed
+   */
+  function the_block_content( $post_id, $echo = true ) {
+    if ( ! has_blocks( $post_id ) ) {
+      return;
+    }
+
+    /**
+     * Overwrite global post to make post related
+     * functions work inside block content
+     */
+    global $post;
+    $post = get_post( $post_id ); // phpcs:ignore
+    setup_postdata( $post );
+
+    // Do the block content
+    $block_content = apply_filters( 'the_content', get_the_content( '', '', $post ) );
+
+    wp_reset_postdata();
+
+    if ( ! $echo ) {
+      return $block_content;
+    }
+
+    /**
+     * Output blocks, already escaped on render function
+     */
+    echo $block_content; // phpcs:ignore
+  } // end the_block_content
+} // end if
