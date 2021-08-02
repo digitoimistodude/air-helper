@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-02-12 14:29:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-02 15:21:40
+ * @Last Modified time: 2021-08-02 14:24:25
  *
  * @package air-helper
  */
@@ -41,6 +41,15 @@ function air_helper_enqueue_helpscout_beacon() {
   if ( ! air_helper_is_helpscout_beacon_configured() ) {
     return;
   }
+
+  // Increase body padding for the HS widget not to override paging controls
+  add_action( 'admin_head', function() { ?>
+    <style type="text/css">
+      #wpbody-content {
+        padding-bottom: 100px;
+      }
+    </style>
+  <?php } );
 
   wp_enqueue_script( 'helpscout-beacon', air_helper_base_url() . '/assets/js/helpscout-beacon.js', [], '2.0.0', true );
 
