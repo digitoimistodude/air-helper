@@ -5,10 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.9.0] - 2021-08-02
 ### Added
 - Allow user to select "No icon" when ACF icon select field is set to "Allow null"
 - Add custom settings functionality
 - Increase body padding for the HS widget not to override paging controls
+- Add helper function to output block content
+- Use block editor in custom setting groups
 
 ## [2.8.0] - 2021-05-18
 ### Added
