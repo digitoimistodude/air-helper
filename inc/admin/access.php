@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:15:47
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-01-29 11:03:14
+ * @Last Modified time: 2021-08-03 10:00:03
  *
  * @package air-helper
  */
@@ -37,6 +37,9 @@ function air_helper_helper_remove_admin_menu_links() {
     'themes.php' => [
       'widgets.php',
     ],
+    'options-general.php' => [
+      'mailgun-lists'
+    ]
   ] );
 
   foreach ( $remove_items as $parent => $items ) {
