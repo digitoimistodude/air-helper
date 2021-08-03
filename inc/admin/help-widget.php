@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:16:02
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-14 10:59:40
+ * @Last Modified time: 2021-08-03 10:13:32
  *
  * @package air-helper
  */
@@ -231,5 +231,5 @@ function _air_helper_admin_dashboard_widget_get_api_url() {
  *  @return string  api key
  */
 function _air_helper_admin_dashboard_widget_get_api_key() {
-  return getenv( 'SENDGRID_API_KEY' );
+  return ! empty( getenv( 'DUDE_API_KEY' ) ) ? getenv( 'DUDE_API_KEY' ) : getenv( 'SENDGRID_API_KEY' );
 } // end _air_helper_admin_dashboard_widget_get_api_key
