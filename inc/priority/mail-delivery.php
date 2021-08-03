@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-03 10:20:41
+ * @Last Modified time: 2021-08-03 10:21:35
  *
  * @package air-helper
  */
@@ -18,7 +18,7 @@
  *
  *  @since 0.1.0
  */
-if ( apply_filters( 'air_helper_mail_delivery', true ) || apply_filters( 'air_helper_sendgrid', true ) ) {
+if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_helper_sendgrid', true ) ) {
   add_action( 'admin_init', 'air_helper_mail_delivery_check' );
 
   // Mailgun support.
