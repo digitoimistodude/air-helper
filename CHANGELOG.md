@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.10.0] - 2021-08-03
+### Added
+- Support for official Mailgun plugin on email delivery settings forcing
+
+### Changed
+- Priority loaded file forcing email delivery settings renamed from sendgrid.php to mail-delivery.php
+- Started using own dedicated API key in dashboard help widget data requests, falls back to using sending key if new one is not defined
+
 ## [2.9.0] - 2021-08-02
 ### Added
 - Allow user to select "No icon" when ACF icon select field is set to "Allow null"
