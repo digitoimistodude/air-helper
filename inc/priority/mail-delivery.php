@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-03 10:21:35
+ * @Last Modified time: 2021-08-03 11:09:28
  *
  * @package air-helper
  */
@@ -22,7 +22,7 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_he
   add_action( 'admin_init', 'air_helper_mail_delivery_check' );
 
   // Mailgun support.
-  if ( is_plugin_active( 'mailgun/mailgun.php' ) ) {
+  if ( is_plugin_active( 'mailgun/mailgun.php' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
     define( 'MAILGUN_APIKEY', getenv( 'MAILGUN_API_KEY' ) );
     define( 'MAILGUN_REGION', ! empty( getenv( 'MAILGUN_REGION' ) ) ? getenv( 'MAILGUN_REGION' ) : 'eu' ); // default to eu region
     define( 'MAILGUN_DOMAIN', ! empty( getenv( 'MAILGUN_DOMAIN' ) ) ? getenv( 'MAILGUN_DOMAIN' ) : str_replace( [ 'https://', 'http://', 'www.', '/wp' ], '', get_site_url() ) );
