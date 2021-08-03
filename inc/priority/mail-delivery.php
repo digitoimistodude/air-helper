@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-03 11:09:28
+ * @Last Modified time: 2021-08-03 11:12:53
  *
  * @package air-helper
  */
@@ -42,7 +42,7 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_he
  *  @since  1.5.3
  */
 function air_helper_mail_delivery_check() {
-  if ( is_plugin_active( 'mailgun/mailgun.php' ) && getenv( 'MAILGUN_API_KEY' ) ) {
+  if ( is_plugin_active( 'mailgun/mailgun.php' ) && getenv( 'MAILGUN_API_KEY' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
     return true;
   }
 
