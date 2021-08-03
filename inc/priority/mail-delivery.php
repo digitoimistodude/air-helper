@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-03 09:54:06
+ * @Last Modified time: 2021-08-03 10:20:41
  *
  * @package air-helper
  */
@@ -23,7 +23,7 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) || apply_filters( 'air_he
 
   // Mailgun support.
   if ( is_plugin_active( 'mailgun/mailgun.php' ) ) {
-    define( 'MAILGUN_APIKEY', getenv( 'MAILGUN_APIKEY' ) );
+    define( 'MAILGUN_APIKEY', getenv( 'MAILGUN_API_KEY' ) );
     define( 'MAILGUN_REGION', ! empty( getenv( 'MAILGUN_REGION' ) ) ? getenv( 'MAILGUN_REGION' ) : 'eu' ); // default to eu region
     define( 'MAILGUN_DOMAIN', ! empty( getenv( 'MAILGUN_DOMAIN' ) ) ? getenv( 'MAILGUN_DOMAIN' ) : str_replace( [ 'https://', 'http://', 'www.', '/wp' ], '', get_site_url() ) );
   }
@@ -42,7 +42,7 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) || apply_filters( 'air_he
  *  @since  1.5.3
  */
 function air_helper_mail_delivery_check() {
-  if ( is_plugin_active( 'mailgun/mailgun.php' ) && getenv( 'MAILGUN_APIKEY' ) ) {
+  if ( is_plugin_active( 'mailgun/mailgun.php' ) && getenv( 'MAILGUN_API_KEY' ) ) {
     return true;
   }
 
