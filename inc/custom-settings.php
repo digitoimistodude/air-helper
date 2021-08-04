@@ -4,8 +4,8 @@
  *
  * @Author: Niku Hietanen
  * @Date: 2021-05-28 14:16:00
- * @Last Modified by: Niku Hietanen
- * @Last Modified time: 2021-05-28 14:34:02
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2021-08-04 14:28:04
  *
  * @package air-helper
  */
@@ -42,6 +42,8 @@ function air_helper_editor_support_for_setting_group_post() {
 /**
  * Check whether to use classic or block editor
  * for a certain post type as defined in the settings
+ *
+ * @since 2.9.0
  */
 add_filter( 'use_block_editor_for_post', __NAMESPACE__ . '\air_helper_use_block_editor_in_custom_setting_group', 10, 2 );
 function air_helper_use_block_editor_in_custom_setting_group( $use_block_editor, $post ) {
@@ -51,5 +53,6 @@ function air_helper_use_block_editor_in_custom_setting_group( $use_block_editor,
   if ( in_array( $post->post_type, $settings_post_types, true ) ) {
     return use_block_editor_in_custom_setting_group( $post->ID );
   }
+
   return $use_block_editor;
 } // end air_helper_use_block_editor_in_custom_setting_group

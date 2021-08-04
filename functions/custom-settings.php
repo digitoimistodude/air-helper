@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-05-20 17:54:57
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-04 14:25:48
+ * @Last Modified time: 2021-08-04 14:26:54
  *
  * @package air-helper
  */
@@ -70,9 +70,12 @@ if ( ! function_exists( 'get_custom_settings_post_id' ) ) {
 } // end if
 
 if ( ! function_exists( 'use_block_editor_in_custom_setting_group' ) ) {
-
   /**
    * Check if to use block editor in setting group post.
+   *
+   * @since  2.9.0
+   * @param  integer $post_id the post to check.
+   * @return boolean          true if post should use block editor, otherwise false.
    */
   function use_block_editor_in_custom_setting_group( $post_id ) {
     $setting_group_post_ids = apply_filters( 'air_helper_custom_settings_post_ids', [] );
@@ -100,5 +103,5 @@ if ( ! function_exists( 'use_block_editor_in_custom_setting_group' ) ) {
     }
 
     return false;
-  }
-}
+  } // end use_block_editor_in_custom_setting_group
+} // end if
