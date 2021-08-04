@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2021-05-20 17:54:57
- * @Last Modified by: Niku Hietanen
- * @Last Modified time: 2021-05-28 14:34:18
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2021-08-04 14:25:48
  *
  * @package air-helper
  */
@@ -76,6 +76,10 @@ if ( ! function_exists( 'use_block_editor_in_custom_setting_group' ) ) {
    */
   function use_block_editor_in_custom_setting_group( $post_id ) {
     $setting_group_post_ids = apply_filters( 'air_helper_custom_settings_post_ids', [] );
+
+    $setting_group_post_ids = array_map( function( $post_id ) {
+      return pll_get_post( $post_id );
+    }, $setting_group_post_ids );
 
     if ( ! in_array( $post_id, $setting_group_post_ids, true ) ) {
       return false;
