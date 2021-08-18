@@ -68,6 +68,14 @@ add_filter( 'air_helper_pll_register_strings', function() {
 } );
 ```
 
+#### REST API support for string translations
+
+By default, the string translation functions like `ask__()` does not work as intended when run inside a REST request, because Polylang does not support it. You can enable support by setting a `lang` parameter to your REST request and enabling the feature with hook:
+
+```php
+add_filter( 'air_helper_pll_enable_rest', '__return_true' );
+```
+
 ### Image lazyloading
 
 Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy) and [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.

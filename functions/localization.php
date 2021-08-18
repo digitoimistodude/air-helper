@@ -21,6 +21,14 @@ function ask__( $key, $lang = null ) {
   $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
   if ( isset( $strings[ $key ] ) ) {
+    /**
+     * Check if this is a REST API request and try to get current lang from the get
+     * parameter because pll_get_current_language does not work inside a REST request
+     */
+    if ( apply_filters( 'air_helper_pll_enable_rest', false ) && defined( 'REST_REQUEST' ) && isset( $_GET['lang'] ) ) { // phpcs:ignore
+      $lang = sanitize_key( $_GET['lang'] ); // phpcs:ignore
+    }
+
     if ( null === $lang ) {
       return pll__( $strings[ $key ] );
     } else {
