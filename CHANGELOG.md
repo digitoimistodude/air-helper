@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Support for REST requests to string translation functions
+
 ## [2.10.2] - 2021-08-04
 ### Fixed
 - Polylang support for custom setting group block editor checks
