@@ -21,7 +21,7 @@
  */
 add_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' );
 function air_helper_helper_remove_archive_title_prefix( $title ) {
-  return preg_replace( '/^\w+: /', '', $title );
+  return preg_replace( '#^[\w\d\s]+:\s*#', '', wp_strip_all_tags( $title ) );
 } // end air_helper_helper_remove_archive_title_prefix
 
 /**
