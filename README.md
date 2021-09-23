@@ -21,6 +21,7 @@ Air helper provides helpful functions and modifications for WordPress projects. 
   - [Modified WordPress functionality](#modified-wordpress-functionality)
     * [Admin](#admin)
     * [Security](#security)
+    * [ACF](#acf)
     * [Archives](#archives)
     * [The SEO Framework](#the-seo-framework)
     * [Yoast](#yoast)
@@ -127,7 +128,7 @@ If you want to get lazyloading div or tag as a string, you may prefix functions 
 #### Misc
 * `get_icons_for_user( $args)` Get list of icons which are available for user. Returns array of icons from defined theme directory (default `svg/foruser/`).
 * `wp_parse_args_dimensional( $a, $b )` Similar to wp_parse_args() just extended to work with multidimensional arrays.
-* `get_the_sentence_excerpt( $length, $excerpt )` Get excerpt with custom length of sentences. Defaults to three sentences and current post.
+* `get_the_sentence_excerpt( $length, $excerpt )` Get excerpt with custom length of sentences. Defaults to three sentences and current post.
 * `get_primary_category( $post_id )` Get primary category for defined or current post.
 
 ### Modified WordPress functionality
@@ -156,6 +157,10 @@ To find out how the modification exactly works and how to disable it, search for
 * Add honeypot to the login form. _NB! This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
 * Change login failed message.
 * Remove hosting provider spesific information from Site Health check.
+
+#### ACF
+* Hide ACF for all users expect the ones that have certain domain in their email address or user meta `_airhelper_admin_show_acf` with value of `true`
+* Try to activate the pro version automatically if `ACF_PRO_KEY` is defined in .env file
 
 #### Archives
 * Remove archive title prefix. Turn off by using `remove_filter( 'get_the_archive_title', 'air_helper_helper_remove_archive_title_prefix' )`
