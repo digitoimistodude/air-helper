@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.11.0] 2021-09-23
+## [2.11.0] & [2.11.1] 2021-09-23
 ### Added
 - Remove plugins page from multisite admin menu
 - Email delivery support for MailHog when in development environment
