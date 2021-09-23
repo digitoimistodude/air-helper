@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.11.0] 2021-09-23
+### Added
+- Remove plugins page from multisite admin menu
+- Email delivery support for MailHog when in development environment
+- If ACF Pro key is defined in .env file, try to activate the license automatically
+
+### Updated
+- Email delivery `is_plugin_active` checks with more robust checks that do not fail in frontend
+
+### Fixed
+- Regular expression for archive prefix removal
+
 ## [2.10.3] 2021-08-19
 ### Added
 - Support for REST requests to string translation functions
