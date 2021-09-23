@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:40:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-09-23 13:44:50
+ * @Last Modified time: 2021-09-23 15:00:45
  *
  * @package air-helper
  */
@@ -22,14 +22,14 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_he
   add_action( 'admin_init', 'air_helper_mail_delivery_check' );
 
   // Mailgun support.
-  if ( is_plugin_active( 'mailgun/mailgun.php' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
+  if ( class_exists( 'Mailgun' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
     define( 'MAILGUN_APIKEY', getenv( 'MAILGUN_API_KEY' ) );
     define( 'MAILGUN_REGION', ! empty( getenv( 'MAILGUN_REGION' ) ) ? getenv( 'MAILGUN_REGION' ) : 'eu' ); // default to eu region
     define( 'MAILGUN_DOMAIN', ! empty( getenv( 'MAILGUN_DOMAIN' ) ) ? getenv( 'MAILGUN_DOMAIN' ) : str_replace( [ 'https://', 'http://', 'www.', '/wp' ], '', get_site_url() ) );
   }
 
   // SendGrid for legacy support.
-  if ( is_plugin_active( 'sendgrid-email-delivery-simplified/wpsendgrid.php' ) && getenv( 'SENDGRID_API_KEY' ) ) {
+  if ( class_exists( 'Sendgrid_Tools' ) && getenv( 'SENDGRID_API_KEY' ) ) {
     define( 'SENDGRID_API_KEY', getenv( 'SENDGRID_API_KEY' ) );
     define( 'SENDGRID_CATEGORIES', sanitize_title( get_option( 'blogname' ) ) );
     define( 'SENDGRID_STATS_CATEGORIES', sanitize_title( get_option( 'blogname' ) ) );
@@ -52,12 +52,12 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_he
  *  @since  1.5.3
  */
 function air_helper_mail_delivery_check() {
-  if ( is_plugin_active( 'mailgun/mailgun.php' ) && getenv( 'MAILGUN_API_KEY' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
+  if ( class_exists( 'Mailgun' ) && getenv( 'MAILGUN_API_KEY' ) && ( defined( 'MAILGUN_USEAPI' ) && MAILGUN_USEAPI ) ) {
     return true;
   }
 
   // SendGrid for legacy support.
-  if ( is_plugin_active( 'sendgrid-email-delivery-simplified/wpsendgrid.php' ) && getenv( 'SENDGRID_API_KEY' ) ) {
+  if ( class_exists( 'Sendgrid_Tools' ) && getenv( 'SENDGRID_API_KEY' ) ) {
     return true;
   }
 
