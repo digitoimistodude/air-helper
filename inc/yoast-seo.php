@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:30:25
  * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 15:12:27
+ * @Last Modified time: 2021-11-18 15:20:05
  *
  * @package air-helper
  */
@@ -22,6 +22,13 @@ function air_helper_lowpriority_yoastseo() {
   return 'low';
 } // end air_helper_lowpriority_yoastseo
 
+/**
+ *  Remove written by from enhanced data if author email cointains specific domain.
+ *
+ *  Turn off by using `remove_filter( 'wpseo_enhanced_slack_data', 'air_helper_maybe_remove_author_from_enhanced_data' )`
+ *
+ *  @since  2.12.0
+ */
 add_filter( 'wpseo_enhanced_slack_data', 'air_helper_maybe_remove_author_from_enhanced_data', 10, 2 );
 function air_helper_maybe_remove_author_from_enhanced_data( $data, $presentation ) {
   if ( ! isset( $presentation->source->post_author ) ) {

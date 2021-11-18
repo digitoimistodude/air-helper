@@ -11,7 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fixed the_block_content function when using a string as post_id.
 
 ### Changed
--Changed instantpage script to load from plugin instead of outside source.
+- Changed instantpage script to load from plugin instead of outside source.
+
+### Added
+- Remove written by from Yoast enhanced data if author email cointains specific domain.
 
 ## [2.11.0] & [2.11.1] 2021-09-23
 ### Added
