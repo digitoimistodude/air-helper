@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-02 15:43:20
+ * @Last Modified by:   Elias Kautto
+ * @Last Modified time: 2021-11-18 14:33:03
  *
  * @package air-helper
  */
@@ -47,13 +47,11 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
 /**
  * Add instant.page just-in-time preloading script to footer.
  *
- * Disble using `remove_action( 'wp_footer', 'air_helper_enqueue_instantpage_script', 50 )`
+ * Disble using `remove_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script', 50 )`
  *
  * @since 5.0.0
- * phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript
  */
-add_action( 'wp_footer', 'air_helper_enqueue_instantpage_script', 50 );
-function air_helper_enqueue_instantpage_script() { ?>
-  <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
-<?php } // end air_helper_enqueue_instantpage_script
-// phpcs:enable
+add_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script' );
+function air_helper_enqueue_instantpage_script() {
+  wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.1.0', true );
+} // end air_helper_enqueue_instantpage_script
