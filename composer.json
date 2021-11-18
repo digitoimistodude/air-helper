@@ -8,20 +8,27 @@
     "plugin"
   ],
   "license": "GPL-3.0+",
-  "version": "2.11.1",
-  "authors": [{
-    "name": "Timi Wahalahti",
-    "email": "timi@dude.fi",
-    "homepage": "https://github.com/timiwahalahti"
-  },
-  {
-    "name": "Roni Laukkarinen",
-    "email": "roni@dude.fi",
-    "homepage": "https://github.com/ronilaukkarinen"
-  },
-  {
-    "name": "Niku Hietanen",
-    "email": "niku@dude.fi",
-    "homepage": "https://github.com/niq1982"
-  }]
+  "version": "2.12.0",
+  "authors": [
+    {
+      "name": "Timi Wahalahti",
+      "email": "timi@dude.fi",
+      "homepage": "https://github.com/timiwahalahti"
+    },
+    {
+      "name": "Roni Laukkarinen",
+      "email": "roni@dude.fi",
+      "homepage": "https://github.com/ronilaukkarinen"
+    },
+    {
+      "name": "Niku Hietanen",
+      "email": "niku@dude.fi",
+      "homepage": "https://github.com/niq1982"
+    },
+    {
+      "name": "Elias Kautto",
+      "email": "elias@dude.fi",
+      "homepage": "https://github.com/eliaskau"
+    }
+  ]
 }
