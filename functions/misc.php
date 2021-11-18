@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:53:45
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-09-14 15:22:38
+ * @Last Modified by:   Elias Kautto
+ * @Last Modified time: 2021-11-18 10:01:35
  *
  * @package air-helper
  */
@@ -110,8 +110,9 @@ if ( ! function_exists( 'get_primary_category' ) ) {
    * Get primary category for post.
    *
    * @since  2.2.0
-   * @param  integer $post_id Which post to get the primary category for, if empty current post is used.
-   * @return mixed            Boolean false of no category, otherwise WP_Term object.
+   * @param  integer $post_id   Which post to get the primary category for, if empty current post is used.
+   * @param  string  $taxonomy  From which taxonomy to get the term from, defaults to category.
+   * @return mixed              Boolean false of no category, otherwise WP_Term object.
    */
   function get_primary_category( $post_id = 0, $taxonomy = 'category' ) {
     $post_id = ! empty( $post_id ) ? $post_id : get_the_id();
