@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Updated
 - Updated ACF Pro license key fetching, to use new ACF_PRO_LICENSE constant.
 
+### Fixed
+- Fixed the_block_content function when using a string as post_id.
+
 ## [2.11.0] & [2.11.1] 2021-09-23
 ### Added
 - Remove plugins page from multisite admin menu

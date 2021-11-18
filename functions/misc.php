@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:53:45
  * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 10:01:35
+ * @Last Modified time: 2021-11-18 14:10:53
  *
  * @package air-helper
  */
@@ -160,6 +160,10 @@ if ( ! function_exists( 'the_block_content' ) ) {
    * @return mixed
    */
   function the_block_content( $post_id, $echo = true ) {
+    if ( ! is_int( $post_id ) ) {
+      $post_id = absint( $post_id );
+    }
+
     if ( ! has_blocks( $post_id ) ) {
       return;
     }
