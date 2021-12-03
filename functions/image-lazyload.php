@@ -5,7 +5,7 @@
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-21 10:32:53
+ * @Last Modified time: 2021-12-03 13:21:28
  *
  * @package air-helper
  */
@@ -32,7 +32,7 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
   }
 
   // Bail if ID is not attachment
-  if ( 'attachment' !== get_post_type( $image_id ) ) {
+  if ( 'attachment' !== get_post_type( $image_id ) && apply_filters( 'air_helper_lazyload_do_post_type_check', true ) ) {
     return false;
   }
 
@@ -111,7 +111,7 @@ function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = [] ) 
   }
 
   // Bail if ID is not attachment
-  if ( 'attachment' !== get_post_type( $image_id ) ) {
+  if ( 'attachment' !== get_post_type( $image_id ) && apply_filters( 'air_helper_lazyload_do_post_type_check', true ) ) {
     return false;
   }
 

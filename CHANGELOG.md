@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.12.1]
+### Changed
+- Allow disabling post type check on lazyload, this is needed sometimes on MU installations
+
 ## [2.12.0] 2021-11-18
 ### Updated
 - Updated ACF Pro license key fetching, to use new ACF_PRO_LICENSE constant.
