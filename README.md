@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![Tested_up_to WordPress_5.7](https://img.shields.io/badge/Tested_up_to-WordPress_5.7-blue.svg?style=flat-square) ![Compatible_with PHP_7.2](https://img.shields.io/badge/Compatible_with-PHP_7.2-green.svg?style=flat-square) [![Build Status](https://img.shields.io/travis/com/digitoimistodude/air-helper.svg?style=flat-square)](https://travis-ci.com/digitoimistodude/air-helper)
 
-Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi). Plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
+Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi). The plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
 
 ## Table of contents
 
@@ -48,7 +48,7 @@ Air helper and Air light are used for **development**, so those update very ofte
 
 ### Localization and Polylang support
 
-Air helper adds fallbacks for widely used Polylang functions, so you can use those event if there's no Polylang or multilanguage support needed in project at the time. This saves heck lot of a time when client want's multilanguage support later on.
+Air helper adds fallbacks for widely used Polylang functions, so you can use those events if there's no Polylang or multilanguage support needed in project at the time. This saves heck lot of a time when client want's multilanguage support later on.
 
 Refer to section below and [functions](#localization) to find out how to use translated strings.
 
@@ -79,15 +79,15 @@ add_filter( 'air_helper_pll_enable_rest', '__return_true' );
 
 ### Image lazyloading
 
-Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy) and [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
+Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy) and [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper, but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
 
-If plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regerenation can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
+If the plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regeneration can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
 
 Refer to [functions](#image-lazyloading-1) to find out how to use image lazyloading.
 
 ### Disabled views
 
-In most of the client projects there's no need for some views that WordPress creates automatically. Insted of caring about those, show 404 page.
+In most of the client projects there's no need for some views that WordPress creates automatically. Instead of caring about those, show 404 page.
 
 Currently disabled views are:
 - archives: tag, category, date, author
@@ -100,7 +100,7 @@ Enable specific view back with filter `add_filter( 'air_helper_disable_views_{VI
 #### Archive related
 * `get_posts_array( $args, $return_key )` Get posts in key=>title array.
 * `get_post_years()` Get years where there are posts published.
-* `get_post_months_by_year( $year, $post_type )` Get months where there are posts in spesific year. Defaults to current year.
+* `get_post_months_by_year( $year, $post_type )` Get months where there are posts in a specific year. Defaults to current year.
 
 #### Checks
 * `post_exists_id( $post_id )` Check if post exists by ID.
@@ -133,7 +133,7 @@ If you want to get lazyloading div or tag as a string, you may prefix functions 
 
 ### Modified WordPress functionality
 
-Air helper modifies default behaviour of WordPress and various plugins to make it more suitable for customer projects, forcing our preferences and making sure that all the un-neccesary information is hidden or unreachable.
+Air helper modifies default behaviour of WordPress and various plugins to make it more suitable for customer projects, forcing our preferences and making sure that all the unnecessary information is hidden or unreachable.
 
 All these modifications can be disabled or altered with hooks. All modifications live under `inc` directory.
 
@@ -141,25 +141,25 @@ To find out how the modification exactly works and how to disable it, search for
 
 #### Admin
 * Clean up admin menu from stuff we usually don't need.
-* Remove plugins page from admin menu, execpt for users with spesific domain or override in user meta.
-* Hide ACF for all users, execpt for users with spesific domain or override in user meta.
+* Remove plugins page from admin menu, except for users with specific domain or override in user meta.
+* Hide ACF for all users, except for users with specific domain or override in user meta.
 * Clean up admin bar.
-* Add envarioment marker to adminbar.
+* Add environment marker to admin bar.
 * Remove welcome panel.
 * Remove some boxes from dashboard.
-* Add our news and support widget to dashboard. Also make sure that it is always first in order.
+* Add our news and support widget to dashboard. Also, make sure that it is always first in order.
 * Remove some notices from dashboard.
 * Remove Update WP text from admin footer.
 * Hide all WP update nags.
 
 #### Security
-* Stop user enumeraton by ?author=(init) urls.
+* Stop user enumeration by ?author=(init) urls.
 * Add honeypot to the login form. _NB! This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
 * Change login failed message.
-* Remove hosting provider spesific information from Site Health check.
+* Remove hosting provider specific information from Site Health check.
 
 #### ACF
-* Hide ACF for all users expect the ones that have certain domain in their email address or user meta `_airhelper_admin_show_acf` with value of `true`
+* Hide ACF for all users, except the ones that have certain domain in their email address or user meta `_airhelper_admin_show_acf` with value of `true`
 * Try to activate the pro version automatically if `ACF_PRO_KEY` is defined in .env file
 
 #### Archives
@@ -181,7 +181,7 @@ To find out how the modification exactly works and how to disable it, search for
 * Allow Gravity Forms to hide labels to add placeholders.
 
 #### Imagify
-* Disable adminbar menu.
+* Disable admin bar menu.
 * Disable .webp conversion.
 * Get Imagify API key from .env
 * Resize large images and set maximum width.
@@ -192,7 +192,7 @@ To find out how the modification exactly works and how to disable it, search for
 
 #### Mail
 * Force essential SendGrid settings.
-* Force to address in wp_mail function so that test emails wont go to client.
+* Force to address in wp_mail function so that test emails won't go to client.
 * Show notice if SendGrid is not active or configured.
 
 #### Media
@@ -213,13 +213,13 @@ To find out how the modification exactly works and how to disable it, search for
 
 ## Installing
 
-Download [latest](https://github.com/digitoimistodude/air-helper/releases/latest) version as a zip package and unzip it to your plugins directiry.
+Download [the latest](https://github.com/digitoimistodude/air-helper/releases/latest) version as a zip package and unzip it to your plugins directory.
 
 Or install with composer, running command `composer require digitoimistodude/air-helper` in your project directory or add `"digitoimistodude/air-helper":"dev-master"` to your composer.json require.
 
 ### Updates
 
-Updates will be automatically distributed when new version is released.
+Updates will be automatically distributed when a new version is released.
 
 ## Changelog
 
@@ -227,4 +227,4 @@ Changelog can be found from [releases page](https://github.com/digitoimistodude/
 
 ## Contributing
 
-If you have ideas about the plugin or spot an issue, please let us know. Before contributing ideas or reporting an issue about "missing" features or things regarding to the nature of that matter, please read [Please note](#please-note-before-using) section. Thank you very much.
+If you have ideas about the plugin or spot an issue, please let us know. Before contributing ideas or reporting an issue about "missing" features or things regarding the nature of that matter, please read [Please note](#please-note-before-using) section. Thank you very much.
