@@ -4,8 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.13.0]
 ### Added
 * Removed general YITH plugin widgets from dashboard
+* `get_first_page_id` function to get first page id.
+
+### Fixed
+* Sorting in pagination.php functions.
+
+### Removed
+* Removed caching from `get_prev_page_id` and `get_next_page_id` functions.
 
 ## [2.12.1]
 ### Changed
