@@ -25,8 +25,8 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   }
 
   if ( $update_option ) {
-    update_option( 'upload_path', untrailingslashit( str_replace( 'wp', 'media', ABSPATH ) ) );
-    update_option( 'upload_url_path', untrailingslashit( str_replace( 'wp', 'media', get_site_url() ) ) );
+    update_option( 'upload_path', untrailingslashit( preg_replace( '/\bwp\b/u', 'media', ABSPATH ) ) );
+    update_option( 'upload_url_path', untrailingslashit( preg_replace( '/\bwp\b/u', 'media', get_site_url() ) ) );
     update_option( 'air_helper_changed_uploads_path', date_i18n( 'Y-m-d H:i:s' ) );
   } // end option update
 
