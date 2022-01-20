@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-19 14:26:47
+ * @Last Modified time: 2022-01-20 15:39:20
  *
  * @package air-helper
  */
@@ -53,6 +53,7 @@ function air_helper_get_care_plan_hostnames() {
   return apply_filters( 'air_helper_care_plan_hostnames', [
     'craft' => true,
     'ghost' => true,
+    'slash' => true,
   ] );
 } // end air_helper_get_care_plan_hostnames
 
