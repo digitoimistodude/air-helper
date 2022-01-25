@@ -4,8 +4,8 @@
  *
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-21 10:30:19
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2022-01-25 14:34:12
  *
  * @package air-helper
  */
@@ -215,7 +215,8 @@ if ( ! function_exists( 'get_image_lazyload_tag_fallback' ) ) {
 
     // Get the img tag
     ob_start(); ?>
-    <img aria-hidden="true"
+    <img
+      loading="lazy"
       class="lazyload"
       src="<?php echo esc_url( $fallback ); ?>"
       data-src="<?php echo esc_url( $fallback ); ?>"
