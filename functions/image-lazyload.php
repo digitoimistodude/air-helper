@@ -10,6 +10,9 @@
  * @package air-helper
  */
 
+// Native lazyload
+require_once air_helper_base_path() . '/functions/image-lazyload-native.php';
+
 // New cleaner vanilla image lazyload tags introduced in 2.3.1
 require_once air_helper_base_path() . '/functions/image-lazyload-vanilla.php';
 
