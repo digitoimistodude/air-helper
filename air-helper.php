@@ -69,7 +69,6 @@ function air_helper_fly() {
   // Function files
   require_once air_helper_base_path() . '/functions/archives.php';
   require_once air_helper_base_path() . '/functions/checks.php';
-  require_once air_helper_base_path() . '/functions/custom-settings.php';
   require_once air_helper_base_path() . '/functions/pagination.php';
   require_once air_helper_base_path() . '/functions/misc.php';
   require_once air_helper_base_path() . '/functions/localization.php';
@@ -87,7 +86,6 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
-  require_once air_helper_base_path() . '/inc/custom-settings.php';
 } // end air_helper_fly
 
 /**
