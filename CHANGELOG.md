@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 * `native_lazyload_tag` funtion to get a img tag that uses browser native lazyloading.
 
+### Removed
+* Removed custom settings related files. Legacy support can be found in air-helper-legacy-custom-settings repository. All new custom setting related stuff can be found in air-setting-groups repository
+
 ## [2.13.0]
 ### Added
 * Removed general YITH plugin widgets from dashboard
