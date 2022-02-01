@@ -4,8 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.14.0]
 ### Added
 * New server "slash" to care plan allowed hostnames
+* `native_lazyload_tag` funtion to get a img tag that uses browser native lazyloading.
+
+### Removed
+* Removed custom settings related files. Legacy support can be found in air-helper-legacy-custom-settings repository. All new custom setting related stuff can be found in air-setting-groups repository
 
 ## [2.13.0]
 ### Added
