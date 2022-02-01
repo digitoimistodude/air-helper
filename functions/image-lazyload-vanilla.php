@@ -4,8 +4,8 @@
  *
  * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
  * @Date:               2019-08-07 14:38:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-11-23 16:41:03
+ * @Last Modified by:   Elias Kautto
+ * @Last Modified time: 2022-02-01 10:23:50
  *
  * @package air-helper
  */
@@ -54,8 +54,11 @@ if ( ! function_exists( 'get_vanilla_lazyload_div' ) ) {
 
     // Make the div ?>
     <div class="lazy"
-      style="<?php echo esc_attr( $styles ); ?>"
-      data-bg="<?php echo esc_url( $image_urls['big'] ); ?>">
+      data-bg="<?php echo esc_url( $image_urls['big'] ); ?>"
+      <?php if ( ! empty( $styles ) ) : ?>
+        style="<?php echo esc_attr( $styles ); ?>"
+      <?php endif; ?>
+    >
     </div>
 
     <?php return ob_get_clean();
@@ -141,9 +144,11 @@ if ( ! function_exists( 'get_vanilla_lazyload_tag' ) ) {
     ob_start(); ?>
     <img class="lazy"
       alt="<?php echo esc_attr( $alt ); ?>"
-      style="<?php echo esc_attr( $styles ); ?>"
       src="<?php echo esc_url( $image_urls['tiny'] ); ?>"
       data-src="<?php echo esc_url( $image_urls['big'] ); ?>"
+      <?php if ( ! empty( $styles ) ) : ?>
+        style="<?php echo esc_attr( $styles ); ?>"
+      <?php endif; ?>
     />
     <?php
 

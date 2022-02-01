@@ -79,7 +79,7 @@ add_filter( 'air_helper_pll_enable_rest', '__return_true' );
 
 ### Image lazyloading
 
-Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy) and [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper, but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
+Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy), [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current) and [native-lazyload](https://caniuse.com/?search=lazy) (native). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper, but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
 
 If the plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regeneration can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
 
@@ -110,8 +110,11 @@ Enable specific view back with filter `add_filter( 'air_helper_disable_views_{VI
 #### Image lazyloading
 * `vanilla_lazyload_div( $attachment_id, $fallback )` Echo image in lazyloading div.
 * `vanilla_lazyload_tag( $attachment_id, $fallback )` Echo image in lazyloading img tag.
+* `native_lazyload_tag( $attachment_id, $args )` Echo image in native lazyloading tag
 
 Fallback is optional. By default fallback is default featured image from theme settings.
+
+Args is optional. Its an array that contains "fallback", "sizes" and "class". Class can be set to give the image tag a specific class, if not set no class will be given.
 
 If you want to get lazyloading div or tag as a string, you may prefix functions with `get_`.
 
