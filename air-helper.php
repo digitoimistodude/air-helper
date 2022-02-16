@@ -47,6 +47,11 @@ require 'plugin-update-checker/plugin-update-checker.php';
 $update_checker = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/digitoimistodude/air-helper', __FILE__, 'air-helper' );
 
 /**
+ * Priority hooks for rare occasions when plugins do not respect loading order.
+ */
+require_once air_helper_base_path() . '/inc/priority/general.php';
+
+/**
 * Require priority files.
 */
 add_action( 'init', 'air_helper_priority_fly', 5 );
