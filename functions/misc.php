@@ -98,8 +98,8 @@ if ( ! function_exists( 'get_the_sentence_excerpt' ) ) {
       $excerpt = get_the_excerpt();
     }
 
-    $split = preg_split( '/(\. |\!|\?)/', $excerpt, $length, PREG_SPLIT_DELIM_CAPTURE );
-    $new_excerpt = implode( '', array_slice( $split, 0, $length + 1 ) );
+    $split = preg_split( '/(\. |\!|\?)/', $excerpt, $length + 1, PREG_SPLIT_DELIM_CAPTURE );
+    $new_excerpt = implode( '', array_slice( $split, 0, $length * 2 ) );
 
     return $new_excerpt;
   } // end get_the_sentence_excerpt

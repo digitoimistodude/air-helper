@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.14.2]
+### Fixed
+- Fixed get_the_sentence_excerpt function to work as intended.
+
 ## [2.14.1]
 ### Added
 * Forced Mailgun's tracking options to false and disabled the selects
