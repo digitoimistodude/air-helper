@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-10-02 15:39:39
+ * @Last Modified time: 2022-06-09 11:46:11
  *
  * @package air-helper
  */
@@ -110,5 +110,5 @@ function air_helper_orderby_fix() {
     }
 
     return $orderby;
-  }, 10, 3);
+  }, 20, 3);
 } // end air_helper_orderby_fix
