@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 14:33:03
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2022-06-22 10:59:38
  *
  * @package air-helper
  */
@@ -55,3 +55,17 @@ add_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script' );
 function air_helper_enqueue_instantpage_script() {
   wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.1.0', true );
 } // end air_helper_enqueue_instantpage_script
+
+/**
+ * Disble cache for Relevanssi related posts output on development environment for easier development.
+ *
+ * @since 2.15.0
+ */
+add_filter( 'relevanssi_disable_related_cache', 'air_helper_disable_relevanssi_related_cache_on_dev' );
+function air_helper_disable_relevanssi_related_cache_on_dev( $cache ) {
+  if ( 'development' === wp_get_environment_type() ) {
+    return true;
+  }
+
+  return $cache;
+} // end air_helper_disable_relevanssi_related_cache_on_dev
