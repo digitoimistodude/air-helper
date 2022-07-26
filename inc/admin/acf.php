@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 13:53:58
+ * @Last Modified by:   Ville Kujansuu
+ * @Last Modified time: 2022-07-08 14:22:58
  *
  * @package air-helper
  */
@@ -25,7 +25,7 @@ function air_helper_maybe_hide_acf() {
   $meta_override = get_user_meta( $user->ID, '_airhelper_admin_show_acf', true );
 
   if ( 'true' === $meta_override ) {
-    return $menu_links;
+    return true;
   }
 
   if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
