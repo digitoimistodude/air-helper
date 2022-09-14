@@ -60,7 +60,7 @@ function air_helper_login_honeypot_form() {
   <script type="text/javascript">
     var text = document.getElementById('air_lh_name');
     text.value += '<?php echo esc_attr( wp_generate_password( 3, false ) ); ?>';
-    // document.getElementById('air_lh_name_field').style.display = 'none';
+    document.getElementById('air_lh_name_field').style.display = 'none';
   </script>
 <?php } // end air_helper_login_honeypot_form
 
