@@ -252,7 +252,7 @@ function air_helper_write_combined_login_log( $message ) {
     return false;
   }
 
-  $log_file = apply_filters( 'air_helper_combined_login_log_file', '/var/log/wp-login.log' );
+  $log_file = apply_filters( 'air_helper_combined_login_log_file', '/var/log/wordpress/wp-login.log' );
 
   // try to create the log file if it does not exist
   if ( ! file_exists( $log_file ) ) {
