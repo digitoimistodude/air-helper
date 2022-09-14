@@ -60,12 +60,14 @@ function air_helper_login_honeypot_form() {
   <script type="text/javascript">
     var text = document.getElementById('air_lh_name');
     text.value += '<?php echo esc_attr( wp_generate_password( 3, false ) ); ?>';
-    document.getElementById('air_lh_name_field').style.display = 'none';
+    // document.getElementById('air_lh_name_field').style.display = 'none';
   </script>
 <?php } // end air_helper_login_honeypot_form
 
 /**
  *  Check if login form honeypot seems legit.
+ *
+ *  If honeypot fails, write to combined login log and prevent simple histroy from doing its logging.
  *
  *  @since  1.9.0
  *  @param  mixed  $user      if the user is authenticated. WP_Error or null otherwise.
@@ -75,7 +77,7 @@ function air_helper_login_honeypot_form() {
  *
  *  phpcs:disable WordPress.Security.NonceVerification.Missing
  */
-add_action( 'authenticate', 'air_helper_login_honeypot_check', 1000, 3 );
+add_action( 'authenticate', 'air_helper_login_honeypot_check', 29, 3 );
 function air_helper_login_honeypot_check( $user, $username, $password ) {
   // field is required
   if ( ! empty( $_POST ) ) {
@@ -89,11 +91,13 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
 
     // field cant be empty
     if ( empty( $_POST['air_lh_name'] ) ) {
+      air_helper_act_on_login_fail( 'honeypot_empty' );
       return null;
     }
 
     // value needs to be exactly six charters long
     if ( 6 !== mb_strlen( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ) ) ) {
+      air_helper_act_on_login_fail( 'honeypot_lenght' );
       return null;
     }
 
@@ -102,11 +106,13 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
 
     // prefix is too old
     if ( $prefix['generated'] < strtotime( '-30 minutes' ) ) {
+      air_helper_act_on_login_fail( 'honeypot_prefix_old' );
       return null;
     }
 
     // prefix is not correct
     if ( substr( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ), 0, 3 ) !== $prefix['prefix'] ) {
+      air_helper_act_on_login_fail( 'honeypot_prefix_wrong' );
       return null;
     }
   }
@@ -146,3 +152,137 @@ add_filter( 'login_errors', 'air_helper_login_errors' );
 function air_helper_login_errors() {
   return __( '<b>Login failed.</b> Please contact your site admin or agency if you continue having problems.', 'air-helper' );
 } // end air_helper_login_errors
+
+/**
+ *  Maybe catch some simple history login related messages and redirect them
+ *  to combined login log instead of simple history databse. If no log message
+ *  redirects are wanted at all, disable whole combined log with
+ *  `add_filter( 'air_helper_write_to_combined_login_log', '__return_false' )`
+ *
+ *  Modify which messages will be redirected with "air_helper_simplehistory_message_keys_to_combined_login_log"
+ *
+ *  @since 2.16.0
+ *  @param boolean  $do_log   If the message should be logged. Default true.
+ *  @param mixed    $level    The log level. Default "info".
+ *  @param string   $message  The log message. Default "".
+ *  @param array    $context  The log context. Default empty array.
+ *  @return boolean           If the message should be logged. Defaults to $do_log.
+ */
+add_action( 'simple_history/log/do_log', 'air_helper_maybe_redirect_simplehistory_to_combined_log', 10, 4 );
+function air_helper_maybe_redirect_simplehistory_to_combined_log( $do_log, $level, $message, $context ) {
+  if ( ! isset( $context['_message_key'] ) ) {
+    return $do_log;
+  }
+
+  // allow filtering which simple history message keys should be redirected to combined log
+  $message_keys_to_combined_log = apply_filters( 'air_helper_simplehistory_message_keys_to_combined_login_log', [
+    'user_unknown_login_failed' => true,
+  ] );
+
+  // check that this type of message should go to combined log, based on message key existance on array
+  if ( ! array_key_exists( $context['_message_key'], $message_keys_to_combined_log ) ) {
+    return $do_log;
+  }
+
+  // check that this type of message should still go to combined log, based on message key is turned on (true) on array
+  if ( ! $message_keys_to_combined_log[ $context['_message_key'] ] ) {
+    return $do_log;
+  }
+
+  // maybe replace username in messge if exists in context
+  // this type is used on "user_unknown_login_failed" message key
+  if ( isset( $context['failed_username'] ) && ! empty( $context['failed_username'] ) ) {
+    $message = str_replace( '{failed_username}', $context['failed_username'], $message );
+  }
+
+  // maybe replace username in messge if exists in context
+  // this type is used on "user_login_failed" message key
+  if ( isset( $context['login'] ) && ! empty( $context['login'] ) ) {
+    $message = str_replace( '{login}', $context['login'], $message );
+  }
+
+  // try to write fo logfile
+  $wrote = air_helper_write_combined_login_log( $message );
+
+  // if write failed, let simple history do logging
+  if ( false === $wrote ) {
+    return $do_log;
+  }
+
+  // prevent default simple history logging
+  return false;
+} // end air_helper_maybe_redirect_simplehistory_to_combined_log
+
+/**
+ * Act on login failures and prevents simple history from doing its own logging.
+ *
+ * Currently used only when login honeypot fails for reason or another.
+ *
+ * If simple history is wanted to work, disable whole combined log with
+ *  `add_filter( 'air_helper_write_to_combined_login_log', '__return_false' )`
+ *
+ * @since  2.16.0
+ * @param  string $type Type of the fail
+ */
+function air_helper_act_on_login_fail( $type ) {
+  $messages_by_type = [
+    'honeypot_empty'        => 'failed to login (air honeypot empty)',
+    'honeypot_lenght'       => 'failed to login (air honeypot lenght)',
+    'honeypot_prefix_old'   => 'failed to login (air honeypot old prefix)',
+    'honeypot_prefix_wrong' => 'failed to login (air honeypot wrong prefix)',
+  ];
+
+  $wrote = air_helper_write_combined_login_log( $messages_by_type[ $type ] );
+  if ( true === $wrote ) {
+    add_filter( 'simple_history/log/do_log/SimpleUserLogger', '__return_false' );
+  }
+} // end air_helper_act_on_login_fail
+
+/**
+ * Try to write login related messages to combined server log.
+ *
+ * Turn this off with `add_filter( 'air_helper_write_to_combined_login_log', '__return_false' )`
+ *
+ * @since  2.16.0
+ * @param  string   $message  The log message.
+ * @return boolean            Was the write to combined log succesfull.
+ */
+function air_helper_write_combined_login_log( $message ) {
+  if ( ! apply_filters( 'air_helper_write_to_combined_login_log', true ) ) {
+    return false;
+  }
+
+  $log_file = apply_filters( 'air_helper_combined_login_log_file', '/var/log/wp-login.log' );
+
+  // try to create the log file if it does not exist
+  if ( ! file_exists( $log_file ) ) {
+    touch( $log_file );
+  }
+
+  // bail if file creation failed
+  if ( ! file_exists( $log_file ) ) {
+    return false;
+  }
+
+  // bail if file is not writable
+  if ( ! is_writable( $log_file ) ) {
+    return false;
+  }
+
+  // get visitor ip
+  if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+    $user_ip = $_SERVER['HTTP_CLIENT_IP'];
+  } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+    $user_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  } else {
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+  }
+
+  // combine the message
+  $write = wp_date( 'Y-m-d H:i:s' ) . " client: {$user_ip}";
+  $write .= ', ' . mb_strtolower( $message );
+  $write .= ', site ' . parse_url( get_home_url() )['host'];
+
+  // write to log
+  return file_put_contents( $log_file, $write . "\n", FILE_APPEND );
+} // end air_helper_write_combined_login_log

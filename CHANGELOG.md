@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.16.0]
+### Changed
+- Priority of `air_helper_login_honeypot_check` on `authenticate` hook to 29 in order it be runned before Simple History runs with priority 30. This prevents some login errors from flooding the Simple History.
+
+### Added
+- Way to write into centralized log when login fails
+- On `air_helper_login_honeypot_check` do centralized login logging if honeypot fails
+- Redirect Simple History user_unknown_login_failed messages to centralized login log
+
 ## [2.15.0]
 ### Added
 - Disble cache for Relevanssi related posts output on development environment for easier development
