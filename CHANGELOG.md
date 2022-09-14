@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [2.16.0]
+### Fixed
+- Fix warning when overriding Hide ACF for all users with user meta. Props @villekujansuu
+
 ### Changed
 - Priority of `air_helper_login_honeypot_check` on `authenticate` hook to 29 in order it be runned before Simple History runs with priority 30. This prevents some login errors from flooding the Simple History.
 
