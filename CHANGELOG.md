@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+##[2.16.2]
+### Changed
+- PUC plugin json details changes to Github proxy
+
 ## [2.16.0]
 ### Fixed
 - Fix warning when overriding Hide ACF for all users with user meta. Props @villekujansuu
