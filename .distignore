@@ -1,0 +1,20 @@
+# A set of files you probably don't want in your plugin distribution
+
+# Directories
+.git
+.github
+.wporg
+node_modules
+
+# Files
+.distignore
+.gitattributes
+.gitignore
+
+# File Types
+*.lock
+*.log
+*.sql
+*.tar.gz
+*.yml
+*.zip
