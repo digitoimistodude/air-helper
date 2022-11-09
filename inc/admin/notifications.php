@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-20 10:50:37
+ * @Last Modified time: 2022-11-09 13:38:50
  *
  * @package air-helper
  */
@@ -59,6 +59,11 @@ function air_helper_clean_admin_notices() {
   // GADWP version 6.0.0 new auth method notice
   if ( ! get_option( 'exactmetrics_notices' ) ) {
     update_option( 'exactmetrics_notices', [ 'exactmetrics_auth_not_manual' => true ] );
+  }
+
+  // Filebird version 5.0.8 upsells YayMail plugin
+  if ( ! get_option( 'yaymail_noti_sale' ) ) {
+    update_option( 'yaymail_noti_sale', true );
   }
 } // end air_helper_clean_admin_notices
 
