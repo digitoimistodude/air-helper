@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Dismiss Filebird version 5.0.8 YayMail plugin upsell
 - If core/list block is allowed, allow also core/list-item. This fixes change that WP 6.1 introduced, without it you cannot add new list item to list
 - Disable global svg filter rendering
+- Force anti-spam honeypot on all Gravity Forms forms
 
 ### Changed
 - Disable autoload for notification dismissal options
