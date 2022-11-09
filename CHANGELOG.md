@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 ### Added
 - Dismiss Filebird version 5.0.8 YayMail plugin upsell
+
+### Changed
 - Disable autoload for notification dismissal options
+
+### Fixed
+- On editor view, add padding-bottom to sidebar in order to make space for HS beacon
 
 ## [2.16.2]
 ### Changed
