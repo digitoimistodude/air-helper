@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:10:07
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 13:38:50
+ * @Last Modified time: 2022-11-09 13:40:28
  *
  * @package air-helper
  */
@@ -39,7 +39,7 @@ function air_helper_clean_admin_notices() {
 
   // GADWP notice is better to remove by updating a option so it won't show up again
   if ( ! get_option( 'exactmetrics_tracking_notice' ) ) {
-    update_option( 'exactmetrics_tracking_notice', true );
+    update_option( 'exactmetrics_tracking_notice', true, false );
   }
 
   // Imagify upsell ads needs to be disabled by user
@@ -53,17 +53,17 @@ function air_helper_clean_admin_notices() {
 
   // GADWP version 6.0.0 update notices
   if ( ! get_option( 'exactmetrics_frontend_tracking_notice_viewed' ) ) {
-    update_option( 'exactmetrics_frontend_tracking_notice_viewed', true );
+    update_option( 'exactmetrics_frontend_tracking_notice_viewed', true, false );
   }
 
   // GADWP version 6.0.0 new auth method notice
   if ( ! get_option( 'exactmetrics_notices' ) ) {
-    update_option( 'exactmetrics_notices', [ 'exactmetrics_auth_not_manual' => true ] );
+    update_option( 'exactmetrics_notices', [ 'exactmetrics_auth_not_manual' => true ], false );
   }
 
   // Filebird version 5.0.8 upsells YayMail plugin
   if ( ! get_option( 'yaymail_noti_sale' ) ) {
-    update_option( 'yaymail_noti_sale', true );
+    update_option( 'yaymail_noti_sale', true, false );
   }
 } // end air_helper_clean_admin_notices
 
