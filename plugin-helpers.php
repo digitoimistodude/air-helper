@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-01-20 15:39:20
+ * @Last Modified time: 2022-11-09 16:07:42
  *
  * @package air-helper
  */
@@ -125,3 +125,41 @@ function air_helper_we_are_airless() {
 
   printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 } // end air_helper_we_are_airless
+
+/**
+ * Check if current user is allowed to see / enter certain views or
+ * functionalities based on their user account email domain or
+ * override in user meta.
+ *
+ * @param  string $allow View / functionality to allow
+ * @return boolean       boolean true if allowed
+ * @since  2.17.0
+ */
+function air_helper_allow_user_to( $allow = null ) {
+  $current_user = get_current_user_id();
+  $user = new WP_User( $current_user );
+
+  $domain = apply_filters( 'air_helper_allow_user_to_domain', 'dude.fi' );
+  $domain = apply_filters( "air_helper_allow_user_to_{$allow}_domain", $domain );
+
+  // Backwards compatibility
+  if ( 'acf' === $allow ) {
+    $domain = apply_filters( 'air_helper_dont_hide_acf_from_domain', $domain );
+  }
+
+  // Backwards compatibility
+  if ( 'plugins' === $allow ) {
+    $domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', $domain );
+  }
+
+  if ( strpos( $user->user_email, "@{$domain}" ) !== false ) {
+    return true;
+  }
+
+  $meta_override = get_user_meta( $user->ID, "_airhelper_admin_show_{$allow}", true );
+  if ( 'true' === $meta_override ) {
+    return true;
+  }
+
+  return false;
+} // end air_helper_allow_user_to

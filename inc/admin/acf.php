@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
- * @Last Modified by:   Ville Kujansuu
- * @Last Modified time: 2022-07-08 14:22:58
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2022-11-09 16:03:16
  *
  * @package air-helper
  */
@@ -19,20 +19,12 @@
  */
 add_filter( 'acf/settings/show_admin', 'air_helper_maybe_hide_acf' );
 function air_helper_maybe_hide_acf() {
-  $current_user = get_current_user_id();
-  $user = new WP_User( $current_user );
-  $domain = apply_filters( 'air_helper_dont_hide_acf_from_domain', 'dude.fi' );
-  $meta_override = get_user_meta( $user->ID, '_airhelper_admin_show_acf', true );
-
-  if ( 'true' === $meta_override ) {
+  // Bail if user is allowed to enter acf
+  if ( air_helper_allow_user_to( 'acf' ) ) {
     return true;
   }
 
-  if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
-    return false;
-  }
-
-  return true;
+  return false;
 } // end air_helper_maybe_hide_acf
 
 /**

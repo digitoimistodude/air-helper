@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:15:47
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-09-23 12:13:44
+ * @Last Modified time: 2022-11-09 16:10:05
  *
  * @package air-helper
  */
@@ -59,18 +59,12 @@ function air_helper_helper_remove_admin_menu_links() {
  */
 add_filter( 'air_helper_helper_remove_admin_menu_links', 'air_helper_maybe_remove_plugins_from_admin_menu' );
 function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
-  $current_user = get_current_user_id();
-  $user = new WP_User( $current_user );
-  $domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', 'dude.fi' );
-  $meta_override = get_user_meta( $user->ID, '_airhelper_admin_show_plugins', true );
-
-  if ( 'true' === $meta_override ) {
+  // Bail if user is allowed to enter plugins
+  if ( air_helper_allow_user_to( 'plugins' ) ) {
     return $menu_links;
   }
 
-  if ( strpos( $user->user_email, "@{$domain}" ) === false ) {
-    $menu_links[] = 'plugins.php';
-  }
+  $menu_links[] = 'plugins.php';
 
   return $menu_links;
 } // end air_helper_maybe_remove_plugins_from_admin_menu
@@ -84,19 +78,46 @@ function air_helper_maybe_remove_plugins_from_admin_menu( $menu_links ) {
  */
 add_action( 'admin_bar_menu', 'air_helper_maybe_remove_plugins_from_network_admin_menu', 999 );
 function air_helper_maybe_remove_plugins_from_network_admin_menu() {
-  $current_user = get_current_user_id();
-  $user = new WP_User( $current_user );
-  $domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', 'dude.fi' );
-  $meta_override = get_user_meta( $user->ID, '_airhelper_admin_show_plugins', true );
-
-  if ( strpos( $user->user_email, "@{$domain}" ) !== false ) {
-    return;
-  }
-
-  if ( 'true' === $meta_override ) {
+  // Bail if user is allowed to enter plugins
+  if ( air_helper_allow_user_to( 'plugins' ) ) {
     return;
   }
 
   global $wp_admin_bar;
   $wp_admin_bar->remove_node( 'network-admin-p' );
 } // end air_helper_maybe_remove_plugins_from_network_admin_menu
+
+add_action( 'admin_menu', 'dashboard_remove_menu_pages' );
+function dashboard_remove_menu_pages() {
+  // remove_submenu_page( 'themes.php', 'nav-menus.php' );
+  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '' , 'dashicons-menu-alt3', 60 );
+} // end dashboard_remove_menu_pages
+
+/**
+ * Move menu edit link to top level of admin menu. Also maybe hide
+ * themes view link if not specifically allowed for the current user.
+ *
+ * @since 2.17.0
+ */
+add_action( 'admin_init', 'air_helper_move_nav_menus_toplevel', 8 );
+function air_helper_move_nav_menus_toplevel() {
+  // If plugin was activated before version 2.17.0, do not change behaviour
+  if ( air_helper_activated_at_version() < 21700 ) {
+    return;
+  }
+
+  // Always add nav-menus.php to toplevel
+  add_action( 'admin_menu', function() {
+    add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '' , 'dashicons-menu-alt3', 60 );
+  } );
+
+  // Maybe hide themes.php from user
+  add_filter( 'air_helper_helper_remove_admin_menu_links', function( $items ) {
+    if ( air_helper_allow_user_to( 'themes' ) ) {
+      return $items;
+    }
+
+    $items[] = 'themes.php';
+    return $items;
+  } );
+} // end air_helper_move_nav_menus_toplevel

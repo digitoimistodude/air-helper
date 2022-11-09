@@ -9,9 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - If core/list block is allowed, allow also core/list-item. This fixes change that WP 6.1 introduced, without it you cannot add new list item to list
 - Disable global svg filter rendering
 - Force anti-spam honeypot on all Gravity Forms forms
+- Menu edit link added to top level of dashboard sidebar. This does not affect users that have activated plugin before version 2.17.0
+- Themes link removed for users without meta override or email from specific domain. This does not affect users that have activated plugin before version 2.17.0
 
 ### Changed
 - Disable autoload for notification dismissal options
+- Unified the way to check if current user should see some functionalities
 
 ### Fixed
 - On editor view, add padding-bottom to sidebar in order to make space for HS beacon
