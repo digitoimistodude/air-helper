@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-06-09 11:46:11
+ * @Last Modified time: 2022-11-09 15:14:51
  *
  * @package air-helper
  */
@@ -56,6 +56,16 @@ function air_helper_helper_disable_emojicons_tinymce( $plugins ) {
     return [];
   }
 } // end air_helper_helper_disable_emojicons_tinymce
+
+/**
+ * Disable global svg filter rendering, as those are used very rarely.
+ *
+ * @since 2.17.0
+ */
+add_action( 'init', 'air_helper_disable_svg_filters_rendering' );
+function air_helper_disable_svg_filters_rendering() {
+  remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+} // end air_helper_disable_svg_filters_rendering
 
 /**
  * Add support for correct UTF8 orderby for post_title and term name (äöå).

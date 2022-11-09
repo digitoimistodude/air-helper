@@ -6,13 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 ### Added
 - Dismiss Filebird version 5.0.8 YayMail plugin upsell
+- If core/list block is allowed, allow also core/list-item. This fixes change that WP 6.1 introduced, without it you cannot add new list item to list
+- Disable global svg filter rendering
 
 ### Changed
 - Disable autoload for notification dismissal options
 
 ### Fixed
 - On editor view, add padding-bottom to sidebar in order to make space for HS beacon
-- If core/list block is allowed, allow also core/list-item. This fixes change that WP 6.1 introduced, without it you cannot add new list item to list
 
 ## [2.16.2]
 ### Changed
