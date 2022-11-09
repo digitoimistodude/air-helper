@@ -109,6 +109,7 @@ add_action( 'init', 'air_helper_admin_fly' );
   require_once air_helper_base_path() . '/inc/admin/acf.php';
   require_once air_helper_base_path() . '/inc/admin/localization.php';
   require_once air_helper_base_path() . '/inc/admin/dashboard.php';
+  require_once air_helper_base_path() . '/inc/admin/gutenberg.php';
   require_once air_helper_base_path() . '/inc/admin/help-widget.php';
   require_once air_helper_base_path() . '/inc/admin/updates.php';
   require_once air_helper_base_path() . '/inc/admin/helpscout.php';
