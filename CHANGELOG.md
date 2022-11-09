@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Force anti-spam honeypot on all Gravity Forms forms
 - Menu edit link added to top level of dashboard sidebar. This does not affect users that have activated plugin before version 2.17.0
 - Themes link removed for users without meta override or email from specific domain. This does not affect users that have activated plugin before version 2.17.0
+- Add native lazy loading for fallback imgs
 
 ### Changed
 - Disable autoload for notification dismissal options
