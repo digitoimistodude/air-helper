@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-19 14:26:45
+ * @Last Modified time: 2022-11-15 17:20:47
  *
  * @package air-helper
  */
@@ -28,30 +28,47 @@ if ( wp_get_environment_type() === 'staging' ) {
 }
 
 /**
- *  Force to address in wp_mail.
- *
- *  Change allowed staging roles by using `add_filter( 'air_helper_helper_mail_to_allowed_roles', 'myprefix_override_air_helper_helper_mail_to_allowed_roles' )`
- *  Change address from admin_email by using `add_filter( 'air_helper_helper_mail_to', 'myprefix_override_air_helper_helper_mail_to' )`
+ *  Prevent email leaks to unwanted recipients. Remove all email addresses which domain
+ *  is not explicitly allowed. If no allowed recipient addresses, force to address fallback.
  *
  *  @since  0.1.0
  *  @param  array $args Default wp_mail agruments.
  *  @return array         New wp_mail agruments with forced to address
  */
 function air_helper_helper_force_mail_to( $args ) {
-  $to = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
+  $original_to_is_array = true;
+  $original_to = $args['to'];
 
-  if ( wp_get_environment_type() === 'staging' ) {
-    $allowed_roles = apply_filters( 'air_helper_helper_mail_to_allowed_roles', [ 'administrator', 'editor', 'author' ] );
-    $user = get_user_by( 'email', $args['to'] );
+  // If addresses are string, try to explode for easier handling
+  if ( ! is_array( $original_to ) ) {
+    $original_to_is_array = false;
+    $to = explode( ',', $original_to );
+    $to = array_map( 'trim', $to );
+  }
 
-    if ( is_a( $user, 'WP_User' ) ) {
-      if ( array_intersect( $allowed_roles, $user->roles ) ) {
-        $to = $args['to'];
-      }
+  // Allow sending emails to all addresses in these domains
+  $allowed_domains = apply_filters( 'air_helper_mail_to_allowed_domains', [ 'dude.fi' ] );
+
+  // Check all to addresses and if their domains are allowed
+  foreach ( $to as $key => $email ) {
+    $domain = array_pop( explode( '@', $email ) );
+    if ( ! in_array( $domain, $allowed_domains ) ) {
+      unset( $to[ $key ] );
     }
   }
 
-  $args['to'] = apply_filters( 'air_helper_helper_mail_to', $to );
+  // Fallback in case all to addresses were denied
+  if ( empty( $to ) ) {
+    $to[] = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
+  }
+
+  // If original to field was string, return it as a string
+  if ( ! $original_to_is_array ) {
+    $to = implode( ',', $to );
+  }
+
+  $args['to'] = $to;
+
   return $args;
 } // end air_helper_helper_force_mail_to
 

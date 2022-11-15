@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+- Way of forcing email in development and staging. Instead of role based allowance, new allowances are domain based. Modify the array of allowed domains with new `air_helper_mail_to_allowed_domains` filter.
+
+### Removed
+- `air_helper_helper_mail_to_allowed_roles` filter
+
 ## [2.17.0]
 ### Added
 - Dismiss Filebird version 5.0.8 YayMail plugin upsell
