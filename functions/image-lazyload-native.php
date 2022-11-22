@@ -4,8 +4,8 @@
  *
  * @Author:		Elias Kautto
  * @Date:   		2022-01-28 12:33:30
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2022-02-01 10:24:12
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2022-11-22 11:25:47
  *
  * @package air-helper
  */
@@ -48,7 +48,7 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
 
     // Check if we have image
     if ( ! $image_urls || ! is_array( $image_urls ) ) {
-      return get_native_lazyload_tag_fallback( $args['fallback'] );
+      return get_native_lazyload_tag_fallback( $args );
     }
 
     // Possibility to add optional styles for the image
