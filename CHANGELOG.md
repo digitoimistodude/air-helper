@@ -5,11 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [2.18.0]
 ### Changed
 - Way of forcing email in development and staging. Instead of role based allowance, new allowances are domain based. Modify the array of allowed domains with new `air_helper_mail_to_allowed_domains` filter.
 
 ### Removed
 - `air_helper_helper_mail_to_allowed_roles` filter
+
+### Fixed
+- `get_native_lazyload_tag` function calling fallback with correct `$args`, props @jennitahva
 
 ## [2.17.0]
 ### Added
