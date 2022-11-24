@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+- After `edit_user_created_user` action do not add `air_helper_helper_force_mail_to` filter if in production
+
 ## [2.18.0]
 ### Changed
 - Way of forcing email in development and staging. Instead of role based allowance, new allowances are domain based. Modify the array of allowed domains with new `air_helper_mail_to_allowed_domains` filter.

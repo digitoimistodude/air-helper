@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-22 11:28:24
+ * @Last Modified time: 2022-11-24 10:40:13
  *
  * @package air-helper
  */
@@ -85,7 +85,10 @@ add_action( 'edit_user_created_user', 'air_helper_dont_force_created_user_mail',
 function air_helper_dont_force_created_user_mail( $user_id, $notify ) {
   remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
   wp_send_new_user_notifications( $user_id, $notify );
-  add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+
+  if ( wp_get_environment_type() !== 'production' ) {
+    add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+  }
 } // end air_helper_dont_force_created_user_mail
 
 /**
