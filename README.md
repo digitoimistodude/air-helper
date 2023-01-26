@@ -79,9 +79,7 @@ add_filter( 'air_helper_pll_enable_rest', '__return_true' );
 
 ### Image lazyloading
 
-Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy), [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (current) and [native-lazyload](https://caniuse.com/?search=lazy) (native). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper, but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
-
-If the plugin is activated after images have been already uploaded, regenerate the thumbnails to get 20x20px image for preview purposes. Regeneration can be done using WP-CLI media regenerate or Regenerate Thumbnails plugin.
+Air-helper supports [tuupola/lazyload](https://github.com/tuupola/lazyload) (legacy), [vanilla-lazyload](https://github.com/verlok/vanilla-lazyload) (legacy) and [native-lazyload](https://caniuse.com/?search=lazy) (native, current). [Air-light](https://github.com/digitoimistodude/air-light) version prior 6.1.8 (2020-10-20) had support for lazyload.js provided by [tuupola/lazyload](https://github.com/tuupola/lazyload) which is still legacy-supported by air-helper, but no longer provided by [air-light](https://github.com/digitoimistodude/air-light) theme.
 
 Refer to [functions](#image-lazyloading-1) to find out how to use image lazyloading.
 
