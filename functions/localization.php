@@ -29,6 +29,11 @@ function ask__( $key, $lang = null ) {
       $lang = sanitize_key( $_GET['lang'] ); // phpcs:ignore
     }
 
+    $string = apply_filters( 'pre_air_helper_ask_string', null, $key, $lang );
+    if ( ! empty( $string ) ) {
+      return $string;
+    }
+
     if ( null === $lang ) {
       return pll__( $strings[ $key ] );
     } else {

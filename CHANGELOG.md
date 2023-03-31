@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - Show warning if ACF has field groups that are not saved in the local json
+- If Polylang is not active, add settings page to allow overriding localization strings
 
 ### Fixed
 - After `edit_user_created_user` action do not add `air_helper_helper_force_mail_to` filter if in production

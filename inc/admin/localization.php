@@ -22,4 +22,152 @@ if ( function_exists( 'pll_register_string' ) ) {
 			pll_register_string( $key, $value, apply_filters( 'air_helper_pll_register_string_group', 'Theme' ) );
 		}
 	}
+} else {
+  if ( ! class_exists( 'WP_List_Table' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+  }
+
+  add_action( 'admin_menu', 'air_helper_localization_strings_override_menu_page' );
+  add_filter( 'pre_air_helper_ask_string', 'air_helper_localization_strings_override', 10, 2 );
 }
+
+function air_helper_localization_strings_override( $string, $key ) {
+  $overrides = get_option( 'air_helper_localization_string_overrides', [] );
+  $overrride_key = sanitize_title( $key );
+
+  if ( isset( $overrides[ $overrride_key ] ) ) {
+    $string = $overrides[ $overrride_key ];
+  }
+
+  return $string;
+} // end air_helper_localization_strings_override
+
+function air_helper_localization_strings_override_menu_page() {
+  add_submenu_page(
+    'options-general.php',
+    __( 'Localization strings', 'air-helper' ),
+    __( 'Localization strings', 'air-helper' ),
+    'manage_options',
+    'air-helper-localization-strings-override',
+    'air_helper_localization_strings_override_page'
+  );
+} // end air_helper_localization_strings_override_menu_page
+
+function air_helper_localization_strings_override_page() {
+  global $title, $plugin_page;
+
+  air_helper_localization_strings_override_maybe_handle_reset();
+  air_helper_localization_strings_override_maybe_handle_save();
+
+  $table = new Air_Helper_Localization_Strings_Table();
+  $table->prepare_items();
+
+  ob_start(); ?>
+
+  <div class="wrap">
+    <h2><?php esc_html( $title ) ?></h2>
+
+    <form method="post" action="options-general.php?page=<?php echo esc_attr( $plugin_page ) ?>">
+      <?php $table->display();
+      wp_nonce_field( -1, '_wpnonce_air_helper_strings' ); ?>
+
+      <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Save' ) ?>">
+    </form>
+
+    <p class="button-wrapper">
+      <a href="<?php echo esc_url( wp_nonce_url( 'options-general.php?page=' . $plugin_page, -1, '_wpnonce_air_helper_strings_reset' ) ) ?>">
+        <?php esc_html_e( 'Reset to default' ) ?>
+      </a>
+    </p>
+  </div>
+
+  <?php echo ob_get_clean();
+} // end air_helper_localization_strings_override_page
+
+class Air_Helper_Localization_Strings_Table extends WP_List_Table {
+  function get_columns() {
+    $columns = [
+      'string_with_key' => 'Key',
+      'string'          => 'String',
+    ];
+
+    return $columns;
+  } // end get_columns
+
+  function prepare_items() {
+    $columns = $this->get_columns();
+    $hidden = [];
+    $sortable = [];
+    $this->_column_headers = [ $columns, $hidden, $sortable ];
+
+    $strings_raw = apply_filters( 'air_helper_pll_register_strings', [] );
+    $strings_saved = get_option( 'air_helper_localization_string_overrides', [] );
+
+    if ( is_array( $strings_raw ) ) {
+      foreach ( $strings_raw as $string_with_key => $string ) {
+        $option_key = sanitize_title( $string_with_key );
+
+        $this->items[] = [
+          'option_key'      => $option_key,
+          'string_with_key' => $string_with_key,
+          'string'          => isset( $strings_saved[ $option_key ] ) ? $strings_saved[ $option_key ] : '',
+          'default'         => $string,
+        ];
+      }
+    }
+  } // end prepare_items
+
+  function column_default( $item, $column_name ) {
+    switch( $column_name ) {
+      case 'string_with_key':
+        return $item[ $column_name ];
+      default:
+        ob_start(); ?>
+        <input type="text" name="strings[<?php echo esc_attr( $item['option_key'] ) ?>]" value="<?php echo esc_html( $item['string'] ) ?>" placeholder="<?php echo esc_html( $item['default'] ) ?>" style="width:100%;" />
+        <?php return ob_get_clean();
+    }
+  } // end column_default
+} // end Air_Helper_Localization_Strings_Table
+
+function air_helper_localization_strings_override_maybe_handle_reset() {
+  if ( ! isset( $_GET['_wpnonce_air_helper_strings_reset'] ) ) {
+    return;
+  }
+
+  if ( ! wp_verify_nonce( $_GET['_wpnonce_air_helper_strings_reset'], -1 ) ) {
+    return;
+  }
+
+  update_option( 'air_helper_localization_string_overrides', false );
+
+  $message = __( 'Localization string overrides removed.', 'air-helper' );
+  printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice notice-success', esc_html( $message ) );
+} // end air_helper_localization_strings_override_maybe_handle_reset
+
+function air_helper_localization_strings_override_maybe_handle_save() {
+  if ( ! isset( $_POST['_wpnonce_air_helper_strings'] ) ) {
+    return;
+  }
+
+  if ( ! wp_verify_nonce( $_POST['_wpnonce_air_helper_strings'], -1 ) ) {
+    return;
+  }
+
+  if ( ! isset( $_POST['strings'] ) ) {
+    return;
+  }
+
+  if ( ! is_array( $_POST['strings'] ) ) {
+    return;
+  }
+
+  $strings = array_filter( $_POST['strings'] );
+  if ( empty( $strings ) ) {
+    return;
+  }
+
+  update_option( 'air_helper_localization_string_overrides', $strings );
+
+  $message = __( 'Localization string overrides saved.', 'air-helper' );
+  printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice notice-success', esc_html( $message ) );
+} // end air_helper_localization_strings_override_maybe_handle_save
