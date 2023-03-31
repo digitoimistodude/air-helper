@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 16:03:16
+ * @Last Modified time: 2023-03-31 12:16:57
  *
  * @package air-helper
  */
@@ -42,3 +42,59 @@ function air_helper_define_acf_pro_license() {
 
   define( 'ACF_PRO_LICENSE', getenv( 'ACF_PRO_KEY' ) );
 } // end air_helper_define_acf_pro_license
+
+/**
+ * Show warning if ACF has field groups that are not saved in the local json.
+ * With this, we try to ensure that all field groups do get saved and stored in the
+ * repository when developing sites.
+ *
+ * @since 2.19.0
+ */
+add_action( 'admin_notices', 'air_helper_warn_if_not_all_acf_local_json_not_saved' );
+function air_helper_warn_if_not_all_acf_local_json_not_saved() {
+  // Bail if ACF not installed
+  if ( ! function_exists( 'acf_get_field_groups' ) ) {
+    return;
+  }
+
+  // Bail in production
+  if ( 'production' === wp_get_environment_type() ) {
+    return;
+  }
+
+  $not_saved = [];
+
+  // Get all ACF field groups and ones saved to local json
+  $groups = acf_get_field_groups();
+  $json = acf_get_local_json_files();
+
+  // Bail if no field groups
+  if ( empty( $groups ) ) {
+    return;
+  }
+
+  // Loop field groups and test if group is in local json
+  foreach ( $groups as $group ) {
+    if ( isset( $json[ $group['key'] ] ) ) {
+      continue;
+    }
+
+    // Group not in local json, add to error array
+    $not_saved[] = mb_strtolower( $group['title'] );
+  }
+
+  // Bail if all field groups were in local json
+  if ( empty( $not_saved ) ) {
+    return;
+  }
+
+  // Show the actual error
+  $class = 'notice notice-error';
+
+  $message = __( '<b>ACF field group local files missing!</b>', 'air-helper' );
+  $message .= ' ' . wp_sprintf( __( 'Make sure following field groups are saved: %1$s.', 'air-helper' ), implode( ', ', $not_saved ) );
+
+  printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+
+  do_action( 'qm/critical', esc_html( $message ) );
+} // end air_helper_warn_if_not_all_acf_local_json_not_saved
