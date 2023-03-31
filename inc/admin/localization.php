@@ -27,6 +27,51 @@ if ( function_exists( 'pll_register_string' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
   }
 
+  class Air_Helper_Localization_Strings_Table extends WP_List_Table {
+    function get_columns() {
+      $columns = [
+        'string_with_key' => 'Key',
+        'string'          => 'String',
+      ];
+
+      return $columns;
+    } // end get_columns
+
+    function prepare_items() {
+      $columns = $this->get_columns();
+      $hidden = [];
+      $sortable = [];
+      $this->_column_headers = [ $columns, $hidden, $sortable ];
+
+      $strings_raw = apply_filters( 'air_helper_pll_register_strings', [] );
+      $strings_saved = get_option( 'air_helper_localization_string_overrides', [] );
+
+      if ( is_array( $strings_raw ) ) {
+        foreach ( $strings_raw as $string_with_key => $string ) {
+          $option_key = sanitize_title( $string_with_key );
+
+          $this->items[] = [
+            'option_key'      => $option_key,
+            'string_with_key' => $string_with_key,
+            'string'          => isset( $strings_saved[ $option_key ] ) ? $strings_saved[ $option_key ] : '',
+            'default'         => $string,
+          ];
+        }
+      }
+    } // end prepare_items
+
+    function column_default( $item, $column_name ) {
+      switch( $column_name ) {
+        case 'string_with_key':
+          return $item[ $column_name ];
+        default:
+          ob_start(); ?>
+          <input type="text" name="strings[<?php echo esc_attr( $item['option_key'] ) ?>]" value="<?php echo esc_html( $item['string'] ) ?>" placeholder="<?php echo esc_html( $item['default'] ) ?>" style="width:100%;" />
+          <?php return ob_get_clean();
+      }
+    } // end column_default
+  } // end Air_Helper_Localization_Strings_Table
+
   add_action( 'admin_menu', 'air_helper_localization_strings_override_menu_page' );
   add_filter( 'pre_air_helper_ask_string', 'air_helper_localization_strings_override', 10, 2 );
 }
@@ -83,51 +128,6 @@ function air_helper_localization_strings_override_page() {
 
   <?php echo ob_get_clean();
 } // end air_helper_localization_strings_override_page
-
-class Air_Helper_Localization_Strings_Table extends WP_List_Table {
-  function get_columns() {
-    $columns = [
-      'string_with_key' => 'Key',
-      'string'          => 'String',
-    ];
-
-    return $columns;
-  } // end get_columns
-
-  function prepare_items() {
-    $columns = $this->get_columns();
-    $hidden = [];
-    $sortable = [];
-    $this->_column_headers = [ $columns, $hidden, $sortable ];
-
-    $strings_raw = apply_filters( 'air_helper_pll_register_strings', [] );
-    $strings_saved = get_option( 'air_helper_localization_string_overrides', [] );
-
-    if ( is_array( $strings_raw ) ) {
-      foreach ( $strings_raw as $string_with_key => $string ) {
-        $option_key = sanitize_title( $string_with_key );
-
-        $this->items[] = [
-          'option_key'      => $option_key,
-          'string_with_key' => $string_with_key,
-          'string'          => isset( $strings_saved[ $option_key ] ) ? $strings_saved[ $option_key ] : '',
-          'default'         => $string,
-        ];
-      }
-    }
-  } // end prepare_items
-
-  function column_default( $item, $column_name ) {
-    switch( $column_name ) {
-      case 'string_with_key':
-        return $item[ $column_name ];
-      default:
-        ob_start(); ?>
-        <input type="text" name="strings[<?php echo esc_attr( $item['option_key'] ) ?>]" value="<?php echo esc_html( $item['string'] ) ?>" placeholder="<?php echo esc_html( $item['default'] ) ?>" style="width:100%;" />
-        <?php return ob_get_clean();
-    }
-  } // end column_default
-} // end Air_Helper_Localization_Strings_Table
 
 function air_helper_localization_strings_override_maybe_handle_reset() {
   if ( ! isset( $_GET['_wpnonce_air_helper_strings_reset'] ) ) {
