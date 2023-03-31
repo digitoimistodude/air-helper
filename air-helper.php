@@ -38,10 +38,6 @@ function air_helper_version() {
 */
 require 'plugin-helpers.php';
 
-add_action( 'init', function() {
-  var_dump( acf_is_local_field_group( 'group_5f7622b9f1748' ) );
-} );
-
 /**
 * Github updater for this plugin.
 *
