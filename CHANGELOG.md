@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 - After `edit_user_created_user` action do not add `air_helper_helper_force_mail_to` filter if in production
+- Replace only whole word in media library, see #51
 
 ## [2.18.0]
 ### Changed
