@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 14:36:38
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 16:07:42
+ * @Last Modified time: 2023-05-22 11:52:54
  *
  * @package air-helper
  */
@@ -70,7 +70,7 @@ function air_helper_site_has_care_plan() {
     return false;
   }
 
-  return true;
+  return apply_filters( 'air_helper_site_has_care_plan', true );
 } // end air_helper_site_has_care_plan
 
 /**
