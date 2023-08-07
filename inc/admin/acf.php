@@ -5,7 +5,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2023-03-31 12:16:57
+ * @Last Modified time: 2023-08-07 13:25:19
  *
  * @package air-helper
  */
@@ -64,8 +64,11 @@ function air_helper_warn_if_not_all_acf_local_json_not_saved() {
 
   $not_saved = [];
 
-  // Get all ACF field groups and ones saved to local json
+  // Get all ACF field groups
   $groups = acf_get_field_groups();
+  $groups = apply_filters( 'air_helper_acf_groups_to_warn_about', $groups );
+
+  // Get ACF field groups saved as an JSON file
   $json = acf_get_local_json_files();
 
   // Bail if no field groups
