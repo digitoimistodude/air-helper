@@ -7,13 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Filter `air_helper_acf_groups_to_warn_about` to allow plugins disable local josn warning for specific field groups
 
-### 2.19.1: 2023-06-19
+## 2.19.1
+### Fixed
+- Fix release being stuck with a mismatch in composer.json
+- Bump tested version to 6.2.2
 
-* Fix release being stuck with a mismatch in composer.json
-* Bump tested version to 6.2.2
-
-### 2.19.0: 2023-05-22
-
+## 2.19.0
 ### Added
 - Show warning if ACF has field groups that are not saved in the local json
 - If Polylang is not active, add settings page to allow overriding localization strings
@@ -66,7 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - On `air_helper_login_honeypot_check` do centralized login logging if honeypot fails
 - Redirect Simple History user_unknown_login_failed messages to centralized login log
 
-## 2.15.0]
+## 2.15.0
 ### Added
 - Disble cache for Relevanssi related posts output on development environment for easier development
 
@@ -89,7 +88,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Removed
 * Removed custom settings related files. Legacy support can be found in air-helper-legacy-custom-settings repository. All new custom setting related stuff can be found in air-setting-groups repository
 
-## 2.13.0]
+## 2.13.0
 ### Added
 * Removed general YITH plugin widgets from dashboard
 * `get_first_page_id` function to get first page id.
@@ -129,7 +128,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - Regular expression for archive prefix removal
 
-## 2.10.3] 2021-08-19
+## 2.10.3: 2021-08-19
 ### Added
 - Support for REST requests to string translation functions
 
@@ -322,22 +321,22 @@ For upkeep customers, Helpscout beacon is added and it requires HS_BEACON_ID in 
 ### Removed
 - PHP 5.6 Travis check
 
-## 1.7.3 - 2019-01-08
+## 1.7.3: 2019-01-08
 ### Fixed
 - Function dude_get_post_meta set $single default as false
 
-## 1.7.2 - 2019-01-04
+## 1.7.2: 2019-01-04
 ### Fixed
 - Tiny MCE (classic editor) `tiny_mce_before_init` hook which caused white broken classic editor with WP 5.0 in some situations
 
-## 1.7.1 - 2018-12-21
+## 1.7.1: 2018-12-21
 ### Added
 - Remove SendGrid, GADWP and Email Address Encored notifications from dashboard
 
 ### Changed
 - Do not trust deactivation hook on air_helper_deactivated_without_version nag save, maybe do it in admin_init
 
-## 1.7.0 - 2018-12-05
+## 1.7.0: 2018-12-05
 ### Added
 - Introduce new dashboard widget to show sheculed maintenances, news/updates from vendor and for sending new support requests. Only visible if site is hosted on Dude's servers
 - Remove some dashboard widgets for having more simpler dashboard
@@ -352,7 +351,7 @@ For upkeep customers, Helpscout beacon is added and it requires HS_BEACON_ID in 
 ### Changed
 - Force mail to address from hook with koodarit@dude.fi default, not from admin email option
 
-## 1.6.0 - 2018-09-13
+## 1.6.0: 2018-09-13
 ### Added
 * Allow overriding plugins page admin menu removal from user meta with meta key `_airhelper_admin_show_plugins`
 * Save plugin version where it was activated first time, this allows us to do some tricks that does not affect old projects
@@ -365,6 +364,6 @@ For upkeep customers, Helpscout beacon is added and it requires HS_BEACON_ID in 
 ### Fixed
 * `post_exists_id` function when passing zero or empty string as a value
 
-## 1.5.6 - 2018-05-03
+## 1.5.6: 2018-05-03
 
 See the [GitHub](https://github.com/digitoimistodude/air-helper/releases) releases for changelog for this and previous versions. Work in progress to merge the previous versiosn to this changelog.
