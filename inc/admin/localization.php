@@ -73,19 +73,7 @@ if ( function_exists( 'pll_register_string' ) ) {
   } // end Air_Helper_Localization_Strings_Table
 
   add_action( 'admin_menu', 'air_helper_localization_strings_override_menu_page' );
-  add_filter( 'pre_air_helper_ask_string', 'air_helper_localization_strings_override', 10, 2 );
 }
-
-function air_helper_localization_strings_override( $string, $key ) {
-  $overrides = get_option( 'air_helper_localization_string_overrides', [] );
-  $overrride_key = sanitize_title( $key );
-
-  if ( isset( $overrides[ $overrride_key ] ) ) {
-    $string = $overrides[ $overrride_key ];
-  }
-
-  return $string;
-} // end air_helper_localization_strings_override
 
 function air_helper_localization_strings_override_menu_page() {
   add_submenu_page(

@@ -91,6 +91,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
+  require_once air_helper_base_path() . '/inc/localization.php';
 } // end air_helper_fly
 
 /**
