@@ -20,6 +20,11 @@
  */
 add_action( 'admin_init', 'air_helper_helper_remove_admin_menu_links' );
 function air_helper_helper_remove_admin_menu_links() {
+  // Core functions don't check if global $menu exists. Bail if global $menu doesn't exist. admin-post.php page for example.
+  if ( ! array_key_exists( 'menu', $GLOBALS ) ) {
+    return;
+  }
+
   $remove_items = apply_filters( 'air_helper_helper_remove_admin_menu_links', [
     'edit-comments.php',
     'themes.php?page=editcss',
