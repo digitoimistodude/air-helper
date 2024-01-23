@@ -95,7 +95,7 @@ function air_helper_maybe_remove_plugins_from_network_admin_menu() {
 add_action( 'admin_menu', 'dashboard_remove_menu_pages' );
 function dashboard_remove_menu_pages() {
   // remove_submenu_page( 'themes.php', 'nav-menus.php' );
-  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '' , 'dashicons-menu-alt3', 60 );
+  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '', 'dashicons-menu-alt3', 60 );
 } // end dashboard_remove_menu_pages
 
 /**
@@ -126,3 +126,119 @@ function air_helper_move_nav_menus_toplevel() {
     return $items;
   } );
 } // end air_helper_move_nav_menus_toplevel
+
+/**
+ * Blacklist installing certain plugins that often have malicious intent.
+ *
+ * To modify the list of blacklisted plugins, use the following filter hook:
+ *
+ * function custom_modify_blacklisted_plugins( $blacklist ) {
+ *   // Add or remove plugin slugs to the blacklist array
+ *   $blacklist[] = 'another-plugin-slug';
+ *   return $blacklist;
+ * }
+ * add_filter( 'modify_blacklisted_plugins', 'custom_modify_blacklisted_plugins' );
+ *
+ * @since 2.19.5
+ */
+add_filter( 'plugins_api_result', 'modify_plugin_search_results', 10, 3 );
+add_action( 'admin_enqueue_scripts', 'enqueue_inline_js_for_plugin_page' );
+
+function get_blacklisted_plugins() {
+    // Default list of blacklisted plugins
+    $blacklist = [
+      'insert-headers-and-footers',
+      'wp-file-manager',
+    ];
+
+    // Allow modification of the blacklisted plugins list via a custom filter hook
+    return apply_filters( 'modify_blacklisted_plugins', $blacklist );
+}
+
+function modify_plugin_search_results( $res, $action, $args ) {
+    if ( 'query_plugins' === $action ) {
+        $blacklist = [
+          'insert-headers-and-footers',
+          'wp-file-manager'
+        ];
+
+        foreach ( $res->plugins as $key => $plugin ) {
+            if ( in_array( $plugin['slug'], $blacklist, true ) ) {
+                $res->plugins[ $key ]['blacklisted'] = true;
+                // Add a custom compatibility notice for blacklisted plugins
+                $res->plugins[ $key ]['compatibility_warning'] = 'This plugin has been blacklisted and is not compatible with your current setup.';
+            }
+        }
+    }
+    return $res;
+}
+
+function enqueue_inline_js_for_plugin_page( $hook ) {
+    if ( 'plugin-install.php' !== $hook ) {
+        return;
+    }
+    ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMNodeInserted', function(event) {
+          var pluginCards = document.querySelectorAll('.plugin-card');
+          pluginCards.forEach(function(card) {
+              // Get slug based on plugin-cad-<slug> class
+              var slug = card.className.split(' ').find(function(className) {
+                  return className.indexOf('plugin-card-') === 0;
+              }).replace('plugin-card-', '');
+
+              var blacklistedPlugins = <?php echo wp_json_encode( get_blacklisted_plugins() ); ?>;
+
+              if (blacklistedPlugins.includes(slug)) {
+                  var installButton = card.querySelector('a.install-now');
+                  var compatibilityNotice = card.querySelector('.column-compatibility');
+
+                  // Notice
+                  var notice = document.createElement('div');
+                  notice.className = 'notice inline notice-error notice-alt';
+                  notice.innerHTML = '<p>This plugin cannot be installed for security reasons.</p>';
+
+                  // Add notice right inside card once
+                  if (!card.querySelector('.notice')) {
+                      card.insertBefore(notice, card.firstChild);
+                  }
+
+                  // Delete all other list items but first inside plugin-action-buttons
+                  var pluginActionButtons = card.querySelector('.plugin-action-buttons');
+                  var pluginActionButtonsListItems = pluginActionButtons.querySelectorAll('li');
+                  pluginActionButtonsListItems.forEach(function(listItem, index) {
+                      if (index !== 0) {
+                          listItem.remove();
+                      }
+                  });
+
+                  // Remove upload button
+                  var uploadButton = document.querySelector('a.upload-view-toggle');
+                  if (uploadButton) {
+                      uploadButton.remove();
+                  }
+
+                  // Remove href inside open-plugin-details-modal link
+                  var openPluginDetailsModal = card.querySelector('a.open-plugin-details-modal');
+                  if (openPluginDetailsModal) {
+                      openPluginDetailsModal.removeAttribute('href');
+                  }
+
+                  // Add pointer-events: none; to card
+                  card.style.pointerEvents = 'none';
+
+                  // Disable button
+                  installButton.outerHTML = '<button type="button" class="button button-disabled" disabled="disabled">Cannot Install</button>';
+
+
+                  if (compatibilityNotice) {
+                      compatibilityNotice.innerHTML = '<span class="compatibility-incompatible"><strong>Blacklisted</strong> plugin</span>';
+                  }
+              }
+          });
+        }, false);
+      });
+    </script>
+    <?php
+}

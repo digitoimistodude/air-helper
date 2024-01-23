@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.19.5
+### Added
+- Security: Add plugin blacklist feature
+- Add .editorconfig
+
 ## 2.19.4
 ### Fixed
 - `air_helper_helper_remove_admin_menu_links` function causing errors if on admin page where menu does not exist. admin-post.php for example.
