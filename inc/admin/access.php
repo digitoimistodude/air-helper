@@ -198,7 +198,7 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
 
               if (blacklistedPlugins.includes(slug)) {
                   var installButton = card.querySelector('a.install-now');
-                  var compatibilityNotice = card.querySelector('.column-compatibility');
+                  var compatibilityNotice = card.querySelector('.compatibility-compatible');
 
                   // Notice
                   var notice = document.createElement('div');
@@ -246,11 +246,11 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
 
                   // Add compatibility notice
                   if (compatibilityNotice) {
-                    var compatibilityNotice = document.createElement('span');
-                    compatibilityNotice.className = 'compatibility-incompatible';
-                    compatibilityNotice.innerHTML = '<strong>Blacklisted</strong> plugin';
+                    var compatibilityNoticeElement = document.createElement('span');
+                    compatibilityNoticeElement.className = 'compatibility-incompatible';
+                    compatibilityNoticeElement.innerHTML = '<strong>Blacklisted</strong> plugin';
 
-                    compatibilityNotice.replaceWith( compatibilityNotice );
+                    compatibilityNotice.replaceWith( compatibilityNoticeElement );
                   }
               }
           });
@@ -274,7 +274,6 @@ function air_helper_prevent_access_to_plugins() {
     $not_allowed_plugin_pages = [
       'plugins.php',
       'plugin-install.php',
-      'plugin-editor.php',
       'update-core.php',
     ];
 
