@@ -182,6 +182,12 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
       document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('DOMNodeInserted', function(event) {
           var pluginCards = document.querySelectorAll('.plugin-card');
+
+          // If no plugin cards, bail
+          if (!pluginCards.length) {
+              return;
+          }
+
           pluginCards.forEach(function(card) {
               // Get slug based on plugin-cad-<slug> class
               var slug = card.className.split(' ').find(function(className) {
@@ -229,11 +235,22 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
                   card.style.pointerEvents = 'none';
 
                   // Disable button
-                  installButton.outerHTML = '<button type="button" class="button button-disabled" disabled="disabled">Cannot Install</button>';
+                  if ( installButton ) {
+                    var disabledButton = document.createElement('button');
+                    disabledButton.className = 'button disabled';
+                    disabledButton.innerHTML = 'Cannot Install';
+                    disabledButton.disabled = true;
 
+                    installButton.replaceWith( disabledButton );
+                  }
 
+                  // Add compatibility notice
                   if (compatibilityNotice) {
-                      compatibilityNotice.innerHTML = '<span class="compatibility-incompatible"><strong>Blacklisted</strong> plugin</span>';
+                    var compatibilityNotice = document.createElement('span');
+                    compatibilityNotice.className = 'compatibility-incompatible';
+                    compatibilityNotice.innerHTML = '<strong>Blacklisted</strong> plugin';
+
+                    compatibilityNotice.replaceWith( compatibilityNotice );
                   }
               }
           });
@@ -242,3 +259,28 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
     </script>
     <?php
 }
+
+/**
+ * Prevent access to plugins
+ * Turn off by using `remove_action( 'admin_init', 'air_helper_prevent_access_to_plugins' );`
+ *
+ * @since 2.19.6
+ */
+add_action( 'admin_init', 'air_helper_prevent_access_to_plugins' );
+function air_helper_prevent_access_to_plugins() {
+
+  if ( ! air_helper_allow_user_to( 'plugins' ) ) {
+
+    $not_allowed_plugin_pages = [
+      'plugins.php',
+      'plugin-install.php',
+      'plugin-editor.php',
+      'update-core.php',
+    ];
+
+    // If current admin page is plugins.php, strip the last part of the URL
+    if ( in_array( $GLOBALS['pagenow'], $not_allowed_plugin_pages, true ) ) {
+      wp_die( 'You are not allowed to access this page.' );
+    }
+  }
+} // end air_helper_prevent_access_to_plugins
