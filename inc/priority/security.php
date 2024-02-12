@@ -155,7 +155,7 @@ function air_helper_login_errors() {
 
 /**
  *  Maybe catch some simple history login related messages and redirect them
- *  to combined login log instead of simple history databse. If no log message
+ *  to combined login log instead of simple history database. If no log message
  *  redirects are wanted at all, disable whole combined log with
  *  `add_filter( 'air_helper_write_to_combined_login_log', '__return_false' )`
  *

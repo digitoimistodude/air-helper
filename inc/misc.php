@@ -47,7 +47,7 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
 /**
  * Add instant.page just-in-time preloading script to footer.
  *
- * Disble using `remove_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script', 50 )`
+ * Disable using `remove_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script', 50 )`
  *
  * @since 5.0.0
  */
@@ -57,7 +57,7 @@ function air_helper_enqueue_instantpage_script() {
 } // end air_helper_enqueue_instantpage_script
 
 /**
- * Disble cache for Relevanssi related posts output on development environment for easier development.
+ * Disable cache for Relevanssi related posts output on development environment for easier development.
  *
  * @since 2.15.0
  */

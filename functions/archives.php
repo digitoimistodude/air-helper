@@ -70,7 +70,7 @@ if ( ! function_exists( 'get_post_years' ) ) {
     global $wpdb;
     $return = [];
 
-    // Do databse query to get years
+    // Do database query to get years
     $years = $wpdb->get_results( $wpdb->prepare( "SELECT YEAR(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s GROUP BY YEAR(post_date) DESC", $wpdb->posts, $post_type ), ARRAY_N );
 
     // Loop result
@@ -115,7 +115,7 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
     global $wpdb;
     $return = [];
 
-    // Do databse query to get years
+    // Do database query to get years
     $months = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT MONTH(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s AND YEAR(post_date) = %s ORDER BY post_date DESC", $wpdb->posts, $post_type, $year ), ARRAY_N );
 
     // Loop result
