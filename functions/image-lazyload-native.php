@@ -4,8 +4,8 @@
  *
  * @Author:		Elias Kautto
  * @Date:   		2022-01-28 12:33:30
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-22 11:25:47
+ * @Last Modified by:   Roni Äikäs
+ * @Last Modified time: 2023-12-18 17:35:55
  *
  * @package air-helper
  */
@@ -37,13 +37,23 @@ if ( ! function_exists( 'native_lazyload_tag' ) ) {
  */
 if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
   function get_native_lazyload_tag( $image_id = 0, $args = [] ) {
-    $args = wp_parse_args( $args, [
-      'fallback' => false,
-      'sizes' => [],
-      'class' => null,
-    ] );
+    if ( is_string( $args ) ) {
+      $args = [
+        'fallback' => false,
+        'sizes' => [
+          'big' => $args,
+        ],
+        'class' => null,
+      ];
+    } else {
+      $args = wp_parse_args( $args, [
+        'fallback' => false,
+        'sizes' => [],
+        'class' => null,
+      ] );
+    }
 
-  // Get image
+    // Get image
     $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $args['sizes'] );
 
     // Check if we have image
