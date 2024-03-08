@@ -159,7 +159,7 @@ if ( ! function_exists( 'the_block_content' ) ) {
    * @param boolean $echo If true, echoes the block content otherwise returns.
    * @return mixed
    */
-  function the_block_content( $post_id, $echo = true ) {
+  function the_block_content( $post_id, $echo = true ) { // phpcs:ignore
     if ( ! is_int( $post_id ) ) {
       $post_id = absint( $post_id );
     }

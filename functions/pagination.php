@@ -27,13 +27,15 @@ if ( ! function_exists( 'get_next_page_id' ) ) {
 
     // Get all pages under this section
     $post = get_post( $id );
-    $get_pages = get_pages( [
-      'post_type'   => $post->post_type,
-      'child_of'    => $post->post_parent,
-      'parent'      => $post->post_parent,
-      'sort_column' => 'menu_order,post_title',
-      'sort_order'  => 'ASC',
-    ] );
+    $get_pages = get_pages(
+      [
+        'post_type'   => $post->post_type,
+        'child_of'    => $post->post_parent,
+        'parent'      => $post->post_parent,
+        'sort_column' => 'menu_order,post_title',
+        'sort_order'  => 'ASC',
+      ]
+    );
 
     // Count pages.
     $page_count = count( $get_pages );
@@ -74,13 +76,15 @@ if ( ! function_exists( 'get_prev_page_id' ) ) {
 
     // Get all pages under this section
     $post = get_post( $id );
-    $get_pages = get_pages( [
-      'post_type'   => $post->post_type,
-      'child_of'    => $post->post_parent,
-      'parent'      => $post->post_parent,
-      'sort_column' => 'menu_order,post_title',
-      'sort_order'  => 'ASC',
-    ] );
+    $get_pages = get_pages(
+      [
+        'post_type'   => $post->post_type,
+        'child_of'    => $post->post_parent,
+        'parent'      => $post->post_parent,
+        'sort_column' => 'menu_order,post_title',
+        'sort_order'  => 'ASC',
+      ]
+    );
 
     // Count pages.
     $page_count = count( $get_pages );
@@ -122,13 +126,15 @@ if ( ! function_exists( 'get_first_page_id' ) ) {
 
     // Get all pages under this section
     $post = get_post( $id );
-    $get_pages = get_pages( [
-      'post_type'   => $post->post_type,
-      'child_of'    => $post->post_parent,
-      'parent'      => $post->post_parent,
-      'sort_column' => 'menu_order,post_title',
-      'sort_order'  => 'ASC',
-    ] );
+    $get_pages = get_pages(
+      [
+        'post_type'   => $post->post_type,
+        'child_of'    => $post->post_parent,
+        'parent'      => $post->post_parent,
+        'sort_column' => 'menu_order,post_title',
+        'sort_order'  => 'ASC',
+      ]
+    );
 
     if ( is_array( $get_pages ) ) {
       $first_page_id = $get_pages[0]->ID;

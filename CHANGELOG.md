@@ -2,6 +2,9 @@
 
 * Fix typos
 * Change to a consistent changelog format
+* Update PHP_Codesniffer rules
+* Add compatibility for PHP 8.3
+* Add unit tests for PHP
 
 ### 2.19.7: 2024-01-23
 
