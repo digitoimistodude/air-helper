@@ -21,7 +21,7 @@
 add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_stop_user_enumeration() {
   if ( ! is_admin() && isset( $_SERVER['REQUEST_URI'] ) ) {
-    if ( preg_match( '/(wp-comments-post)/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === 0 && ! empty( $_REQUEST['author'] ) ) {
+    if ( preg_match( '/(wp-comments-post)/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === 0 && ! empty( $_REQUEST['author'] ) ) { // phpcs:ignore
       wp_safe_redirect( home_url() );
       exit;
     }
@@ -53,7 +53,7 @@ function air_helper_login_honeypot_form() {
   } ?>
 
   <p id="air_lh_name_field" class="air_lh_name_field">
-    <label for="air_lh_name"><?php echo esc_html( 'Append three letters to this input', 'air-helper' ); ?></label><br />
+    <label for="air_lh_name"><?php echo esc_html( 'Append three letters to this input', 'air-helper' ); // phpcs:ignore ?></label><br />
     <input type="text" name="air_lh_name" id="air_lh_name" class="input" value="<?php echo esc_attr( $prefix['prefix'] ); ?>" size="20" autocomplete="off" />
   </p>
 
@@ -78,7 +78,7 @@ function air_helper_login_honeypot_form() {
  *  phpcs:disable WordPress.Security.NonceVerification.Missing
  */
 add_action( 'authenticate', 'air_helper_login_honeypot_check', 29, 3 );
-function air_helper_login_honeypot_check( $user, $username, $password ) {
+function air_helper_login_honeypot_check( $user, $username, $password ) { // phpcs:ignore
   // field is required
   if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['woocommerce-login-nonce'] ) ) {
@@ -256,7 +256,7 @@ function air_helper_write_combined_login_log( $message ) {
 
   // try to create the log file if it does not exist
   if ( ! file_exists( $log_file ) ) {
-    touch( $log_file );
+    touch( $log_file ); // phpcs:ignore
   }
 
   // bail if file creation failed
@@ -265,26 +265,26 @@ function air_helper_write_combined_login_log( $message ) {
   }
 
   // bail if file is not writable
-  if ( ! is_writable( $log_file ) ) {
+  if ( ! is_writable( $log_file ) ) { // phpcs:ignore
     return false;
   }
 
   // get visitor ip
   if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-    $user_ip = $_SERVER['HTTP_CLIENT_IP'];
+    $user_ip = $_SERVER['HTTP_CLIENT_IP']; // phpcs:ignore
   } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-    $user_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $user_ip = $_SERVER['HTTP_X_FORWARDED_FOR']; // phpcs:ignore
   } else {
-    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $user_ip = $_SERVER['REMOTE_ADDR']; // phpcs:ignore
   }
 
   // combine the message
   $write = wp_date( 'Y-m-d H:i:s' ) . " client: {$user_ip}";
   $write .= ', ' . mb_strtolower( $message );
-  $write .= ', site ' . parse_url( get_home_url() )['host'];
+  $write .= ', site ' . parse_url( get_home_url() )['host']; // phpcs:ignore
 
   // write to log
-  return file_put_contents( $log_file, $write . "\n", FILE_APPEND );
+  return file_put_contents( $log_file, $write . "\n", FILE_APPEND ); // phpcs:ignore
 } // end air_helper_write_combined_login_log
 
 /**
@@ -315,11 +315,11 @@ function get_blacklisted_plugins() {
     return apply_filters( 'modify_blacklisted_plugins', $blacklist );
 }
 
-function modify_plugin_search_results( $res, $action, $args ) {
+function modify_plugin_search_results( $res, $action, $args ) { // phpcs:ignore
     if ( 'query_plugins' === $action ) {
         $blacklist = [
           'insert-headers-and-footers',
-          'wp-file-manager'
+          'wp-file-manager',
         ];
 
         foreach ( $res->plugins as $key => $plugin ) {

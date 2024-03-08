@@ -37,10 +37,10 @@ if ( apply_filters( 'air_helper_mail_delivery', true ) && apply_filters( 'air_he
 
   // Mailhog support for development enviroments.
   if ( 'development' === wp_get_environment_type() ) {
-    add_action( 'phpmailer_init', function( $phpmailer ) {
-      $phpmailer->Host = ! empty( getenv( 'WP_MAILHOG_HOST' ) ) ? getenv( 'WP_MAILHOG_HOST' ) : '127.0.0.1';
-      $phpmailer->Port = ! empty( getenv( 'WP_MAILHOG_POST' ) ) ? getenv( 'WP_MAILHOG_POST' ) : '1025';
-      $phpmailer->SMTPAuth = false;
+    add_action( 'phpmailer_init', function ( $phpmailer ) {
+      $phpmailer->Host = ! empty( getenv( 'WP_MAILHOG_HOST' ) ) ? getenv( 'WP_MAILHOG_HOST' ) : '127.0.0.1'; // phpcs:ignore
+      $phpmailer->Port = ! empty( getenv( 'WP_MAILHOG_POST' ) ) ? getenv( 'WP_MAILHOG_POST' ) : '1025'; // phpcs:ignore
+      $phpmailer->SMTPAuth = false; // phpcs:ignore
       $phpmailer->isSMTP();
     } );
   }

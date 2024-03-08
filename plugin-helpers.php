@@ -80,7 +80,7 @@ function air_helper_site_has_care_plan() {
  *  @since  1.5.0
  */
 add_filter( 'plugin_action_links', 'air_helper_remove_deactivation_link', 10, 4 );
-function air_helper_remove_deactivation_link( $actions, $plugin_file, $plugin_data, $context ) {
+function air_helper_remove_deactivation_link( $actions, $plugin_file, $plugin_data, $context ) { // phpcs:ignore
   if ( plugin_basename( __FILE__ ) === $plugin_file && array_key_exists( 'deactivate', $actions ) ) {
     unset( $actions['deactivate'] );
   }

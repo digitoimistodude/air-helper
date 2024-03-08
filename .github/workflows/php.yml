@@ -38,7 +38,7 @@ jobs:
 
     - name: Run PHP_CodeSniffer
       run: |
-        vendor/bin/phpcs -p . --extensions=php --ignore=vendor,node_modules,src,js,css,sass --standard=phpcs.xml
+        vendor/bin/phpcs -p . --extensions=php --ignore=vendor,node_modules,src,js,css,sass,plugin-update-checker --standard=phpcs.xml
 
     - name: Test PHP for syntax errors
       run: find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l

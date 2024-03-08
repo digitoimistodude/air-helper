@@ -2,8 +2,8 @@
 /**
  * @Author: Timi Wahalahti
  * @Date:   2020-02-12 14:29:27
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 14:54:24
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:47:42
  *
  * @package air-helper
  */
@@ -43,7 +43,7 @@ function air_helper_enqueue_helpscout_beacon() {
   }
 
   // Increase body padding for the HS widget not to override paging controls
-  add_action( 'admin_head', function() { ?>
+  add_action( 'admin_head', function () { ?>
     <style type="text/css">
       .block-editor .edit-post-sidebar,
       #wpbody-content {

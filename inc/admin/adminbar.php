@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:14:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-19 14:28:58
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:46:09
  *
  * @package air-helper
  */
@@ -58,7 +58,7 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
 
   if ( wp_get_environment_type() === 'staging' ) {
     $class = 'air-helper-env-stage';
-  } else if ( wp_get_environment_type() === 'development' ) {
+  } elseif ( wp_get_environment_type() === 'development' ) {
     $env .= ' (DB ' . getenv( 'DB_HOST' ) . ')'; // On dev, show database
     $class = 'air-helper-env-dev';
   }

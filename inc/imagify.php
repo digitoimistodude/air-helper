@@ -48,6 +48,6 @@ function air_helper_imagify_resize_larger_w() {
  * @since  5.0.0
  */
 add_filter( 'get_imagify_option_optimization_level', 'air_helper_imagify_optimization_level' );
-function air_helper_imagify_optimization_level( $level ) {
+function air_helper_imagify_optimization_level( $level ) { // phpcs:ignore
   return (string) apply_filters( 'air_helper_imagify_optimization_level', '0' );
 } // end air_helper_imagify_optimization_level

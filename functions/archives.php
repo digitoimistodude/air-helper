@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:49:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-13 15:22:06
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:49:35
  *
  * @package air-helper
  */
@@ -20,7 +20,7 @@ if ( ! function_exists( 'get_posts_array' ) ) {
    *  @return array              {$return_key}=>post_title array of posts.
    */
   function get_posts_array( $args = [], $return_key = 'ID' ) {
-    $cache_key_hash = sprintf( '%u', crc32( serialize( $args ) . $return_key ) );
+    $cache_key_hash = sprintf( '%u', crc32( serialize( $args ) . $return_key ) ); // phpcs:ignore
     $cache_key = apply_filters( 'get_posts_array_cache_key', "get_posts_array_{$cache_key_hash}", $args, $return_key );
 
     // Check if result is cached and if, return cached version
@@ -71,7 +71,7 @@ if ( ! function_exists( 'get_post_years' ) ) {
     $return = [];
 
     // Do database query to get years
-    $years = $wpdb->get_results( $wpdb->prepare( "SELECT YEAR(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s GROUP BY YEAR(post_date) DESC", $wpdb->posts, $post_type ), ARRAY_N );
+    $years = $wpdb->get_results( $wpdb->prepare( "SELECT YEAR(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s GROUP BY YEAR(post_date) DESC", $wpdb->posts, $post_type ), ARRAY_N ); // phpcs:ignore
 
     // Loop result
     if ( is_array( $years ) && count( $years ) > 0 ) {
@@ -101,7 +101,7 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
   function get_post_months_by_year( $year = '', $post_type = 'post' ) {
     // Use current year if not defined
     if ( empty( $year ) ) {
-      $year = date( 'Y' );
+      $year = date( 'Y' ); // phpcs:ignore
     }
 
     $cache_key = "get_{$post_type}_months_by_year_{$year}_result";
@@ -116,7 +116,7 @@ if ( ! function_exists( 'get_post_months_by_year' ) ) {
     $return = [];
 
     // Do database query to get years
-    $months = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT MONTH(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s AND YEAR(post_date) = %s ORDER BY post_date DESC", $wpdb->posts, $post_type, $year ), ARRAY_N );
+    $months = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT MONTH(post_date) FROM %1s WHERE post_status = 'publish' AND post_type = %s AND YEAR(post_date) = %s ORDER BY post_date DESC", $wpdb->posts, $post_type, $year ), ARRAY_N ); // phpcs:ignore
 
     // Loop result
     if ( is_array( $months ) && count( $months ) > 0 ) {

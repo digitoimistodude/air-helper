@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Gutenberg editor related hooks.
  *

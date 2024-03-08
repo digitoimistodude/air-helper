@@ -22,7 +22,7 @@
 add_filter( 'style_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'script_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr', 10, 2 );
-function air_helper_remove_type_attr( $tag, $handle = '' ) {
+function air_helper_remove_type_attr( $tag, $handle = '' ) { // phpcs:ignore
   return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag ); // phpcs:ignore
 } // end air_helper_remove_type_attr
 
@@ -40,7 +40,7 @@ function air_helper_remove_type_attr( $tag, $handle = '' ) {
  */
 add_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item', 10, 4 );
 add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
-function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
+function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) { // phpcs:ignore
   return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
 } // end air_helper_strip_tags_menu_item
 

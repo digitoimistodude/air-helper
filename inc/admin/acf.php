@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:11:23
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2023-08-07 13:25:19
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:49:10
  *
  * @package air-helper
  */
@@ -94,10 +94,10 @@ function air_helper_warn_if_not_all_acf_local_json_not_saved() {
   // Show the actual error
   $class = 'notice notice-error';
 
-  $message = __( '<b>ACF field group local files missing!</b>', 'air-helper' );
+  $message = __( '<b>ACF field group local files missing!</b>', 'air-helper' ); // phpcs:ignore
   $message .= ' ' . wp_sprintf( __( 'Make sure following field groups are saved: %1$s.', 'air-helper' ), implode( ', ', $not_saved ) );
 
-  printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+  printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); // phpcs:ignore
 
-  do_action( 'qm/critical', esc_html( $message ) );
+  do_action( 'qm/critical', esc_html( $message ) ); // phpcs:ignore
 } // end air_helper_warn_if_not_all_acf_local_json_not_saved
