@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:03:27
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 15:14:51
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:51:32
  *
  * @package air-helper
  */
@@ -85,7 +85,7 @@ function air_helper_orderby_fix() {
    *  @param string $orderby ordering clause for query
    *  @return string ordering clause for query
    */
-  add_filter( 'posts_orderby', function( $orderby ) {
+  add_filter( 'posts_orderby', function ( $orderby ) {
     global $wpdb;
 
     if ( strstr( $orderby, 'post_title' ) ) {
@@ -110,7 +110,7 @@ function air_helper_orderby_fix() {
    *  @param array  $this_query_vars_taxonomy an array of taxonomies
    *  @return string ordering clause for terms query
    */
-  add_filter( 'get_terms_orderby', function( $orderby, $this_query_vars, $this_query_vars_taxonomy ) {
+  add_filter( 'get_terms_orderby', function ( $orderby, $this_query_vars, $this_query_vars_taxonomy ) { // phpcs:ignore
     if ( strstr( $orderby, 't.name' ) ) {
       $old_orderby  = 't.name';
       $utf8_orderby = 'CONVERT ( LCASE(t.name) USING utf8) COLLATE utf8_bin ';
