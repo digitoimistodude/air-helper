@@ -5,6 +5,7 @@
 * Update PHP_Codesniffer rules
 * Add compatibility for PHP 8.3
 * Add unit tests for PHP
+* Bump tested WordPress version to 6.4.3
 
 ### 2.19.7: 2024-01-23
 
