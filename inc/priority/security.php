@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:42:34
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-27 16:39:32
  *
  * @package air-helper
  */
@@ -97,7 +97,7 @@ function air_helper_login_honeypot_check( $user, $username, $password ) { // php
 
     // value needs to be exactly six charters long
     if ( 6 !== mb_strlen( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ) ) ) {
-      air_helper_act_on_login_fail( 'honeypot_lenght' );
+      air_helper_act_on_login_fail( 'honeypot_length' );
       return null;
     }
 
@@ -227,7 +227,7 @@ function air_helper_maybe_redirect_simplehistory_to_combined_log( $do_log, $leve
 function air_helper_act_on_login_fail( $type ) {
   $messages_by_type = [
     'honeypot_empty'        => 'failed to login (air honeypot empty)',
-    'honeypot_lenght'       => 'failed to login (air honeypot lenght)',
+    'honeypot_length'       => 'failed to login (air honeypot length)',
     'honeypot_prefix_old'   => 'failed to login (air honeypot old prefix)',
     'honeypot_prefix_wrong' => 'failed to login (air honeypot wrong prefix)',
   ];
