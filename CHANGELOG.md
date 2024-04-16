@@ -7,6 +7,7 @@
 * Add unit tests for PHP
 * Bump tested WordPress version to 6.4.3
 * Dont try to add "core/list-item" to allowed blocks if all blocks are already allowed
+* Replace hardcoded lang strings with `get_user_locale` in Polylang fallback functions
 
 ### 2.19.7: 2024-01-23
 

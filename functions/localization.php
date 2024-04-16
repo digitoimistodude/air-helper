@@ -144,15 +144,15 @@ if ( ! function_exists( 'pll__' ) ) {
   }
 
   function pll_current_language() {
-    return 'fi';
+    return get_user_locale();
   }
 
   function pll_default_language( $value = 'slug' ) { // phpcs:ignore
-    return 'fi';
+    return get_user_locale();
   }
 
   function pll_get_post_language( $id ) { // phpcs:ignore
-    return 'fi';
+    return get_user_locale();
   }
 
   function pll_get_post( $post_id, $slug = '' ) { // phpcs:ignore
