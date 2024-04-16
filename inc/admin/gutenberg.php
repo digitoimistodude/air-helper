@@ -21,6 +21,11 @@
  */
 add_filter( 'allowed_block_types_all', 'air_helper_gutenberg_allowed_blocks', 50 );
 function air_helper_gutenberg_allowed_blocks( $allowed_blocks ) {
+  // If all blocks are allowed no need to add anything
+  if ( true === $allowed_blocks ) {
+    return $allowed_blocks;
+  }
+
   // After WP 6.1 you cannot add new list items without core/list-item block that was introduced
   if ( in_array( 'core/list', $allowed_blocks ) ) {
     $allowed_blocks[] = 'core/list-item';

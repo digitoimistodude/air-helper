@@ -6,6 +6,7 @@
 * Add compatibility for PHP 8.3
 * Add unit tests for PHP
 * Bump tested WordPress version to 6.4.3
+* Dont try to add "core/list-item" to allowed blocks if all blocks are already allowed
 
 ### 2.19.7: 2024-01-23
 
