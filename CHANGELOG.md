@@ -1,4 +1,4 @@
-### 2.2.0rc: 2024-02-12
+### 3.0.0: 2024-04-16
 
 * Fix typos
 * Change to a consistent changelog format
