@@ -33,3 +33,13 @@ function air_helper_gutenberg_allowed_blocks( $allowed_blocks ) {
 
   return $allowed_blocks;
 } // end air_helper_gutenberg_allowed_blocks
+
+/**
+ * Disable gutenberg block assets so users can't intall plugins by enabling new blocks.
+ *
+ * @since 3.0.4
+ */
+add_action( 'init', 'air_helper_disable_gutenberg_block_directory_assets', 100 );
+function air_helper_disable_gutenberg_block_directory_assets() {
+  remove_action( 'enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets' );
+} // end air_helper_disable_gutenberg_block_directory_assets
