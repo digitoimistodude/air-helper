@@ -39,6 +39,7 @@ function air_helper_wphidenag() {
 add_action( 'admin_head', 'air_helper_hide_nag_styles' );
 function air_helper_hide_nag_styles() { ?>
   <style>
+    #cookiebot-admin-notice-container,
     .update-nag,
     #wp-admin-bar-updates,
     #menu-plugins .update-plugins,
