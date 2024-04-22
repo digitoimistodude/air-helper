@@ -1,6 +1,10 @@
+### 3.0.2: 2024-04-22
+
+* Fix mistake in nag class
+
 ### 3.0.1: 2024-04-22
 
-* Add `#cookiebot-admin-notice-container` to `air_helper_hide_nag_styles()`
+* Add cookiebot-admin-notice-container to `air_helper_hide_nag_styles()`
 
 ### 3.0.0: 2024-04-16
 
