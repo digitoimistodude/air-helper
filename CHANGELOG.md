@@ -1,3 +1,7 @@
+### 3.0.3: 2024-04-22
+
+* Make sure the rest of the update nags are hidden with !important rule and not partly hidden with overriding styles
+
 ### 3.0.2: 2024-04-22
 
 * Fix mistake in nag class

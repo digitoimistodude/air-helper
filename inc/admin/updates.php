@@ -48,8 +48,8 @@ function air_helper_hide_nag_styles() { ?>
     table.plugins .update-message,
     .theme-browser .update-message,
     body.plugins-php ul.subsubsub li.upgrade {
-      display: none;
-      visibility: hidden;
+      display: none !important;
+      visibility: hidden !important;
     }
 
     .plugin-update-tr {
