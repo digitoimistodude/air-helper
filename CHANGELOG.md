@@ -1,6 +1,7 @@
-### 3.0.5rc: 2024-05-10
+### 3.0.5: 2024-05-10
 
 * Fix Autoptimize hook for filtering out the type attributes, sometimes breaks 3rd party plugin scripts like OptinMonster
+* Upgrade instant.page to 5.2.0
 
 ### 3.0.4: 2024-04-26
 

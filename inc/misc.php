@@ -62,7 +62,7 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
  */
 add_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script' );
 function air_helper_enqueue_instantpage_script() {
-  wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.1.0', true );
+  wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.2.0', true );
 } // end air_helper_enqueue_instantpage_script
 
 /**
