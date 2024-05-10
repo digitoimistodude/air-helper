@@ -13,9 +13,13 @@
 /**
  * Remove unnecessary type attributes to suppress HTML validator messages.
  *
- * Turn off by using `add_filter( 'style_loader_tag', 'air_helper_remove_type_attr' )`
- * Turn off by using `add_filter( 'script_loader_tag', 'air_helper_remove_type_attr' )`
- * Turn off by using `add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr' )`
+ * Turn off with:
+ *
+ * add_action( 'init', function() {
+ *  remove_filter( 'style_loader_tag', 'air_helper_remove_type_attr' );
+ *  remove_filter( 'script_loader_tag', 'air_helper_remove_type_attr' );
+ *  remove_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr' );
+ * }, 999 );
  *
  * @since  2.3.0
  */
@@ -23,7 +27,12 @@ add_filter( 'style_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'script_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr', 10, 2 );
 function air_helper_remove_type_attr( $tag, $handle = '' ) { // phpcs:ignore
-  return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag ); // phpcs:ignore
+  $tag = str_replace( " type='text/javascript'", '', $tag );
+  $tag = str_replace( ' type="text/javascript"', '', $tag );
+  $tag = str_replace( " type='text/css'", '', $tag );
+  $tag = str_replace( ' type="text/css"', '', $tag );
+
+  return $tag;
 } // end air_helper_remove_type_attr
 
 /**
