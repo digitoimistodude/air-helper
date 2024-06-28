@@ -54,6 +54,7 @@ function air_helper_get_care_plan_hostnames() {
     'craft' => true,
     'ghost' => true,
     'slash' => true,
+    'soen'  => true,
   ] );
 } // end air_helper_get_care_plan_hostnames
 

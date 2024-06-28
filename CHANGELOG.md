@@ -1,3 +1,7 @@
+### 3.0.6: 2024-06-28
+
+* Add fourth server to care plan hosts
+
 ### 3.0.5: 2024-05-10
 
 * Fix Autoptimize hook for filtering out the type attributes, sometimes breaks 3rd party plugin scripts like OptinMonster
