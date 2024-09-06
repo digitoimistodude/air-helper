@@ -1,4 +1,4 @@
-### 3.0.7
+### 3.0.7: 2024-09-06
 
 * Add array check to Gutenberg allowed block filter
 
