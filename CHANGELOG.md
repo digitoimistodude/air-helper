@@ -1,3 +1,7 @@
+### 3.0.7
+
+* Add array check to Gutenberg allowed block filter
+
 ### 3.0.6: 2024-06-28
 
 * Add fourth server to care plan hosts
