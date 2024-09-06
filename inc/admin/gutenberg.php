@@ -27,7 +27,7 @@ function air_helper_gutenberg_allowed_blocks( $allowed_blocks ) {
   }
 
   // After WP 6.1 you cannot add new list items without core/list-item block that was introduced
-  if ( in_array( 'core/list', $allowed_blocks ) ) {
+  if ( is_array( $allowed_blocks ) && in_array( 'core/list', $allowed_blocks ) ) {
     $allowed_blocks[] = 'core/list-item';
   }
 
