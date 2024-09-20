@@ -191,3 +191,13 @@ if ( ! function_exists( 'the_block_content' ) ) {
     echo $block_content; // phpcs:ignore
   } // end the_block_content
 } // end if
+
+function first_block_load_eager () {
+
+  if ( is_first_block( get_the_ID(), $block ) ) {
+    echo '<div class="default-image">';
+    get_picture_element_with_cfcdn( $bg_image, $picture_cdn_args, $picture_cdn_srcset, $loading = 'eager' );
+    echo '</div>';
+
+  }
+}
