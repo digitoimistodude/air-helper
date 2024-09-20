@@ -2,11 +2,6 @@
 /**
  * Image native lazyload.
  *
- * @Author:		Elias Kautto
- * @Date:   		2022-01-28 12:33:30
- * @Last Modified by:   Roni Äikäs
- * @Last Modified time: 2023-12-18 17:35:55
- *
  * @package air-helper
  */
 

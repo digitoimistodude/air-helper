@@ -55,12 +55,12 @@ function ask__( $key, $lang = null ) {
       }
     }
 
-    // compose error message.
+    // Compose error message.
     $error_msg = $e->getMessage() . $trace_line;
 
-    // trigger errors.
-    trigger_error( esc_html( $error_msg ), E_USER_WARNING );
-    error_log( $error_msg );
+    // Trigger errors.
+    trigger_error( esc_html( $error_msg ), E_USER_WARNING ); // phpcs:ignore
+    error_log( $error_msg ); // phpcs:ignore
   }
 
   return $key;
@@ -102,12 +102,12 @@ function asv__( $value, $lang = null ) {
         }
       }
 
-      // compose error message.
+      // Compose error message.
       $error_msg = $e->getMessage() . $trace_line;
 
-      // trigger errors.
-      trigger_error( esc_html( $error_msg ), E_USER_WARNING );
-      error_log( $error_msg );
+      // Trigger errors.
+      trigger_error( esc_html( $error_msg ), E_USER_WARNING ); // phpcs:ignore
+      error_log( $error_msg ); // phpcs:ignore
     }
   }
 
@@ -135,39 +135,39 @@ function asv_e( $value, $lang = null ) {
  *  @since 1.4.0
  */
 if ( ! function_exists( 'pll__' ) ) {
-  function pll__( $string ) {
+  function pll__( $string ) { // phpcs:ignore
     return $string;
   }
 
-  function pll_e( $string ) {
+  function pll_e( $string ) { // phpcs:ignore
     echo wp_kses_post( $string );
   }
 
   function pll_current_language() {
-    return 'fi';
+    return get_user_locale();
   }
 
-  function pll_default_language( $value = 'slug' ) {
-    return 'fi';
+  function pll_default_language( $value = 'slug' ) { // phpcs:ignore
+    return get_user_locale();
   }
 
-  function pll_get_post_language( $id ) {
-    return 'fi';
+  function pll_get_post_language( $id ) { // phpcs:ignore
+    return get_user_locale();
   }
 
-  function pll_get_post( $post_id, $slug = '' ) {
+  function pll_get_post( $post_id, $slug = '' ) { // phpcs:ignore
     return $post_id;
   }
 
-  function pll_get_term( $term_id, $slug = '' ) {
+  function pll_get_term( $term_id, $slug = '' ) { // phpcs:ignore
     return $term_id;
   }
 
-  function pll_translate_string( $str, $lang = '' ) {
+  function pll_translate_string( $str, $lang = '' ) { // phpcs:ignore
     return $str;
   }
 
-  function pll_home_url( $slug = '' ) {
+  function pll_home_url( $slug = '' ) { // phpcs:ignore
     return get_home_url();
   }
 } // end if

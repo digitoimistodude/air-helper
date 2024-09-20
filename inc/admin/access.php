@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:15:47
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 16:10:05
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:46:57
  *
  * @package air-helper
  */
@@ -20,6 +20,11 @@
  */
 add_action( 'admin_init', 'air_helper_helper_remove_admin_menu_links' );
 function air_helper_helper_remove_admin_menu_links() {
+  // Core functions don't check if global $menu exists. Bail if global $menu doesn't exist. admin-post.php page for example.
+  if ( ! array_key_exists( 'menu', $GLOBALS ) ) {
+    return;
+  }
+
   $remove_items = apply_filters( 'air_helper_helper_remove_admin_menu_links', [
     'edit-comments.php',
     'themes.php?page=editcss',
@@ -38,8 +43,8 @@ function air_helper_helper_remove_admin_menu_links() {
       'widgets.php',
     ],
     'options-general.php' => [
-      'mailgun-lists'
-    ]
+      'mailgun-lists',
+    ],
   ] );
 
   foreach ( $remove_items as $parent => $items ) {
@@ -89,8 +94,7 @@ function air_helper_maybe_remove_plugins_from_network_admin_menu() {
 
 add_action( 'admin_menu', 'dashboard_remove_menu_pages' );
 function dashboard_remove_menu_pages() {
-  // remove_submenu_page( 'themes.php', 'nav-menus.php' );
-  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '' , 'dashicons-menu-alt3', 60 );
+  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '', 'dashicons-menu-alt3', 60 );
 } // end dashboard_remove_menu_pages
 
 /**
@@ -107,12 +111,12 @@ function air_helper_move_nav_menus_toplevel() {
   }
 
   // Always add nav-menus.php to toplevel
-  add_action( 'admin_menu', function() {
-    add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '' , 'dashicons-menu-alt3', 60 );
+  add_action( 'admin_menu', function () {
+    add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '', 'dashicons-menu-alt3', 60 );
   } );
 
   // Maybe hide themes.php from user
-  add_filter( 'air_helper_helper_remove_admin_menu_links', function( $items ) {
+  add_filter( 'air_helper_helper_remove_admin_menu_links', function ( $items ) {
     if ( air_helper_allow_user_to( 'themes' ) ) {
       return $items;
     }

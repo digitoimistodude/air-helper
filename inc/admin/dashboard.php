@@ -1,11 +1,13 @@
 <?php
 /**
+ * Dashboard
+ *
  * Customize wp-admin dashboard (index.php).
  *
- * @Author: 						Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
- * @Date:   						2018-11-13 18:06:44
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-12-15 10:34:05
+ * @Author: Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
+ * @Date: 2018-11-13 18:06:44
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:43:08
  *
  * @package air-helper
  */
@@ -28,7 +30,7 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
 add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
 function air_helper_clear_admin_dashboard() {
 	$remove_boxes = [
-		'normal'	=> [
+		'normal' => [
 			'dashboard_right_now',
 			'dashboard_recent_comments',
 			'dashboard_incoming_links',
@@ -43,7 +45,7 @@ function air_helper_clear_admin_dashboard() {
       'yith_dashboard_products_news', // all YITH plugins
       'yith_dashboard_blog_news', // all YITH plugins
 		],
-		'side'		=> [
+		'side' => [
 			'dashboard_quick_press',
 			'dashboard_recent_drafts',
 			'dashboard_primary',

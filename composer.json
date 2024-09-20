@@ -8,7 +8,7 @@
     "plugin"
   ],
   "license": "GPL-3.0+",
-  "version": "2.19.3",
+  "version": "3.0.7",
   "authors": [
     {
       "name": "Timi Wahalahti",
@@ -30,5 +30,19 @@
       "email": "elias@dude.fi",
       "homepage": "https://github.com/eliaskau"
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.0",
+    "phpcompatibility/php-compatibility": "dev-develop as 9.3.5",
+    "phpcsstandards/phpcsutils": "^1.0",
+    "squizlabs/php_codesniffer": "*",
+    "phpcsstandards/phpcsextra": "^1.2.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "phpcompatibility/phpcompatibility-wp": "*"
+  }
 }

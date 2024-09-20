@@ -39,6 +39,7 @@ function air_helper_wphidenag() {
 add_action( 'admin_head', 'air_helper_hide_nag_styles' );
 function air_helper_hide_nag_styles() { ?>
   <style>
+    .cookiebot-admin-notice-container,
     .update-nag,
     #wp-admin-bar-updates,
     #menu-plugins .update-plugins,
@@ -47,8 +48,8 @@ function air_helper_hide_nag_styles() { ?>
     table.plugins .update-message,
     .theme-browser .update-message,
     body.plugins-php ul.subsubsub li.upgrade {
-      display: none;
-      visibility: hidden;
+      display: none !important;
+      visibility: hidden !important;
     }
 
     .plugin-update-tr {

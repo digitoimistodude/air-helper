@@ -1,6 +1,6 @@
 {
   "name": "air-helper",
-  "version": "2.19.3",
+  "version": "3.0.7",
   "description": "Plugin provides helpful functions and modifications for WordPress projects.",
   "main": "air-helper.php",
   "dependencies": {},

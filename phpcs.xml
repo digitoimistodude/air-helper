@@ -69,6 +69,12 @@
     <exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
     <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
     <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
+    <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found" />
+    <exclude name="Universal.WhiteSpace.PrecisionAlignment.Found" />
+    <exclude name="PEAR.Functions.FunctionCallSignature" />
+    <exclude name="Squiz.Commenting.FunctionComment" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace" />
+    <exclude name="Generic.Commenting.DocComment.MissingShort" />
 
   </rule>
 </ruleset>

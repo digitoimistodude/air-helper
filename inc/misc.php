@@ -13,17 +13,26 @@
 /**
  * Remove unnecessary type attributes to suppress HTML validator messages.
  *
- * Turn off by using `add_filter( 'style_loader_tag', 'air_helper_remove_type_attr' )`
- * Turn off by using `add_filter( 'script_loader_tag', 'air_helper_remove_type_attr' )`
- * Turn off by using `add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr' )`
+ * Turn off with:
+ *
+ * add_action( 'init', function() {
+ *  remove_filter( 'style_loader_tag', 'air_helper_remove_type_attr' );
+ *  remove_filter( 'script_loader_tag', 'air_helper_remove_type_attr' );
+ *  remove_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr' );
+ * }, 999 );
  *
  * @since  2.3.0
  */
 add_filter( 'style_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'script_loader_tag', 'air_helper_remove_type_attr', 10, 2 );
 add_filter( 'autoptimize_html_after_minify', 'air_helper_remove_type_attr', 10, 2 );
-function air_helper_remove_type_attr( $tag, $handle = '' ) {
-  return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag ); // phpcs:ignore
+function air_helper_remove_type_attr( $tag, $handle = '' ) { // phpcs:ignore
+  $tag = str_replace( " type='text/javascript'", '', $tag );
+  $tag = str_replace( ' type="text/javascript"', '', $tag );
+  $tag = str_replace( " type='text/css'", '', $tag );
+  $tag = str_replace( ' type="text/css"', '', $tag );
+
+  return $tag;
 } // end air_helper_remove_type_attr
 
 /**
@@ -40,24 +49,24 @@ function air_helper_remove_type_attr( $tag, $handle = '' ) {
  */
 add_filter( 'nav_menu_item_title', 'air_helper_strip_tags_menu_item', 10, 4 );
 add_filter( 'the_title', 'air_helper_strip_tags_menu_item', 10, 2 );
-function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) {
+function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, $arg_4 = null ) { // phpcs:ignore
   return strip_tags( $title, apply_filters( 'air_helper_allowed_tags_in_title', '<br><em><b><strong>' ) );
 } // end air_helper_strip_tags_menu_item
 
 /**
  * Add instant.page just-in-time preloading script to footer.
  *
- * Disble using `remove_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script', 50 )`
+ * Disable using `remove_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script', 50 )`
  *
  * @since 5.0.0
  */
 add_action( 'wp_enqueue_scripts', 'air_helper_enqueue_instantpage_script' );
 function air_helper_enqueue_instantpage_script() {
-  wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.1.0', true );
+  wp_enqueue_script( 'instantpage', air_helper_base_url() . '/assets/js/instantpage.js', [], '5.2.0', true );
 } // end air_helper_enqueue_instantpage_script
 
 /**
- * Disble cache for Relevanssi related posts output on development environment for easier development.
+ * Disable cache for Relevanssi related posts output on development environment for easier development.
  *
  * @since 2.15.0
  */

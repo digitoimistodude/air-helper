@@ -6,6 +6,11 @@
  *  original (GPL-2.o licensed) code, which this file is based on.
  *  https://github.com/aucor/aucor-starter/blob/master/inc/localization.php
  *
+ * @Author: Roni Laukkarinen
+ * @Date: 2024-02-12 11:37:42
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:43:31
+ *
  *  @package air-helper
  */
 
@@ -24,11 +29,11 @@ if ( function_exists( 'pll_register_string' ) ) {
 	}
 } else {
   if ( ! class_exists( 'WP_List_Table' ) ) {
-    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
   }
 
   class Air_Helper_Localization_Strings_Table extends WP_List_Table {
-    function get_columns() {
+    function get_columns() { // phpcs:ignore
       $columns = [
         'string_with_key' => 'Key',
         'string'          => 'String',
@@ -37,7 +42,7 @@ if ( function_exists( 'pll_register_string' ) ) {
       return $columns;
     } // end get_columns
 
-    function prepare_items() {
+    function prepare_items() { // phpcs:ignore
       $columns = $this->get_columns();
       $hidden = [];
       $sortable = [];
@@ -60,13 +65,13 @@ if ( function_exists( 'pll_register_string' ) ) {
       }
     } // end prepare_items
 
-    function column_default( $item, $column_name ) {
-      switch( $column_name ) {
+    function column_default( $item, $column_name ) { // phpcs:ignore
+      switch ( $column_name ) {
         case 'string_with_key':
-          return $item[ $column_name ];
+          return $item[ $column_name ]; // phpcs:ignore
         default:
           ob_start(); ?>
-          <input type="text" name="strings[<?php echo esc_attr( $item['option_key'] ) ?>]" value="<?php echo esc_html( $item['string'] ) ?>" placeholder="<?php echo esc_html( $item['default'] ) ?>" style="width:100%;" />
+          <input type="text" name="strings[<?php echo esc_attr( $item['option_key'] ); ?>]" value="<?php echo esc_html( $item['string'] ); ?>" placeholder="<?php echo esc_html( $item['default'] ); ?>" style="width:100%;" />
           <?php return ob_get_clean();
       }
     } // end column_default
@@ -75,7 +80,7 @@ if ( function_exists( 'pll_register_string' ) ) {
   add_action( 'admin_menu', 'air_helper_localization_strings_override_menu_page' );
 }
 
-function air_helper_localization_strings_override_menu_page() {
+function air_helper_localization_strings_override_menu_page() { // phpcs:ignore
   add_submenu_page(
     'options-general.php',
     __( 'Localization strings', 'air-helper' ),
@@ -98,23 +103,23 @@ function air_helper_localization_strings_override_page() {
   ob_start(); ?>
 
   <div class="wrap">
-    <h2><?php esc_html( $title ) ?></h2>
+    <h2><?php esc_html( $title ); ?></h2>
 
-    <form method="post" action="options-general.php?page=<?php echo esc_attr( $plugin_page ) ?>">
+    <form method="post" action="options-general.php?page=<?php echo esc_attr( $plugin_page ); ?>">
       <?php $table->display();
       wp_nonce_field( -1, '_wpnonce_air_helper_strings' ); ?>
 
-      <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Save' ) ?>">
+      <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Save' ); ?>">
     </form>
 
     <p class="button-wrapper">
-      <a href="<?php echo esc_url( wp_nonce_url( 'options-general.php?page=' . $plugin_page, -1, '_wpnonce_air_helper_strings_reset' ) ) ?>">
-        <?php esc_html_e( 'Reset to default' ) ?>
+      <a href="<?php echo esc_url( wp_nonce_url( 'options-general.php?page=' . $plugin_page, -1, '_wpnonce_air_helper_strings_reset' ) ); ?>">
+        <?php esc_html_e( 'Reset to default' ); ?>
       </a>
     </p>
   </div>
 
-  <?php echo ob_get_clean();
+  <?php echo ob_get_clean(); // phpcs:ignore
 } // end air_helper_localization_strings_override_page
 
 function air_helper_localization_strings_override_maybe_handle_reset() {
@@ -122,7 +127,7 @@ function air_helper_localization_strings_override_maybe_handle_reset() {
     return;
   }
 
-  if ( ! wp_verify_nonce( $_GET['_wpnonce_air_helper_strings_reset'], -1 ) ) {
+  if ( ! wp_verify_nonce( $_GET['_wpnonce_air_helper_strings_reset'], -1 ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
     return;
   }
 
@@ -137,7 +142,7 @@ function air_helper_localization_strings_override_maybe_handle_save() {
     return;
   }
 
-  if ( ! wp_verify_nonce( $_POST['_wpnonce_air_helper_strings'], -1 ) ) {
+  if ( ! wp_verify_nonce( $_POST['_wpnonce_air_helper_strings'], -1 ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
     return;
   }
 
@@ -149,7 +154,7 @@ function air_helper_localization_strings_override_maybe_handle_save() {
     return;
   }
 
-  $strings = array_filter( $_POST['strings'] );
+  $strings = array_filter( $_POST['strings'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
   if ( empty( $strings ) ) {
     return;
   }

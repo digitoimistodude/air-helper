@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 15:16:02
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-08-03 10:16:41
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-08 17:48:50
  *
  * @package air-helper
  */
@@ -57,7 +57,7 @@ function air_helper_dashboard_widget_styles() {
  *  @param  mixed $post          Where widget is shown.
  *  @param  array $callback_args Arguments passed into callback function.
  */
-function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
+function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) { // phpcs:ignore
   // get data for widget
   $data = _air_helper_admin_dashboard_widget_get_data();
 
@@ -85,20 +85,20 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
           // make maintenance start and end times to human readbale string
           $day_str = _air_helper_admin_dashboard_widget_get_time_str( $maintenance->start, $maintenance->end ); ?>
           <div class="maintenance">
-            <h3><?php echo esc_html( $maintenance->title ) ?></h3>
+            <h3><?php echo esc_html( $maintenance->title ); ?></h3>
 
             <p class="time">
-              <?php echo esc_html( $day_str ) ?>
+              <?php echo esc_html( $day_str ); ?>
             </p>
 
-            <?php echo wp_kses_post( wpautop( $maintenance->desc ) ) ?>
+            <?php echo wp_kses_post( wpautop( $maintenance->desc ) ); ?>
 
             <p class="read-more">
-              <a href="<?php echo esc_url( $statuspage_url ) ?>" target="_blank"><?php echo esc_html( 'Server status on real time', 'air-helper' ) ?> &rarr;</a>
+              <a href="<?php echo esc_url( $statuspage_url ); ?>" target="_blank"><?php echo esc_html( 'Server status on real time', 'air-helper' ); // phpcs:ignore ?> &rarr;</a>
             </p>
           </div>
         <?php endif; // maintennace content isset
-      endif; // ! empty( $data->maintenances )
+      endif;
 
       // check if we have news to show
       if ( ! empty( $data->news ) ) :
@@ -119,24 +119,24 @@ function air_helper_admin_dashboard_widget_callback( $post, $callback_args ) {
           $content = strip_tags( $news->content, '<a><i><b><br><strong><italic>' ); ?>
           <div class="news">
             <p class="time">
-              <?php echo esc_html( date_i18n( 'j.n.Y H:i', strtotime( $news->time ) ) ) ?>
+              <?php echo esc_html( date_i18n( 'j.n.Y H:i', strtotime( $news->time ) ) ); ?>
             </p>
 
-            <h3><?php echo esc_html( $news->title ) ?></h3>
+            <h3><?php echo esc_html( $news->title ); ?></h3>
 
             <?php echo wp_kses_post( wpautop( $content ) );
 
             if ( isset( $news->link ) ) :
               if ( ! empty( $news->link->href ) && ! empty( $news->link->title ) ) : ?>
                 <p class="read-more">
-                  <a href="<?php echo esc_url( $news->link->href ) ?>" target="_blank"><?php echo esc_html( $news->link->title ) ?> &rarr;</a>
+                  <a href="<?php echo esc_url( $news->link->href ); ?>" target="_blank"><?php echo esc_html( $news->link->title ); ?> &rarr;</a>
                 </p>
               <?php endif;
             endif; ?>
 
           </div>
         <?php endforeach; // loop news
-      endif; // ! empty( $data->news ) ?>
+      endif; ?>
     </div>
 
   </div>

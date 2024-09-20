@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:00:16
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:42:34
+ * @Last Modified by:   Roni Laukkarinen
+ * @Last Modified time: 2024-03-27 16:39:32
  *
  * @package air-helper
  */
@@ -21,7 +21,7 @@
 add_action( 'init', 'air_helper_stop_user_enumeration', 10 );
 function air_helper_stop_user_enumeration() {
   if ( ! is_admin() && isset( $_SERVER['REQUEST_URI'] ) ) {
-    if ( preg_match( '/(wp-comments-post)/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === 0 && ! empty( $_REQUEST['author'] ) ) {
+    if ( preg_match( '/(wp-comments-post)/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) === 0 && ! empty( $_REQUEST['author'] ) ) { // phpcs:ignore
       wp_safe_redirect( home_url() );
       exit;
     }
@@ -53,7 +53,7 @@ function air_helper_login_honeypot_form() {
   } ?>
 
   <p id="air_lh_name_field" class="air_lh_name_field">
-    <label for="air_lh_name"><?php echo esc_html( 'Append three letters to this input', 'air-helper' ); ?></label><br />
+    <label for="air_lh_name"><?php echo esc_html( 'Append three letters to this input', 'air-helper' ); // phpcs:ignore ?></label><br />
     <input type="text" name="air_lh_name" id="air_lh_name" class="input" value="<?php echo esc_attr( $prefix['prefix'] ); ?>" size="20" autocomplete="off" />
   </p>
 
@@ -78,7 +78,7 @@ function air_helper_login_honeypot_form() {
  *  phpcs:disable WordPress.Security.NonceVerification.Missing
  */
 add_action( 'authenticate', 'air_helper_login_honeypot_check', 29, 3 );
-function air_helper_login_honeypot_check( $user, $username, $password ) {
+function air_helper_login_honeypot_check( $user, $username, $password ) { // phpcs:ignore
   // field is required
   if ( ! empty( $_POST ) ) {
     if ( isset( $_POST['woocommerce-login-nonce'] ) ) {
@@ -97,7 +97,7 @@ function air_helper_login_honeypot_check( $user, $username, $password ) {
 
     // value needs to be exactly six charters long
     if ( 6 !== mb_strlen( sanitize_text_field( wp_unslash( $_POST['air_lh_name'] ) ) ) ) {
-      air_helper_act_on_login_fail( 'honeypot_lenght' );
+      air_helper_act_on_login_fail( 'honeypot_length' );
       return null;
     }
 
@@ -155,7 +155,7 @@ function air_helper_login_errors() {
 
 /**
  *  Maybe catch some simple history login related messages and redirect them
- *  to combined login log instead of simple history databse. If no log message
+ *  to combined login log instead of simple history database. If no log message
  *  redirects are wanted at all, disable whole combined log with
  *  `add_filter( 'air_helper_write_to_combined_login_log', '__return_false' )`
  *
@@ -227,7 +227,7 @@ function air_helper_maybe_redirect_simplehistory_to_combined_log( $do_log, $leve
 function air_helper_act_on_login_fail( $type ) {
   $messages_by_type = [
     'honeypot_empty'        => 'failed to login (air honeypot empty)',
-    'honeypot_lenght'       => 'failed to login (air honeypot lenght)',
+    'honeypot_length'       => 'failed to login (air honeypot length)',
     'honeypot_prefix_old'   => 'failed to login (air honeypot old prefix)',
     'honeypot_prefix_wrong' => 'failed to login (air honeypot wrong prefix)',
   ];
@@ -256,7 +256,7 @@ function air_helper_write_combined_login_log( $message ) {
 
   // try to create the log file if it does not exist
   if ( ! file_exists( $log_file ) ) {
-    touch( $log_file );
+    touch( $log_file ); // phpcs:ignore
   }
 
   // bail if file creation failed
@@ -265,24 +265,181 @@ function air_helper_write_combined_login_log( $message ) {
   }
 
   // bail if file is not writable
-  if ( ! is_writable( $log_file ) ) {
+  if ( ! is_writable( $log_file ) ) { // phpcs:ignore
     return false;
   }
 
   // get visitor ip
   if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-    $user_ip = $_SERVER['HTTP_CLIENT_IP'];
+    $user_ip = $_SERVER['HTTP_CLIENT_IP']; // phpcs:ignore
   } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-    $user_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $user_ip = $_SERVER['HTTP_X_FORWARDED_FOR']; // phpcs:ignore
   } else {
-    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $user_ip = $_SERVER['REMOTE_ADDR']; // phpcs:ignore
   }
 
   // combine the message
   $write = wp_date( 'Y-m-d H:i:s' ) . " client: {$user_ip}";
   $write .= ', ' . mb_strtolower( $message );
-  $write .= ', site ' . parse_url( get_home_url() )['host'];
+  $write .= ', site ' . parse_url( get_home_url() )['host']; // phpcs:ignore
 
   // write to log
-  return file_put_contents( $log_file, $write . "\n", FILE_APPEND );
+  return file_put_contents( $log_file, $write . "\n", FILE_APPEND ); // phpcs:ignore
 } // end air_helper_write_combined_login_log
+
+/**
+ * Blacklist installing certain plugins that often have malicious intent.
+ *
+ * To modify the list of blacklisted plugins, use the following filter hook:
+ *
+ * function custom_modify_blacklisted_plugins( $blacklist ) {
+ *   // Add or remove plugin slugs to the blacklist array
+ *   $blacklist[] = 'another-plugin-slug';
+ *   return $blacklist;
+ * }
+ * add_filter( 'modify_blacklisted_plugins', 'custom_modify_blacklisted_plugins' );
+ *
+ * @since 2.19.5
+ */
+add_filter( 'plugins_api_result', 'modify_plugin_search_results', 10, 3 );
+add_action( 'admin_enqueue_scripts', 'enqueue_inline_js_for_plugin_page' );
+
+function get_blacklisted_plugins() {
+    // Default list of blacklisted plugins
+    $blacklist = [
+      'insert-headers-and-footers',
+      'wp-file-manager',
+    ];
+
+    // Allow modification of the blacklisted plugins list via a custom filter hook
+    return apply_filters( 'modify_blacklisted_plugins', $blacklist );
+}
+
+function modify_plugin_search_results( $res, $action, $args ) { // phpcs:ignore
+    if ( 'query_plugins' === $action ) {
+        $blacklist = [
+          'insert-headers-and-footers',
+          'wp-file-manager',
+        ];
+
+        foreach ( $res->plugins as $key => $plugin ) {
+            if ( in_array( $plugin['slug'], $blacklist, true ) ) {
+                $res->plugins[ $key ]['blacklisted'] = true;
+                // Add a custom compatibility notice for blacklisted plugins
+                $res->plugins[ $key ]['compatibility_warning'] = 'This plugin has been blacklisted and is not compatible with your current setup.';
+            }
+        }
+    }
+    return $res;
+}
+
+function enqueue_inline_js_for_plugin_page( $hook ) {
+    if ( 'plugin-install.php' !== $hook ) {
+        return;
+    }
+    ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMNodeInserted', function(event) {
+          var pluginCards = document.querySelectorAll('.plugin-card');
+
+          // If no plugin cards, bail
+          if (!pluginCards.length) {
+              return;
+          }
+
+          pluginCards.forEach(function(card) {
+              // Get slug based on plugin-cad-<slug> class
+              var slug = card.className.split(' ').find(function(className) {
+                  return className.indexOf('plugin-card-') === 0;
+              }).replace('plugin-card-', '');
+
+              var blacklistedPlugins = <?php echo wp_json_encode( get_blacklisted_plugins() ); ?>;
+
+              if (blacklistedPlugins.includes(slug)) {
+                  var installButton = card.querySelector('a.install-now');
+                  var compatibilityNotice = card.querySelector('.compatibility-compatible');
+
+                  // Notice
+                  var notice = document.createElement('div');
+                  notice.className = 'notice inline notice-error notice-alt';
+                  notice.innerHTML = '<p>This plugin cannot be installed for security reasons.</p>';
+
+                  // Add notice right inside card once
+                  if (!card.querySelector('.notice')) {
+                      card.insertBefore(notice, card.firstChild);
+                  }
+
+                  // Delete all other list items but first inside plugin-action-buttons
+                  var pluginActionButtons = card.querySelector('.plugin-action-buttons');
+                  var pluginActionButtonsListItems = pluginActionButtons.querySelectorAll('li');
+                  pluginActionButtonsListItems.forEach(function(listItem, index) {
+                      if (index !== 0) {
+                          listItem.remove();
+                      }
+                  });
+
+                  // Remove upload button
+                  var uploadButton = document.querySelector('a.upload-view-toggle');
+                  if (uploadButton) {
+                      uploadButton.remove();
+                  }
+
+                  // Remove href inside open-plugin-details-modal link
+                  var openPluginDetailsModal = card.querySelector('a.open-plugin-details-modal');
+                  if (openPluginDetailsModal) {
+                      openPluginDetailsModal.removeAttribute('href');
+                  }
+
+                  // Add pointer-events: none; to card
+                  card.style.pointerEvents = 'none';
+
+                  // Disable button
+                  if ( installButton ) {
+                    var disabledButton = document.createElement('button');
+                    disabledButton.className = 'button disabled';
+                    disabledButton.innerHTML = 'Cannot Install';
+                    disabledButton.disabled = true;
+
+                    installButton.replaceWith( disabledButton );
+                  }
+
+                  // Add compatibility notice
+                  if (compatibilityNotice) {
+                    var compatibilityNoticeElement = document.createElement('span');
+                    compatibilityNoticeElement.className = 'compatibility-incompatible';
+                    compatibilityNoticeElement.innerHTML = '<strong>Blacklisted</strong> plugin';
+
+                    compatibilityNotice.replaceWith( compatibilityNoticeElement );
+                  }
+              }
+          });
+        }, false);
+      });
+    </script>
+    <?php
+}
+
+/**
+ * Prevent access to plugins
+ * Turn off by using `remove_action( 'admin_init', 'air_helper_prevent_access_to_plugins' );`
+ *
+ * @since 2.19.6
+ */
+add_action( 'admin_init', 'air_helper_prevent_access_to_plugins' );
+function air_helper_prevent_access_to_plugins() {
+
+  if ( ! air_helper_allow_user_to( 'plugins' ) ) {
+
+    $not_allowed_plugin_pages = [
+      'plugins.php',
+      'plugin-install.php',
+      'update-core.php',
+    ];
+
+    // If current admin page is plugins.php, strip the last part of the URL
+    if ( in_array( $GLOBALS['pagenow'], $not_allowed_plugin_pages, true ) ) {
+      wp_die( 'You are not allowed to access this page.' );
+    }
+  }
+} // end air_helper_prevent_access_to_plugins
