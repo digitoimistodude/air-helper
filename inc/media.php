@@ -4,8 +4,8 @@
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:42:40
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-19 14:26:46
+ * @Last Modified by:   Roni Äikäs
+ * @Last Modified time: 2024-09-24 19:54:03
  *
  * @package air-helper
  */
@@ -21,6 +21,11 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   $update_option = true;
 
   if ( 'production' === wp_get_environment_type() && get_option( 'air_helper_changed_uploads_path' ) ) {
+    $update_option = false;
+  }
+
+  // Don't update options if development environment is used on staging DB
+  if ( 'development' === wp_get_environment_type() && 'gunship.dude.fi' === getenv( 'DB_HOST' ) ) {
     $update_option = false;
   }
 
