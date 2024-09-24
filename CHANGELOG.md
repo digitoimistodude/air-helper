@@ -1,3 +1,7 @@
+### 3.0.8: 2024-09-24
+
+* Fix media option switching on staging DB in development
+
 ### 3.0.7: 2024-09-06
 
 * Add array check to Gutenberg allowed block filter
