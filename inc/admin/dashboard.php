@@ -17,7 +17,7 @@
  *
  * @since  1.7.0
  */
-add_action( 'init', function () {
+add_action( 'admin_init', function () {
   if ( is_admin() ) {
     remove_action( 'welcome_panel', 'wp_welcome_panel' );
   }
