@@ -67,11 +67,15 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     // Get alt
     $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
+    // Get srcset
+    $srcset = wp_get_attachment_image_srcset( $image_id );
+
     // Get the img tag
     ob_start(); ?>
     <img loading="lazy"
       alt="<?php echo esc_attr( $alt ); ?>"
       src="<?php echo esc_url( $image_urls['big'] ); ?>"
+      srcset="<?php echo esc_attr( $srcset ); ?>"
       <?php if ( ! empty( $styles ) ) : ?>
         style="<?php echo esc_attr( $styles ); ?>"
       <?php endif; ?>

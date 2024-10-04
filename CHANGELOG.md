@@ -1,3 +1,17 @@
+### Unreleased
+
+* Add srcset to `get_native_lazyload_tag` function
+
+### 3.0.9: 2024-09-25
+
+* Disable dashboard widgets for wpseo-wincher, tinypng and objectcache
+* Fix removal of welcome panel in admin dashboard
+* Bump tested WordPress version to 6.6.2
+
+### 3.0.8: 2024-09-24
+
+* Fix media option switching on staging DB in development
+
 ### 3.0.7: 2024-09-06
 
 * Add array check to Gutenberg allowed block filter
