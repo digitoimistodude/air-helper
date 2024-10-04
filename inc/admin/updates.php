@@ -41,6 +41,7 @@ function air_helper_hide_nag_styles() { ?>
   <style>
     .cookiebot-admin-notice-container,
     .update-nag,
+    #yoast-first-time-configuration-notice,
     #wp-admin-bar-updates,
     #menu-plugins .update-plugins,
     .theme-info .notice,
