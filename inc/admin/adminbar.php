@@ -100,3 +100,55 @@ function air_helper_adminbar_show_env_styles() { ?>
     }
   </style>
 <?php } // end air_helper_adminbar_show_env_styles
+
+/**
+ * Add general flush all caches button to admin bar.
+ */
+
+add_action( 'admin_bar_menu', 'air_helper_adminbar_flush_all_caches', 999 );
+
+function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
+  $wp_admin_bar->add_node( [
+    'id'    => 'flushallcaches',
+    'title' => __( 'Flush all caches', 'air-helper' ),
+    'href'  => admin_url( 'admin-post.php?action=flush_all_caches' ),
+    'meta'  => [
+      'class' => 'flushallcaches',
+    ],
+  ] );
+}
+
+/**
+ * Flush all caches.
+ */
+
+add_action( 'admin_post_flush_all_caches', 'air_helper_flush_all_caches' );
+
+function air_helper_flush_all_caches() {
+  if ( ! current_user_can( 'manage_options' ) ) {
+    return;
+  }
+
+  if ( is_plugin_active( 'autoptimize/autoptimize.php' ) ) {
+    $success = autoptimizeCache::clearall();
+  }
+
+  // Redirect back with parameters to show notice
+  wp_safe_redirect( add_query_arg( 'action', 'flush_all_caches', wp_get_referer() ) );
+  exit;
+}
+
+function air_helper_flush_all_caches_notice() {
+  if ( ! isset( $_GET['action'] ) || 'flush_all_caches' !== $_GET['action'] ) {
+    return;
+  }
+
+  ?>
+  <div class="notice notice-success is-dismissible">
+    <p><?php esc_html_e( 'All caches flushed.', 'air-helper' ); ?></p>
+  </div>
+  <?php
+}
+
+  // Show notice
+  add_action( 'admin_notices', 'air_helper_flush_all_caches_notice', 999 );
