@@ -1,3 +1,7 @@
+### Unreleased
+
+* Add srcset to `get_native_lazyload_tag` function
+
 ### 3.0.9: 2024-09-25
 
 * Disable dashboard widgets for wpseo-wincher, tinypng and objectcache
