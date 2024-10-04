@@ -1,3 +1,7 @@
+### 3.0.10rc
+
+- Hide yoast-first-time-configuration-notice (T-9811)
+
 ### 3.0.9: 2024-09-25
 
 * Disable dashboard widgets for wpseo-wincher, tinypng and objectcache
