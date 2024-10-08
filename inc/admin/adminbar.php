@@ -163,7 +163,7 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
 /**
  * Flush all caches
  *
- * Actions to flush all caches.
+ * Actions to flush all caches, including rewrites.
  *
  * @since 3.1.0
  */
@@ -172,6 +172,9 @@ function air_helper_flush_all_caches() {
   if ( ! current_user_can( 'manage_options' ) ) {
     return;
   }
+
+  // Flush rewrites
+  flush_rewrite_rules();
 
   // Flush Autoptimize
   if ( is_plugin_active( 'autoptimize/autoptimize.php' ) ) {
@@ -184,6 +187,14 @@ function air_helper_flush_all_caches() {
   if ( is_plugin_active( 'cache-enabler/cache-enabler.php' ) ) {
     if ( class_exists( 'Cache_Enabler' ) ) {
       Cache_Enabler::clear_total_cache();
+    }
+  }
+
+  // Flush Object Cache Pro and Redis Cache
+  if ( is_plugin_active( 'object-cache-pro/object-cache-pro.php' || is_plugin_active( 'redis-cache/redis-cache.php' ) ) ) {
+    // Completely clear object cache and send a message to redis monitor log
+    if ( function_exists( 'wp_cache_flush' ) ) {
+      wp_cache_flush();
     }
   }
 
