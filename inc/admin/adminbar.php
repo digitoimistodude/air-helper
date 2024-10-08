@@ -145,7 +145,7 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
     'cache_enabler_clear_cache',
     'redis-cache',
     'wp-super-cache',
-    'nginx-helper',
+    'nginx-helper-purge-all',
   ];
 
   foreach ( $remove_items as $item ) {
@@ -248,6 +248,14 @@ function air_helper_flush_all_caches() {
 
     $fs = new WP_Filesystem_Direct( new StdClass() );
     $r = $fs->rmdir( WP_CONTENT_DIR . '/cache/surge/', true );
+  }
+
+  // Flush nginx fastcgi cache
+  if ( is_plugin_active( 'nginx-helper/nginx-helper.php' ) ) {
+    // phpcs:disable
+    // Use: $this->loader->add_action( 'rt_nginx_helper_purge_all', $nginx_purger, 'purge_all' );
+    // phpcs:enable
+    do_action( 'rt_nginx_helper_purge_all' );
   }
 
   // Redirect back with parameters to show notice
