@@ -138,6 +138,18 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
     return;
   }
 
+  $remove_items = apply_filters( 'air_helper_helper_remove_admin_bar_links', [
+    'autoptimize',
+    'cache_enabler_clear_cache',
+    'redis-cache',
+    'wp-super-cache',
+    'nginx-helper',
+  ] );
+
+  foreach ( $remove_items as $item ) {
+    $wp_admin_bar->remove_menu( $item );
+  }
+
   $wp_admin_bar->add_node( [
     'id'    => 'flushallcaches',
     'title' => __( 'Flush all caches', 'air-helper' ),
