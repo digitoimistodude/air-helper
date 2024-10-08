@@ -173,26 +173,18 @@ function air_helper_flush_all_caches() {
     return;
   }
 
+  // Flush Autoptimize
   if ( is_plugin_active( 'autoptimize/autoptimize.php' ) ) {
-    if ( ! class_exists( 'autoptimizeCache' ) ) {
-      return;
+    if ( class_exists( 'autoptimizeCache' ) ) {
+      autoptimizeCache::clearall();
     }
-    $success = autoptimizeCache::clearall();
   }
 
-  if ( is_plugin_active( 'object-cache-pro/object-cache-pro.php' ) ) {
-    // Check if Object Cache Pro class exists
-    if ( ! class_exists( 'RedisCachePro\Console\Commands' ) ) {
-      return;
+  // Flush Cache Enabler
+  if ( is_plugin_active( 'cache-enabler/cache-enabler.php' ) ) {
+    if ( class_exists( 'Cache_Enabler' ) ) {
+      Cache_Enabler::clear_total_cache();
     }
-
-    function flushRedis( $arguments, $options ) {
-      $commands = new RedisCachePro\Console\Commands();
-      $commands->flush( $arguments, $options );
-    }
-
-    // Run the flush command
-    flushRedis( [], [] );
   }
 
   // Redirect back with parameters to show notice
@@ -201,7 +193,8 @@ function air_helper_flush_all_caches() {
 }
 
 function air_helper_flush_all_caches_notice() {
-  if ( ! isset( $_GET['action'] ) || 'flush_all_caches' !== $_GET['action'] ) {
+  // WordPress provides these GET parameters, so we can safely check for them
+  if ( ! isset( $_GET['action'] ) || 'flush_all_caches' !== $_GET['action'] ) { // phpcs:ignore
     return;
   }
 
