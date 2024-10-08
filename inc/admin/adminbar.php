@@ -44,7 +44,7 @@ function air_helper_helper_remove_admin_bar_links() {
 } // end air_helper_helper_remove_admin_bar_links
 
 /**
- * Add envarioment marker to adminbar.
+ * Add environment marker to adminbar.
  *
  * Turn off by using `remove_action( 'admin_bar_menu', 'air_helper_adminbar_show_env' )`
  *
@@ -74,7 +74,7 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
 } // end air_helper_adminbar_show_env
 
 /**
- * Add envarioment marker styles.
+ * Add environment marker styles.
  *
  * Turn off by using `remove_action( 'admin_head', 'air_helper_adminbar_show_env_styles' )`
  *

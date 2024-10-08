@@ -1,6 +1,6 @@
 <?php
 /**
- * Actions related to sending mail in development and staging envarioments.
+ * Actions related to sending mail in development and staging environments.
  *
  * @Author: Timi Wahalahti
  * @Date:   2020-01-10 16:07:14
