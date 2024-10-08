@@ -198,6 +198,22 @@ function air_helper_flush_all_caches() {
     }
   }
 
+  // Flush W3 Total Cache
+  if ( function_exists( 'w3tc_pgcache_flush' ) ) {
+    w3tc_pgcache_flush();
+  }
+
+  // Flush WP Super Cache
+  if ( function_exists( 'wp_cache_clean_cache' ) ) {
+    global $file_prefix, $supercachedir;
+
+    if ( empty( $supercachedir ) && function_exists( 'get_supercache_dir' ) ) {
+        $supercachedir = get_supercache_dir();
+    }
+
+    wp_cache_clean_cache( $file_prefix );
+  }
+
   // Redirect back with parameters to show notice
   wp_safe_redirect( add_query_arg( 'action', 'flush_all_caches', wp_get_referer() ) );
   exit;
