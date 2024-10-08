@@ -102,11 +102,13 @@ function air_helper_adminbar_show_env_styles() { ?>
 <?php } // end air_helper_adminbar_show_env_styles
 
 /**
+ * Flush all caches admin bar item
+ *
  * Add general flush all caches button to admin bar.
+ *
+ * @since 3.1.0
  */
-
 add_action( 'admin_bar_menu', 'air_helper_adminbar_flush_all_caches', 999 );
-
 function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
   $wp_admin_bar->add_node( [
     'id'    => 'flushallcaches',
@@ -119,11 +121,13 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
 }
 
 /**
- * Flush all caches.
+ * Flush all caches
+ *
+ * Actions to flush all caches.
+ *
+ * @since 3.1.0
  */
-
 add_action( 'admin_post_flush_all_caches', 'air_helper_flush_all_caches' );
-
 function air_helper_flush_all_caches() {
   if ( ! current_user_can( 'manage_options' ) ) {
     return;
