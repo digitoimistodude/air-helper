@@ -240,6 +240,16 @@ function air_helper_flush_all_caches() {
     $wp_fastest_cache->deleteCache( true );
   }
 
+  // Flush Surge
+  if ( is_plugin_active( 'surge/surge.php' ) ) {
+    // Remove cache dir via WP Filesystem
+    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+
+    $fs = new WP_Filesystem_Direct( new StdClass() );
+    $r = $fs->rmdir( WP_CONTENT_DIR . '/cache/surge/', true );
+  }
+
   // Redirect back with parameters to show notice
   wp_safe_redirect( add_query_arg( 'action', 'flush_all_caches', wp_get_referer() ) );
   exit;
