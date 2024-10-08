@@ -36,6 +36,7 @@ function air_helper_helper_remove_admin_bar_links() {
     'comments',
     'customize',
     'imagify',
+    'wpforms-menu',
   ] );
 
   foreach ( $remove_items as $item ) {
