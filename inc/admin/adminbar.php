@@ -110,6 +110,18 @@ function air_helper_adminbar_show_env_styles() { ?>
  */
 add_action( 'admin_bar_menu', 'air_helper_adminbar_flush_all_caches', 999 );
 function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
+
+  // If none of the cache plugins we use have been activated, do not show the button
+  if ( ! is_plugin_active( 'autoptimize/autoptimize.php' ) &&
+    ! is_plugin_active( 'object-cache-pro/object-cache-pro.php' ) &&
+    ! is_plugin_active( 'nginx-helper/nginx-helper.php' ) &&
+    ! is_plugin_active( 'wp-fastest-cache/wpFastestCache.php' ) &&
+    ! is_plugin_active( 'cache-enabler/cache-enabler.php' ) &&
+    ! is_plugin_active( 'wp-super-cache/wp-cache.php' ) &&
+    ! is_plugin_active( 'redis-cache/redis-cache.php' ) ) {
+    return;
+  }
+
   $wp_admin_bar->add_node( [
     'id'    => 'flushallcaches',
     'title' => __( 'Flush all caches', 'air-helper' ),
