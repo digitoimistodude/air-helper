@@ -102,6 +102,25 @@ function air_helper_adminbar_show_env_styles() { ?>
 <?php } // end air_helper_adminbar_show_env_styles
 
 /**
+ * Define cache plugins we use
+ *
+ * Define cache plugins we use in production.
+ *
+ * @since 3.1.0
+ */
+function air_helper_cache_plugins() {
+  return [
+    'autoptimize/autoptimize.php',
+    'object-cache-pro/object-cache-pro.php',
+    'nginx-helper/nginx-helper.php',
+    'wp-fastest-cache/wpFastestCache.php',
+    'cache-enabler/cache-enabler.php',
+    'wp-super-cache/wp-cache.php',
+    'redis-cache/redis-cache.php',
+  ];
+}
+
+/**
  * Flush all caches admin bar item
  *
  * Add general flush all caches button to admin bar.
@@ -112,13 +131,10 @@ add_action( 'admin_bar_menu', 'air_helper_adminbar_flush_all_caches', 999 );
 function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
 
   // If none of the cache plugins we use have been activated, do not show the button
-  if ( ! is_plugin_active( 'autoptimize/autoptimize.php' ) &&
-    ! is_plugin_active( 'object-cache-pro/object-cache-pro.php' ) &&
-    ! is_plugin_active( 'nginx-helper/nginx-helper.php' ) &&
-    ! is_plugin_active( 'wp-fastest-cache/wpFastestCache.php' ) &&
-    ! is_plugin_active( 'cache-enabler/cache-enabler.php' ) &&
-    ! is_plugin_active( 'wp-super-cache/wp-cache.php' ) &&
-    ! is_plugin_active( 'redis-cache/redis-cache.php' ) ) {
+  $cache_plugins = air_helper_cache_plugins();
+  $active_plugins = get_option( 'active_plugins' );
+
+  if ( ! array_intersect( $cache_plugins, $active_plugins ) ) {
     return;
   }
 
