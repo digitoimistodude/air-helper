@@ -17,7 +17,11 @@
  *
  * @since  1.7.0
  */
-remove_action( 'welcome_panel', 'wp_welcome_panel' );
+add_action( 'admin_init', function () {
+  if ( is_admin() ) {
+    remove_action( 'welcome_panel', 'wp_welcome_panel' );
+  }
+}, 999 );
 
 /**
  *  Remove some boxes from dashboard.
@@ -31,19 +35,22 @@ add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
 function air_helper_clear_admin_dashboard() {
 	$remove_boxes = [
 		'normal' => [
-			'dashboard_right_now',
-			'dashboard_recent_comments',
-			'dashboard_incoming_links',
-			'dashboard_activity',
-			'dashboard_plugins',
+      'dashboard_right_now',
+      'dashboard_recent_comments',
+      'dashboard_incoming_links',
+      'dashboard_activity',
+      'dashboard_plugins',
       'dashboard_site_health',
-			'sendgrid_statistics_widget',
-			'wpseo-dashboard-overview', // yoast
-			'rg_forms_dashboard', // gravity forms
+      'sendgrid_statistics_widget',
+      'wpseo-dashboard-overview', // yoast
+      'rg_forms_dashboard', // gravity forms
       'dashboard_rediscache',
       'dashboard_php_nag',
       'yith_dashboard_products_news', // all YITH plugins
       'yith_dashboard_blog_news', // all YITH plugins
+      'wpseo-wincher-dashboard-overview',
+      'tinypng_dashboard_widget',
+      'dashboard_objectcache',
 		],
 		'side' => [
 			'dashboard_quick_press',
