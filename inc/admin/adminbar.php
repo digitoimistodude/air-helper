@@ -117,11 +117,12 @@ function air_helper_cache_plugins() {
     'cache-enabler/cache-enabler.php',
     'wp-super-cache/wp-cache.php',
     'redis-cache/redis-cache.php',
+    'surge/surge.php',
   ];
 }
 
 /**
- * Flush all caches admin bar item
+ * Flush all caches - admin bar item
  *
  * Add general flush all caches button to admin bar.
  *
@@ -129,6 +130,7 @@ function air_helper_cache_plugins() {
  */
 add_action( 'admin_bar_menu', 'air_helper_adminbar_flush_all_caches', 999 );
 function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
+  global $wp_admin_bar;
 
   // If none of the cache plugins we use have been activated, do not show the button
   $cache_plugins = air_helper_cache_plugins();
@@ -138,13 +140,13 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
     return;
   }
 
-  $remove_items = apply_filters( 'air_helper_helper_remove_admin_bar_links', [
+  $remove_items = [
     'autoptimize',
     'cache_enabler_clear_cache',
     'redis-cache',
     'wp-super-cache',
     'nginx-helper',
-  ] );
+  ];
 
   foreach ( $remove_items as $item ) {
     $wp_admin_bar->remove_menu( $item );
@@ -161,6 +163,23 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
 }
 
 /**
+ * Hide other cache buttons
+ *
+ * Hide those cache buttons in admin bar that are called wrong and cannot be removed via a hook.
+ *
+ * @since 3.1.0
+ */
+add_action( 'admin_head', 'air_helper_adminbar_hide_via_styles', 999 );
+add_action( 'wp_head', 'air_helper_adminbar_hide_via_styles', 999 );
+function air_helper_adminbar_hide_via_styles() { ?>
+  <style>
+    body #wp-admin-bar-wpfc-toolbar-parent {
+      display: none !important;
+    }
+  </style>
+<?php } // end air_helper_adminbar_hide_via_styles
+
+/**
  * Flush all caches
  *
  * Actions to flush all caches, including rewrites.
@@ -169,6 +188,8 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
  */
 add_action( 'admin_post_flush_all_caches', 'air_helper_flush_all_caches' );
 function air_helper_flush_all_caches() {
+  global $wp_fastest_cache;
+
   if ( ! current_user_can( 'manage_options' ) ) {
     return;
   }
@@ -212,6 +233,11 @@ function air_helper_flush_all_caches() {
     }
 
     wp_cache_clean_cache( $file_prefix );
+  }
+
+  // Flush WP Fastest Cache
+  if ( method_exists( 'WpFastestCache', 'deleteCache' ) && ! empty( $wp_fastest_cache ) ) {
+    $wp_fastest_cache->deleteCache( true );
   }
 
   // Redirect back with parameters to show notice
