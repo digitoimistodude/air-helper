@@ -146,6 +146,7 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
     'redis-cache',
     'wp-super-cache',
     'nginx-helper-purge-all',
+    'delete-cache',
   ];
 
   foreach ( $remove_items as $item ) {
