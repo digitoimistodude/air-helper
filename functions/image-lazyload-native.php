@@ -2,11 +2,6 @@
 /**
  * Image native lazyload.
  *
- * @Author: Elias Kautto
- * @Date: 2022-01-28 12:33:30
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:49:47
- *
  * @package air-helper
  */
 
@@ -37,11 +32,21 @@ if ( ! function_exists( 'native_lazyload_tag' ) ) {
  */
 if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
   function get_native_lazyload_tag( $image_id = 0, $args = [] ) {
-    $args = wp_parse_args( $args, [
-      'fallback' => false,
-      'sizes' => [],
-      'class' => null,
-    ] );
+    if ( is_string( $args ) ) {
+      $args = [
+        'fallback' => false,
+        'sizes' => [
+          'big' => $args,
+        ],
+        'class' => null,
+      ];
+    } else {
+      $args = wp_parse_args( $args, [
+        'fallback' => false,
+        'sizes' => [],
+        'class' => null,
+      ] );
+    }
 
     // Get image
     $image_urls = air_helper_get_image_lazyload_sizes( $image_id, $args['sizes'] );
