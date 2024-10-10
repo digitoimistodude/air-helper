@@ -1,6 +1,7 @@
-### 3.1.0rc: 2024-10-08
+### 3.1.0rc: 2024-10-10
 
-* Add "Flush all caches" to admin bar
+* Add "Flush all caches" to admin bar (T-19416)
+* Add srcset to `get_native_lazyload_tag` function (T-17628)
 
 ### 3.0.9: 2024-09-25
 
