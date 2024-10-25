@@ -1,3 +1,7 @@
+### Unreleased
+
+* Add tinyMCE plugin that adds helper class to elements
+
 ### 3.0.9: 2024-09-25
 
 * Disable dashboard widgets for wpseo-wincher, tinypng and objectcache

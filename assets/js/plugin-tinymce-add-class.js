@@ -1,5 +1,5 @@
 /* eslint-disable no-undef, no-unused-vars */
-(function addClassesToWysiwygElements() {
+(function addClassToWysiwygElements() {
   tinymce.create('tinymce.plugins.addClass', {
     init(editor, url) {
       editor.on('NodeChange', () => {
