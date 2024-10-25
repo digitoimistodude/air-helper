@@ -191,3 +191,28 @@ if ( ! function_exists( 'the_block_content' ) ) {
     echo $block_content; // phpcs:ignore
   } // end the_block_content
 } // end if
+
+if ( ! function_exists( 'air_helper_is_first_block' ) ) {
+  function air_helper_is_first_block( $post_id, $block ) {
+    if ( ! $post_id ) {
+      $post_id = get_the_ID();
+    }
+
+    $post = get_post( $post_id );
+    if ( ! has_blocks( $post->post_content ) ) {
+      return false;
+    }
+
+    $blocks = parse_blocks( $post->post_content );
+    $first_block = $blocks[0];
+    if ( $first_block['blockName'] !== $block['name'] ) {
+      return false;
+    }
+
+    if ( crc32( maybe_serialize( $first_block['attrs']['data'] ) ) !== crc32( maybe_serialize( $block['data'] ) ) ) {
+      return false;
+    }
+
+    return true;
+  } // end air_helper_get_first_block_id
+} // end if
