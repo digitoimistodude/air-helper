@@ -219,6 +219,15 @@ function air_helper_flush_all_caches() {
     if ( function_exists( 'wp_cache_flush' ) ) {
       wp_cache_flush();
     }
+
+    if ( is_multisite() ) {
+      global $wp_object_cache;
+
+      if ( is_object( $wp_object_cache ) && method_exists( $wp_object_cache, 'flush' ) ) {
+        // Without arguments flush will clear the entire cache
+        $wp_object_cache->flush();
+      }
+    }
   }
 
   // Flush W3 Total Cache
