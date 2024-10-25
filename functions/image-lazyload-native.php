@@ -67,9 +67,17 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     // Get alt
     $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
+    $is_first_block = false;
+
+    // If image is in the first block we want to add loading="eager" instead of lazy
+    global $air_light_current_block;
+    if ( $air_light_current_block ) {
+      $is_first_block = air_helper_is_first_block( get_the_ID(), $air_light_current_block );
+    }
+
     // Get the img tag
     ob_start(); ?>
-    <img loading="lazy"
+    <img loading="<?php echo $is_first_block ? 'eager' : 'lazy'; ?>"
       alt="<?php echo esc_attr( $alt ); ?>"
       src="<?php echo esc_url( $image_urls['big'] ); ?>"
       <?php if ( ! empty( $styles ) ) : ?>

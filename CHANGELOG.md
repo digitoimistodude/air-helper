@@ -1,3 +1,7 @@
+### Unreleased
+
+* Use eager loading instead of lazy if `native_lazyload_tag` is used in the first block
+
 ### 3.0.7: 2024-09-06
 
 * Add array check to Gutenberg allowed block filter

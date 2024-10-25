@@ -192,12 +192,27 @@ if ( ! function_exists( 'the_block_content' ) ) {
   } // end the_block_content
 } // end if
 
-function first_block_load_eager () {
+if ( ! function_exists( 'air_helper_is_first_block' ) ) {
+  function air_helper_is_first_block( $post_id, $block ) {
+    if ( ! $post_id ) {
+      $post_id = get_the_ID();
+    }
 
-  if ( is_first_block( get_the_ID(), $block ) ) {
-    echo '<div class="default-image">';
-    get_picture_element_with_cfcdn( $bg_image, $picture_cdn_args, $picture_cdn_srcset, $loading = 'eager' );
-    echo '</div>';
+    $post = get_post( $post_id );
+    if ( ! has_blocks( $post->post_content ) ) {
+      return false;
+    }
 
-  }
-}
+    $blocks = parse_blocks( $post->post_content );
+    $first_block = $blocks[0];
+    if ( $first_block['blockName'] !== $block['name'] ) {
+      return false;
+    }
+
+    if ( crc32( maybe_serialize( $first_block['attrs']['data'] ) ) !== crc32( maybe_serialize( $block['data'] ) ) ) {
+      return false;
+    }
+
+    return true;
+  } // end air_helper_get_first_block_id
+} // end if
