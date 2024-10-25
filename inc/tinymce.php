@@ -46,3 +46,17 @@ function air_helper_tinymce_remove_formats( $init ) {
   $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;';
   return $init;
 } // end air_helper_tinymce_remove_formats
+
+/**
+ *  Add helper class to specific elements in TinyMCE
+ */
+function add_tinymce_plugin( $plugin_array ) {
+  $plugin_array['addClass'] = air_helper_base_url() . '/assets/js/plugin-tinymce-add-class.js';
+  return $plugin_array;
+}
+
+function tinymce_plugin() {
+  add_filter( 'mce_external_plugins', 'add_tinymce_plugin' );
+}
+
+add_action( 'admin_head', 'tinymce_plugin' );

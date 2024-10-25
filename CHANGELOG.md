@@ -1,3 +1,8 @@
+
+### 3.1.1rc: 2024-10-25
+
+* Add tinyMCE plugin that adds helper class to elements (T-17631)
+
 ### 3.1.0: 2024-10-10
 
 * Add "Flush all caches" to admin bar (T-19416)
