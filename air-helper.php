@@ -46,7 +46,9 @@ require 'plugin-helpers.php';
 * @since 0.1.0
 */
 require 'plugin-update-checker/plugin-update-checker.php';
-$update_checker = Puc_v4_Factory::buildUpdateChecker( 'http://githubupdates.dude.fi/plugins/digitoimistodude/air-helper', __FILE__, 'air-helper' );
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$update_checker = PucFactory::buildUpdateChecker( 'http://githubupdates.dude.fi/plugins/digitoimistodude/air-helper', __FILE__, 'air-helper' );
 
 /**
  * Priority hooks for rare occasions when plugins do not respect loading order.

@@ -1,3 +1,7 @@
+### [Unreleased]
+
+* Update PUC to v5.5 (T-20922)
+
 ### 3.1.0: 2024-10-10
 
 * Add "Flush all caches" to admin bar (T-19416)
