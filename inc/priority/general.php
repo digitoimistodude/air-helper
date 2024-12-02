@@ -2,11 +2,6 @@
 /**
  * Priority hooks for rare occasions when plugins do not respect loading order.
  *
- * @Author: Timi Wahalahti
- * @Date:   2022-02-16 11:22:08
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-02-16 11:41:12
- *
  * @package air-helper
  */
 

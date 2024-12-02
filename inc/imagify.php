@@ -2,11 +2,6 @@
 /**
  * Imagify default settings.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-02-11 15:18:11
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-05-18 13:10:49
- *
  * @package air-helper
  */
 

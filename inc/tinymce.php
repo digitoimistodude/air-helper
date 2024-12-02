@@ -2,11 +2,6 @@
 /**
  * TinyMCE (old) editor actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:35:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:59:08
- *
  * @package air-helper
  */
 

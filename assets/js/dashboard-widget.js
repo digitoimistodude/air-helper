@@ -1,10 +1,3 @@
-/*
-* @Author: Timi Wahalahti
-* @Date:   2018-12-04 13:35:35
-* @Last Modified by:   Timi Wahalahti
-* @Last Modified time: 2018-12-04 15:29:22
-*/
-
 jQuery(document).ready( function($) {
 	jQuery( '#dashboard-widgets #air-helper-help .support-form form' ).submit( function(e) {
 		e.preventDefault();

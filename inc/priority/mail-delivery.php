@@ -2,11 +2,6 @@
 /**
  * Mail delivery related actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:40:38
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-09-23 15:00:45
- *
  * @package air-helper
  */
 

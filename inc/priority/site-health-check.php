@@ -2,11 +2,6 @@
 /**
  * Site health check modifications.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:02:19
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-01-10 16:03:15
- *
  * @package air-helper
  */
 

@@ -4,11 +4,6 @@
  *
  * Customize wp-admin dashboard (index.php).
  *
- * @Author: Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
- * @Date: 2018-11-13 18:06:44
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:43:08
- *
  * @package air-helper
  */
 

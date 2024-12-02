@@ -2,11 +2,6 @@
 /**
  * Actions related to sending mail in development and staging environments.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:07:14
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-24 10:40:13
- *
  * @package air-helper
  */
 

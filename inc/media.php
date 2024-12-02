@@ -2,11 +2,6 @@
 /**
  * Media library and file actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:42:40
- * @Last Modified by:   Roni Äikäs
- * @Last Modified time: 2024-09-24 19:54:03
- *
  * @package air-helper
  */
 
