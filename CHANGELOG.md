@@ -1,4 +1,4 @@
-### [Unreleased]
+### 3.1.1: 2024-12-02
 
 * Remove file headers as we no longer require them
 * Add missing file comments
