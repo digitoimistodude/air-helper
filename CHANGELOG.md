@@ -2,6 +2,8 @@
 
 * Remove file headers as we no longer require them
 * Add missing file comments
+* Add width and height attributes to vanilla lazyload when available (T-23188)
+* Add width and height attributes to native lazyload when available (T-23188)
 
 ### 3.1.0: 2024-10-10
 
