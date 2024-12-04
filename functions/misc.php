@@ -2,11 +2,6 @@
 /**
  * Collection of miscellaneous functions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:53:45
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 14:10:53
- *
  * @package air-helper
  */
 

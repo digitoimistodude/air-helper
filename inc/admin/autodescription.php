@@ -2,11 +2,6 @@
 /**
  * Modify The SEO Framework (autodescription) behaviour.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-02-11 16:49:04
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-22 13:28:40
- *
  * @package air-helper
  */
 

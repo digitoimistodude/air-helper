@@ -2,11 +2,6 @@
 /**
  * Helper functions to use in this plugin.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 14:36:38
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2023-05-22 11:52:54
- *
  * @package air-helper
  */
 

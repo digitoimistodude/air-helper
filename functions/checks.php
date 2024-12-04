@@ -2,11 +2,6 @@
 /**
  * Collection of functions to make different kind of checks.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:51:13
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 11:35:31
- *
  * @package air-helper
  */
 

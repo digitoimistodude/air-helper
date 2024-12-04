@@ -2,11 +2,6 @@
 /**
  * Image lazyload helpers.
  *
- * @Author:             Timi Wahalahti, Digitoimisto Dude Oy (https://dude.fi)
- * @Date:               2019-08-07 14:38:34
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-12-03 13:21:28
- *
  * @package air-helper
  */
 

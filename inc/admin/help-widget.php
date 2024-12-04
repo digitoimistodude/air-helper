@@ -2,11 +2,6 @@
 /**
  * News and help widget for upkeeping customers.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:16:02
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:48:50
- *
  * @package air-helper
  */
 

@@ -2,11 +2,6 @@
 /**
  * Modify admin bar.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:14:34
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:46:09
- *
  * @package air-helper
  */
 

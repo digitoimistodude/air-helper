@@ -2,11 +2,6 @@
 /**
  * Remove, modify and add notifications on dashbard.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:10:07
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:47:11
- *
  * @package air-helper
  */
 

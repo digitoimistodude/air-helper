@@ -2,11 +2,6 @@
 /**
  * Commenting and pingback related.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:22:06
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-02-22 19:44:42
- *
  * @package air-helper
  */
 

@@ -2,11 +2,6 @@
 /**
  * Advanced Custom Fields plugin modifications.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:11:23
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:49:10
- *
  * @package air-helper
  */
 

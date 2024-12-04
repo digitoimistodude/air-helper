@@ -1,8 +1,14 @@
-
-### 3.1.1rc: 2024-10-25
+### 3.1.2rc: 2024-10-25
 
 * Add tinyMCE plugin that adds helper class to elements (T-17631)
 * Use eager loading instead of lazy if `native_lazyload_tag` is used in the first block (T-17629)
+
+### 3.1.1: 2024-12-02
+
+* Remove file headers as we no longer require them
+* Add missing file comments
+* Add width and height attributes to vanilla lazyload when available (T-23188)
+* Add width and height attributes to native lazyload when available (T-23188)
 
 ### 3.1.0: 2024-10-10
 

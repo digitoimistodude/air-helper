@@ -2,11 +2,6 @@
 /**
  * Prioritized security related actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:00:16
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-27 16:39:32
- *
  * @package air-helper
  */
 

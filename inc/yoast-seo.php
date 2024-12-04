@@ -2,11 +2,6 @@
 /**
  * Yoast SEO plugin actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:30:25
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-11-18 15:20:05
- *
  * @package air-helper
  */
 

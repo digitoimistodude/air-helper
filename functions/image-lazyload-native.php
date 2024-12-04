@@ -56,6 +56,9 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
       return get_native_lazyload_tag_fallback( $args );
     }
 
+    // Get dimensions
+    $dimensions = air_helper_get_image_lazyload_dimensions( $image_id, $args['sizes'] );
+
     // Possibility to add optional styles for the image
     $styles = '';
     $styles_array = apply_filters( 'air_helper_lazyload_tag_styles', [], $image_id );
@@ -83,6 +86,10 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
       alt="<?php echo esc_attr( $alt ); ?>"
       src="<?php echo esc_url( $image_urls['big'] ); ?>"
       srcset="<?php echo esc_attr( $srcset ); ?>"
+      <?php if ( ! empty( $dimensions ) ) : ?>
+        width="<?php echo esc_attr( $dimensions['width'] ); ?>"
+        height="<?php echo esc_attr( $dimensions['height'] ); ?>"
+      <?php endif; ?>
       <?php if ( ! empty( $styles ) ) : ?>
         style="<?php echo esc_attr( $styles ); ?>"
       <?php endif; ?>

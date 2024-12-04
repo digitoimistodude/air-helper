@@ -2,11 +2,6 @@
 /**
  * Archive related actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:20:24
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:57:39
- *
  * @package air-helper
  */
 

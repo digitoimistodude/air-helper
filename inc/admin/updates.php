@@ -2,11 +2,6 @@
 /**
  * WordPress update related actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:17:20
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-11 14:34:03
- *
  * @package air-helper
  */
 

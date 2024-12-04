@@ -1,9 +1,8 @@
 <?php
 /**
- * @Author: Timi Wahalahti
- * @Date:   2020-02-20 10:30:25
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2020-02-20 10:41:28
+ * Polylang
+ *
+ * Hooks related to Polylang settings.
  *
  * @package air-helper
  */

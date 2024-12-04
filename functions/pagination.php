@@ -2,11 +2,6 @@
 /**
  * Custom functions related to pagination.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:47:21
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2021-12-17 11:08:17
- *
  * @package air-helper
  */
 

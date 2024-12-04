@@ -2,11 +2,6 @@
 /**
  * Gravity forms related actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:28:59
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 15:23:04
- *
  * @package air-helper
  */
 

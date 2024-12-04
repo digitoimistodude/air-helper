@@ -6,11 +6,6 @@
  *  original (GPL-2.o licensed) code, which this file is based on.
  *  https://github.com/aucor/aucor-starter/blob/master/inc/localization.php
  *
- * @Author: Roni Laukkarinen
- * @Date: 2024-02-12 11:37:42
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:43:31
- *
  *  @package air-helper
  */
 

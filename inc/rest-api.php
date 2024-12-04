@@ -2,11 +2,6 @@
 /**
  * WordPress REST API actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:24:01
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-01-19 09:52:42
- *
  * @package air-helper
  */
 

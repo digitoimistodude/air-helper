@@ -6,11 +6,6 @@
  * but sometimes we need to distribute global fixes.
  * In those situations, this file comes handy.
  *
- * @Author: Timi Wahalahti
- * @Date:   2022-11-09 15:03:40
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-09 15:09:25
- *
  * @package air-helper
  */
 

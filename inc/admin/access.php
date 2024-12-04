@@ -2,11 +2,6 @@
 /**
  * Limit access to certaing parts of dashboard.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:15:47
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:46:57
- *
  * @package air-helper
  */
 

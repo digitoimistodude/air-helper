@@ -2,11 +2,6 @@
 /**
  * Functions to help builing customized archives.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 15:49:34
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:49:35
- *
  * @package air-helper
  */
 

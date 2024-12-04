@@ -1,9 +1,8 @@
 <?php
 /**
- * @Author: Timi Wahalahti
- * @Date:   2020-02-12 14:29:27
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:47:42
+ * Help Scout
+ *
+ * Hooks related to Help Scout customer support.
  *
  * @package air-helper
  */

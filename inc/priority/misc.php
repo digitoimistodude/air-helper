@@ -2,11 +2,6 @@
 /**
  * Collection of miscellaneous prioritized actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:03:27
- * @Last Modified by:   Roni Laukkarinen
- * @Last Modified time: 2024-03-08 17:51:32
- *
  * @package air-helper
  */
 

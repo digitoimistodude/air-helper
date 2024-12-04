@@ -2,11 +2,6 @@
 /**
  * Collection of miscellaneous actions.
  *
- * @Author: Timi Wahalahti
- * @Date:   2020-01-10 16:03:27
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-06-22 10:59:38
- *
  * @package air-helper
  */
 
