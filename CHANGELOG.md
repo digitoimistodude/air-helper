@@ -9,6 +9,7 @@
 * Add logging to cache flushing functions (T-20707)
 * Remove unnecessary WordPress default styles in front end (T-13957)
 * Separate clean up functions to their own file (T-13957)
+* Update PUC to v5.5 (T-20922)
 
 ### 3.1.1: 2024-12-02
 
