@@ -1,3 +1,10 @@
+### [Unreleased]
+
+* Hide unnecessary dashboard widgets for network admin (T-20707)
+* Fix "Flush all caches" admin bar item not showing up in multisite (T-20707)
+* Add support for flushing all caches in multisite (T-20707)
+* Add logging to cache flushing functions (T-20707)
+
 ### 3.1.0: 2024-10-10
 
 * Add "Flush all caches" to admin bar (T-19416)
