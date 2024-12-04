@@ -37,15 +37,15 @@ function air_helper_clear_admin_dashboard() {
       'dashboard_plugins',
       'dashboard_site_health',
       'sendgrid_statistics_widget',
-      'wpseo-dashboard-overview', // yoast
-      'rg_forms_dashboard', // gravity forms
+      'wpseo-dashboard-overview', // Yoast
+      'rg_forms_dashboard', // Gravity forms
       'dashboard_rediscache',
+      'dashboard_objectcache',
       'dashboard_php_nag',
-      'yith_dashboard_products_news', // all YITH plugins
-      'yith_dashboard_blog_news', // all YITH plugins
+      'yith_dashboard_products_news', // YITH plugins
+      'yith_dashboard_blog_news', // YITH plugins
       'wpseo-wincher-dashboard-overview',
       'tinypng_dashboard_widget',
-      'dashboard_objectcache',
 		],
 		'side' => [
 			'dashboard_quick_press',

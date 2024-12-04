@@ -3,6 +3,10 @@
 * Add tinyMCE plugin that adds helper class to elements (T-17631)
 * Use eager loading instead of lazy if `native_lazyload_tag` is used in the first block (T-17629)
 * Change to minified version of instant.page 5.2.0 (T-23371)
+* Hide unnecessary dashboard widgets for network admin (T-20707)
+* Fix "Flush all caches" admin bar item not showing up in multisite (T-20707)
+* Add support for flushing all caches in multisite (T-20707)
+* Add logging to cache flushing functions (T-20707)
 
 ### 3.1.1: 2024-12-02
 
