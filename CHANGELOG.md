@@ -1,3 +1,8 @@
+### 3.1.3: 2024-12-04
+
+* Update plugin localizations for Finnish
+* Hotfix for $has_staging_media being used before it was defined (T-15169)
+
 ### 3.1.2: 2024-12-04
 
 * Add tinyMCE plugin that adds helper class to elements (T-17631)

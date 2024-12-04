@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Air helper\n"
-"POT-Creation-Date: 2024-10-08 16:13+0300\n"
-"PO-Revision-Date: 2024-10-08 16:14+0300\n"
+"POT-Creation-Date: 2024-12-04 22:37+0200\n"
+"PO-Revision-Date: 2024-12-04 22:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -21,41 +21,41 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: functions/misc.php:32 functions/misc.php:34
+#: functions/misc.php:27 functions/misc.php:29
 msgid "No icon"
 msgstr "Ei kuvaketta"
 
-#: inc/admin/access.php:97 inc/admin/access.php:115
+#: inc/admin/access.php:92 inc/admin/access.php:110
 msgid "Menus"
 msgstr "Valikot"
 
-#: inc/admin/acf.php:97
+#: inc/admin/acf.php:92
 msgid "<b>ACF field group local files missing!</b>"
 msgstr "<b>ACF-kenttäryhmän paikalliset tiedostot puuttuvat!</b>"
 
-#: inc/admin/acf.php:98
+#: inc/admin/acf.php:93
 #, php-format
 msgid "Make sure following field groups are saved: %1$s."
 msgstr "Varmista, että seuraavat kenttäryhmät on tallennettu: %1$s."
 
-#: inc/admin/adminbar.php:68
+#: inc/admin/adminbar.php:64
 #, php-format
 msgid "Environment: %s"
 msgstr "Ympäristö: %s"
 
-#: inc/admin/adminbar.php:115
+#: inc/admin/adminbar.php:167
 msgid "Flush all caches"
 msgstr "Tyhjennä kaikki välimuistit"
 
-#: inc/admin/adminbar.php:170
-msgid "All caches flushed."
-msgstr "Kaikki välimuistit tyhjennetty."
+#: inc/admin/adminbar.php:362
+msgid "All caches flushed"
+msgstr "Kaikki välimuistit tyhjennetty"
 
-#: inc/admin/autodescription.php:64
+#: inc/admin/autodescription.php:59
 msgid "The SEO Framework options reset is probably needed."
 msgstr "SEO Framework -asetusten nollaus on luultavasti tarpeen."
 
-#: inc/admin/autodescription.php:65
+#: inc/admin/autodescription.php:60
 msgid ""
 "Do NOT reset the settings if site is in production or settings have been "
 "already changed!"
@@ -63,117 +63,117 @@ msgstr ""
 "ÄLÄ nollaa asetuksia, jos sivusto on tuotannossa tai asetuksia on jo "
 "muutettu!"
 
-#: inc/admin/autodescription.php:66
+#: inc/admin/autodescription.php:61
 msgid "In that case, please contact your agency to fix this issue."
 msgstr ""
 "Help Scout Beacon ei ole määritetty. Ota yhteyttä digitoimistoosi tämän "
 "ongelman korjaamiseksi."
 
-#: inc/admin/help-widget.php:31
+#: inc/admin/help-widget.php:26
 msgid "Updates from Dude"
 msgstr "Päivityksiä Dudelta"
 
-#: inc/admin/help-widget.php:66
+#: inc/admin/help-widget.php:61
 msgid "Error while fetching data."
 msgstr "Virhe noudettaessa tietoja."
 
-#: inc/admin/helpscout.php:72
+#: inc/admin/helpscout.php:71
 msgid "Help request"
 msgstr "Tukipyyntö"
 
-#: inc/admin/helpscout.php:73
+#: inc/admin/helpscout.php:72
 msgid "Do you need help?"
 msgstr "Ongelmia sivuston kanssa?"
 
-#: inc/admin/helpscout.php:74 inc/admin/helpscout.php:88
+#: inc/admin/helpscout.php:73 inc/admin/helpscout.php:87
 msgid "Dude user support"
 msgstr "Duden käyttötuki"
 
-#: inc/admin/helpscout.php:75 inc/admin/helpscout.php:83
+#: inc/admin/helpscout.php:74 inc/admin/helpscout.php:82
 msgid "How can we help?"
 msgstr "Miten voimme auttaa?"
 
-#: inc/admin/helpscout.php:76 inc/admin/helpscout.php:90
+#: inc/admin/helpscout.php:75 inc/admin/helpscout.php:89
 msgid "Our support team will respond to you on next working day at latest"
 msgstr "Käyttötukitiimi vastaa sinulle viimeistään seuraavana työpäivänä"
 
-#: inc/admin/helpscout.php:77
+#: inc/admin/helpscout.php:76
 msgid "Continue writing…"
 msgstr "Jatka kirjoittamista…"
 
-#: inc/admin/helpscout.php:78
+#: inc/admin/helpscout.php:77
 msgid "Last updated"
 msgstr "Päivitetty"
 
-#: inc/admin/helpscout.php:79
+#: inc/admin/helpscout.php:78
 msgid "You"
 msgstr "Sinä"
 
-#: inc/admin/helpscout.php:80
+#: inc/admin/helpscout.php:79
 msgid "Name"
 msgstr "Nimi"
 
-#: inc/admin/helpscout.php:81
+#: inc/admin/helpscout.php:80
 msgid "Subject"
 msgstr "Aihe"
 
-#: inc/admin/helpscout.php:82
+#: inc/admin/helpscout.php:81
 msgid "Email address"
 msgstr "Sähköpostiosoite"
 
-#: inc/admin/helpscout.php:84
+#: inc/admin/helpscout.php:83
 msgid "Send support request"
 msgstr "Lähetä tukipyyntö"
 
-#: inc/admin/helpscout.php:85
+#: inc/admin/helpscout.php:84
 msgid "Next"
 msgstr "Seuraava"
 
-#: inc/admin/helpscout.php:86
+#: inc/admin/helpscout.php:85
 msgid "We’re on it!"
 msgstr "Viesti vastaanotettu!"
 
-#: inc/admin/helpscout.php:87
+#: inc/admin/helpscout.php:86
 msgid "You’ll receive an reply shortly."
 msgstr "Vastaamme sinulle pian."
 
-#: inc/admin/helpscout.php:89
+#: inc/admin/helpscout.php:88
 msgid "You can view and update your message in"
 msgstr "Voit tarkastella ja päivittää tukipyyntöjäsi"
 
-#: inc/admin/helpscout.php:91
+#: inc/admin/helpscout.php:90
 msgid "Previous Conversations"
 msgstr "Aiemmat tukipyynnöt"
 
-#: inc/admin/helpscout.php:92
+#: inc/admin/helpscout.php:91
 msgid "Email"
 msgstr "Sähköposti"
 
-#: inc/admin/helpscout.php:93
+#: inc/admin/helpscout.php:92
 msgid "Send message to our support team"
 msgstr "Lähetä viesti käyttötukeen"
 
-#: inc/admin/helpscout.php:94
+#: inc/admin/helpscout.php:93
 msgid "Add a reply"
 msgstr "Vastaa"
 
-#: inc/admin/helpscout.php:95
+#: inc/admin/helpscout.php:94
 msgid "Add your message here..."
 msgstr "Viestisi…"
 
-#: inc/admin/helpscout.php:96
+#: inc/admin/helpscout.php:95
 msgid "Send message"
 msgstr "Lähetä viesti"
 
-#: inc/admin/helpscout.php:97
+#: inc/admin/helpscout.php:96
 msgid "Received"
 msgstr "Vastaanotettu"
 
-#: inc/admin/helpscout.php:98
+#: inc/admin/helpscout.php:97
 msgid "Waiting for an answer"
 msgstr "Odottaa vastausta"
 
-#: inc/admin/helpscout.php:99
+#: inc/admin/helpscout.php:98
 msgid ""
 "There was a problem retrieving this message. Please double-check your "
 "Internet connection and try again."
@@ -181,31 +181,31 @@ msgstr ""
 "Tämän viestin noutamisessa oli ongelma. Tarkista Internet-yhteytesi ja yritä "
 "uudelleen."
 
-#: inc/admin/helpscout.php:100
+#: inc/admin/helpscout.php:99
 msgid "Just Now"
 msgstr "Juuri nyt"
 
-#: inc/admin/localization.php:86 inc/admin/localization.php:87
+#: inc/admin/localization.php:81 inc/admin/localization.php:82
 msgid "Localization strings"
-msgstr ""
+msgstr "Kielikäännökset"
+
+#: inc/admin/localization.php:107
+msgid "Save"
+msgstr "Tallenna"
 
 #: inc/admin/localization.php:112
-msgid "Save"
-msgstr ""
-
-#: inc/admin/localization.php:117
 msgid "Reset to default"
-msgstr ""
+msgstr "Palauta oletuksiin"
 
-#: inc/admin/localization.php:136
+#: inc/admin/localization.php:131
 msgid "Localization string overrides removed."
-msgstr ""
+msgstr "Kielikäännösten yliajot poistettu."
 
-#: inc/admin/localization.php:164
+#: inc/admin/localization.php:159
 msgid "Localization string overrides saved."
-msgstr ""
+msgstr "Kielikäännösten yliajot tallennettu."
 
-#: inc/admin/polylang.php:52
+#: inc/admin/polylang.php:51
 msgid ""
 "Polylang Pro license not set or invalid. Please update the license or "
 "contact your agency to fix this issue."
@@ -213,19 +213,33 @@ msgstr ""
 "Polylang Pron lisenssiä ei ole määritetty tai se ei kelpaa. Päivitä lisenssi "
 "tai ota yhteyttä digitoimistoosi tämän ongelman korjaamiseksi."
 
-#: inc/priority/mail-delivery.php:80
-#, fuzzy
-#| msgid ""
-#| "SendGrid email delivery plugin is not active or configured. Please "
-#| "contact your agency to fix this issue."
+#: inc/media.php:127
+msgid ""
+"You are in development environment. Media uploads are disabled in "
+"development environment. Please use staging or production environment for "
+"uploading media."
+msgstr ""
+"Olet kehitysympäristössä. Median lataaminen on devissä otettu pois käytöstä "
+"air-helperissä. Käytä mieluummin median lataamiseen staging- tai "
+"tuotantoympäristöä."
+
+#: inc/media.php:161
+msgid ""
+"Media uploads are disabled in development environment. Please use staging or "
+"production environment for uploading media."
+msgstr ""
+"Mediatiedostojen lataaminen on poistettu käytöstä kehitysympäristössä. "
+"Käytäthän median lataamiseen staging- tai tuotantoympäristöä."
+
+#: inc/priority/mail-delivery.php:75
 msgid ""
 "Email delivery is not active or configured. Please contact your agency to "
 "fix this issue."
 msgstr ""
-"SendGrid-sähköpostilaajennos ei ole aktiivinen tai määritetty. Ota yhteyttä "
+"Sähköpostin välitys ei ole aktiivinen tai määritetty. Ota yhteyttä "
 "digitoimistoosi tämän ongelman korjaamiseksi."
 
-#: inc/priority/security.php:153
+#: inc/priority/security.php:148
 msgid ""
 "<b>Login failed.</b> Please contact your site admin or agency if you "
 "continue having problems."
@@ -233,11 +247,11 @@ msgstr ""
 "<b>Kirjautuminen epäonnistui.</b> Ota yhteyttä sivuston ylläpitäjään tai "
 "digitoimistoon, jos sinulla on edelleen ongelmia."
 
-#: inc/yoast-seo.php:45
+#: inc/yoast-seo.php:40
 msgid "Written by"
-msgstr ""
+msgstr "Kirjoittanut"
 
-#: plugin-helpers.php:125
+#: plugin-helpers.php:120
 msgid ""
 "Active theme seems not to be Air based. Some functionality of Air helper "
 "plugin may not work, since it's intended to use with Air based themes."
@@ -245,43 +259,43 @@ msgstr ""
 "Aktiivinen teema ei näytä olevan Airiin pohjautuva. Kaikki Air helper -"
 "lisäosan ominaisuudet eivät välttämättä toimi."
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:54
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:56
 msgid "View details"
 msgstr "Tarkemmat tiedot"
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:77
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:79
 #, php-format
 msgid "More information about %s"
 msgstr "Lisätietoa %s"
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:128
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:130
 msgid "Check for updates"
 msgstr "Tarkista päivitykset"
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:213
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:217
 #, php-format
 msgctxt "the plugin title"
 msgid "The %s plugin is up to date."
 msgstr "Lisäosa %s on ajantasalla."
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:215
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:219
 #, php-format
 msgctxt "the plugin title"
 msgid "A new version of the %s plugin is available."
 msgstr "Uusi versio lisäosasta %s on saatavilla."
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:217
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:221
 #, php-format
 msgctxt "the plugin title"
 msgid "Could not determine if updates are available for %s."
 msgstr "Päivityksiä ei onnistuttu hakemaan %s."
 
-#: plugin-update-checker/Puc/v4p9/Plugin/Ui.php:223
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:227
 #, php-format
 msgid "Unknown update checker status \"%s\""
 msgstr "Tuntematon ilmoitus “%s” päivitystarkistuksessa"
 
-#: plugin-update-checker/Puc/v4p9/Vcs/PluginUpdateChecker.php:98
+#: plugin-update-checker/Puc/v5p5/Vcs/PluginUpdateChecker.php:113
 msgid "There is no changelog available."
 msgstr "Ei muutoslokia saatavilla."
 
@@ -300,10 +314,8 @@ msgstr ""
 "Lisäosa tarjoaa käytännöllisiä toimintoja sekä muokkaa WordPressin toimintaa."
 
 #. Author of the plugin/theme
-#, fuzzy
-#| msgid "Digitoimisto Dude Oy, Timi Wahalahti"
 msgid "Digitoimisto Dude Oy"
-msgstr "Digitoimisto Dude Oy, Timi Wahalahti"
+msgstr "Digitoimisto Dude Oy"
 
 #. Author URI of the plugin/theme
 msgid "https://www.dude.fi"

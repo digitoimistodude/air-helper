@@ -105,6 +105,10 @@ function air_helper_dev_media_library_notice() {
     return;
   }
 
+  // Check if there are staging URLs in the media files
+  $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
+  $has_staging_media = air_helper_has_staging_media( $staging_url );
+
   if ( ! $has_staging_media ) {
     return;
   }

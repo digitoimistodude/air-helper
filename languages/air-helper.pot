@@ -1,201 +1,282 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Air helper\n"
-"POT-Creation-Date: 2020-02-12 15:41+0200\n"
+"POT-Creation-Date: 2024-12-04 22:39+0200\n"
 "PO-Revision-Date: 2020-02-12 15:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: air-helper.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: inc/admin/adminbar.php:53
-msgid "production"
+#: functions/misc.php:27 functions/misc.php:29
+msgid "No icon"
 msgstr ""
 
-#: inc/admin/adminbar.php:57
-msgid "staging"
+#: inc/admin/access.php:92 inc/admin/access.php:110
+msgid "Menus"
 msgstr ""
 
-#: inc/admin/adminbar.php:60
-msgid "development"
+#: inc/admin/acf.php:92
+msgid "<b>ACF field group local files missing!</b>"
 msgstr ""
 
-#: inc/admin/adminbar.php:67
+#: inc/admin/acf.php:93
+#, php-format
+msgid "Make sure following field groups are saved: %1$s."
+msgstr ""
+
+#: inc/admin/adminbar.php:64
 #, php-format
 msgid "Environment: %s"
 msgstr ""
 
-#: inc/admin/help-scout.php:29
+#: inc/admin/adminbar.php:167
+msgid "Flush all caches"
+msgstr ""
+
+#: inc/admin/adminbar.php:362
+msgid "All caches flushed"
+msgstr ""
+
+#: inc/admin/autodescription.php:59
+msgid "The SEO Framework options reset is probably needed."
+msgstr ""
+
+#: inc/admin/autodescription.php:60
+msgid ""
+"Do NOT reset the settings if site is in production or settings have been "
+"already changed!"
+msgstr ""
+
+#: inc/admin/autodescription.php:61
+msgid "In that case, please contact your agency to fix this issue."
+msgstr ""
+
+#: inc/admin/help-widget.php:26
+msgid "Updates from Dude"
+msgstr ""
+
+#: inc/admin/help-widget.php:61
+msgid "Error while fetching data."
+msgstr ""
+
+#: inc/admin/helpscout.php:71
 msgid "Help request"
 msgstr ""
 
-#: inc/admin/help-scout.php:30
+#: inc/admin/helpscout.php:72
 msgid "Do you need help?"
 msgstr ""
 
-#: inc/admin/help-scout.php:31 inc/admin/help-scout.php:45
+#: inc/admin/helpscout.php:73 inc/admin/helpscout.php:87
 msgid "Dude user support"
 msgstr ""
 
-#: inc/admin/help-scout.php:32 inc/admin/help-scout.php:40
+#: inc/admin/helpscout.php:74 inc/admin/helpscout.php:82
 msgid "How can we help?"
 msgstr ""
 
-#: inc/admin/help-scout.php:33 inc/admin/help-scout.php:47
+#: inc/admin/helpscout.php:75 inc/admin/helpscout.php:89
 msgid "Our support team will respond to you on next working day at latest"
 msgstr ""
 
-#: inc/admin/help-scout.php:34
+#: inc/admin/helpscout.php:76
 msgid "Continue writing…"
 msgstr ""
 
-#: inc/admin/help-scout.php:35
+#: inc/admin/helpscout.php:77
 msgid "Last updated"
 msgstr ""
 
-#: inc/admin/help-scout.php:36
+#: inc/admin/helpscout.php:78
 msgid "You"
 msgstr ""
 
-#: inc/admin/help-scout.php:37
+#: inc/admin/helpscout.php:79
 msgid "Name"
 msgstr ""
 
-#: inc/admin/help-scout.php:38
+#: inc/admin/helpscout.php:80
 msgid "Subject"
 msgstr ""
 
-#: inc/admin/help-scout.php:39
+#: inc/admin/helpscout.php:81
 msgid "Email address"
 msgstr ""
 
-#: inc/admin/help-scout.php:41
+#: inc/admin/helpscout.php:83
 msgid "Send support request"
 msgstr ""
 
-#: inc/admin/help-scout.php:42
+#: inc/admin/helpscout.php:84
 msgid "Next"
 msgstr ""
 
-#: inc/admin/help-scout.php:43
+#: inc/admin/helpscout.php:85
 msgid "We’re on it!"
 msgstr ""
 
-#: inc/admin/help-scout.php:44
+#: inc/admin/helpscout.php:86
 msgid "You’ll receive an reply shortly."
 msgstr ""
 
-#: inc/admin/help-scout.php:46
+#: inc/admin/helpscout.php:88
 msgid "You can view and update your message in"
 msgstr ""
 
-#: inc/admin/help-scout.php:48
+#: inc/admin/helpscout.php:90
 msgid "Previous Conversations"
 msgstr ""
 
-#: inc/admin/help-scout.php:49
+#: inc/admin/helpscout.php:91
 msgid "Email"
 msgstr ""
 
-#: inc/admin/help-scout.php:50
+#: inc/admin/helpscout.php:92
 msgid "Send message to our support team"
 msgstr ""
 
-#: inc/admin/help-scout.php:51
+#: inc/admin/helpscout.php:93
 msgid "Add a reply"
 msgstr ""
 
-#: inc/admin/help-scout.php:52
+#: inc/admin/helpscout.php:94
 msgid "Add your message here..."
 msgstr ""
 
-#: inc/admin/help-scout.php:53
+#: inc/admin/helpscout.php:95
 msgid "Send message"
 msgstr ""
 
-#: inc/admin/help-scout.php:54
+#: inc/admin/helpscout.php:96
 msgid "Received"
 msgstr ""
 
-#: inc/admin/help-scout.php:55
+#: inc/admin/helpscout.php:97
 msgid "Waiting for an answer"
 msgstr ""
 
-#: inc/admin/help-scout.php:56
+#: inc/admin/helpscout.php:98
 msgid ""
 "There was a problem retrieving this message. Please double-check your "
 "Internet connection and try again."
 msgstr ""
 
-#: inc/admin/help-scout.php:57
+#: inc/admin/helpscout.php:99
 msgid "Just Now"
 msgstr ""
 
-#: inc/admin/help-widget.php:37
-msgid "Updates from Dude"
+#: inc/admin/localization.php:81 inc/admin/localization.php:82
+msgid "Localization strings"
 msgstr ""
 
-#: inc/admin/help-widget.php:72
-msgid "Error while fetching data."
+#: inc/admin/localization.php:107
+msgid "Save"
 msgstr ""
 
-#: inc/admin/help-widget.php:103
-msgid "Server status on real time"
+#: inc/admin/localization.php:112
+msgid "Reset to default"
 msgstr ""
 
-#: inc/priority/security.php:147
+#: inc/admin/localization.php:131
+msgid "Localization string overrides removed."
+msgstr ""
+
+#: inc/admin/localization.php:159
+msgid "Localization string overrides saved."
+msgstr ""
+
+#: inc/admin/polylang.php:51
+msgid ""
+"Polylang Pro license not set or invalid. Please update the license or "
+"contact your agency to fix this issue."
+msgstr ""
+
+#: inc/media.php:127
+msgid ""
+"You are in development environment. Media uploads are disabled in "
+"development environment. Please use staging or production environment for "
+"uploading media."
+msgstr ""
+
+#: inc/media.php:161
+msgid ""
+"Media uploads are disabled in development environment. Please use staging "
+"or production environment for uploading media."
+msgstr ""
+
+#: inc/priority/mail-delivery.php:75
+msgid ""
+"Email delivery is not active or configured. Please contact your agency to "
+"fix this issue."
+msgstr ""
+
+#: inc/priority/security.php:148
 msgid ""
 "<b>Login failed.</b> Please contact your site admin or agency if you "
 "continue having problems."
 msgstr ""
 
-#: inc/priority/sendgrid.php:48
-msgid ""
-"SendGrid email delivery plugin is not active or configured. Please contact "
-"your agency to fix this issue."
+#: inc/yoast-seo.php:40
+msgid "Written by"
 msgstr ""
 
-#: plugin-helpers.php:95
+#: plugin-helpers.php:120
 msgid ""
 "Active theme seems not to be Air based. Some functionality of Air helper "
 "plugin may not work, since it's intended to use with Air based themes."
 msgstr ""
 
-#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:358
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:56
+msgid "View details"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:79
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:130
 msgid "Check for updates"
 msgstr ""
 
-#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:405
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:217
 #, php-format
 msgctxt "the plugin title"
 msgid "The %s plugin is up to date."
 msgstr ""
 
-#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:407
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:219
 #, php-format
 msgctxt "the plugin title"
 msgid "A new version of the %s plugin is available."
 msgstr ""
 
-#: plugin-update-checker/Puc/v4p1/Plugin/UpdateChecker.php:409
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:221
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: plugin-update-checker/Puc/v5p5/Plugin/Ui.php:227
 #, php-format
 msgid "Unknown update checker status \"%s\""
 msgstr ""
 
-#: plugin-update-checker/Puc/v4p1/Vcs/PluginUpdateChecker.php:83
+#: plugin-update-checker/Puc/v5p5/Vcs/PluginUpdateChecker.php:113
 msgid "There is no changelog available."
 msgstr ""
 
@@ -209,12 +290,11 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"This plugin extends themes based on Air by adding useful hooks, functions "
-"and basic things for WooCommerce."
+"Plugin provides helpful functions and modifications for WordPress projects."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Digitoimisto Dude Oy, Timi Wahalahti"
+msgid "Digitoimisto Dude Oy"
 msgstr ""
 
 #. Author URI of the plugin/theme
