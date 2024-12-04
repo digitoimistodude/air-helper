@@ -1,4 +1,4 @@
-### 3.1.2rc: 2024-10-25
+### 3.1.2: 2024-12-04
 
 * Add tinyMCE plugin that adds helper class to elements (T-17631)
 * Use eager loading instead of lazy if `native_lazyload_tag` is used in the first block (T-17629)
