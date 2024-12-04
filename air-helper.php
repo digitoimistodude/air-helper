@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: Plugin provides helpful functions and modifications for WordPress projects.
- * Version: 3.1.1
+ * Version: 3.1.2rc
  * Author: Digitoimisto Dude Oy
  * Author URI: https://www.dude.fi
  * Requires at least: 5.5
@@ -93,6 +93,7 @@ function air_helper_fly() {
   require_once air_helper_base_path() . '/inc/tinymce.php';
   require_once air_helper_base_path() . '/inc/media.php';
   require_once air_helper_base_path() . '/inc/misc.php';
+  require_once air_helper_base_path() . '/inc/clean-ups.php';
   require_once air_helper_base_path() . '/inc/localization.php';
 } // end air_helper_fly
 

@@ -7,6 +7,8 @@
 * Fix "Flush all caches" admin bar item not showing up in multisite (T-20707)
 * Add support for flushing all caches in multisite (T-20707)
 * Add logging to cache flushing functions (T-20707)
+* Remove unnecessary WordPress default styles in front end (T-13957)
+* Separate clean up functions to their own file (T-13957)
 
 ### 3.1.1: 2024-12-02
 
