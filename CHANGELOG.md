@@ -10,6 +10,7 @@
 * Remove unnecessary WordPress default styles in front end (T-13957)
 * Separate clean up functions to their own file (T-13957)
 * Update PUC to v5.5 (T-20922)
+* Prevent add media files from dev if there is a staging environment or files have been added from staging (T-15169)
 
 ### 3.1.1: 2024-12-02
 
