@@ -120,3 +120,23 @@ function air_helper_move_nav_menus_toplevel() {
     return $items;
   } );
 } // end air_helper_move_nav_menus_toplevel
+
+/**
+ * Move intrusive plugin settings under Settings menu.
+ *
+ * @since 3.1.5
+ */
+add_action('admin_menu', 'air_helper_move_optimole_menu', 999);
+function air_helper_move_optimole_menu() {
+  // Remove the top level menu for intrusive plugins
+  remove_menu_page('optimole');
+
+  // Add Optimole back as a submenu under Settings
+  add_submenu_page(
+    'options-general.php', // Parent slug
+    'Optimole', // Page title
+    'Optimole', // Menu title
+    'manage_options', // Capability
+    'admin.php?page=optimole' // Menu slug
+  );
+}
