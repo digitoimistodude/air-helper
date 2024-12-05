@@ -2,6 +2,7 @@
 
 * Remove Optimole dashboard widget (T-23392)
 * Move Optimole under Settings (T-23392)
+* Move Broken Link Checker under Settings
 
 ### 3.1.3: 2024-12-04
 
