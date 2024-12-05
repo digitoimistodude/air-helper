@@ -1,3 +1,7 @@
+### 3.1.4: 2024-12-05
+
+* Remove Optimole dashboard widget (T-23392)
+
 ### 3.1.3: 2024-12-04
 
 * Update plugin localizations for Finnish

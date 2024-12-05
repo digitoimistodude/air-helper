@@ -46,6 +46,7 @@ function air_helper_clear_admin_dashboard() {
       'yith_dashboard_blog_news', // YITH plugins
       'wpseo-wincher-dashboard-overview',
       'tinypng_dashboard_widget',
+      'themeisle', // Optimole
 		],
 		'side' => [
 			'dashboard_quick_press',
