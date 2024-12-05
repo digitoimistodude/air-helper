@@ -130,6 +130,7 @@ add_action('admin_menu', 'air_helper_move_optimole_menu', 999);
 function air_helper_move_optimole_menu() {
   // Remove the top level menu for intrusive plugins
   remove_menu_page('optimole');
+  remove_menu_page('blc_dash');
 
   // Add Optimole back as a submenu under Settings
   add_submenu_page(
@@ -138,5 +139,14 @@ function air_helper_move_optimole_menu() {
     'Optimole', // Menu title
     'manage_options', // Capability
     'admin.php?page=optimole' // Menu slug
+  );
+
+  // Add Broken Link Checker back as a submenu under Settings
+  add_submenu_page(
+    'options-general.php', // Parent slug
+    'Broken Link Checker', // Page title
+    'Broken Link Checker', // Menu title
+    'manage_options', // Capability
+    'admin.php?page=blc_local' // Menu slug
   );
 }
