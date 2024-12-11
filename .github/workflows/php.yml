@@ -41,4 +41,4 @@ jobs:
         vendor/bin/phpcs -p . --extensions=php --ignore=vendor,node_modules,src,js,css,sass,plugin-update-checker --standard=phpcs.xml
 
     - name: Test PHP for syntax errors
-      run: find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+      run: find -L . -name '*.php' -not -path "./vendor/*" -not -path "./node_modules/*" -not -path "./src/*" -not -path "./js/*" -not -path "./css/*" -not -path "./sass/*" -not -path "./plugin-update-checker/*" -print0 | xargs -0 -n 1 -P 4 php -l
