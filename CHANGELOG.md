@@ -1,3 +1,7 @@
+### 3.1.5: 2024-12-11
+
+* Allow deregistering more styles with `air_helper_styles_to_deregister` filter (T-23392)
+
 ### 3.1.4: 2024-12-05
 
 * Remove Optimole dashboard widget (T-23392)

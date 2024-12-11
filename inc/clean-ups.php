@@ -51,15 +51,20 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
 /**
  * Remove unnecessary WordPress default styles in front end (T-13957)
  *
- * Turn off with:
+ * Turn off completely with:
  * add_action( 'init', function() {
  *  remove_action( 'wp_enqueue_scripts', 'air_helper_dequeue_default_styles' );
  * }, 999 );
  *
- * Enable specific styles with filter:
- * add_filter( 'air_helper_enabled_frontend_styles', function( $enabled_styles ) {
- *   $enabled_styles[] = 'dashicons';
- *   return $enabled_styles;
+ * Modify styles to deregister:
+ * add_filter( 'air_helper_styles_to_deregister', function( $styles ) {
+ *   // Remove a style from default list
+ *   $styles = array_diff( $styles, ['dashicons'] );
+ *
+ *   // Or add new ones to deregister
+ *   $styles[] = 'wp-block-library';
+ *
+ *   return $styles;
  * });
  *
  * @since 3.1.2
@@ -70,19 +75,14 @@ function air_helper_dequeue_default_styles() {
     return;
   }
 
-  $styles_to_deregister = [
+  $styles_to_deregister = apply_filters( 'air_helper_styles_to_deregister', [
     'dashicons',
-    'wp-block-library',
     'wp-block-library-theme',
     'classic-theme-styles',
     'global-styles',
-  ];
-
-  $enabled_styles = apply_filters( 'air_helper_enabled_frontend_styles', [] );
+  ] );
 
   foreach ( $styles_to_deregister as $style ) {
-    if ( ! in_array( $style, $enabled_styles, true ) ) {
-      wp_deregister_style( $style );
-    }
+    wp_deregister_style( $style );
   }
 }
