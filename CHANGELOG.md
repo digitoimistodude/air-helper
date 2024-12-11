@@ -1,6 +1,8 @@
 ### 3.1.5: 2024-12-11
 
 * Allow deregistering more styles with `air_helper_styles_to_deregister` filter (T-23392)
+* Exclude development dirs from CI (dev)
+* Delete travis no longer in use (dev)
 
 ### 3.1.4: 2024-12-05
 
