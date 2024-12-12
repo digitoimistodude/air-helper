@@ -1,3 +1,8 @@
+### 3.1.6: 2024-12-12
+
+* Fix regression with T-23371, use minified version of instant.page (minified with `npx terser instantpage.js -o instantpage.min.js --compress --mangle`)
+* Bump tested WordPress version to 6.7.1
+
 ### 3.1.5: 2024-12-11
 
 * Allow deregistering more styles with `air_helper_styles_to_deregister` filter (T-23392)
