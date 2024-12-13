@@ -1,4 +1,4 @@
-### [Unreleased]
+### 3.1.7: 2024-12-13
 * Remove notice error about missing acf local json files in staging (T-23571)
 
 ### 3.1.6: 2024-12-12
