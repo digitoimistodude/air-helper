@@ -1,3 +1,6 @@
+### [Unreleased]
+* Remove notice error about missing acf local json files in staging (T-23571)
+
 ### 3.1.6: 2024-12-12
 
 * Fix regression with T-23371, use minified version of instant.page (minified with `npx terser instantpage.js -o instantpage.min.js --compress --mangle`)

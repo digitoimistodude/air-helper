@@ -52,8 +52,8 @@ function air_helper_warn_if_not_all_acf_local_json_not_saved() {
     return;
   }
 
-  // Bail in production
-  if ( 'production' === wp_get_environment_type() ) {
+  // Bail in staging and production
+  if ( 'staging' === wp_get_environment_type() || 'production' === wp_get_environment_type() ) {
     return;
   }
 
