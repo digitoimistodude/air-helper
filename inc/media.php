@@ -27,45 +27,71 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
   // If we do not have media folder in project root, do not continue with this filter
   if ( ! file_exists( $project_root_path . '/media' ) ) {
-    return;
+		return;
   }
 
   // If project root path contains /Users, replace it with /var/www, first ensuring /var/www/project_name exists
   if ( strpos( $project_root_path, '/Users' ) !== false && file_exists( '/var/www/' . $project_name ) ) {
-    $project_root_path = '/var/www/' . $project_name;
+		$project_root_path = '/var/www/' . $project_name;
   }
 
   if ( $has_staging_media && wp_get_environment_type() === 'staging' ) {
-    // Get the project name and path from ABSPATH
-    $current_path = dirname(ABSPATH);
-    $releases_path = dirname($current_path);
-    $project_root = dirname($releases_path);
+		// Get the project name and path from ABSPATH
+		$current_path = dirname(ABSPATH);
+		$releases_path = dirname($current_path);
+		$project_root = dirname($releases_path);
 
-    // Force staging path and URL for staging environment
-    $upload_path = $project_root . '/shared/media';
-    $upload_url = str_replace( [ 'http://', 'https://' ], '', home_url());
-    $upload_url = 'https://' . $upload_url . '/media';
+		// Force staging path and URL for staging environment
+		$upload_path = $project_root . '/shared/media';
+		$upload_url = str_replace( [ 'http://', 'https://' ], '', home_url());
+		$upload_url = 'https://' . $upload_url . '/media';
 
-    // Disable media options in admin
-    add_filter( 'pre_option_upload_path', function () use ( $upload_path ) {
-      return $upload_path;
-    } );
-    add_filter( 'pre_option_upload_url_path', function () use ( $upload_url ) {
-      return $upload_url;
-    } );
+		// Disable media options in admin
+		add_filter( 'pre_option_upload_path', function () use ( $upload_path ) {
+		  return $upload_path;
+			} );
+		  add_filter( 'pre_option_upload_url_path', function () use ( $upload_url ) {
+			return $upload_url;
+			} );
+
+		  // Helper function to replace test domain with staging domain
+		  function air_helper_replace_test_domain( $url ) {
+			return str_replace('.test', '.vaiheessa.fi', $url);
+			  }
+
+		  // Add filter to replace .test domain with staging domain in attachment URLs
+		  add_filter('wp_get_attachment_url', 'air_helper_replace_test_domain');
+
+		  // Filter the srcset URLs
+		  add_filter('wp_calculate_image_srcset', function ( $sources ) {
+			foreach ($sources as &$source ) {
+				$source['url'] = air_helper_replace_test_domain($source['url']);
+			}
+			return $sources;
+			});
+
+		  // Filter all image URLs in our lazyload functions
+		  add_filter('air_helper_get_image_lazyload_sizes', function ( $sizes ) {
+			if ( is_array($sizes) ) {
+				foreach ( $sizes as $key => $url ) {
+					$sizes[ $key ] = air_helper_replace_test_domain($url);
+				}
+			}
+			return $sizes;
+			});
   } else {
-    // Get media directory path
-    $upload_path = $project_root_path . '/media';
+		// Get media directory path
+		$upload_path = $project_root_path . '/media';
 
-    // Ensure the URL path is relative to the site root
-    $upload_url = home_url( '/media' );
+		// Ensure the URL path is relative to the site root
+		$upload_url = home_url( '/media' );
   }
 
   // If staging media found or we are in dev, disable media options in admin
   if ( $has_staging_media || wp_get_environment_type() === 'development' ) {
-    // Add JavaScript to disable fields in admin
-    add_action( 'admin_head', function () {
-      echo '<script>
+		// Add JavaScript to disable fields in admin
+		add_action( 'admin_head', function () {
+		  echo '<script>
         document.addEventListener("DOMContentLoaded", function() {
           var uploadPathField = document.querySelector("input[name=\'upload_path\']");
           var uploadUrlPathField = document.querySelector("input[name=\'upload_url_path\']");
@@ -75,7 +101,7 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
           if (yearMonthField) yearMonthField.setAttribute("disabled", "disabled");
         });
       </script>';
-    });
+			});
   }
 
   // Update the options
@@ -98,11 +124,11 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 function air_helper_dev_media_library_notice() {
   // Only prevent uploads in development environment
   if ( wp_get_environment_type() !== 'development' ) {
-    return;
+		return;
   }
 
   if ( ! air_helper_prevent_dev_uploads_enabled() ) {
-    return;
+		return;
   }
 
   // Check if there are staging URLs in the media files
@@ -110,7 +136,7 @@ function air_helper_dev_media_library_notice() {
   $has_staging_media = air_helper_has_staging_media( $staging_url );
 
   if ( ! $has_staging_media ) {
-    return;
+		return;
   }
 
   // Only show if DB is not localhost and contains staging URLs or if staging URLs are found
@@ -118,13 +144,13 @@ function air_helper_dev_media_library_notice() {
   $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
 
   if ( 'localhost' === $db_name && ! air_helper_has_staging_media( $staging_url ) ) {
-    return;
+		return;
   }
 
   // Only show on media library pages
   $screen = get_current_screen();
   if ( ! $screen || ! in_array( $screen->base, [ 'upload', 'media' ], true ) ) {
-    return;
+		return;
   }
 
   $class = 'notice notice-warning';
@@ -144,11 +170,11 @@ add_action( 'admin_notices', 'air_helper_dev_media_library_notice' );
 function air_helper_prevent_dev_media_upload( $file ) {
   // Only prevent uploads in development environment
   if ( wp_get_environment_type() !== 'development' ) {
-    return $file;
+		return $file;
   }
 
   if ( ! air_helper_prevent_dev_uploads_enabled() ) {
-    return $file;
+		return $file;
   }
 
   // Check if there are staging URLs in the media files
@@ -156,13 +182,13 @@ function air_helper_prevent_dev_media_upload( $file ) {
   $has_staging_media = air_helper_has_staging_media( $staging_url );
 
   if ( ! $has_staging_media ) {
-    return $file;
+		return $file;
   }
 
   // Only prevent uploads if we have staging media
   $db_name = defined( 'DB_NAME' ) ? DB_NAME : '';
   if ( 'localhost' !== $db_name || air_helper_has_staging_media( $staging_url ) ) {
-    $file['error'] = __( 'Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
+		$file['error'] = __( 'Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
   }
 
   return $file;
