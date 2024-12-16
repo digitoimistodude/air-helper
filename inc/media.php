@@ -5,6 +5,20 @@
  * @package air-helper
  */
 
+// Helper function to get staging URL
+function air_helper_get_staging_url() {
+  // Check for constant first
+  if ( defined( 'STAGING_URL' ) ) {
+    return STAGING_URL;
+  }
+  // Then check for environment variable
+  elseif ( getenv( 'STAGING_URL' ) ) {
+    return getenv( 'STAGING_URL' );
+  }
+  // Finally fall back to default
+  return apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
+}
+
 /**
  * Custom uploads folder media/ instead of default content/uploads/.
  *
@@ -16,8 +30,7 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   $update_option = false;
 
   // Check if there are staging URLs in the media files
-  $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
-  $has_staging_media = air_helper_has_staging_media( $staging_url );
+  $has_staging_media = air_helper_has_staging_media( air_helper_get_staging_url() );
 
   // Get the project root directory
   $project_root_path = dirname( ABSPATH );
@@ -48,36 +61,39 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
 		// Disable media options in admin
 		add_filter( 'pre_option_upload_path', function () use ( $upload_path ) {
-		  return $upload_path;
+		    return $upload_path;
 			} );
+
 		  add_filter( 'pre_option_upload_url_path', function () use ( $upload_url ) {
-			return $upload_url;
+			  return $upload_url;
 			} );
 
 		  // Helper function to replace test domain with staging domain
 		  function air_helper_replace_test_domain( $url ) {
-			return str_replace('.test', '.vaiheessa.fi', $url);
-			  }
+			  return str_replace('.test', '.' . air_helper_get_staging_url(), $url);
+		  }
 
 		  // Add filter to replace .test domain with staging domain in attachment URLs
 		  add_filter('wp_get_attachment_url', 'air_helper_replace_test_domain');
 
 		  // Filter the srcset URLs
 		  add_filter('wp_calculate_image_srcset', function ( $sources ) {
-			foreach ($sources as &$source ) {
-				$source['url'] = air_helper_replace_test_domain($source['url']);
-			}
-			return $sources;
+        foreach ($sources as &$source ) {
+          $source['url'] = air_helper_replace_test_domain( $source['url'] );
+        }
+
+        return $sources;
 			});
 
 		  // Filter all image URLs in our lazyload functions
 		  add_filter('air_helper_get_image_lazyload_sizes', function ( $sizes ) {
-			if ( is_array($sizes) ) {
-				foreach ( $sizes as $key => $url ) {
-					$sizes[ $key ] = air_helper_replace_test_domain($url);
-				}
-			}
-			return $sizes;
+        if ( is_array($sizes) ) {
+          foreach ( $sizes as $key => $url ) {
+            $sizes[ $key ] = air_helper_replace_test_domain( $url );
+          }
+        }
+
+        return $sizes;
 			});
   } else {
 		// Get media directory path
@@ -132,8 +148,7 @@ function air_helper_dev_media_library_notice() {
   }
 
   // Check if there are staging URLs in the media files
-  $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
-  $has_staging_media = air_helper_has_staging_media( $staging_url );
+  $has_staging_media = air_helper_has_staging_media( air_helper_get_staging_url() );
 
   if ( ! $has_staging_media ) {
 		return;
@@ -141,10 +156,9 @@ function air_helper_dev_media_library_notice() {
 
   // Only show if DB is not localhost and contains staging URLs or if staging URLs are found
   $db_name = defined( 'DB_NAME' ) ? DB_NAME : '';
-  $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
 
-  if ( 'localhost' === $db_name && ! air_helper_has_staging_media( $staging_url ) ) {
-		return;
+  if ( 'localhost' === $db_name && ! air_helper_has_staging_media( air_helper_get_staging_url() ) ) {
+    return;
   }
 
   // Only show on media library pages
@@ -178,8 +192,7 @@ function air_helper_prevent_dev_media_upload( $file ) {
   }
 
   // Check if there are staging URLs in the media files
-  $staging_url = apply_filters( 'air_helper_staging_url', 'vaiheessa.fi' );
-  $has_staging_media = air_helper_has_staging_media( $staging_url );
+  $has_staging_media = air_helper_has_staging_media( air_helper_get_staging_url() );
 
   if ( ! $has_staging_media ) {
 		return $file;
@@ -187,8 +200,8 @@ function air_helper_prevent_dev_media_upload( $file ) {
 
   // Only prevent uploads if we have staging media
   $db_name = defined( 'DB_NAME' ) ? DB_NAME : '';
-  if ( 'localhost' !== $db_name || air_helper_has_staging_media( $staging_url ) ) {
-		$file['error'] = __( 'Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
+  if ( 'localhost' !== $db_name || air_helper_has_staging_media( air_helper_get_staging_url() ) ) {
+    $file['error'] = __( 'Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
   }
 
   return $file;
