@@ -3,6 +3,7 @@
 * Fix: Replace .test domain with staging domain in attachment URLs (T-23857)
 * Allow changing staging URL with `STAGING_URL` constant or `STAGING_URL` environment variable (T-23857)
 * Fix path being included to the URL of the image (T-23857)
+* Add filter to disable air_helper_prevent_dev_uploads
 
 ### 3.1.7: 2024-12-13
 
