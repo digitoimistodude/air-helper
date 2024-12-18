@@ -1,3 +1,8 @@
+### 3.1.9: 2024-12-18
+
+* Remove WPForms reports widget from dashboard
+* Add more clear instructions in code comments on how to add custom widgets to dashboard
+
 ### 3.1.8: 2024-12-16
 
 * Fix: Replace .test domain with staging domain in attachment URLs (T-23857)

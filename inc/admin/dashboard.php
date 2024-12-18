@@ -21,8 +21,22 @@ add_action( 'admin_init', function () {
 /**
  *  Remove some boxes from dashboard.
  *
- *  Turn off by using `remove_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard' )`
- *  Modify with `add_filter( 'air_helper_clear_admin_dashboard_boxes', 'myprefix_air_helper_clear_admin_dashboard_boxes' )`
+ *  Turn off completely by using:
+ *  remove_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard' );
+ *
+ *  Modify which boxes are hidden/shown using:
+ *  add_filter( 'air_helper_clear_admin_dashboard_boxes', function( $remove_boxes ) {
+ *    // Show Yoast SEO widget
+ *    $key = array_search( 'wpseo-dashboard-overview', $remove_boxes['normal'] );
+ *    if ( false !== $key ) {
+ *        unset( $remove_boxes['normal'][$key] );
+ *    }
+ *
+ *    // Hide additional widget
+ *    $remove_boxes['normal'][] = 'my_custom_widget';
+ *
+ *    return $remove_boxes;
+ *  } );
  *
  *  @since 1.7.0
  */
@@ -47,6 +61,7 @@ function air_helper_clear_admin_dashboard() {
       'wpseo-wincher-dashboard-overview',
       'tinypng_dashboard_widget',
       'themeisle', // Optimole
+      'wpforms_reports_widget_pro', // WP Forms reports
 		],
 		'side' => [
 			'dashboard_quick_press',
@@ -56,7 +71,7 @@ function air_helper_clear_admin_dashboard() {
 		],
 	];
 
-	// Allow filtering which boxes to hide
+	// Allow filtering which boxes to hide or show
 	$remove_boxes = apply_filters( 'air_helper_clear_admin_dashboard_boxes', $remove_boxes );
 
 	if ( ! empty( $remove_boxes ) ) {
