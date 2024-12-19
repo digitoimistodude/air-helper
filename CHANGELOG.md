@@ -1,3 +1,8 @@
+### 3.1.10: 2024-12-19
+
+* Fix removal of dashicons from frontend for non-admin, non-logged-in users
+* Remove gutenberg default styles, classic theme styles and global styles from clean up hook by default (T-23576)
+
 ### 3.1.9: 2024-12-18
 
 * Remove WPForms reports widget from dashboard
