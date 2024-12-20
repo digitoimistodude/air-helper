@@ -1,3 +1,7 @@
+### 3.1.11: 2024-12-20
+
+* Fix potential issue with media urls and paths being modified in production (T-24022, T-24004)
+
 ### 3.1.10: 2024-12-19
 
 * Fix removal of dashicons from frontend for non-admin, non-logged-in users
