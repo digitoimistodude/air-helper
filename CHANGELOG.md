@@ -1,4 +1,25 @@
-### 3.1.8rc: 2024-12-16
+### 3.2.0rc: 2024-12-31
+
+* Remove maintained todo comments from instantpage.js
+* Add phpcs:disable to PUC maintainer files
+* Show health check for admins
+* Fix disabling login hook instruction in code comments
+
+### 3.1.11: 2024-12-20
+
+* Fix potential issue with media urls and paths being modified in production (T-24022, T-24004)
+
+### 3.1.10: 2024-12-19
+
+* Fix removal of dashicons from frontend for non-admin, non-logged-in users
+* Remove gutenberg default styles, classic theme styles and global styles from clean up hook by default (T-23576)
+
+### 3.1.9: 2024-12-18
+
+* Remove WPForms reports widget from dashboard
+* Add more clear instructions in code comments on how to add custom widgets to dashboard
+
+### 3.1.8: 2024-12-16
 
 * Fix: Replace .test domain with staging domain in attachment URLs (T-23857)
 * Allow changing staging URL with `STAGING_URL` constant or `STAGING_URL` environment variable (T-23857)
