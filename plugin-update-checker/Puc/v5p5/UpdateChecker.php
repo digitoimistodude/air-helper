@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable
 namespace YahnisElsts\PluginUpdateChecker\v5p5;
 
 use stdClass;

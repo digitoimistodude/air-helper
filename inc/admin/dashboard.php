@@ -49,7 +49,6 @@ function air_helper_clear_admin_dashboard() {
       'dashboard_incoming_links',
       'dashboard_activity',
       'dashboard_plugins',
-      'dashboard_site_health',
       'sendgrid_statistics_widget',
       'wpseo-dashboard-overview', // Yoast
       'rg_forms_dashboard', // Gravity forms
@@ -70,6 +69,11 @@ function air_helper_clear_admin_dashboard() {
 			'dashboard_secondary',
 		],
 	];
+
+	// Add site health widget to removal list only if user is not allowed to see it
+	if ( ! air_helper_allow_user_to( 'health-check' ) ) {
+		$remove_boxes['normal'][] = 'dashboard_site_health';
+	}
 
 	// Allow filtering which boxes to hide or show
 	$remove_boxes = apply_filters( 'air_helper_clear_admin_dashboard_boxes', $remove_boxes );

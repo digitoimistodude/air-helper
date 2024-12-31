@@ -138,7 +138,10 @@ function air_helper_login_honeypot_reset_prefix() {
  *  Unify and modify the login error message to be more general,
  *  so those do not exist any hint what did go wrong.
  *
- *  Turn off by using `remove_action( 'login_errors', 'air_helper_login_errors' )`
+ *  Turn off by using this snippet:
+ *  add_action( 'init', function() {
+ *    remove_action( 'login_errors', 'air_helper_login_errors' );
+ *  }, 999 );
  *
  *  @since  1.8.0
  *  @return string  messag to display when login fails
