@@ -71,16 +71,13 @@ function air_helper_strip_tags_menu_item( $title, $arg_2 = null, $arg_3 = null, 
  */
 add_action( 'wp_enqueue_scripts', 'air_helper_dequeue_default_styles', 100 );
 function air_helper_dequeue_default_styles() {
-  if ( is_admin() || is_user_logged_in() ) {
-    return;
+  // Only disable dashicons for non-admin, non-logged-in users
+  if ( ! is_admin() && ! is_user_logged_in() ) {
+    wp_deregister_style( 'dashicons' );
   }
 
-  $styles_to_deregister = apply_filters( 'air_helper_styles_to_deregister', [
-    'dashicons',
-    'wp-block-library-theme',
-    'classic-theme-styles',
-    'global-styles',
-  ] );
+  // Always disable these styles regardless of user status
+  $styles_to_deregister = apply_filters( 'air_helper_styles_to_deregister', [] );
 
   foreach ( $styles_to_deregister as $style ) {
     wp_deregister_style( $style );

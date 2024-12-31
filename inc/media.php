@@ -107,6 +107,11 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   if ( $has_staging_media || wp_get_environment_type() === 'development' ) {
 		// Add JavaScript to disable fields in admin
 		add_action( 'admin_head', function () {
+		  // Don't disable fields in production
+		  if ( wp_get_environment_type() === 'production' ) {
+				return;
+		  }
+
 		  echo '<script>
         document.addEventListener("DOMContentLoaded", function() {
           var uploadPathField = document.querySelector("input[name=\'upload_path\']");
@@ -120,24 +125,30 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 			});
   }
 
-  // Update the options
-  update_option( 'upload_path', untrailingslashit( $upload_path ) );
-  update_option( 'upload_url_path', untrailingslashit( $upload_url ) );
-  update_option( 'air_helper_changed_uploads_path', date_i18n( 'Y-m-d H:i:s' ) );
+  // Update the options - this should not happen in production
+  if ( wp_get_environment_type() !== 'production' ) {
+    update_option( 'upload_path', untrailingslashit( $upload_path ) );
+    update_option( 'upload_url_path', untrailingslashit( $upload_url ) );
+    update_option( 'air_helper_changed_uploads_path', date_i18n( 'Y-m-d H:i:s' ) );
+  }
 
-  // Add upload_dir filter to set correct paths
-  add_filter('upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
-		$uploads['basedir'] = $upload_path;
-		$uploads['baseurl'] = $upload_url;
-		$uploads['path'] = $upload_path;
-		$uploads['url'] = $upload_url;
+  // Add upload_dir filter to set correct paths - not in production
+  if ( wp_get_environment_type() !== 'production' ) {
+    add_filter('upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
+      $uploads['basedir'] = $upload_path;
+      $uploads['baseurl'] = $upload_url;
+      $uploads['path'] = $upload_path;
+      $uploads['url'] = $upload_url;
 
-		return $uploads;
-  });
+      return $uploads;
+    });
+  }
 
-  // These should always be set regardless of environment
-  define( 'uploads', 'media' ); // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase
-  add_filter( 'option_uploads_use_yearmonth_folders', '__return_false', 100 );
+  // These should only be set in non-production environments
+  if ( wp_get_environment_type() !== 'production' ) {
+    define( 'uploads', 'media' ); // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase
+    add_filter( 'option_uploads_use_yearmonth_folders', '__return_false', 100 );
+  }
 }
 
 /**
