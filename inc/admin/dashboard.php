@@ -35,7 +35,6 @@ function air_helper_clear_admin_dashboard() {
       'dashboard_incoming_links',
       'dashboard_activity',
       'dashboard_plugins',
-      'dashboard_site_health',
       'sendgrid_statistics_widget',
       'wpseo-dashboard-overview', // Yoast
       'rg_forms_dashboard', // Gravity forms

@@ -1,4 +1,4 @@
-### 3.1.8: 2024-12-16
+### 3.1.8rc: 2024-12-16
 
 * Fix: Replace .test domain with staging domain in attachment URLs (T-23857)
 * Allow changing staging URL with `STAGING_URL` constant or `STAGING_URL` environment variable (T-23857)
