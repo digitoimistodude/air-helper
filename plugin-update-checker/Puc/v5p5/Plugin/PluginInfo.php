@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable
 namespace YahnisElsts\PluginUpdateChecker\v5p5\Plugin;
 
 use YahnisElsts\PluginUpdateChecker\v5p5\Metadata;

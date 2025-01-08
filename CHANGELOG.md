@@ -1,10 +1,3 @@
-### 3.2.0: 2024-12-31
-
-* Remove maintained todo comments from instantpage.js
-* Add phpcs:disable to PUC maintainer files
-* Show health check for admins
-* Fix disabling login hook instruction in code comments
-
 ### 3.1.11: 2024-12-20
 
 * Fix potential issue with media urls and paths being modified in production (T-24022, T-24004)
