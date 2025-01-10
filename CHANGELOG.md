@@ -1,3 +1,8 @@
+### [Unreleasd]
+
+* Consistency in filter formatting
+* Add filter to lock plugins from modifications in wp-admin (T-24122)
+
 ### 3.1.11: 2024-12-20
 
 * Fix potential issue with media urls and paths being modified in production (T-24022, T-24004)

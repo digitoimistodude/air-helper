@@ -76,10 +76,10 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 		}
 
 		// Add filter to replace .test domain with staging domain in attachment URLs
-		add_filter('wp_get_attachment_url', 'air_helper_replace_test_domain');
+		add_filter( 'wp_get_attachment_url', 'air_helper_replace_test_domain' );
 
     // Filter the srcset URLs
-    add_filter('wp_calculate_image_srcset', function ( $sources ) {
+    add_filter( 'wp_calculate_image_srcset', function ( $sources ) {
       foreach ($sources as &$source ) {
         $source['url'] = air_helper_replace_test_domain( $source['url'] );
       }
@@ -87,7 +87,7 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
     });
 
     // Filter all image URLs in our lazyload functions
-    add_filter('air_helper_get_image_lazyload_sizes', function ( $sizes ) {
+    add_filter( 'air_helper_get_image_lazyload_sizes', function ( $sizes ) {
       if ( is_array($sizes) ) {
         foreach ( $sizes as $key => $url ) {
           $sizes[ $key ] = air_helper_replace_test_domain( $url );
@@ -134,7 +134,7 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
   // Add upload_dir filter to set correct paths - not in production
   if ( wp_get_environment_type() !== 'production' ) {
-    add_filter('upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
+    add_filter( 'upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
       $uploads['basedir'] = $upload_path;
       $uploads['baseurl'] = $upload_url;
       $uploads['path'] = $upload_path;
@@ -177,11 +177,11 @@ function air_helper_get_clean_media_url( $url ) {
  * @since 3.1.8
  * @return boolean
  */
-add_filter('wp_get_attachment_url', function ( $url ) {
+add_filter( 'wp_get_attachment_url', function ( $url ) {
   return air_helper_get_clean_media_url($url);
 }, 99);
 
-add_filter('wp_calculate_image_srcset', function ( $sources ) {
+add_filter( 'wp_calculate_image_srcset', function ( $sources ) {
   // Respect the existing filter to disable functionality
   if ( ! apply_filters('air_helper_change_uploads_path', true) ) {
 		return $sources;
@@ -271,7 +271,7 @@ function air_helper_prevent_dev_media_upload( $file ) {
   }
   return $file;
 }
-add_filter('wp_handle_upload_prefilter', 'air_helper_prevent_dev_media_upload');
+add_filter( 'wp_handle_upload_prefilter', 'air_helper_prevent_dev_media_upload');
 
 /**
  * Check if media upload prevention is enabled
