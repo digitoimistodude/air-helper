@@ -2,6 +2,9 @@
 
 * Fix media URL reverting to default when using a CDN url, Fixes T-25521
 * Add WPML, Wordfence and WooCommerce Multilingual to blacklist (T-25548)
+* Consistency in filter formatting
+* Add filter to lock plugins from modifications in wp-admin (T-24122)
+* Make changing year month folders optional (T-24271)
 
 ### 3.1.11: 2024-12-20
 

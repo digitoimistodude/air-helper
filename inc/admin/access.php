@@ -1,6 +1,6 @@
 <?php
 /**
- * Limit access to certaing parts of dashboard.
+ * Limit access to certain parts of dashboard.
  *
  * @package air-helper
  */
@@ -149,4 +149,109 @@ function air_helper_move_optimole_menu() {
     'manage_options', // Capability
     'admin.php?page=blc_local' // Menu slug
   );
+}
+
+/**
+ * Get list of locked plugins that cannot be modified.
+ *
+ * To lock plugins from modifications in wp-admin, add this to your theme's functions.php:
+ *
+ * // Lock specific plugins from modifications
+ * add_filter('air_helper_locked_plugins', function($plugins) {
+ *   return [
+ *     'advanced-custom-fields-pro/acf.php',    // Plugin folder/file.php
+ *     'air-helper/air-helper.php',             // Plugin folder/file.php
+ *     'plugin-folder/plugin-file.php',         // Plugin folder/file.php
+ *   ];
+ * });
+ *
+ * Locked plugins:
+ * - Cannot be deactivated
+ * - Cannot be updated through wp-admin
+ * - Cannot be deleted
+ * - Are hidden from update-core.php
+ * - Show a "locked" indicator in plugins.php
+ * - Have a separate "Locked" filter view in plugins.php
+ *
+ * @since 3.1.12
+ * @return array Array of plugin basenames that should be locked
+ */
+function air_helper_get_locked_plugins() {
+  return apply_filters('air_helper_locked_plugins', []);
+}
+
+/**
+ * Add locked status to plugins list
+ *
+ * @since 3.1.12
+ */
+add_filter( 'views_plugins', 'air_helper_add_locked_plugins_status' );
+function air_helper_add_locked_plugins_status( $views ) {
+  $locked_plugins = air_helper_get_locked_plugins();
+  $count = count($locked_plugins);
+
+  $class = '';
+  if ( isset( $_GET['plugin_status'] ) && 'locked' === $_GET['plugin_status'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $class = 'current';
+  }
+
+  $views['locked'] = sprintf(
+    '<a href="%s" class="%s">%s <span class="count">(%d)</span></a>',
+    admin_url('plugins.php?plugin_status=locked'),
+    $class,
+    __('Locked', 'air-helper'),
+    $count
+  );
+
+  return $views;
+}
+
+/**
+ * Filter plugin list to show only locked plugins when locked status is selected
+ *
+ * @since 3.1.12
+ */
+add_filter( 'all_plugins', 'air_helper_filter_locked_plugins' );
+function air_helper_filter_locked_plugins( $plugins ) {
+  if ( ! isset( $_GET['plugin_status'] ) || 'locked' !== $_GET['plugin_status'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    return $plugins;
+  }
+
+  $locked_plugins = air_helper_get_locked_plugins();
+  return array_intersect_key($plugins, array_flip($locked_plugins));
+}
+
+/**
+ * Prevent modifications to locked plugins
+ *
+ * @since 3.1.12
+ */
+add_filter( 'plugin_action_links', 'air_helper_remove_locked_plugin_actions', 20, 4 );
+function air_helper_remove_locked_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+  if ( in_array($plugin_file, air_helper_get_locked_plugins(), true) ) { // phpcs:ignore WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis
+    return [];
+  }
+
+  return $actions;
+}
+
+add_filter( 'bulk_actions-plugins', 'air_helper_remove_locked_bulk_actions' );
+function air_helper_remove_locked_bulk_actions( $actions ) {
+  if ( isset( $_GET['plugin_status'] ) && 'locked' === $_GET['plugin_status'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    return [];
+  }
+  return $actions;
+}
+
+add_filter( 'admin_body_class', 'air_helper_add_locked_plugins_body_class' );
+function air_helper_add_locked_plugins_body_class( $classes ) {
+  global $pagenow;
+
+  if ( 'plugins.php' !== $pagenow ) {
+    $locked_plugins = air_helper_get_locked_plugins();
+    foreach ( $locked_plugins as $plugin ) {
+      $classes .= ' plugin-locked-' . sanitize_html_class(basename($plugin, '.php'));
+    }
+  }
+  return $classes;
 }
