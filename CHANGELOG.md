@@ -1,6 +1,7 @@
 ### 3.2.0: 2025-02-11
 
 * Fix media URL reverting to default when using a CDN url, Fixes T-25521
+* Add WPML, Wordfence and WooCommerce Multilingual to blacklist (T-25548)
 
 ### 3.1.11: 2024-12-20
 

@@ -304,6 +304,9 @@ function get_blacklisted_plugins() {
     $blacklist = [
       'insert-headers-and-footers',
       'wp-file-manager',
+      'woocommerce-multilingual',
+      'sitepress-multilingual-cms',
+      'wordfence',
     ];
 
     // Allow modification of the blacklisted plugins list via a custom filter hook
