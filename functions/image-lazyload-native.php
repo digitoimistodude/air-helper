@@ -39,12 +39,14 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
           'big' => $args,
         ],
         'class' => null,
+        'sizes_attribute' => '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw',
       ];
     } else {
       $args = wp_parse_args( $args, [
         'fallback' => false,
         'sizes' => [],
         'class' => null,
+        'sizes_attribute' => '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw',
       ] );
     }
 
@@ -85,7 +87,10 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     <img loading="<?php echo $is_first_block ? 'eager' : 'lazy'; ?>"
       alt="<?php echo esc_attr( $alt ); ?>"
       src="<?php echo esc_url( $image_urls['big'] ); ?>"
-      srcset="<?php echo esc_attr( $srcset ); ?>"
+      <?php if ( $srcset ) : ?>
+        srcset="<?php echo esc_attr( $srcset ); ?>"
+        sizes="<?php echo esc_attr( apply_filters( 'air_helper_image_sizes_attribute', $args['sizes_attribute'], $image_id ) ); ?>"
+      <?php endif; ?>
       <?php if ( ! empty( $dimensions ) ) : ?>
         width="<?php echo esc_attr( $dimensions['width'] ); ?>"
         height="<?php echo esc_attr( $dimensions['height'] ); ?>"
