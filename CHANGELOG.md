@@ -1,3 +1,7 @@
+### 3.2.1: 2025-02-11
+
+* Packagist release 3.2.1
+
 ### 3.2.0: 2025-02-11
 
 * Fix media URL reverting to default when using a CDN url, Fixes T-25521
