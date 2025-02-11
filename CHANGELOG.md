@@ -5,6 +5,7 @@
 * Consistency in filter formatting
 * Add filter to lock plugins from modifications in wp-admin (T-24122)
 * Make changing year month folders optional (T-24271)
+* Add filter to lock plugins from modifications in wp-admin, T-24122 #75
 
 ### 3.1.11: 2024-12-20
 
