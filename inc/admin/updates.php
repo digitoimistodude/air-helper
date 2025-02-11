@@ -89,16 +89,30 @@ function air_helper_locked_plugins_styles() {
       display: none !important;
     }
 
-    .plugins .locked .plugin-title strong:before {
+    .plugins .locked .plugin-title strong::before {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
       content: '';
       display: inline-block;
-      width: 14px;
       height: 14px;
       margin-right: 5px;
-      vertical-align: -1px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+      margin-top: 2px;
       background-size: contain;
       background-repeat: no-repeat;
+      position: absolute;
+      left: 20px;
+      vertical-align: -1px;
+      width: 14px;
+    }
+
+    @media screen and (max-width: 782px) {
+      #wpbody-content .wp-list-table.plugins .locked .plugin-title.column-primary {
+        position: unset;
+      }
+
+      .plugins .locked .plugin-title strong::before {
+        height: 22px;
+        width: 22px;
+      }
     }
 
     /* Disable actions for locked plugins */
