@@ -307,3 +307,12 @@ function air_helper_has_staging_media( $staging_url ) {
 
   return intval( $has_staging_media ) > 0;
 }
+
+add_filter( 'air_helper_change_uploads_path', function ( $enabled ) {
+  // Only allow URL modifications in non-production environments
+  if ( wp_get_environment_type() === 'production' ) {
+    return false;
+  }
+
+  return $enabled;
+}, 999);

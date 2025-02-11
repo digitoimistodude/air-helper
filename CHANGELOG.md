@@ -1,3 +1,7 @@
+### 3.2.0: 2025-02-11
+
+* Fix media URL reverting to default when using a CDN url, Fixes T-25521
+
 ### 3.1.11: 2024-12-20
 
 * Fix potential issue with media urls and paths being modified in production (T-24022, T-24004)
