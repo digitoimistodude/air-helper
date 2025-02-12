@@ -1,6 +1,8 @@
-### 3.2.2rc: 2025-02-12
+### 3.2.2: 2025-02-12
 
 * Fix indents, fix incorrect tags in new features
+* Remove problematic tag mixup 3.2.0/3.1.12 from history
+* Fix Plugin Updater (PUC) not working due to incorrect version number
 
 ### 3.2.1: 2025-02-11
 
