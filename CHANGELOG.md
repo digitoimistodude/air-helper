@@ -1,3 +1,9 @@
+### 3.2.4: 2025-02-12
+
+* Fix license deprecation from GPL-3.0+ to GPL-3.0-or-later
+* Fix: The version field is present, it is recommended to leave it out if the package is published on Packagist.
+* Add development workflow to README.md
+
 ### 3.2.3: 2025-02-12
 
 * Delete problematic tag mixups 3.2.0, 3.1.12, 2.19.5, 2.19.0, 2.11.0 to prevent packagist issues
