@@ -1,3 +1,7 @@
+### 3.2.2rc: 2025-02-12
+
+* Fix indents, fix incorrect tags in new features
+
 ### 3.2.1: 2025-02-11
 
 * Packagist release 3.2.1

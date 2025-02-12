@@ -173,7 +173,7 @@ function air_helper_move_optimole_menu() {
  * - Show a "locked" indicator in plugins.php
  * - Have a separate "Locked" filter view in plugins.php
  *
- * @since 3.1.12
+ * @since 3.2.0
  * @return array Array of plugin basenames that should be locked
  */
 function air_helper_get_locked_plugins() {
@@ -183,7 +183,7 @@ function air_helper_get_locked_plugins() {
 /**
  * Add locked status to plugins list
  *
- * @since 3.1.12
+ * @since 3.2.0
  */
 add_filter( 'views_plugins', 'air_helper_add_locked_plugins_status' );
 function air_helper_add_locked_plugins_status( $views ) {
@@ -209,7 +209,7 @@ function air_helper_add_locked_plugins_status( $views ) {
 /**
  * Filter plugin list to show only locked plugins when locked status is selected
  *
- * @since 3.1.12
+ * @since 3.2.0
  */
 add_filter( 'all_plugins', 'air_helper_filter_locked_plugins' );
 function air_helper_filter_locked_plugins( $plugins ) {
@@ -224,7 +224,7 @@ function air_helper_filter_locked_plugins( $plugins ) {
 /**
  * Prevent modifications to locked plugins
  *
- * @since 3.1.12
+ * @since 3.2.0
  */
 add_filter( 'plugin_action_links', 'air_helper_remove_locked_plugin_actions', 20, 4 );
 function air_helper_remove_locked_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed

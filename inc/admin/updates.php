@@ -57,7 +57,7 @@ function air_helper_hide_nag_styles() { ?>
 /**
  * Add styles for locked plugins
  *
- * @since 3.1.12
+ * @since 3.2.0
  */
 add_action('admin_head', 'air_helper_locked_plugins_styles');
 function air_helper_locked_plugins_styles() {
@@ -127,7 +127,7 @@ function air_helper_locked_plugins_styles() {
 /**
  * Add JavaScript enhancements for locked plugins
  *
- * @since 3.1.12
+ * @since 3.2.0
  */
 add_action('admin_footer', 'air_helper_locked_plugins_js');
 function air_helper_locked_plugins_js() {
@@ -169,7 +169,7 @@ function air_helper_locked_plugins_js() {
 /**
  * Remove locked plugins from update-core.php list
  *
- * @since 3.1.12
+ * @since 3.2.0
  * @param object $transient The pre-saved value of the update_plugins transient
  * @return object Modified transient value
  */
