@@ -1,3 +1,8 @@
+### 3.2.3: 2025-02-12
+
+* Delete problematic tag mixups 3.2.0, 3.1.12, 2.19.5, 2.19.0, 2.11.0 to prevent packagist issues
+* Add .gitignore
+
 ### 3.2.2: 2025-02-12
 
 * Fix indents, fix incorrect tags in new features
