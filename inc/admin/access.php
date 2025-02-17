@@ -126,11 +126,11 @@ function air_helper_move_nav_menus_toplevel() {
  *
  * @since 3.1.5
  */
-add_action('admin_menu', 'air_helper_move_optimole_menu', 999);
+add_action( 'admin_menu', 'air_helper_move_optimole_menu', 999 );
 function air_helper_move_optimole_menu() {
   // Remove the top level menu for intrusive plugins
-  remove_menu_page('optimole');
-  remove_menu_page('blc_dash');
+  remove_menu_page( 'optimole' );
+  remove_menu_page( 'blc_dash' );
 
   // Add Optimole back as a submenu under Settings
   add_submenu_page(
@@ -177,7 +177,7 @@ function air_helper_move_optimole_menu() {
  * @return array Array of plugin basenames that should be locked
  */
 function air_helper_get_locked_plugins() {
-  return apply_filters('air_helper_locked_plugins', []);
+  return apply_filters( 'air_helper_locked_plugins', [] );
 }
 
 /**
@@ -188,7 +188,7 @@ function air_helper_get_locked_plugins() {
 add_filter( 'views_plugins', 'air_helper_add_locked_plugins_status' );
 function air_helper_add_locked_plugins_status( $views ) {
   $locked_plugins = air_helper_get_locked_plugins();
-  $count = count($locked_plugins);
+  $count = count( $locked_plugins );
 
   $class = '';
   if ( isset( $_GET['plugin_status'] ) && 'locked' === $_GET['plugin_status'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -197,9 +197,9 @@ function air_helper_add_locked_plugins_status( $views ) {
 
   $views['locked'] = sprintf(
     '<a href="%s" class="%s">%s <span class="count">(%d)</span></a>',
-    admin_url('plugins.php?plugin_status=locked'),
+    admin_url( 'plugins.php?plugin_status=locked' ),
     $class,
-    __('Locked', 'air-helper'),
+    __( 'Locked', 'air-helper' ),
     $count
   );
 
@@ -218,7 +218,7 @@ function air_helper_filter_locked_plugins( $plugins ) {
   }
 
   $locked_plugins = air_helper_get_locked_plugins();
-  return array_intersect_key($plugins, array_flip($locked_plugins));
+  return array_intersect_key( $plugins, array_flip( $locked_plugins ) );
 }
 
 /**
@@ -228,7 +228,7 @@ function air_helper_filter_locked_plugins( $plugins ) {
  */
 add_filter( 'plugin_action_links', 'air_helper_remove_locked_plugin_actions', 20, 4 );
 function air_helper_remove_locked_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
-  if ( in_array($plugin_file, air_helper_get_locked_plugins(), true) ) { // phpcs:ignore WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis
+  if ( in_array( $plugin_file, air_helper_get_locked_plugins(), true ) ) { // phpcs:ignore WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis
     return [];
   }
 
@@ -250,7 +250,7 @@ function air_helper_add_locked_plugins_body_class( $classes ) {
   if ( 'plugins.php' !== $pagenow ) {
     $locked_plugins = air_helper_get_locked_plugins();
     foreach ( $locked_plugins as $plugin ) {
-      $classes .= ' plugin-locked-' . sanitize_html_class(basename($plugin, '.php'));
+      $classes .= ' plugin-locked-' . sanitize_html_class( basename( $plugin, '.php' ) );
     }
   }
   return $classes;

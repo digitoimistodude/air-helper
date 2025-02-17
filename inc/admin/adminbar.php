@@ -78,7 +78,7 @@ function air_helper_adminbar_show_env( $wp_admin_bar ) {
  */
 add_action( 'admin_head', 'air_helper_adminbar_show_env_styles' );
 add_action( 'wp_head', 'air_helper_adminbar_show_env_styles' );
-function air_helper_adminbar_show_env_styles() { ?>
+function air_helper_adminbar_show_env_styles() { // phpcs:ignore Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace ?>
   <style>
     #wp-admin-bar-airhelperenv.air-helper-env-prod > a {
       background: #00bb00 !important;
@@ -181,7 +181,7 @@ function air_helper_adminbar_flush_all_caches( $wp_admin_bar ) {
  */
 add_action( 'admin_head', 'air_helper_adminbar_hide_via_styles', 999 );
 add_action( 'wp_head', 'air_helper_adminbar_hide_via_styles', 999 );
-function air_helper_adminbar_hide_via_styles() { ?>
+function air_helper_adminbar_hide_via_styles() { // phpcs:ignore Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace ?>
   <style>
     body.network-admin #dashboard_primary,
     body.network-admin #dashboard_objectcache,
@@ -270,16 +270,6 @@ function flush_site_caches( $is_multisite, &$flushed_caches ) {
   if ( is_plugin_active( 'object-cache-pro/object-cache-pro.php' ) || is_plugin_active( 'redis-cache/redis-cache.php' ) ) {
     if ( function_exists( 'wp_cache_flush' ) ) {
 
-      // Only run test cache operations in development environment
-      if ( wp_get_environment_type() === 'development' ) {
-        // Test: Set a value before flush
-        wp_cache_set('test_key', 'test_value', 'test_group');
-
-        // Verify the value exists
-        $before_flush = wp_cache_get('test_key', 'test_group');
-        do_action( $log_action, sprintf('Before flush, test value: %s', $before_flush ? 'exists' : 'not found') );
-      }
-
       // In multisite, only flush the current site's cache
       if ( is_multisite() ) {
         wp_cache_flush( 'site' );
@@ -287,17 +277,11 @@ function flush_site_caches( $is_multisite, &$flushed_caches ) {
         wp_cache_flush();
       }
 
-      // Only run test cache operations in development environment
-      if ( wp_get_environment_type() === 'development' ) {
-        // Try to get the value after flush
-        $after_flush = wp_cache_get('test_key', 'test_group');
-        do_action( $log_action, sprintf('After flush, test value: %s', $after_flush ? 'exists' : 'not found') );
-      }
-
       // Only add to flushed_caches if it's not already there
       if ( ! in_array( 'Redis/Object Cache Pro', $flushed_caches ) ) {
         $flushed_caches[] = 'Redis/Object Cache Pro';
       }
+
       do_action( $log_action, 'Flushed Redis/Object Cache Pro cache' );
     }
   }

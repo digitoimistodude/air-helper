@@ -32,7 +32,7 @@ function air_helper_wphidenag() {
  * @since 1.0.0
  */
 add_action( 'admin_head', 'air_helper_hide_nag_styles' );
-function air_helper_hide_nag_styles() { ?>
+function air_helper_hide_nag_styles() { // phpcs:ignore Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace ?>
   <style>
     .cookiebot-admin-notice-container,
     .update-nag,
@@ -59,7 +59,7 @@ function air_helper_hide_nag_styles() { ?>
  *
  * @since 3.2.0
  */
-add_action('admin_head', 'air_helper_locked_plugins_styles');
+add_action( 'admin_head', 'air_helper_locked_plugins_styles' );
 function air_helper_locked_plugins_styles() {
   global $pagenow;
   if ( 'plugins.php' !== $pagenow ) {
@@ -129,7 +129,7 @@ function air_helper_locked_plugins_styles() {
  *
  * @since 3.2.0
  */
-add_action('admin_footer', 'air_helper_locked_plugins_js');
+add_action( 'admin_footer', 'air_helper_locked_plugins_js' );
 function air_helper_locked_plugins_js() {
   global $pagenow;
   if ( 'plugins.php' !== $pagenow ) {
@@ -144,7 +144,7 @@ function air_helper_locked_plugins_js() {
   <script>
     window.addEventListener('load', function() {
       try {
-        var lockedPlugins = <?php echo wp_json_encode($locked_plugins); ?>;
+        var lockedPlugins = <?php echo wp_json_encode( $locked_plugins ); ?>;
 
         if (lockedPlugins && lockedPlugins.length) {
           lockedPlugins.forEach(function(plugin) {
@@ -153,7 +153,7 @@ function air_helper_locked_plugins_js() {
               row.classList.add('locked');
               var titleEl = row.querySelector('.plugin-title strong');
               if (titleEl) {
-                titleEl.setAttribute('data-locked-text', '<?php esc_attr_e('Locked', 'air-helper'); ?>');
+                titleEl.setAttribute('data-locked-text', '<?php esc_attr_e( 'Locked', 'air-helper' ); ?>');
               }
             }
           });

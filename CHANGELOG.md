@@ -1,3 +1,10 @@
+### 3.2.5: 2025-02-17
+
+* Delete problematic tag mixup 2.0.0-beta, 1.0.3 to prevent packagist issues
+* Update to latest phpcs.xml, T-25520
+* Lint PHP for the latest phpcs rules, T-25520
+* Exclude plugin-update-checker directory from PHP linting, T-25520
+
 ### 3.2.4: 2025-02-12
 
 * Fix license deprecation from GPL-3.0+ to GPL-3.0-or-later
