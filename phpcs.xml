@@ -76,5 +76,8 @@
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace" />
     <exclude name="Generic.Commenting.DocComment.MissingShort" />
 
+    <!-- Exclude plugin-update-checker directory -->
+    <exclude-pattern>/plugin-update-checker/*</exclude-pattern>
+
   </rule>
 </ruleset>
