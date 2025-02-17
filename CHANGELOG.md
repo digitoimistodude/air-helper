@@ -34,6 +34,7 @@
 * Add filter to lock plugins from modifications in wp-admin (T-24122)
 * Make changing year month folders optional (T-24271)
 * Add filter to lock plugins from modifications in wp-admin, T-24122 #75
+* Add sizes, Fixes #76, T-24240
 
 ### 3.1.11: 2024-12-20
 
