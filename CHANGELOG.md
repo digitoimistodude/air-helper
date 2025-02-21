@@ -1,3 +1,7 @@
+### Unreleased
+
+* Skip getting srcset for gifs (T-25654)
+
 ### 3.2.5: 2025-02-17
 
 * Delete problematic tag mixup 2.0.0-beta, 1.0.3 to prevent packagist issues

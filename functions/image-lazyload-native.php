@@ -72,8 +72,15 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     // Get alt
     $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
+    // Attachment types to skip getting srcsets for
+    $attachment_types_to_skip = apply_filters( 'air_helper_attachment_types_to_skip_srcset_for', [ 'image/gif' ] );
+
     // Get srcset
-    $srcset = wp_get_attachment_image_srcset( $image_id );
+    $srcset = false;
+    if ( ! in_array( get_post_mime_type( $image_id ), $attachment_types_to_skip, true ) ) {
+      $srcset = wp_get_attachment_image_srcset( $image_id );
+    }
+
     $is_first_block = false;
 
     // If image is in the first block we want to add loading="eager" instead of lazy
