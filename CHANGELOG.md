@@ -1,4 +1,4 @@
-### Unreleased
+### 3.2.6: 2025-02-24
 
 * Skip getting srcset for gifs (T-25654)
 
