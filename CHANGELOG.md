@@ -1,3 +1,7 @@
+### 3.2.7: 2025-04-01
+
+* Add Messa to care plan server list
+
 ### 3.2.6: 2025-02-24
 
 * Skip getting srcset for gifs (T-25654)

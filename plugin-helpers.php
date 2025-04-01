@@ -50,6 +50,7 @@ function air_helper_get_care_plan_hostnames() {
     'ghost' => true,
     'slash' => true,
     'soen'  => true,
+    'messa' => true,
   ] );
 } // end air_helper_get_care_plan_hostnames
 
