@@ -336,9 +336,33 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
     return;
   }
   ?>
-  <script>
+    <script>
     document.addEventListener('DOMContentLoaded', function() {
-      document.addEventListener('DOMNodeInserted', function(event) {
+      processPluginCards();
+
+      // Set up the observer
+      const observer = new MutationObserver(function(mutationsList) {
+        for (let mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            // Check if any of the added nodes are plugin cards or contain plugin cards
+            for (let node of mutation.addedNodes) {
+              if (node.nodeType === 1) {
+                if (node.classList?.contains('plugin-card') || node.querySelector('.plugin-card')) {
+                  processPluginCards();
+                  break; // Process once per mutation batch
+                }
+              }
+            }
+          }
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      function processPluginCards() {
         var pluginCards = document.querySelectorAll('.plugin-card');
 
         // If no plugin cards, bail
@@ -347,7 +371,10 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
         }
 
         pluginCards.forEach(function(card) {
-          // Get slug based on plugin-cad-<slug> class
+          // Skip if already processed
+          if (card.dataset.processed) return;
+
+          // Get slug based on plugin-card-<slug> class
           var slug = card.className.split(' ').find(function(className) {
             return className.indexOf('plugin-card-') === 0;
           }).replace('plugin-card-', '');
@@ -355,6 +382,9 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
           var blacklistedPlugins = <?php echo wp_json_encode( get_blacklisted_plugins() ); ?>;
 
           if (blacklistedPlugins.includes(slug)) {
+            // Mark as processed
+            card.dataset.processed = 'true';
+
             var installButton = card.querySelector('a.install-now');
             var compatibilityNotice = card.querySelector('.compatibility-compatible');
 
@@ -393,13 +423,13 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
             card.style.pointerEvents = 'none';
 
             // Disable button
-            if ( installButton ) {
+            if (installButton) {
               var disabledButton = document.createElement('button');
               disabledButton.className = 'button disabled';
               disabledButton.innerHTML = 'Cannot Install';
               disabledButton.disabled = true;
 
-              installButton.replaceWith( disabledButton );
+              installButton.replaceWith(disabledButton);
             }
 
             // Add compatibility notice
@@ -408,11 +438,11 @@ function enqueue_inline_js_for_plugin_page( $hook ) {
               compatibilityNoticeElement.className = 'compatibility-incompatible';
               compatibilityNoticeElement.innerHTML = '<strong>Blacklisted</strong> plugin';
 
-              compatibilityNotice.replaceWith( compatibilityNoticeElement );
+              compatibilityNotice.replaceWith(compatibilityNoticeElement);
             }
           }
         });
-      }, false);
+      }
     });
   </script>
   <?php
