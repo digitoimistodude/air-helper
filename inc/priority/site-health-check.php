@@ -546,6 +546,7 @@ function air_helper_php_errors_dashboard_widget_callback() {
       esc_html( $error_data['fatal'] ),
       esc_html__( 'Warnings', 'air-helper' ),
       esc_html( $error_data['warning'] ),
+      esc_html__( 'Notices', 'air-helper' ),
       esc_html( $error_data['notice'] )
     );
 
