@@ -93,11 +93,19 @@ function air_helper_parse_nginx_error_log() {
     '/var/log/php-fpm/www-error.log', // PHP-FPM log
     '/var/log/php/php_errors.log',   // General PHP error log
     '/var/log/apache2/error.log',    // Apache error log
-    ini_get( 'error_log' ),            // PHP configured error log
+    '/usr/local/var/log/nginx/error.log',  // Local macOS Nginx logs
+    '/opt/homebrew/var/log/nginx/error.log', // Homebrew Nginx logs
+    ini_get('error_log'),            // PHP configured error log
   ];
 
   // Filter log paths
   $possible_log_paths = apply_filters( 'air_helper_error_log_paths', $possible_log_paths );
+
+  // Check if we have cached data from a previous run
+  $cached_data = get_transient( 'air_helper_error_log_data' );
+  if ( $cached_data ) {
+    return $cached_data;
+  }
 
   $log_path = false;
 
@@ -266,12 +274,18 @@ function air_helper_parse_nginx_error_log() {
     // Store the number of entries in the two-week period
     $errors['entries_in_period'] = $entries_in_period;
 
+    // Store which log path was used for troubleshooting
+    $errors['log_path'] = $log_path;
+
   } catch ( Exception $e ) {
     return new WP_Error(
       'log_parse_failed',
       $e->getMessage()
     );
   }
+
+  // Cache results for 5 minutes to avoid frequent parsing of large log files
+  set_transient( 'air_helper_error_log_data', $errors, 5 * MINUTE_IN_SECONDS );
 
   return $errors;
 }
@@ -498,11 +512,23 @@ function air_helper_add_php_errors_dashboard_widget() {
  * @since  3.2.8
  */
 function air_helper_php_errors_dashboard_widget_callback() {
+  // Allow force refreshing of error data with a query parameter for testing
+  if ( isset( $_GET['refresh_errors'] ) && current_user_can( 'manage_options' ) ) {
+    delete_transient( 'air_helper_error_log_data' );
+  }
+
   $error_data = air_helper_parse_nginx_error_log();
 
   if ( is_wp_error( $error_data ) ) {
     echo '<p class="error">' . esc_html( $error_data->get_error_message() ) . '</p>';
     return;
+  }
+
+  // Display which log file is being read (for admin troubleshooting)
+  if ( isset( $error_data['log_path'] ) && current_user_can( 'manage_options' ) ) {
+    echo '<p class="log-path-info" style="font-size: 0.8em; color: #666;">Reading errors from: ' .
+      esc_html( $error_data['log_path'] ) .
+      ' <a href="' . esc_url( add_query_arg( 'refresh_errors', '1' ) ) . '">Refresh data</a></p>';
   }
 
   // Display recent errors if any
