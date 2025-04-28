@@ -1,4 +1,4 @@
-### 3.2.0rc: 2024-12-31
+### 3.2.8rc: 2025-04-28
 
 * Remove maintained todo comments from instantpage.js
 * Add phpcs:disable to PUC maintainer files
