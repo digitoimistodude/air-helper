@@ -328,21 +328,20 @@ function air_helper_error_log_health_test() {
 
   // Build a single paragraph with all stats together
   $description = sprintf(
-    '<p style="margin-top: 0; padding-top: 0;">%s %s</p>',
+    '<p class="site-health-status" style="margin-top: 0; padding-top: 0;">%s %s</p>',
     sprintf(
-      __( 'Found <b>%1$d fatal errors</b>, <b>%2$d warnings</b>, and <b>%3$d notices</b> in the last two weeks. Analyzed <b>%4$d log entries</b>, with <b>%5$d from the last two weeks</b>.', 'air-helper' ),
-      $error_data['fatal'],
-      $error_data['warning'],
-      $error_data['notice'],
-      $error_data['analyzed_entries'],
-      isset( $error_data['entries_in_period'] ) ? $error_data['entries_in_period'] : 0
+      __( 'Found <b>%1$d fatal errors</b>, <b>%2$d warnings</b>, and <b>%3$d notices</b> in the last two weeks. Analyzed <b>%4$d log entries</b>.', 'air-helper' ), // phpcs:ignore
+      absint( $error_data['fatal'] ),
+      absint( $error_data['warning'] ),
+      absint( $error_data['notice'] ),
+      absint( $error_data['analyzed_entries'] )
     ),
-    __( 'Errors and warnings from the last two weeks:', 'air-helper' )
+    esc_html__( 'Errors and warnings from the last two weeks:', 'air-helper' )
   );
 
   // Instead of just showing 5 errors, get all errors and warnings from the temp_errors array
   if ( ! empty( $error_data['recent_errors'] ) ) {
-    $description .= '<ol>';
+    $description .= '<ul class="simple-error-list">';
 
     // Extract and display all warnings and fatal errors, sorted by newest first
     $displayed_errors = [];
@@ -354,40 +353,11 @@ function air_helper_error_log_health_test() {
 
       // Extract date components for better formatting
       $timestamp = '';
-      $date_formatted = '';
       $time_ago = '';
       if ( ! empty( $error['timestamp'] ) ) {
         // Parse timestamp like "2025/04/25 22:25:20"
         $timestamp = $error['timestamp'];
         if ( preg_match( '/^(\d{4})\/(\d{2})\/(\d{2})\s+(\d{2}):(\d{2}):(\d{2})$/', $timestamp, $date_parts ) ) {
-          $year = $date_parts[1];
-          $month = $date_parts[2];
-          $day = $date_parts[3];
-          $hour = $date_parts[4];
-          $minute = $date_parts[5];
-          $second = $date_parts[6];
-
-          // Convert month number to name
-          $month_names = [
-            '01' => 'January',
-            '02' => 'February',
-            '03' => 'March',
-            '04' => 'April',
-            '05' => 'May',
-            '06' => 'June',
-            '07' => 'July',
-            '08' => 'August',
-            '09' => 'September',
-            '10' => 'October',
-            '11' => 'November',
-            '12' => 'December',
-          ];
-
-          $month_name = isset( $month_names[ $month ] ) ? $month_names[ $month ] : $month;
-
-          // Format as "25. April, 2025"
-          $date_formatted = sprintf( '%d. %s, %s', (int) $day, $month_name, $year );
-
           // Calculate time ago
           $error_time = strtotime( str_replace( '/', '-', $timestamp ) );
           $current_time = time();
@@ -409,23 +379,10 @@ function air_helper_error_log_health_test() {
           } elseif ( $time_diff < 86400 ) {
             // Less than a day
             $hours = floor( $time_diff / 3600 );
-            $minutes = floor( ( $time_diff % 3600 ) / 60 );
-
-            if ( $minutes > 0 ) {
-              $time_ago = sprintf(
-                // Translators: %1$d = number of hours, %2$s = 's' for plural or '' for singular, %3$d = number of minutes, %4$s = 's' for plural or '' for singular
-                __( '%1$d hour%2$s and %3$d minute%4$s ago', 'air-helper' ),
-                $hours,
-                1 === $hours ? '' : 's',
-                $minutes,
-                1 === $minutes ? '' : 's'
-              );
-            } else {
-              $time_ago = sprintf(
-                _n( '%d hour ago', '%d hours ago', $hours, 'air-helper' ),
-                $hours
-              );
-            }
+            $time_ago = sprintf(
+              _n( '%d hour ago', '%d hours ago', $hours, 'air-helper' ),
+              $hours
+            );
           } else {
             // Days or more
             $days = floor( $time_diff / 86400 );
@@ -437,61 +394,80 @@ function air_helper_error_log_health_test() {
         }
       }
 
-      // Format with message, file and line first
-      $error_details = esc_html( $error['message'] );
-
-      if ( ! empty( $error['file'] ) && ! empty( $error['line'] ) ) {
-        // Fix linter error by using ordered placeholders
-        $error_details .= '<br><span class="error-location">' .
-          sprintf(
-            __( 'in %1$s on line %2$s', 'air-helper' ),
-            '<code>' . esc_html( $error['file'] ) . '</code>',
-            '<code>' . esc_html( $error['line'] ) . '</code>'
-          ) . '</span>';
+      // Create SimpleHistory-style tag for error type
+      $error_type_class = strtolower( $error['type'] );
+      if ( 'fatal error' === $error_type_class ) {
+        $error_type_class = 'critical';
       }
 
-      // Show count and date at the end
+      $error_type_tag = sprintf(
+        '<span class="logleveltag logleveltag-%s">%s</span>',
+        esc_attr( $error_type_class ),
+        esc_html( $error['type'] )
+      );
+
+      // Format message
+      $error_message = esc_html( $error['message'] );
+
+      // Format file and line info with tag inside it
+      $file_info = '';
+      if ( ! empty( $error['file'] ) && ! empty( $error['line'] ) ) {
+        $file_info = sprintf(
+          ' <span class="error-location">%s %s</span>',
+          sprintf(
+            esc_html__( 'in %1$s on line %2$s', 'air-helper' ),
+            '<code>' . esc_html( $error['file'] ) . '</code>',
+            '<code>' . esc_html( $error['line'] ) . '</code>'
+          ),
+          $error_type_tag
+        );
+      } else {
+        // If no file/line info, still show the tag
+        $file_info = ' <span class="error-location">' . $error_type_tag . '</span>';
+      }
+
+      // Occurrence info
       $occurrence_info = '';
       if ( isset( $error['count'] ) && $error['count'] > 1 ) {
         $occurrence_info = sprintf(
-          _n(
-            'Occurred %d time',
-            'Occurred %d times',
-            $error['count'],
-            'air-helper'
-          ),
-          $error['count']
+          '<span class="occurrence-count">%s</span>',
+          sprintf(
+            esc_html_x(
+              'Occurred %d times',
+              'Error occurrence count',
+              'air-helper'
+            ),
+            $error['count']
+          )
         );
       }
 
+      // Time ago display
+      $time_display = '';
       if ( ! empty( $time_ago ) ) {
-        if ( ! empty( $occurrence_info ) ) {
-          $occurrence_info .= ', last time ' . $time_ago;
-        } else {
-          $occurrence_info = $time_ago;
-        }
-      }
-
-      if ( ! empty( $date_formatted ) && ! empty( $timestamp ) ) {
-        $occurrence_info .= sprintf(
-          __( ' (%1$s, exact timestamp: %2$s)', 'air-helper' ),
-          $date_formatted,
-          substr( $timestamp, 11 ) // Just the time part HH:MM:SS
+        $time_display = sprintf(
+          '<span class="time-ago">%s</span>',
+          esc_html( $time_ago )
         );
       }
 
-      if ( ! empty( $occurrence_info ) ) {
-        $error_details .= '<br><em>' . $occurrence_info . '</em>';
-      }
+      // Put it all together - tag is now inside file_info
+      $error_details = sprintf(
+        '%s%s %s %s',
+        $error_message,
+        $file_info,
+        $occurrence_info,
+        $time_display
+      );
 
       $description .= sprintf(
-        '<li>%s</li>',
+        '<li class="simple-error-item">%s</li>',
         $error_details
       );
 
       $displayed_errors[] = $error;
     }
-    $description .= '</ol>';
+    $description .= '</ul>';
   }
 
   $result['description'] = $description;
@@ -525,45 +501,166 @@ function air_helper_php_errors_dashboard_widget_callback() {
   $error_data = air_helper_parse_nginx_error_log();
 
   if ( is_wp_error( $error_data ) ) {
-		echo '<p class="error">' . esc_html( $error_data->get_error_message() ) . '</p>';
-		return;
+    echo '<p class="error">' . esc_html( $error_data->get_error_message() ) . '</p>';
+    return;
   }
 
   // Display recent errors if any
   if ( ! empty( $error_data['recent_errors'] ) ) {
-		echo '<h4>' . esc_html__( 'Latest PHP messages', 'air-helper' ) . '</h4>';
-
     // Display error explanation
     printf(
       '<p>%s</p>',
       esc_html__( 'PHP errors can indicate problems with your website\'s code. While some notices are normal, frequent warnings or fatal errors should be investigated.', 'air-helper' )
     );
 
-    // Display error counts
+    // Build a single paragraph with all stats together like in health check
     printf(
-      '<p><strong>%s:</strong> %d<br><strong>%s:</strong> %d<br><strong>%s:</strong> %d</p>',
-      esc_html__( 'Fatal errors', 'air-helper' ),
-      esc_html( $error_data['fatal'] ),
-      esc_html__( 'Warnings', 'air-helper' ),
-      esc_html( $error_data['warning'] ),
-      esc_html__( 'Notices', 'air-helper' ),
-      esc_html( $error_data['notice'] )
+      '<p class="site-health-status" style="margin-top: 0; padding-top: 0;">%s %s</p>',
+      sprintf(
+        __( 'Found <b>%1$d fatal errors</b>, <b>%2$d warnings</b>, and <b>%3$d notices</b> in the last two weeks. Analyzed <b>%4$d log entries</b>.', 'air-helper' ), // phpcs:ignore
+        absint( $error_data['fatal'] ),
+        absint( $error_data['warning'] ),
+        absint( $error_data['notice'] ),
+        absint( $error_data['analyzed_entries'] )
+      ),
+      esc_html__( 'Errors and warnings from the last two weeks:', 'air-helper' )
     );
 
-		echo '<h4>' . esc_html__( 'Found warnings:', 'air-helper' ) . '</h4>';
-		echo '<ol class="recent-errors">';
-		foreach ( $error_data['recent_errors'] as $error ) {
-		  printf(
-			'<li class="error-type-%s">
-          <span class="error-time">%s</span>
-          <code>%s</code>
-        </li>',
-			sanitize_html_class( strtolower( $error['type'] ) ),
-			esc_html( $error['timestamp'] ),
-			esc_html( $error['message'] )
-		  );
-			}
-		echo '</ol>';
+    if ( ! empty( $error_data['recent_errors'] ) ) {
+      echo '<ul class="simple-error-list">';
+      // Extract and display all warnings and fatal errors, sorted by newest first
+      $displayed_errors = [];
+      foreach ( $error_data['recent_errors'] as $error ) {
+        // Skip notices, only show warnings and fatal errors
+        if ( 'Notice' === $error['type'] ) {
+          continue;
+        }
+
+        // Extract date components for better formatting
+        $timestamp = '';
+        $time_ago = '';
+        if ( ! empty( $error['timestamp'] ) ) {
+          // Parse timestamp like "2025/04/25 22:25:20"
+          $timestamp = $error['timestamp'];
+          if ( preg_match( '/^(\d{4})\/(\d{2})\/(\d{2})\s+(\d{2}):(\d{2}):(\d{2})$/', $timestamp, $date_parts ) ) {
+            // Calculate time ago
+            $error_time = strtotime( str_replace( '/', '-', $timestamp ) );
+            $current_time = time();
+            $time_diff = $current_time - $error_time;
+
+            if ( $time_diff < 60 ) {
+              // Less than a minute
+              $time_ago = sprintf(
+                _n( 'just now', '%d seconds ago', $time_diff, 'air-helper' ), // phpcs:ignore
+                $time_diff
+              );
+            } elseif ( $time_diff < 3600 ) {
+              // Less than an hour
+              $minutes = floor( $time_diff / 60 );
+              $time_ago = sprintf(
+                _n( '%d minute ago', '%d minutes ago', $minutes, 'air-helper' ),
+                $minutes
+              );
+            } elseif ( $time_diff < 86400 ) {
+              // Less than a day
+              $hours = floor( $time_diff / 3600 );
+              $time_ago = sprintf(
+                _n( '%d hour ago', '%d hours ago', $hours, 'air-helper' ),
+                $hours
+              );
+            } else {
+              // Days or more
+              $days = floor( $time_diff / 86400 );
+              $time_ago = sprintf(
+                _n( '%d day ago', '%d days ago', $days, 'air-helper' ),
+                $days
+              );
+            }
+          }
+        }
+
+        // Create SimpleHistory-style tag for error type
+        $error_type_class = strtolower( $error['type'] );
+        if ( 'fatal error' === $error_type_class ) {
+          $error_type_class = 'critical';
+        }
+
+        $error_type_tag = sprintf(
+          '<span class="logleveltag logleveltag-%s">%s</span>',
+          esc_attr( $error_type_class ),
+          esc_html( $error['type'] )
+        );
+
+        // Format message
+        $error_message = esc_html( $error['message'] );
+
+        // Format file and line info with tag inside it
+        $file_info = '';
+        if ( ! empty( $error['file'] ) && ! empty( $error['line'] ) ) {
+          $file_info = sprintf(
+            ' <span class="error-location">%s %s</span>',
+            sprintf(
+              esc_html__( 'in %1$s on line %2$s', 'air-helper' ),
+              '<code>' . esc_html( $error['file'] ) . '</code>',
+              '<code>' . esc_html( $error['line'] ) . '</code>'
+            ),
+            $error_type_tag
+          );
+        } else {
+          // If no file/line info, still show the tag
+          $file_info = ' <span class="error-location">' . $error_type_tag . '</span>';
+        }
+
+        // Occurrence info
+        $occurrence_info = '';
+        if ( isset( $error['count'] ) && $error['count'] > 1 ) {
+          $occurrence_info = sprintf(
+            '<span class="occurrence-count">%s</span>',
+            sprintf(
+              esc_html_x(
+                'Occurred %d times',
+                'Error occurrence count',
+                'air-helper'
+              ),
+              $error['count']
+            )
+          );
+        }
+
+        // Time ago display
+        $time_display = '';
+        if ( ! empty( $time_ago ) ) {
+          $time_display = sprintf(
+            '<span class="time-ago">%s</span>',
+            esc_html( $time_ago )
+          );
+        }
+
+        // Put it all together - tag is now inside file_info
+        $error_details = sprintf(
+          '%s%s %s %s',
+          $error_message,
+          $file_info,
+          $occurrence_info,
+          $time_display
+        );
+
+        printf(
+          '<li class="simple-error-item">%s</li>',
+          wp_kses_post( $error_details )
+        );
+
+        $displayed_errors[] = $error;
+      }
+      echo '</ul>';
+
+      // Add link to Site Health page for more details
+      echo '<div class="error-details-link"><a href="' . esc_url( admin_url( 'site-health.php' ) ) . '" class="button button-primary">' .
+        esc_html__( 'View detailed health information', 'air-helper' ) . '</a></div>';
+    }
+  } else {
+    // No errors found
+    echo '<p>' . esc_html__( 'No PHP errors detected in the last two weeks. Great job!', 'air-helper' ) . '</p>';
   }
 }
 
@@ -654,50 +751,126 @@ add_filter('debug_information', 'air_helper_add_error_stats_to_debug_information
 add_action( 'admin_head', function () {
   ?>
   <style>
-    .recent-errors {
+    /* SimpleHistory-inspired styles */
+    .simple-error-list {
       margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .recent-errors li {
-      margin-bottom: 15px;
-      padding: 10px;
-      background: #f8f9fa;
+    .simple-error-item {
+      margin-bottom: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      line-height: 1.5;
     }
 
-    .recent-errors .error-time {
-      display: block;
-      color: #646970;
+    .logleveltag {
+      display: inline-block;
+      background-color: rgba(238, 238, 238, 1);
+      font-size: 10px;
+      padding: 3px 4px;
+      border-radius: 3px;
+      vertical-align: 1px;
+      line-height: 1;
+      margin-right: 5px;
+    }
+
+    .logleveltag-warning {
+      background-color: #f7d358;
+      color: #111;
+    }
+
+    .logleveltag-critical, .logleveltag-fatal {
+      background-color: #fa5858;
+      color: #fff;
+    }
+
+    .logleveltag-notice {
+      background-color: #72aee6;
+      color: #fff;
+    }
+
+    .error-location {
       font-size: 0.9em;
-      margin-bottom: 5px;
+      color: #646970;
+      display: inline-block;
+      margin-left: 3px;
+      line-height: 1.8;
     }
 
-    .recent-errors code {
-      display: block;
-      margin: 10px 0 0;
-      padding: 10px;
-      max-height: 150px;
-      overflow-y: auto;
+    .simple-error-item code {
+      display: inline;
+      padding: 2px 4px;
       background: #f1f1f1;
       border: 1px solid #ddd;
       word-wrap: break-word;
+      font-size: 0.9em;
     }
 
-    .error-type-fatal {
-      border-left: 4px solid #d63638;
+    .occurrence-count {
+      display: inline-block;
+      color: #646970;
+      font-size: 0.85em;
+      margin-left: 5px;
+      font-style: italic;
     }
 
-    .error-type-warning {
-      border-left: 4px solid #dba617;
+    .time-ago {
+      display: inline-block;
+      color: #646970;
+      font-size: 0.85em;
+      margin-left: 5px;
+      font-style: italic;
     }
 
-    .error-type-notice {
-      border-left: 4px solid #72aee6;
+    /* Health Check status styles */
+    .health-check-status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 4px;
     }
 
-    .error-details-link {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid #ddd;
+    .health-check-status.good {
+      background-color: #edfaef;
+    }
+
+    .health-check-status.recommended {
+      background-color: #fcf9e8;
+    }
+
+    .health-check-status.critical {
+      background-color: #fcf0f1;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    .health-check-status.good .status-badge {
+      background-color: #00a32a;
+      color: #fff;
+    }
+
+    .health-check-status.recommended .status-badge {
+      background-color: #dba617;
+      color: #fff;
+    }
+
+    .health-check-status.critical .status-badge {
+      background-color: #d63638;
+      color: #fff;
+    }
+
+    .site-health-status b {
+      font-weight: 600;
     }
   </style>
   <?php
