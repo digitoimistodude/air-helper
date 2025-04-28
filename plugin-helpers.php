@@ -135,21 +135,31 @@ function air_helper_allow_user_to( $allow = null ) {
   $current_user = get_current_user_id();
   $user = new WP_User( $current_user );
 
-  $domain = apply_filters( 'air_helper_allow_user_to_domain', 'dude.fi' );
-  $domain = apply_filters( "air_helper_allow_user_to_{$allow}_domain", $domain );
+  $domains = getenv( 'AIR_HELPER_ALLOWED_DOMAINS' ) ? explode( ',', getenv( 'AIR_HELPER_ALLOWED_DOMAINS' ) ) : ( defined( 'AIR_HELPER_ALLOWED_DOMAINS' ) ? explode( ',', AIR_HELPER_ALLOWED_DOMAINS ) : [ 'dude.fi' ] );
+
+  // For backwards compatibility with filters that expect a single domain
+  $default_domain = $domains[0];
+  $default_domain = apply_filters( 'air_helper_allow_user_to_domain', $default_domain );
+  $default_domain = apply_filters( "air_helper_allow_user_to_{$allow}_domain", $default_domain );
 
   // Backwards compatibility
   if ( 'acf' === $allow ) {
-    $domain = apply_filters( 'air_helper_dont_hide_acf_from_domain', $domain );
+    $default_domain = apply_filters( 'air_helper_dont_hide_acf_from_domain', $default_domain );
   }
 
   // Backwards compatibility
   if ( 'plugins' === $allow ) {
-    $domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', $domain );
+    $default_domain = apply_filters( 'air_helper_dont_remove_plugins_admin_menu_link_from_domain', $default_domain );
   }
 
-  if ( strpos( $user->user_email, "@{$domain}" ) !== false ) {
-    return true;
+  // Add filtered domain back to domains array to ensure it's checked
+  $domains[0] = $default_domain;
+
+  // Check if user's email matches any of the allowed domains
+  foreach ( $domains as $domain ) {
+    if ( strpos( $user->user_email, "@{$domain}" ) !== false ) {
+      return true;
+    }
   }
 
   $meta_override = get_user_meta( $user->ID, "_airhelper_admin_show_{$allow}", true );

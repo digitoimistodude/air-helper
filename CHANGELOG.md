@@ -4,6 +4,7 @@
 * Add phpcs:disable to PUC maintainer files
 * Show health check for admins
 * Fix disabling login hook instruction in code comments
+* Allow setting with .env `AIR_HELPER_ALLOWED_DOMAINS=`, multiple domains, otherwise default to dude.fi, Closes DEV-211
 
 ### 3.1.11: 2024-12-20
 

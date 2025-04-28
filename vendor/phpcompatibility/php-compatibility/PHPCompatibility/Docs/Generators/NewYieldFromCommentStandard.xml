@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<documentation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://phpcsstandards.github.io/PHPCSDevTools/phpcsdocs.xsd"
+    title="New Yield From Comment"
+    >
+    <standard>
+    <![CDATA[
+    Having a comment between the "yield" and "from" keywords in a "yield from" expression is allowed since PHP 8.3.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Cross-version compatible: yield from without comment.">
+        <![CDATA[
+function myGenerator() {
+    <em>yield from</em> foo();
+}
+        ]]>
+        </code>
+        <code title="PHP &gt;= 8.3: yield and from keywords separated by a comment.">
+        <![CDATA[
+function myGenerator() {
+    <em>yield /*comment*/ from</em> foo();
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
