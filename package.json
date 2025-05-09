@@ -1,6 +1,6 @@
 {
   "name": "air-helper",
-  "version": "3.2.0",
+  "version": "3.2.8",
   "description": "Plugin provides helpful functions and modifications for WordPress projects.",
   "main": "air-helper.php",
   "dependencies": {},
@@ -13,7 +13,7 @@
     "url": "https://github.com/digitoimistodude/air-helper.git"
   },
   "author": "Digitoimisto Dude Oy",
-  "license": "GPL-3.0+",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/digitoimistodude/air-helper/issues"
   },

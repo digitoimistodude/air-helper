@@ -138,10 +138,7 @@ function air_helper_login_honeypot_reset_prefix() {
  *  Unify and modify the login error message to be more general,
  *  so those do not exist any hint what did go wrong.
  *
- *  Turn off by using this snippet:
- *  add_action( 'init', function() {
- *    remove_action( 'login_errors', 'air_helper_login_errors' );
- *  }, 999 );
+ *  Turn off by using `remove_action( 'login_errors', 'air_helper_login_errors' )`
  *
  *  @since  1.8.0
  *  @return string  messag to display when login fails
@@ -303,119 +300,122 @@ add_filter( 'plugins_api_result', 'modify_plugin_search_results', 10, 3 );
 add_action( 'admin_enqueue_scripts', 'enqueue_inline_js_for_plugin_page' );
 
 function get_blacklisted_plugins() {
-    // Default list of blacklisted plugins
+  // Default list of blacklisted plugins
+  $blacklist = [
+    'insert-headers-and-footers',
+    'wp-file-manager',
+    'woocommerce-multilingual',
+    'sitepress-multilingual-cms',
+    'wordfence',
+  ];
+
+  // Allow modification of the blacklisted plugins list via a custom filter hook
+  return apply_filters( 'modify_blacklisted_plugins', $blacklist );
+}
+
+function modify_plugin_search_results( $res, $action, $args ) { // phpcs:ignore
+  if ( 'query_plugins' === $action ) {
     $blacklist = [
       'insert-headers-and-footers',
       'wp-file-manager',
     ];
 
-    // Allow modification of the blacklisted plugins list via a custom filter hook
-    return apply_filters( 'modify_blacklisted_plugins', $blacklist );
-}
-
-function modify_plugin_search_results( $res, $action, $args ) { // phpcs:ignore
-    if ( 'query_plugins' === $action ) {
-        $blacklist = [
-          'insert-headers-and-footers',
-          'wp-file-manager',
-        ];
-
-        foreach ( $res->plugins as $key => $plugin ) {
-            if ( in_array( $plugin['slug'], $blacklist, true ) ) {
-                $res->plugins[ $key ]['blacklisted'] = true;
-                // Add a custom compatibility notice for blacklisted plugins
-                $res->plugins[ $key ]['compatibility_warning'] = 'This plugin has been blacklisted and is not compatible with your current setup.';
-            }
-        }
+    foreach ( $res->plugins as $key => $plugin ) {
+      if ( in_array( $plugin['slug'], $blacklist, true ) ) {
+        $res->plugins[ $key ]['blacklisted'] = true;
+        // Add a custom compatibility notice for blacklisted plugins
+        $res->plugins[ $key ]['compatibility_warning'] = 'This plugin has been blacklisted and is not compatible with your current setup.';
+      }
     }
-    return $res;
+  }
+  return $res;
 }
 
 function enqueue_inline_js_for_plugin_page( $hook ) {
-    if ( 'plugin-install.php' !== $hook ) {
-        return;
-    }
-    ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        document.addEventListener('DOMNodeInserted', function(event) {
-          var pluginCards = document.querySelectorAll('.plugin-card');
+  if ( 'plugin-install.php' !== $hook ) {
+    return;
+  }
+  ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMNodeInserted', function(event) {
+        var pluginCards = document.querySelectorAll('.plugin-card');
 
-          // If no plugin cards, bail
-          if (!pluginCards.length) {
-              return;
-          }
+        // If no plugin cards, bail
+        if (!pluginCards.length) {
+          return;
+        }
 
-          pluginCards.forEach(function(card) {
-              // Get slug based on plugin-cad-<slug> class
-              var slug = card.className.split(' ').find(function(className) {
-                  return className.indexOf('plugin-card-') === 0;
-              }).replace('plugin-card-', '');
+        pluginCards.forEach(function(card) {
+          // Get slug based on plugin-cad-<slug> class
+          var slug = card.className.split(' ').find(function(className) {
+            return className.indexOf('plugin-card-') === 0;
+          }).replace('plugin-card-', '');
 
-              var blacklistedPlugins = <?php echo wp_json_encode( get_blacklisted_plugins() ); ?>;
+          var blacklistedPlugins = <?php echo wp_json_encode( get_blacklisted_plugins() ); ?>;
 
-              if (blacklistedPlugins.includes(slug)) {
-                  var installButton = card.querySelector('a.install-now');
-                  var compatibilityNotice = card.querySelector('.compatibility-compatible');
+          if (blacklistedPlugins.includes(slug)) {
+            var installButton = card.querySelector('a.install-now');
+            var compatibilityNotice = card.querySelector('.compatibility-compatible');
 
-                  // Notice
-                  var notice = document.createElement('div');
-                  notice.className = 'notice inline notice-error notice-alt';
-                  notice.innerHTML = '<p>This plugin cannot be installed for security reasons.</p>';
+            // Notice
+            var notice = document.createElement('div');
+            notice.className = 'notice inline notice-error notice-alt';
+            notice.innerHTML = '<p>This plugin cannot be installed for security reasons.</p>';
 
-                  // Add notice right inside card once
-                  if (!card.querySelector('.notice')) {
-                      card.insertBefore(notice, card.firstChild);
-                  }
+            // Add notice right inside card once
+            if (!card.querySelector('.notice')) {
+              card.insertBefore(notice, card.firstChild);
+            }
 
-                  // Delete all other list items but first inside plugin-action-buttons
-                  var pluginActionButtons = card.querySelector('.plugin-action-buttons');
-                  var pluginActionButtonsListItems = pluginActionButtons.querySelectorAll('li');
-                  pluginActionButtonsListItems.forEach(function(listItem, index) {
-                      if (index !== 0) {
-                          listItem.remove();
-                      }
-                  });
-
-                  // Remove upload button
-                  var uploadButton = document.querySelector('a.upload-view-toggle');
-                  if (uploadButton) {
-                      uploadButton.remove();
-                  }
-
-                  // Remove href inside open-plugin-details-modal link
-                  var openPluginDetailsModal = card.querySelector('a.open-plugin-details-modal');
-                  if (openPluginDetailsModal) {
-                      openPluginDetailsModal.removeAttribute('href');
-                  }
-
-                  // Add pointer-events: none; to card
-                  card.style.pointerEvents = 'none';
-
-                  // Disable button
-                  if ( installButton ) {
-                    var disabledButton = document.createElement('button');
-                    disabledButton.className = 'button disabled';
-                    disabledButton.innerHTML = 'Cannot Install';
-                    disabledButton.disabled = true;
-
-                    installButton.replaceWith( disabledButton );
-                  }
-
-                  // Add compatibility notice
-                  if (compatibilityNotice) {
-                    var compatibilityNoticeElement = document.createElement('span');
-                    compatibilityNoticeElement.className = 'compatibility-incompatible';
-                    compatibilityNoticeElement.innerHTML = '<strong>Blacklisted</strong> plugin';
-
-                    compatibilityNotice.replaceWith( compatibilityNoticeElement );
-                  }
+            // Delete all other list items but first inside plugin-action-buttons
+            var pluginActionButtons = card.querySelector('.plugin-action-buttons');
+            var pluginActionButtonsListItems = pluginActionButtons.querySelectorAll('li');
+            pluginActionButtonsListItems.forEach(function(listItem, index) {
+              if (index !== 0) {
+                listItem.remove();
               }
-          });
-        }, false);
-      });
-    </script>
-    <?php
+            });
+
+            // Remove upload button
+            var uploadButton = document.querySelector('a.upload-view-toggle');
+            if (uploadButton) {
+              uploadButton.remove();
+            }
+
+            // Remove href inside open-plugin-details-modal link
+            var openPluginDetailsModal = card.querySelector('a.open-plugin-details-modal');
+            if (openPluginDetailsModal) {
+              openPluginDetailsModal.removeAttribute('href');
+            }
+
+            // Add pointer-events: none; to card
+            card.style.pointerEvents = 'none';
+
+            // Disable button
+            if ( installButton ) {
+              var disabledButton = document.createElement('button');
+              disabledButton.className = 'button disabled';
+              disabledButton.innerHTML = 'Cannot Install';
+              disabledButton.disabled = true;
+
+              installButton.replaceWith( disabledButton );
+            }
+
+            // Add compatibility notice
+            if (compatibilityNotice) {
+              var compatibilityNoticeElement = document.createElement('span');
+              compatibilityNoticeElement.className = 'compatibility-incompatible';
+              compatibilityNoticeElement.innerHTML = '<strong>Blacklisted</strong> plugin';
+
+              compatibilityNotice.replaceWith( compatibilityNoticeElement );
+            }
+          }
+        });
+      }, false);
+    });
+  </script>
+  <?php
 }
 
 /**

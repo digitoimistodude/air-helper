@@ -52,13 +52,13 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
   if ( $has_staging_media && wp_get_environment_type() === 'staging' ) {
 		// Get the project name and path from ABSPATH
-		$current_path = dirname(ABSPATH);
-		$releases_path = dirname($current_path);
-		$project_root = dirname($releases_path);
+		$current_path = dirname( ABSPATH );
+		$releases_path = dirname( $current_path );
+		$project_root = dirname( $releases_path );
 
 		// Force staging path and URL for staging environment
 		$upload_path = $project_root . '/shared/media';
-		$upload_url = str_replace( [ 'http://', 'https://' ], '', home_url());
+		$upload_url = str_replace( [ 'http://', 'https://' ], '', home_url() );
 		$upload_url = 'https://' . $upload_url . '/media';
 
 		// Disable media options in admin
@@ -72,23 +72,23 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
 		// Helper function to replace test domain with staging domain
 		function air_helper_replace_test_domain( $url ) {
-			return str_replace('.test', '.' . air_helper_get_staging_url(), $url);
+			return str_replace( '.test', '.' . air_helper_get_staging_url(), $url );
 		}
 
 		// Add filter to replace .test domain with staging domain in attachment URLs
-		add_filter('wp_get_attachment_url', 'air_helper_replace_test_domain');
+		add_filter( 'wp_get_attachment_url', 'air_helper_replace_test_domain' );
 
     // Filter the srcset URLs
-    add_filter('wp_calculate_image_srcset', function ( $sources ) {
-      foreach ($sources as &$source ) {
+    add_filter( 'wp_calculate_image_srcset', function ( $sources ) {
+      foreach ( $sources as &$source ) {
         $source['url'] = air_helper_replace_test_domain( $source['url'] );
       }
       return $sources;
     });
 
     // Filter all image URLs in our lazyload functions
-    add_filter('air_helper_get_image_lazyload_sizes', function ( $sizes ) {
-      if ( is_array($sizes) ) {
+    add_filter( 'air_helper_get_image_lazyload_sizes', function ( $sizes ) {
+      if ( is_array( $sizes ) ) {
         foreach ( $sizes as $key => $url ) {
           $sizes[ $key ] = air_helper_replace_test_domain( $url );
         }
@@ -119,7 +119,10 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
           var yearMonthField = document.querySelector("input[name=\'uploads_use_yearmonth_folders\']");
           if (uploadPathField) uploadPathField.setAttribute("disabled", "disabled");
           if (uploadUrlPathField) uploadUrlPathField.setAttribute("disabled", "disabled");
-          if (yearMonthField) yearMonthField.setAttribute("disabled", "disabled");
+          // Only disable year/month checkbox if the feature is enabled
+          if (yearMonthField && ' . wp_json_encode( apply_filters( 'air_helper_change_yearmonth_folders', true ) ) . ') {
+            yearMonthField.setAttribute("disabled", "disabled");
+          }
         });
       </script>';
 			});
@@ -134,7 +137,7 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
 
   // Add upload_dir filter to set correct paths - not in production
   if ( wp_get_environment_type() !== 'production' ) {
-    add_filter('upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
+    add_filter( 'upload_dir', function ( $uploads ) use ( $upload_path, $upload_url ) {
       $uploads['basedir'] = $upload_path;
       $uploads['baseurl'] = $upload_url;
       $uploads['path'] = $upload_path;
@@ -147,7 +150,11 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
   // These should only be set in non-production environments
   if ( wp_get_environment_type() !== 'production' ) {
     define( 'uploads', 'media' ); // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase
-    add_filter( 'option_uploads_use_yearmonth_folders', '__return_false', 100 );
+
+    // Disable year/month based folders - can be turned off with: add_filter( 'air_helper_change_yearmonth_folders', '__return_false' );
+    if ( apply_filters( 'air_helper_change_yearmonth_folders', true ) ) {
+      add_filter( 'option_uploads_use_yearmonth_folders', '__return_false', 100 );
+    }
   }
 }
 
@@ -160,15 +167,15 @@ if ( apply_filters( 'air_helper_change_uploads_path', true ) ) {
  */
 function air_helper_get_clean_media_url( $url ) {
   // Respect the existing filter to disable functionality
-  if ( ! apply_filters('air_helper_change_uploads_path', true) ) {
+  if ( ! apply_filters( 'air_helper_change_uploads_path', true ) ) {
 		return $url;
   }
 
   // Get just the filename from the URL or path, regardless of what's in front of it
-  $filename = basename($url);
+  $filename = basename( $url );
 
   // Always return clean URL with correct structure
-  return home_url('/media/' . $filename);
+  return home_url( '/media/' . $filename );
 }
 
 /**
@@ -177,18 +184,18 @@ function air_helper_get_clean_media_url( $url ) {
  * @since 3.1.8
  * @return boolean
  */
-add_filter('wp_get_attachment_url', function ( $url ) {
-  return air_helper_get_clean_media_url($url);
+add_filter( 'wp_get_attachment_url', function ( $url ) {
+  return air_helper_get_clean_media_url( $url );
 }, 99);
 
-add_filter('wp_calculate_image_srcset', function ( $sources ) {
+add_filter( 'wp_calculate_image_srcset', function ( $sources ) {
   // Respect the existing filter to disable functionality
-  if ( ! apply_filters('air_helper_change_uploads_path', true) ) {
+  if ( ! apply_filters( 'air_helper_change_uploads_path', true ) ) {
 		return $sources;
   }
 
-  foreach ($sources as &$source ) {
-		$source['url'] = air_helper_get_clean_media_url($source['url']);
+  foreach ( $sources as &$source ) {
+		$source['url'] = air_helper_get_clean_media_url( $source['url'] );
   }
   return $sources;
 }, 99);
@@ -203,40 +210,40 @@ add_filter('wp_calculate_image_srcset', function ( $sources ) {
  */
 function air_helper_dev_media_library_notice() {
   // Only prevent uploads in development environment
-  if (wp_get_environment_type() !== 'development' ) {
+  if ( wp_get_environment_type() !== 'development' ) {
 		return;
   }
 
   // Respect the filter to disable functionality
-  if ( ! apply_filters('air_helper_prevent_dev_uploads', true) ) {
+  if ( ! apply_filters( 'air_helper_prevent_dev_uploads', true ) ) {
 		return;
   }
 
   // Check if there are staging URLs in the media files
-  $has_staging_media = air_helper_has_staging_media(air_helper_get_staging_url());
+  $has_staging_media = air_helper_has_staging_media( air_helper_get_staging_url() );
 
   if ( ! $has_staging_media ) {
 		return;
   }
 
   // Only show if DB is not localhost and contains staging URLs or if staging URLs are found
-  $db_name = defined('DB_NAME') ? DB_NAME : '';
-  if ('localhost' === $db_name && ! air_helper_has_staging_media(air_helper_get_staging_url()) ) {
+  $db_name = defined( 'DB_NAME' ) ? DB_NAME : '';
+  if ( 'localhost' === $db_name && ! air_helper_has_staging_media( air_helper_get_staging_url() ) ) {
 		return;
   }
 
   // Only show on media library pages
   $screen = get_current_screen();
-  if ( ! $screen || ! in_array($screen->base, [ 'upload', 'media' ], true) ) {
+  if ( ! $screen || ! in_array( $screen->base, [ 'upload', 'media' ], true ) ) {
 		return;
   }
 
   $class = 'notice notice-warning';
-  $message = __('You are in development environment. Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper');
+  $message = __( 'You are in development environment. Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
 
-  printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
+  printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 }
-add_action('admin_notices', 'air_helper_dev_media_library_notice');
+add_action( 'admin_notices', 'air_helper_dev_media_library_notice' );
 
 /**
  * Prevent media uploads in development environment
@@ -248,30 +255,30 @@ add_action('admin_notices', 'air_helper_dev_media_library_notice');
  */
 function air_helper_prevent_dev_media_upload( $file ) {
   // Only prevent uploads in development environment
-  if (wp_get_environment_type() !== 'development' ) {
+  if ( wp_get_environment_type() !== 'development' ) {
 		return $file;
   }
 
   // Respect the filter to disable functionality
-  if ( ! apply_filters('air_helper_prevent_dev_uploads', true) ) {
+  if ( ! apply_filters( 'air_helper_prevent_dev_uploads', true ) ) {
 		return $file;
   }
 
   // Check if there are staging URLs in the media files
-  $has_staging_media = air_helper_has_staging_media(air_helper_get_staging_url());
+  $has_staging_media = air_helper_has_staging_media( air_helper_get_staging_url() );
 
   if ( ! $has_staging_media ) {
 		return $file;
   }
 
   // Only prevent uploads if we have staging media
-  $db_name = defined('DB_NAME') ? DB_NAME : '';
-  if ('localhost' !== $db_name || air_helper_has_staging_media(air_helper_get_staging_url()) ) {
-		$file['error'] = __('Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper');
+  $db_name = defined( 'DB_NAME' ) ? DB_NAME : '';
+  if ( 'localhost' !== $db_name || air_helper_has_staging_media( air_helper_get_staging_url() ) ) {
+		$file['error'] = __( 'Media uploads are disabled in development environment. Please use staging or production environment for uploading media.', 'air-helper' );
   }
   return $file;
 }
-add_filter('wp_handle_upload_prefilter', 'air_helper_prevent_dev_media_upload');
+add_filter( 'wp_handle_upload_prefilter', 'air_helper_prevent_dev_media_upload' );
 
 /**
  * Check if media upload prevention is enabled
@@ -307,3 +314,17 @@ function air_helper_has_staging_media( $staging_url ) {
 
   return intval( $has_staging_media ) > 0;
 }
+
+/**
+ * Prevent media uploads in production environment, T-25521
+ *
+ * @since 3.2.0
+ */
+add_filter( 'air_helper_change_uploads_path', function ( $enabled ) {
+  // Only allow URL modifications in non-production environments
+  if ( wp_get_environment_type() === 'production' ) {
+    return false;
+  }
+
+  return $enabled;
+}, 999);

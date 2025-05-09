@@ -7,8 +7,12 @@
     "wordpress",
     "plugin"
   ],
+<<<<<<< HEAD
   "license": "GPL-3.0+",
   "version": "3.2.0",
+=======
+  "license": "GPL-3.0-or-later",
+>>>>>>> master
   "authors": [
     {
       "name": "Timi Wahalahti",

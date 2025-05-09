@@ -44,6 +44,41 @@ Air helper provides helpful functions and modifications for WordPress projects. 
 
 Air helper and Air light are used for **development**, so those update very often. By using these code bases, you agree that the anything can change to a different direction without a prior warning.
 
+## Development workflow
+
+1. Git clone the repository to your local machine
+2. Create a fork
+3. Create a new branch for each new feature (Height task ID for Dude staff)
+4. Push your changes to your fork
+
+### Release cycle workflow
+
+1. Test changes thoroughly in multiple projects by symlinking the dev version of air-helper to the projects:
+
+  ```bash
+  # Project 1
+  rm -rf /var/www/project1/content/plugins/air-helper
+  ln -s /var/www/air-helper /var/www/project1/content/plugins/
+
+  # Project 2
+  rm -rf /var/www/project2/content/plugins/air-helper
+  ln -s /var/www/air-helper /var/www/project2/content/plugins/
+
+  # Project 3
+  rm -rf /var/www/project3/content/plugins/air-helper
+  ln -s /var/www/air-helper /var/www/project3/content/plugins/
+  ```
+
+2. Run `composer validate` to check if the composer.json is valid
+3. After verifying that the changes work as expected, send a pull request to the original repository
+4. Wait for review and merge
+
+#### For Dude staff
+
+5. Update versions in air-helper.php, package.json and CHANGELOG.md
+6. Create a release on GitHub with the same version number as the one in the `air-helper.php` file
+7. The release will automatically be published to Packagist
+
 ## Features
 
 ### Localization and Polylang support

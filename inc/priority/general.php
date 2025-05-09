@@ -28,7 +28,7 @@ function air_helper_disable_mailgun_tracking( $option ) {
  * @since 2.15.0
  */
 add_action( 'admin_footer-settings_page_mailgun', 'air_helper_disable_mailgun_tracking_settings' );
-function air_helper_disable_mailgun_tracking_settings() { ?>
+function air_helper_disable_mailgun_tracking_settings() { // phpcs:ignore Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace?>
   <script type="text/javascript">
     document.querySelector('select[name="mailgun[track-clicks]"]').disabled = true;
     document.querySelector('select[name="mailgun[track-opens]"]').disabled = true;

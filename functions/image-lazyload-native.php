@@ -39,12 +39,14 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
           'big' => $args,
         ],
         'class' => null,
+        'sizes_attribute' => '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw',
       ];
     } else {
       $args = wp_parse_args( $args, [
         'fallback' => false,
         'sizes' => [],
         'class' => null,
+        'sizes_attribute' => '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw',
       ] );
     }
 
@@ -70,8 +72,41 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     // Get alt
     $alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
+    // Attachment types to skip getting srcsets for
+    $attachment_types_to_skip = apply_filters( 'air_helper_attachment_types_to_skip_srcset_for', [ 'image/gif' ] );
+
     // Get srcset
-    $srcset = wp_get_attachment_image_srcset( $image_id );
+    $srcset = false;
+    if ( ! in_array( get_post_mime_type( $image_id ), $attachment_types_to_skip, true ) ) {
+      $srcset = wp_get_attachment_image_srcset( $image_id );
+
+      // Filter out tiny thumbnail images from srcset, Ref: DEV-231
+      if ( $srcset ) {
+        $srcset_items = explode( ', ', $srcset );
+        $filtered_srcset_items = [];
+
+        foreach ( $srcset_items as $item ) {
+          // Skip any srcset item that contains "-20x" which would be the tiny thumbnail
+          if ( strpos( $item, '-20x' ) === false ) {
+            $filtered_srcset_items[] = $item;
+          }
+        }
+
+        $srcset = implode( ', ', $filtered_srcset_items );
+      }
+    }
+
+    // If dimensions are empty but we have the image ID, try to get dimensions directly, Ref: DEV-231, PIEN-86
+    if ( empty( $dimensions ) && $image_id ) {
+      $full_image_data = wp_get_attachment_image_src( $image_id, 'full' );
+      if ( $full_image_data ) {
+        $dimensions = [
+          'width'  => $full_image_data[1],
+          'height' => $full_image_data[2],
+        ];
+      }
+    }
+
     $is_first_block = false;
 
     // If image is in the first block we want to add loading="eager" instead of lazy
@@ -85,7 +120,10 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     <img loading="<?php echo $is_first_block ? 'eager' : 'lazy'; ?>"
       alt="<?php echo esc_attr( $alt ); ?>"
       src="<?php echo esc_url( $image_urls['big'] ); ?>"
-      srcset="<?php echo esc_attr( $srcset ); ?>"
+      <?php if ( $srcset ) : ?>
+        srcset="<?php echo esc_attr( $srcset ); ?>"
+        sizes="<?php echo esc_attr( apply_filters( 'air_helper_image_sizes_attribute', $args['sizes_attribute'], $image_id ) ); ?>"
+      <?php endif; ?>
       <?php if ( ! empty( $dimensions ) ) : ?>
         width="<?php echo esc_attr( $dimensions['width'] ); ?>"
         height="<?php echo esc_attr( $dimensions['height'] ); ?>"

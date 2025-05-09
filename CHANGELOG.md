@@ -1,9 +1,52 @@
+<<<<<<< HEAD
 ### 3.2.0rc: 2024-12-31
+=======
+### 3.2.7: 2025-04-01
+>>>>>>> master
 
-* Remove maintained todo comments from instantpage.js
-* Add phpcs:disable to PUC maintainer files
-* Show health check for admins
-* Fix disabling login hook instruction in code comments
+* Add Messa to care plan server list
+
+### 3.2.6: 2025-02-24
+
+* Skip getting srcset for gifs (T-25654)
+
+### 3.2.5: 2025-02-17
+
+* Delete problematic tag mixup 2.0.0-beta, 1.0.3 to prevent packagist issues
+* Update to latest phpcs.xml, T-25520
+* Lint PHP for the latest phpcs rules, T-25520
+* Exclude plugin-update-checker directory from PHP linting, T-25520
+
+### 3.2.4: 2025-02-12
+
+* Fix license deprecation from GPL-3.0+ to GPL-3.0-or-later
+* Fix: The version field is present, it is recommended to leave it out if the package is published on Packagist.
+* Add development workflow to README.md
+
+### 3.2.3: 2025-02-12
+
+* Delete problematic tag mixups 3.2.0, 3.1.12, 2.19.5, 2.19.0, 2.11.0 to prevent packagist issues
+* Add .gitignore
+
+### 3.2.2: 2025-02-12
+
+* Fix indents, fix incorrect tags in new features
+* Remove problematic tag mixup 3.2.0/3.1.12 from history
+* Fix Plugin Updater (PUC) not working due to incorrect version number
+
+### 3.2.1: 2025-02-11
+
+* Packagist release 3.2.1
+
+### 3.2.0: 2025-02-11
+
+* Fix media URL reverting to default when using a CDN url, Fixes T-25521
+* Add WPML, Wordfence and WooCommerce Multilingual to blacklist (T-25548)
+* Consistency in filter formatting
+* Add filter to lock plugins from modifications in wp-admin (T-24122)
+* Make changing year month folders optional (T-24271)
+* Add filter to lock plugins from modifications in wp-admin, T-24122 #75
+* Add sizes, Fixes #76, T-24240
 
 ### 3.1.11: 2024-12-20
 

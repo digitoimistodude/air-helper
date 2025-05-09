@@ -310,6 +310,7 @@ function isEventLikelyTriggeredByTouch(event) {
   // Testable in test/extras/delay-not-considered-touch.html
   // This is okay for our purpose: two equivalent timestamps will be less
   // than the max duration, which means they’re related events.
+  // TODO: fill/find Chromium bug
   const durationBetweenLastTouchstartAndNow = now - _lastTouchstartEvent.timeStamp
 
   const MAX_DURATION_TO_BE_CONSIDERED_TRIGGERED_BY_TOUCHSTART = 2500
@@ -325,8 +326,11 @@ function isEventLikelyTriggeredByTouch(event) {
 
   return durationBetweenLastTouchstartAndNow < MAX_DURATION_TO_BE_CONSIDERED_TRIGGERED_BY_TOUCHSTART
 
+  // TODO: Investigate if pointer events could be used.
   // https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
 
+  // TODO: Investigate if InputDeviceCapabilities could be used to make it
+  // less hacky on Chromium browsers.
   // https://developer.mozilla.org/en-US/docs/Web/API/InputDeviceCapabilities_API
   // https://wicg.github.io/input-device-capabilities/
   // Needs careful reading of the spec and tests (notably, what happens with a
@@ -334,6 +338,8 @@ function isEventLikelyTriggeredByTouch(event) {
   // Also need to judge if WebKit could implement it differently, as they
   // don’t mind doing when a spec gives room to interpretation.
   // It seems to work well on Chrome on ChromeOS.
+
+  // TODO: Consider using event screen position as another heuristic.
 }
 
 function isPreloadable(anchorElement) {
