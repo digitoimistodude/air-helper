@@ -79,6 +79,32 @@ if ( ! function_exists( 'get_native_lazyload_tag' ) ) {
     $srcset = false;
     if ( ! in_array( get_post_mime_type( $image_id ), $attachment_types_to_skip, true ) ) {
       $srcset = wp_get_attachment_image_srcset( $image_id );
+
+      // Filter out tiny thumbnail images from srcset, Ref: DEV-231
+      if ( $srcset ) {
+        $srcset_items = explode( ', ', $srcset );
+        $filtered_srcset_items = [];
+
+        foreach ( $srcset_items as $item ) {
+          // Skip any srcset item that contains "-20x" which would be the tiny thumbnail
+          if ( strpos( $item, '-20x' ) === false ) {
+            $filtered_srcset_items[] = $item;
+          }
+        }
+
+        $srcset = implode( ', ', $filtered_srcset_items );
+      }
+    }
+
+    // If dimensions are empty but we have the image ID, try to get dimensions directly, Ref: DEV-231, PIEN-86
+    if ( empty( $dimensions ) && $image_id ) {
+      $full_image_data = wp_get_attachment_image_src( $image_id, 'full' );
+      if ( $full_image_data ) {
+        $dimensions = [
+          'width'  => $full_image_data[1],
+          'height' => $full_image_data[2],
+        ];
+      }
     }
 
     $is_first_block = false;
