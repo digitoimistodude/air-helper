@@ -330,6 +330,13 @@ function flush_site_caches( $is_multisite, &$flushed_caches ) {
     $flushed_caches[] = 'Nginx fastcgi';
     do_action( $log_action, 'Flushed Nginx fastcgi cache' );
   }
+
+  // Purge PHP OpCache
+  if ( function_exists( 'opcache_reset' ) && opcache_get_status() !== false ) {
+    opcache_reset();
+    $flushed_caches[] = 'PHP OpCache';
+    do_action( $log_action, 'Purged PHP OpCache' );
+  }
 }
 
 function air_helper_flush_all_caches_notice() {
