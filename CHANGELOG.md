@@ -4,7 +4,7 @@
 * Add opcache purge, Closes DEV-185
 * Fix tiny image size being included to srcset, attempt to fix image size missing issue, Ref: DEV-231, PIEN-86
 * Fix deprecated DOMNodeInserted with new MutationObserver, T-25576, Closes DEV-41 (kudos to @ottotiitinen)
-* only show intrusive plugins under settings menu if they are active, T-25868, Closes DEV-38 (kudos to @ottotiitinen)
+* Only show intrusive plugins under settings menu if they are active, T-25868, Closes DEV-38 (kudos to @ottotiitinen)
 
 ### 3.2.7: 2025-04-01
 
