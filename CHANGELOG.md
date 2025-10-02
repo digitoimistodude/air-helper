@@ -1,3 +1,7 @@
+### 3.2.9: 2025-10-02
+
+* Add APCu cache clearing to flush all caches, Ref: DEV-543
+
 ### 3.2.8: 2025-05-09
 
 * Upgrade to actions/cache@v4, Closes DEV-116

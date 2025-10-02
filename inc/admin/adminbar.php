@@ -337,6 +337,13 @@ function flush_site_caches( $is_multisite, &$flushed_caches ) {
     $flushed_caches[] = 'PHP OpCache';
     do_action( $log_action, 'Purged PHP OpCache' );
   }
+
+  // Purge APCu Cache
+  if ( function_exists( 'apcu_clear_cache' ) ) {
+    apcu_clear_cache();
+    $flushed_caches[] = 'APCu Cache';
+    do_action( $log_action, 'Purged APCu Cache' );
+  }
 }
 
 function air_helper_flush_all_caches_notice() {
