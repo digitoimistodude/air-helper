@@ -51,12 +51,11 @@ function air_helper_enqueue_helpscout_beacon() {
     </style>
   <?php } );
 
-  wp_enqueue_script( 'helpscout-beacon', air_helper_base_url() . '/assets/js/helpscout-beacon.js', [], '2.0.0', true );
+  wp_enqueue_script( 'helpscout-beacon', air_helper_base_url() . '/assets/js/helpscout-beacon.js', [], '3.2.9', true );
 
   // Settings for beacon and string translations based on the language user has in dashboard rather than using the browser language
   $user_info = get_userdata( get_current_user_id() );
   wp_localize_script( 'helpscout-beacon', 'airhelperHelpscout', [
-    'color'         => '#4d4aff',
     'userEmail'     => $user_info->user_email,
     'userName'      => $user_info->user_nicename,
     'site'          => get_bloginfo( 'name' ),
