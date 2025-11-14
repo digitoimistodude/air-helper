@@ -1,6 +1,6 @@
 # Air helper
 
-[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) ![GitHub contributors](https://img.shields.io/github/contributors/digitoimistodude/air-helper.svg) [![Build Status for PHP 8.3](https://github.com/digitoimistodude/air-helper/actions/workflows/php8.3.yml/badge.svg)](https://github.com/digitoimistodude/air-helper/actions/workflows/php8.3.yml) [![Build Status for PHP](https://github.com/digitoimistodude/air-helper/actions/workflows/php.yml/badge.svg)](https://github.com/digitoimistodude/air-helper/actions/workflows/php.yml)
+[![Packagist](https://img.shields.io/packagist/v/digitoimistodude/air-helper.svg?style=flat-square)](https://packagist.org/packages/digitoimistodude/air-helper) [![Build Status for PHP 8.3](https://github.com/digitoimistodude/air-helper/actions/workflows/php8.3.yml/badge.svg)](https://github.com/digitoimistodude/air-helper/actions/workflows/php8.3.yml) [![Build Status for PHP](https://github.com/digitoimistodude/air-helper/actions/workflows/php.yml/badge.svg)](https://github.com/digitoimistodude/air-helper/actions/workflows/php.yml)
 
 Air helper provides helpful functions and modifications for WordPress projects. All modifications are preferences of [Dude](https://www.dude.fi). The plugin is meant to be used with our [Air light](https://github.com/digitoimistodude/air-light) theme, but works just fine also without it.
 
