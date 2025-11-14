@@ -1,3 +1,7 @@
+### 3.2.10: 2025-11-14
+
+* Fix PHP notice "Only variables should be passed by reference" in mail.php:49, Ref: RAD-466
+
 ### 3.2.9: 2025-10-02
 
 * Add APCu cache clearing to flush all caches, Ref: DEV-543

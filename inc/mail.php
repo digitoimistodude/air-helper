@@ -46,7 +46,8 @@ function air_helper_helper_force_mail_to( $args ) {
 
   // Check all to addresses and if their domains are allowed
   foreach ( $to as $key => $email ) {
-    $domain = array_pop( explode( '@', $email ) );
+    $email_parts = explode( '@', $email, 2 );
+    $domain = $email_parts[1] ?? '';
     if ( ! in_array( $domain, $allowed_domains ) ) {
       unset( $to[ $key ] );
     }
