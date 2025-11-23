@@ -98,7 +98,7 @@ function air_helper_localization_strings_override_page() {
   ob_start(); ?>
 
   <div class="wrap">
-    <h2><?php esc_html( $title ); ?></h2>
+    <h2><?php echo esc_html( $title ); ?></h2>
 
     <form method="post" action="options-general.php?page=<?php echo esc_attr( $plugin_page ); ?>">
       <?php $table->display();
