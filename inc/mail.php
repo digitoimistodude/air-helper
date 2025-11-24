@@ -29,11 +29,11 @@ if ( wp_get_environment_type() === 'staging' ) {
 
 /**
  *  Prevent email leaks to unwanted recipients. Remove all email addresses which domain
- *  is not explicitly allowed. If no allowed recipient addresses, force to address fallback.
+ *  is not explicitly allowed. If no allowed recipient addresses, email will not be sent.
  *
  *  @since  0.1.0
  *  @param  array $args Default wp_mail agruments.
- *  @return array         New wp_mail agruments with forced to address
+ *  @return array         New wp_mail agruments with filtered addresses
  */
 function air_helper_helper_force_mail_to( $args ) {
   $original_to_is_array = true;
@@ -56,11 +56,6 @@ function air_helper_helper_force_mail_to( $args ) {
     if ( ! in_array( $domain, $allowed_domains ) ) {
       unset( $to[ $key ] );
     }
-  }
-
-  // Fallback in case all to addresses were denied
-  if ( empty( $to ) ) {
-    $to[] = apply_filters( 'air_helper_helper_mail_to', 'koodarit@dude.fi' );
   }
 
   // If original to field was string, return it as a string
