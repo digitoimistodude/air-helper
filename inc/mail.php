@@ -8,17 +8,22 @@
 /**
  *  Force to address in wp_mail function so that test emails wont go to client.
  *
- *  Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
+ *  Disabled by default. Enable by using:
+ *  `add_filter( 'air_helper_enable_force_mail_to', '__return_true' );`
  *
  *  @since  0.1.0
+ *  @since  3.2.12  Changed to opt-in instead of opt-out. Closes #67, Ref: DEV-420
  */
 if ( wp_get_environment_type() === 'development' ) {
-  add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+  if ( apply_filters( 'air_helper_enable_force_mail_to', false ) ) {
+    add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+  }
 }
 
-// Turn off by using `remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' )`
 if ( wp_get_environment_type() === 'staging' ) {
-  add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+  if ( apply_filters( 'air_helper_enable_force_mail_to', false ) ) {
+    add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
+  }
   add_filter( 'wp_mail_from', 'air_helper_staging_wp_mail_from' );
 }
 
@@ -82,7 +87,8 @@ function air_helper_dont_force_created_user_mail( $user_id, $notify ) {
   remove_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
   wp_send_new_user_notifications( $user_id, $notify );
 
-  if ( wp_get_environment_type() !== 'production' ) {
+  // Re-add the filter if it was enabled and we're not in production
+  if ( wp_get_environment_type() !== 'production' && apply_filters( 'air_helper_enable_force_mail_to', false ) ) {
     add_filter( 'wp_mail', 'air_helper_helper_force_mail_to' );
   }
 } // end air_helper_dont_force_created_user_mail

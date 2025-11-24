@@ -1,3 +1,7 @@
+### 3.2.12: 2025-11-24
+
+* Change `air_helper_helper_force_mail_to` to be disabled by default. Enable with `add_filter( 'air_helper_enable_force_mail_to', '__return_true' );` if needed. Existing workaround code continues to work without errors, Fixes #67, Closes DEV-420
+
 ### 3.2.11: 2025-11-24
 
 * Fix: Add missing echo in localization.php #84 (thanks @DAnn2012!)
