@@ -1,3 +1,8 @@
+### 3.2.11: 2025-11-24
+
+* Fix: Add missing echo in localization.php #84 (thanks @DAnn2012!)
+* Remove color ovverride, let's use Help Scout's definitions, Closes DEV-252 #83
+
 ### 3.2.10: 2025-11-14
 
 * Fix PHP notice "Only variables should be passed by reference" in mail.php:49, Ref: RAD-466
