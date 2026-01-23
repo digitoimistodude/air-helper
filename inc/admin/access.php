@@ -89,7 +89,9 @@ function air_helper_maybe_remove_plugins_from_network_admin_menu() {
 
 add_action( 'admin_menu', 'dashboard_remove_menu_pages' );
 function dashboard_remove_menu_pages() {
-  add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '', 'dashicons-menu-alt3', 60 );
+  if ( ! empty( get_registered_nav_menus() ) ) {
+    add_menu_page( __( 'Menus' ), __( 'Menus' ), 'edit_theme_options', 'nav-menus.php', '', 'dashicons-menu-alt3', 60 );
+  }
 } // end dashboard_remove_menu_pages
 
 /**
