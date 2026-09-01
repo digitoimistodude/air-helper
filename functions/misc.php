@@ -194,7 +194,7 @@ if ( ! function_exists( 'air_helper_is_first_block' ) ) {
     }
 
     $post = get_post( $post_id );
-    if ( ! has_blocks( $post->post_content ) ) {
+    if ( ! $post instanceof \WP_Post || ! has_blocks( $post->post_content ) ) {
       return false;
     }
 
