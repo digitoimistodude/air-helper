@@ -10,6 +10,34 @@
  */
 
 /**
+ * Trigger a warning about a localization string that is not registered.
+ *
+ * @since 3.2.14
+ * @param string $key       Identifier to report as missing.
+ * @param array  $functions Wrapper function names used to locate the calling file and line.
+ */
+function air_helper_localization_missing_string( $key, $functions ) {
+  // init warning to get source.
+  $e = new Exception( 'Localization error - Missing string by key {' . $key . '}' );
+
+  // find file and line for problem.
+  $trace_line = '';
+
+  foreach ( $e->getTrace() as $trace ) {
+    if ( in_array( $trace['function'], $functions, true ) ) {
+      $trace_line = ' in ' . $trace['file'] . ':' . $trace['line'];
+    }
+  }
+
+  // Compose error message.
+  $error_msg = $e->getMessage() . $trace_line;
+
+  // Trigger errors.
+  trigger_error( esc_html( $error_msg ), E_USER_WARNING ); // phpcs:ignore
+  error_log( $error_msg ); // phpcs:ignore
+}
+
+/**
  * Get localized string by key.
  *
  * @since  1.4.0
@@ -43,24 +71,7 @@ function ask__( $key, $lang = null ) {
 
   // Debug missing strings.
   if ( WP_DEBUG === true ) {
-    // init warning to get source.
-    $e = new Exception( 'Localization error - Missing string by key {' . $key . '}' );
-
-    // find file and line for problem.
-    $trace_line = '';
-
-    foreach ( $e->getTrace() as $trace ) {
-      if ( in_array( $trace['function'], [ 'ask__', 'ask_e' ], true ) ) {
-        $trace_line = ' in ' . $trace['file'] . ':' . $trace['line'];
-      }
-    }
-
-    // Compose error message.
-    $error_msg = $e->getMessage() . $trace_line;
-
-    // Trigger errors.
-    trigger_error( esc_html( $error_msg ), E_USER_WARNING ); // phpcs:ignore
-    error_log( $error_msg ); // phpcs:ignore
+    air_helper_localization_missing_string( $key, [ 'ask__', 'ask_e' ] );
   }
 
   return $key;
@@ -90,24 +101,7 @@ function asv__( $value, $lang = null ) {
     $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
     if ( array_search( $value, $strings, true ) === false ) {
-      // init warning to get source.
-      $e = new Exception( 'Localization error - Missing string by key {' . $value . '}' );
-
-      // find file and line for problem.
-      $trace_line = '';
-
-      foreach ( $e->getTrace() as $trace ) {
-        if ( in_array( $trace['function'], [ 'asv__', 'asv_e' ], true ) ) {
-          $trace_line = ' in ' . $trace['file'] . ':' . $trace['line'];
-        }
-      }
-
-      // Compose error message.
-      $error_msg = $e->getMessage() . $trace_line;
-
-      // Trigger errors.
-      trigger_error( esc_html( $error_msg ), E_USER_WARNING ); // phpcs:ignore
-      error_log( $error_msg ); // phpcs:ignore
+      air_helper_localization_missing_string( $value, [ 'asv__', 'asv_e' ] );
     }
   }
 
