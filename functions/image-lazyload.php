@@ -23,6 +23,10 @@ require_once air_helper_base_path() . '/functions/image-lazyload-legacy.php';
  * @since  1.11.0
  */
 function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
+  if ( is_wp_error( $image_id ) || is_object( $image_id ) || is_array( $image_id ) ) {
+    return false;
+  }
+
   $image_id = intval( $image_id );
 
   if ( ! $image_id ) {
@@ -47,7 +51,7 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
   // Loop sizes to get corresponding image url
   foreach ( $sizes as $size_for => $size ) {
     // Check that asked image size exists and fallback to full size
-    if ( ! in_array( $size, $intermediate_sizes ) ) {
+    if ( ! in_array( $size, $intermediate_sizes, true ) ) {
       $size = 'full';
     }
 
@@ -102,6 +106,10 @@ function air_helper_get_image_lazyload_sizes( $image_id = 0, $sizes = [] ) {
  * @since  1.11.0
  */
 function air_helper_get_image_lazyload_dimensions( $image_id = 0, $sizes = [] ) {
+  if ( is_wp_error( $image_id ) || is_object( $image_id ) || is_array( $image_id ) ) {
+    return false;
+  }
+
   $image_id = intval( $image_id );
 
   if ( ! $image_id ) {
