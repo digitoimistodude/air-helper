@@ -3,66 +3,48 @@ name: Package Plugin
 on:
   release:
     types:
-      - created
-      - updated
+      - published
+      - edited
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
     name: On Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
 
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Workflow Context
-        id: workflow
-        working-directory: ${{ runner.temp }}
-        env:
-          REPO: ${{ github.repository }}
-        run: |
-          mkdir dist
-          echo ::set-output name=DIST::${PWD}/dist
-          echo ::set-output name=PACKAGE::${REPO##*/}
-
-      - name: PHP version
-        run: php --version
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache Composer vendor directory
-        uses: actions/cache@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
 
-      - name: Install PHP Dependencies
-        run: composer install --no-progress --no-dev --optimize-autoloader
+      - name: Validate composer.json
+        run: composer validate --no-check-lock
 
       - name: Prepare files
-        run: rsync -r --exclude-from=.distignore . ${{ steps.workflow.outputs.DIST }}/${{ steps.workflow.outputs.PACKAGE }}
+        run: |
+          mkdir -p "${RUNNER_TEMP}/dist/${PACKAGE}"
+          rsync -r --exclude-from=.distignore . "${RUNNER_TEMP}/dist/${PACKAGE}"
+          find "${RUNNER_TEMP}/dist"
+        env:
+          PACKAGE: ${{ github.event.repository.name }}
 
-      - name: List Files
-        working-directory: ${{ steps.workflow.outputs.DIST }}
-        run: find .
+      - name: Create zip
+        working-directory: ${{ runner.temp }}/dist
+        run: zip -r "${PACKAGE}.zip" "${PACKAGE}"
+        env:
+          PACKAGE: ${{ github.event.repository.name }}
 
-      - name: Create Zip
-        working-directory: ${{ steps.workflow.outputs.DIST }}
-        run: zip -r ${{ steps.workflow.outputs.PACKAGE }}.zip .
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+      - name: Upload release asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets{?name,label}
-          asset_path: ${{ steps.workflow.outputs.DIST }}/${{ steps.workflow.outputs.PACKAGE }}.zip
-          asset_name: ${{ steps.workflow.outputs.PACKAGE }}.zip
-          asset_content_type: application/zip
+          PACKAGE: ${{ github.event.repository.name }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" "${RUNNER_TEMP}/dist/${PACKAGE}.zip" --clobber
