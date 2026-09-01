@@ -1,3 +1,14 @@
+### 3.2.13: 2026-09-01
+
+* Switch coding standards to DCS, Closes DEV-1310
+* Modernize GitHub Actions workflows, Closes DEV-1310
+* Exclude `vendor` from plugin distribution, Ref: DEV-1310
+* Guard `WP_Error` passed to lazyload helpers, Closes DEV-1311
+* Guard null post in `air_helper_is_first_block`, Ref: DEV-1312
+* Fix undefined `$key` in `asv__()` debug warning
+* Use strict comparison in `in_array()` and `array_search()`
+* Simplify `air_helper_disable_views()`
+
 ### 3.2.12: 2025-11-24
 
 * Change `air_helper_helper_force_mail_to` to be disabled by default. Enable with `add_filter( 'air_helper_enable_force_mail_to', '__return_true' );` if needed. Existing workaround code continues to work without errors, Fixes #67, Closes DEV-420
