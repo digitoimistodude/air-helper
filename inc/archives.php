@@ -41,48 +41,28 @@ function air_helper_disable_views() {
     return;
   }
 
-  // Enable tag archives by using `add_filter( 'air_helper_disable_views_tag', '__return_false' )`
-  if ( apply_filters( 'air_helper_disable_views_tag', true ) ) {
-    if ( is_tag() ) {
-      global $wp_query;
-      $wp_query->set_404();
-      status_header( 404 );
-    }
-  }
+  // Views to disable, each can be enabled back with
+  // `add_filter( 'air_helper_disable_views_{$view}', '__return_false' )`
+  $views = [
+    'tag'      => 'is_tag',
+    'category' => 'is_category',
+    'date'     => 'is_date',
+    'author'   => 'is_author',
+    'search'   => 'is_search',
+  ];
 
-  // Enable category archives by using `add_filter( 'air_helper_disable_views_category', '__return_false' )`
-  if ( apply_filters( 'air_helper_disable_views_category', true ) ) {
-    if ( is_category() ) {
-      global $wp_query;
-      $wp_query->set_404();
-      status_header( 404 );
-    }
-  }
+  global $wp_query;
 
-  // Enable date archives by using `add_filter( 'air_helper_disable_views_date', '__return_false' )`
-  if ( apply_filters( 'air_helper_disable_views_date', true ) ) {
-    if ( is_date() ) {
-      global $wp_query;
-      $wp_query->set_404();
-      status_header( 404 );
+  foreach ( $views as $view => $conditional ) {
+    if ( ! apply_filters( "air_helper_disable_views_{$view}", true ) ) {
+      continue;
     }
-  }
 
-  // Enable author archives by using `add_filter( 'air_helper_disable_views_author', '__return_false' )`
-  if ( apply_filters( 'air_helper_disable_views_author', true ) ) {
-    if ( is_author() ) {
-      global $wp_query;
-      $wp_query->set_404();
-      status_header( 404 );
+    if ( ! call_user_func( $conditional ) ) {
+      continue;
     }
-  }
 
-  // Enable search view by using `add_filter( 'air_helper_disable_views_search', '__return_false' )`
-  if ( apply_filters( 'air_helper_disable_views_search', true ) ) {
-    if ( is_search() ) {
-      global $wp_query;
-      $wp_query->set_404();
-      status_header( 404 );
-    }
+    $wp_query->set_404();
+    status_header( 404 );
   }
 } // end air_helper_disable_views

@@ -53,7 +53,7 @@ function air_helper_helper_force_mail_to( $args ) {
   foreach ( $to as $key => $email ) {
     $email_parts = explode( '@', $email, 2 );
     $domain = $email_parts[1] ?? '';
-    if ( ! in_array( $domain, $allowed_domains ) ) {
+    if ( ! in_array( $domain, $allowed_domains, true ) ) {
       unset( $to[ $key ] );
     }
   }

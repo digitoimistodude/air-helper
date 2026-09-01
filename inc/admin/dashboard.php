@@ -42,8 +42,8 @@ add_action( 'admin_init', function () {
  */
 add_action( 'wp_dashboard_setup', 'air_helper_clear_admin_dashboard', 99 );
 function air_helper_clear_admin_dashboard() {
-	$remove_boxes = [
-		'normal' => [
+  $remove_boxes = [
+    'normal' => [
       'dashboard_right_now',
       'dashboard_recent_comments',
       'dashboard_incoming_links',
@@ -62,32 +62,32 @@ function air_helper_clear_admin_dashboard() {
       'tinypng_dashboard_widget',
       'themeisle', // Optimole
       'wpforms_reports_widget_pro', // WP Forms reports
-		],
-		'side' => [
-			'dashboard_quick_press',
-			'dashboard_recent_drafts',
-			'dashboard_primary',
-			'dashboard_secondary',
-		],
-	];
+    ],
+    'side' => [
+      'dashboard_quick_press',
+      'dashboard_recent_drafts',
+      'dashboard_primary',
+      'dashboard_secondary',
+    ],
+  ];
 
-	// Allow filtering which boxes to hide or show
-	$remove_boxes = apply_filters( 'air_helper_clear_admin_dashboard_boxes', $remove_boxes );
+  // Allow filtering which boxes to hide or show
+  $remove_boxes = apply_filters( 'air_helper_clear_admin_dashboard_boxes', $remove_boxes );
 
-	if ( ! empty( $remove_boxes ) ) {
+  if ( ! empty( $remove_boxes ) ) {
 
-		// Hide normal boxes
-		if ( isset( $remove_boxes['normal'] ) ) {
-			foreach ( $remove_boxes['normal'] as $box ) {
-				remove_meta_box( $box, 'dashboard', 'normal' );
-			}
-		}
+    // Hide normal boxes
+    if ( isset( $remove_boxes['normal'] ) ) {
+      foreach ( $remove_boxes['normal'] as $box ) {
+        remove_meta_box( $box, 'dashboard', 'normal' );
+      }
+    }
 
-		// Hide side boxes
-		if ( isset( $remove_boxes['side'] ) ) {
-			foreach ( $remove_boxes['side'] as $box ) {
-				remove_meta_box( $box, 'dashboard', 'side' );
-			}
-		}
-	}
+    // Hide side boxes
+    if ( isset( $remove_boxes['side'] ) ) {
+      foreach ( $remove_boxes['side'] as $box ) {
+        remove_meta_box( $box, 'dashboard', 'side' );
+      }
+    }
+  }
 } // end air_helper_clear_admin_dashboard
