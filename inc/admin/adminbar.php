@@ -278,7 +278,7 @@ function flush_site_caches( $is_multisite, &$flushed_caches ) {
       }
 
       // Only add to flushed_caches if it's not already there
-      if ( ! in_array( 'Redis/Object Cache Pro', $flushed_caches ) ) {
+      if ( ! in_array( 'Redis/Object Cache Pro', $flushed_caches, true ) ) {
         $flushed_caches[] = 'Redis/Object Cache Pro';
       }
 

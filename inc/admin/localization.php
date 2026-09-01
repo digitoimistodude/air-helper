@@ -15,13 +15,13 @@
  *  @since 1.4.0
  */
 if ( function_exists( 'pll_register_string' ) ) {
-	$strings = apply_filters( 'air_helper_pll_register_strings', [] );
+  $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
-	if ( is_array( $strings ) ) {
-		foreach ( $strings as $key => $value ) {
-			pll_register_string( $key, $value, apply_filters( 'air_helper_pll_register_string_group', 'Theme' ) );
-		}
-	}
+  if ( is_array( $strings ) ) {
+    foreach ( $strings as $key => $value ) {
+      pll_register_string( $key, $value, apply_filters( 'air_helper_pll_register_string_group', 'Theme' ) );
+    }
+  }
 } else {
   if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';

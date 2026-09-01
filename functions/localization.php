@@ -89,9 +89,9 @@ function asv__( $value, $lang = null ) {
   if ( WP_DEBUG === true ) {
     $strings = apply_filters( 'air_helper_pll_register_strings', [] );
 
-    if ( array_search( $value, $strings ) === false ) {
+    if ( array_search( $value, $strings, true ) === false ) {
       // init warning to get source.
-      $e = new Exception( 'Localization error - Missing string by key {' . $key . '}' );
+      $e = new Exception( 'Localization error - Missing string by key {' . $value . '}' );
 
       // find file and line for problem.
       $trace_line = '';
