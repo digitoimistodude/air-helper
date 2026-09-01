@@ -1,3 +1,8 @@
+### 3.2.14: 2026-09-01
+
+* Commit `composer.lock` to pin CI, Closes DEV-1313
+* Extract localization debug helper, Ref: DEV-1313
+
 ### 3.2.13: 2026-09-01
 
 * Switch coding standards to DCS, Closes DEV-1310
