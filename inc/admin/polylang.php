@@ -27,7 +27,7 @@ function air_helper_is_polylang_license_set() {
   }
 
   if ( isset( $licences['polylang-pro'] ) ) {
-    if ( 'invalid' === $licences['polylang-pro']['data']->license ?? null ) {
+    if ( 'invalid' === ( $licences['polylang-pro']['data']->license ?? null ) ) {
       $set = false;
     }
   } else {
