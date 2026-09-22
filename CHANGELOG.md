@@ -1,3 +1,7 @@
+### 3.2.15: 2026-09-22
+
+* Guard missing polylang licence data in polylang.php line 30, Ref: DEV-524
+
 ### 3.2.14: 2026-09-01
 
 * Commit `composer.lock` to pin CI, Closes DEV-1313
