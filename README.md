@@ -187,6 +187,7 @@ To find out how the modification exactly works and how to disable it, search for
 * Remove some notices from dashboard.
 * Remove Update WP text from admin footer.
 * Hide all WP update nags.
+* Open the block inserter on all patterns when a new, empty page is created.
 
 #### Security
 * Stop user enumeration by ?author=(init) urls.
