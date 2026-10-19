@@ -57,6 +57,11 @@ function air_helper_enqueue_page_patterns_onboarding() {
     return;
   }
 
+  // The inserter tab and category options arrived in core/editor in WP 6.6
+  if ( version_compare( get_bloginfo( 'version' ), '6.6', '<' ) ) {
+    return;
+  }
+
   $screen = get_current_screen();
   if ( ! $screen || 'page' !== $screen->post_type ) {
     return;

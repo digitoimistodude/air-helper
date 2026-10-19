@@ -1,3 +1,7 @@
+### 3.2.17: 2026-10-19
+
+* Skip pattern onboarding on WordPress older than 6.6, Ref: DEV-1611
+
 ### 3.2.16: 2026-10-19
 
 * Open block patterns on a new empty page, Ref: DEV-1611
