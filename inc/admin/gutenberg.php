@@ -62,6 +62,11 @@ function air_helper_enqueue_page_patterns_onboarding() {
     return;
   }
 
+  // Block themes edit pages inside the template, where core aims the inserter at the post content block
+  if ( wp_is_block_theme() ) {
+    return;
+  }
+
   $screen = get_current_screen();
   if ( ! $screen || 'page' !== $screen->post_type ) {
     return;

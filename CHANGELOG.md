@@ -1,6 +1,10 @@
+### 3.2.18: 2026-10-19
+
+* Add compatibility for block themes and the template view, Ref: DEV-1611
+
 ### 3.2.17: 2026-10-19
 
-* Skip pattern onboarding on WordPress older than 6.6, Ref: DEV-1611
+* Add backwards compatibility for WordPress older than 6.6, Ref: DEV-1611
 
 ### 3.2.16: 2026-10-19
 
