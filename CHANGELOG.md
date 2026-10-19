@@ -1,3 +1,8 @@
+### 3.2.16: 2026-10-19
+
+* Open block patterns on a new empty page, Ref: DEV-1611
+* Open the toolbar "+" on the Patterns tab on existing pages, Closes DEV-1611
+
 ### 3.2.15: 2026-09-22
 
 * Guard missing polylang licence data in polylang.php line 30, Ref: DEV-524

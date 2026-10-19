@@ -1,10 +1,21 @@
 /**
- * Open the inserter on all patterns when a new, empty page is opened.
+ * Open the inserter on all patterns when a new, empty page is opened,
+ * and on the Patterns tab when "+" is pressed on an existing page.
  *
  * @package air-helper
  */
 ( function ( wp ) {
   const { select, dispatch, subscribe } = wp.data;
+
+  // Core opens the toolbar "+" on the Blocks tab and has no public option for it
+  document.addEventListener( 'click', function ( event ) {
+    if ( ! event.target.closest( '.editor-document-tools__inserter-toggle' ) || select( 'core/editor' ).isInserterOpened() ) {
+      return;
+    }
+
+    event.stopPropagation();
+    dispatch( 'core/editor' ).setIsInserterOpened( { tab: 'patterns' } );
+  }, true );
 
   wp.domReady( function () {
     const unsubscribe = subscribe( function () {

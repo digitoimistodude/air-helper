@@ -40,7 +40,8 @@ function air_helper_disable_gutenberg_block_directory_assets() {
 } // end air_helper_disable_gutenberg_block_directory_assets
 
 /**
- * Open the block patterns on a new, empty page.
+ * Open the block patterns on a new, empty page, and make Patterns the
+ * default tab of the toolbar "+" on existing pages.
  *
  * A blank canvas with the block inserter only shows single blocks, and
  * users rarely find the finished sections under the Patterns tab.
@@ -48,7 +49,7 @@ function air_helper_disable_gutenberg_block_directory_assets() {
  *
  * Disable using `add_filter( 'air_helper_enable_page_patterns_onboarding', '__return_false' )`
  *
- * @since 3.3.0
+ * @since 3.2.16
  */
 add_action( 'enqueue_block_editor_assets', 'air_helper_enqueue_page_patterns_onboarding' );
 function air_helper_enqueue_page_patterns_onboarding() {
@@ -72,7 +73,7 @@ function air_helper_enqueue_page_patterns_onboarding() {
 /**
  * Whether the site has any user patterns or registered patterns.
  *
- * @since 3.3.0
+ * @since 3.2.16
  * @return boolean
  */
 function air_helper_site_has_block_patterns() {
