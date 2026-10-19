@@ -40,8 +40,8 @@ function air_helper_disable_gutenberg_block_directory_assets() {
 } // end air_helper_disable_gutenberg_block_directory_assets
 
 /**
- * Open the block patterns on a new, empty page, and make Patterns the
- * default tab of the toolbar "+" on existing pages.
+ * Open all block patterns on a new, empty page, and from the toolbar "+"
+ * on existing pages.
  *
  * A blank canvas with the block inserter only shows single blocks, and
  * users rarely find the finished sections under the Patterns tab.

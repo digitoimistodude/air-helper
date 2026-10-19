@@ -1,6 +1,6 @@
 /**
  * Open the inserter on all patterns when a new, empty page is opened,
- * and on the Patterns tab when "+" is pressed on an existing page.
+ * and when "+" is pressed on an existing page.
  *
  * @package air-helper
  */
@@ -12,6 +12,14 @@
     return 'template-locked' === select( 'core/editor' ).getRenderingMode();
   }
 
+  function openAllPatterns() {
+    dispatch( 'core/editor' ).setIsInserterOpened( {
+      tab: 'patterns',
+      // Same name and translated label core uses for its own "All" pattern category
+      category: { name: 'allPatterns', label: wp.i18n._x( 'All', 'patterns' ) },
+    } );
+  }
+
   // Core opens the toolbar "+" on the Blocks tab and has no public option for it
   document.addEventListener( 'click', function ( event ) {
     if ( ! event.target.closest( '.editor-document-tools__inserter-toggle' ) || select( 'core/editor' ).isInserterOpened() || isTemplateLocked() ) {
@@ -19,7 +27,7 @@
     }
 
     event.stopPropagation();
-    dispatch( 'core/editor' ).setIsInserterOpened( { tab: 'patterns' } );
+    openAllPatterns();
   }, true );
 
   wp.domReady( function () {
@@ -39,11 +47,7 @@
         return;
       }
 
-      dispatch( 'core/editor' ).setIsInserterOpened( {
-        tab: 'patterns',
-        // Same name and translated label core uses for its own "All" pattern category
-        category: { name: 'allPatterns', label: wp.i18n._x( 'All', 'patterns' ) },
-      } );
+      openAllPatterns();
     } );
   } );
 } )( window.wp );

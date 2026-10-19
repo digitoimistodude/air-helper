@@ -1,6 +1,7 @@
 ### 3.2.18: 2026-10-19
 
 * Add compatibility for block themes and the template view, Ref: DEV-1611
+* Open all pattern previews from "+" on existing pages, Ref: DEV-1611
 
 ### 3.2.17: 2026-10-19
 
