@@ -14,18 +14,35 @@
 /**
  * Ask nginx to empty this site's cache.
  *
+ * Tries https first, where every site includes its pool, then plain http
+ * for servers behind a TLS-terminating proxy. Both are pinned to 127.0.0.1.
+ *
  * @since 3.2.19
  * @return bool True when nginx emptied the cache.
  */
 function air_helper_nginx_purge_all() {
-  $response = wp_remote_request( 'http://127.0.0.1/purgeall', [
-    'method'      => 'PURGE',
-    'headers'     => [ 'Host' => wp_parse_url( home_url(), PHP_URL_HOST ) ],
-    'timeout'     => 10,
-    'redirection' => 0,
-  ] );
+  $host = wp_parse_url( home_url(), PHP_URL_HOST );
 
-  return 200 === wp_remote_retrieve_response_code( $response );
+  foreach ( [ 443 => 'https', 80 => 'http' ] as $port => $scheme ) {
+    $pin = function ( $handle ) use ( $host, $port ) {
+      curl_setopt( $handle, CURLOPT_RESOLVE, [ "{$host}:{$port}:127.0.0.1" ] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+    };
+
+    add_action( 'http_api_curl', $pin );
+    $response = wp_remote_request( "{$scheme}://{$host}/purgeall", [
+      'method'      => 'PURGE',
+      'timeout'     => 10,
+      'redirection' => 0,
+      'sslverify'   => false, // Loopback only; Cloudflare origin certificates do not verify
+    ] );
+    remove_action( 'http_api_curl', $pin );
+
+    if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
+      return true;
+    }
+  }
+
+  return false;
 } // end air_helper_nginx_purge_all
 
 /**

@@ -1,3 +1,7 @@
+### 3.2.20: 2026-11-11
+
+* Send full cache purges over https pinned to 127.0.0.1 first, so sites need the `/purgeall` location only in their 443 server, Ref: DEV-2603
+
 ### 3.2.19: 2026-11-11
 
 * Send nginx-helper full cache purges to the nginx `/purgeall` location instead of deleting cache files in PHP, falling back to the old way when nginx does not answer 200, Ref: DEV-2603
