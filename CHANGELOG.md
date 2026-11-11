@@ -1,3 +1,7 @@
+### 3.2.19: 2026-11-11
+
+* Send nginx-helper full cache purges to the nginx `/purgeall` location instead of deleting cache files in PHP, falling back to the old way when nginx does not answer 200, Ref: DEV-2603
+
 ### 3.2.18: 2026-10-19
 
 * Add compatibility for block themes and the template view, Ref: DEV-1611
