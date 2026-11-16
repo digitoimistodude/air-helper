@@ -42,33 +42,46 @@ function air_helper_base_url() {
 /**
  * Get server hostnames that indicate that the site is in care plan.
  *
+ * Care plan detection moved to dude-wordpress-upkeep. Kept so that code
+ * filtering or calling this does not break.
+ *
  * @since  5.0.0
+ * @deprecated 4.0.0
  */
 function air_helper_get_care_plan_hostnames() {
-  return apply_filters( 'air_helper_care_plan_hostnames', [
-    'craft' => true,
-    'ghost' => true,
-    'slash' => true,
-    'soen'  => true,
-    'messa' => true,
-  ] );
+  return apply_filters( 'air_helper_care_plan_hostnames', [] );
 } // end air_helper_get_care_plan_hostnames
 
 /**
  * Check if site belongs to care plan.
  *
+ * Answered by dude-wordpress-upkeep when it is active, otherwise false.
+ *
  * @return boolean True if site has care plan, otherwise false.
  * @since  5.0.0
+ * @deprecated 4.0.0
  */
 function air_helper_site_has_care_plan() {
-  $hostnames = air_helper_get_care_plan_hostnames();
-
-  if ( 'development' !== wp_get_environment_type() && ! array_key_exists( php_uname( 'n' ), $hostnames ) ) {
-    return false;
+  if ( function_exists( 'dudeupkeep_site_has_care_plan' ) ) {
+    return dudeupkeep_site_has_care_plan();
   }
 
-  return apply_filters( 'air_helper_site_has_care_plan', true );
+  return apply_filters( 'air_helper_site_has_care_plan', false );
 } // end air_helper_site_has_care_plan
+
+/**
+ * Get list of locked plugins.
+ *
+ * Locked plugins moved to dude-wordpress-upkeep. Kept so that code calling
+ * this does not break.
+ *
+ * @since 3.2.0
+ * @deprecated 4.0.0
+ * @return array Plugin basenames.
+ */
+function air_helper_get_locked_plugins() {
+  return apply_filters( 'air_helper_locked_plugins', [] );
+} // end air_helper_get_locked_plugins
 
 /**
  *  Remove deactivate from air helper plugin actions.

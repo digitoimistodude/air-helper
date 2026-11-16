@@ -1,3 +1,8 @@
+### 4.0.0: 2026-11-25
+
+* Move care plan features to upkeep, Ref: DEV-2854
+* Deprecate care plan helper functions, Ref: DEV-1552
+
 ### 3.2.22: 2026-11-23
 
 * Fix full purges trusting no_match answers, Ref: DEV-2659

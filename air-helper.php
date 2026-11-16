@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: Plugin provides helpful functions and modifications for WordPress projects.
- * Version: 3.2.22
+ * Version: 4.0.0
  * Author: Digitoimisto Dude Oy
  * Author URI: https://www.dude.fi
  * Requires at least: 5.5
@@ -28,9 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return integer current version of plugin
  */
 function air_helper_version() {
-  // Version: 3.2.22
-  // 5 integers, e. g. 3.2.22 -> 32022
-  return 32022;
+  // Version: 4.0.0
+  // 5 integers, e. g. 4.0.0 -> 40000
+  return 40000;
 } // end air_helper_version
 
 /**
@@ -54,7 +54,6 @@ $update_checker = PucFactory::buildUpdateChecker( 'http://githubupdates.dude.fi/
  * Priority hooks for rare occasions when plugins do not respect loading order.
  */
 require_once air_helper_base_path() . '/inc/priority/general.php';
-require_once air_helper_base_path() . '/inc/priority/nginx-purge.php';
 
 /**
 * Require priority files.
@@ -66,8 +65,6 @@ function air_helper_priority_fly() {
 
   // Hook & filter files
   require_once air_helper_base_path() . '/inc/priority/security.php';
-  require_once air_helper_base_path() . '/inc/priority/site-health-check.php';
-  require_once air_helper_base_path() . '/inc/priority/mail-delivery.php';
   require_once air_helper_base_path() . '/inc/priority/misc.php';
 } // end air_helper_priority_fly
 
@@ -112,14 +109,10 @@ add_action( 'init', 'air_helper_admin_fly' );
   require_once air_helper_base_path() . '/inc/admin/adminbar.php';
   require_once air_helper_base_path() . '/inc/admin/autodescription.php';
   require_once air_helper_base_path() . '/inc/admin/notifications.php';
-  require_once air_helper_base_path() . '/inc/admin/access.php';
   require_once air_helper_base_path() . '/inc/admin/acf.php';
   require_once air_helper_base_path() . '/inc/admin/localization.php';
   require_once air_helper_base_path() . '/inc/admin/dashboard.php';
   require_once air_helper_base_path() . '/inc/admin/gutenberg.php';
-  require_once air_helper_base_path() . '/inc/admin/help-widget.php';
-  require_once air_helper_base_path() . '/inc/admin/updates.php';
-  require_once air_helper_base_path() . '/inc/admin/helpscout.php';
   require_once air_helper_base_path() . '/inc/admin/polylang.php';
 
   do_action( 'after_air_helper_init' );
