@@ -175,25 +175,20 @@ All these modifications can be disabled or altered with hooks. All modifications
 
 To find out how the modification exactly works and how to disable it, search for a comment section from files in `inc` directory with following list item.
 
+Features for sites in Dude's care plan (support beacon, news widget, update hiding, menu cleanup, plugin access and locked plugins, Site Health trimming, mail delivery settings, login honeypot and log, and cache flushing) moved to [dude-wordpress-upkeep](https://github.com/digitoimistodude/dude-wordpress-upkeep) in 4.0.0.
+
 #### Admin
-* Clean up admin menu from stuff we usually don't need.
-* Remove plugins page from admin menu, except for users with specific domain or override in user meta.
 * Hide ACF for all users, except for users with specific domain or override in user meta.
 * Clean up admin bar.
 * Add environment marker to admin bar.
 * Remove welcome panel.
 * Remove some boxes from dashboard.
-* Add our news and support widget to dashboard. Also, make sure that it is always first in order.
 * Remove some notices from dashboard.
-* Remove Update WP text from admin footer.
-* Hide all WP update nags.
 * Open the block inserter on all patterns when a new, empty page is created, and when "+" is pressed on an existing page.
 
 #### Security
 * Stop user enumeration by ?author=(init) urls.
-* Add honeypot to the login form. _NB! This does not replace proper security tools in server, consider using Fail2Ban or similar tool._
-* Change login failed message.
-* Remove hosting provider specific information from Site Health check.
+* Block installing plugins that are often used maliciously.
 
 #### ACF
 * Hide ACF for all users, except the ones that have certain domain in their email address or user meta `_airhelper_admin_show_acf` with value of `true`
@@ -228,9 +223,7 @@ To find out how the modification exactly works and how to disable it, search for
 * Hide always all email address encoder notifications.
 
 #### Mail
-* Force essential SendGrid settings.
 * Force to address in wp_mail function so that test emails won't go to client.
-* Show notice if SendGrid is not active or configured.
 
 #### Media
 * Custom uploads folder media/ instead of default content/uploads/.

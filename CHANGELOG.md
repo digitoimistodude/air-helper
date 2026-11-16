@@ -1,3 +1,8 @@
+### 4.0.0: unreleased
+
+* Move care plan features to dude-wordpress-upkeep: Help Scout beacon, news widget, update hiding, menu cleanup, plugin access, locked plugins, Site Health trimming, mail delivery settings, login honeypot and log, cache flushing, Ref: DEV-2854
+* Keep `air_helper_site_has_care_plan()`, `air_helper_get_care_plan_hostnames()` and `air_helper_get_locked_plugins()` as deprecated functions, Ref: DEV-1552
+
 ### 3.2.20: 2026-11-11
 
 * Send full cache purges over https pinned to 127.0.0.1 first, so sites need the `/purgeall` location only in their 443 server, Ref: DEV-2603
