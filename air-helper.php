@@ -3,7 +3,7 @@
  * Plugin Name: Air helper
  * Plugin URI: https://github.com/digitoimistodude/air-helper
  * Description: Plugin provides helpful functions and modifications for WordPress projects.
- * Version: 3.2.20
+ * Version: 3.2.21
  * Author: Digitoimisto Dude Oy
  * Author URI: https://www.dude.fi
  * Requires at least: 5.5
@@ -28,9 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return integer current version of plugin
  */
 function air_helper_version() {
-  // Version: 3.2.20
-  // 5 integers, e. g. 3.2.20 -> 32020
-  return 32020;
+  // Version: 3.2.21
+  // 5 integers, e. g. 3.2.21 -> 32021
+  return 32021;
 } // end air_helper_version
 
 /**

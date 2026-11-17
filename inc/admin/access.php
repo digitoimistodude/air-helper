@@ -15,8 +15,9 @@
  */
 add_action( 'admin_init', 'air_helper_helper_remove_admin_menu_links' );
 function air_helper_helper_remove_admin_menu_links() {
-  // Core functions don't check if global $menu exists. Bail if global $menu doesn't exist. admin-post.php page for example.
-  if ( ! array_key_exists( 'menu', $GLOBALS ) ) {
+  // Core functions don't check that global $menu is an array. It is not on admin-ajax.php and admin-post.php,
+  // and another plugin declaring `global $menu` early leaves it null.
+  if ( ! is_array( $GLOBALS['menu'] ?? null ) ) {
     return;
   }
 

@@ -1,3 +1,7 @@
+### 3.2.21: 2026-11-17
+
+* Skip admin menu link removal when `$menu` is not an array, ends `foreach() argument must be of type array|object, null given` in `remove_menu_page()` on admin-ajax requests, Ref: DEV-524
+
 ### 3.2.20: 2026-11-11
 
 * Send full cache purges over https pinned to 127.0.0.1 first, so sites need the `/purgeall` location only in their 443 server, Ref: DEV-2603
