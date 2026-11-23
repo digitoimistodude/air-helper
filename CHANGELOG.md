@@ -1,3 +1,7 @@
+### 3.2.22: 2026-11-23
+
+* Fix full purges trusting no_match answers, Ref: DEV-2659
+
 ### 3.2.21: 2026-11-17
 
 * Skip admin menu link removal when `$menu` is not an array, ends `foreach() argument must be of type array|object, null given` in `remove_menu_page()` on admin-ajax requests, Ref: DEV-524

@@ -37,7 +37,8 @@ function air_helper_nginx_purge_all() {
     ] );
     remove_action( 'http_api_curl', $pin );
 
-    if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
+    // nginx answers 200 with no_match when the location purged nothing, Ref: DEV-2659
+    if ( 200 === wp_remote_retrieve_response_code( $response ) && 'no_match' !== wp_remote_retrieve_header( $response, 'cache-purge-code' ) ) {
       return true;
     }
   }
